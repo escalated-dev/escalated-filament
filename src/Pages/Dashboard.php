@@ -46,7 +46,7 @@ class Dashboard extends Page
         ];
     }
 
-    protected function getFooterWidgetsColumns(): int|array
+    public function getFooterWidgetsColumns(): int|array
     {
         return 2;
     }

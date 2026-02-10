@@ -8,7 +8,7 @@ use Filament\Widgets\StatsOverviewWidget\Stat;
 
 class CsatOverviewWidget extends StatsOverviewWidget
 {
-    protected static ?string $heading = 'Customer Satisfaction';
+    protected ?string $heading = 'Customer Satisfaction';
 
     protected static ?int $sort = 4;
 
