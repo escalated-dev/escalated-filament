@@ -128,6 +128,15 @@ class ManagePlugins extends Page implements HasForms, HasTable
                     ->sortable()
                     ->color('gray'),
 
+                Tables\Columns\TextColumn::make('source')
+                    ->label('Source')
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'composer' => 'purple',
+                        default => 'info',
+                    })
+                    ->sortable(),
+
                 Tables\Columns\IconColumn::make('is_active')
                     ->label('Status')
                     ->boolean()
@@ -218,6 +227,7 @@ class ManagePlugins extends Page implements HasForms, HasTable
                     ->label('Delete')
                     ->icon('heroicon-o-trash')
                     ->color('danger')
+                    ->visible(fn ($record): bool => ($record->source ?? 'local') !== 'composer')
                     ->requiresConfirmation()
                     ->modalHeading('Delete Plugin')
                     ->modalDescription(fn ($record): string => "Are you sure you want to permanently delete \"{$record->name}\"? This will remove all plugin files and cannot be undone.")
@@ -276,14 +286,5 @@ class ManagePlugins extends Page implements HasForms, HasTable
     public function mount(): void
     {
         abort_unless(config('escalated.plugins.enabled', false), 404);
-
-        try {
-            $this->getPluginService()->syncPlugins();
-        } catch (\Exception $e) {
-            // Sync failure is non-fatal; the table will show whatever is in the DB
-            Log::warning('Plugin sync failed during page mount', [
-                'error' => $e->getMessage(),
-            ]);
-        }
     }
 }
