@@ -8,6 +8,7 @@ use Escalated\Filament\EscalatedFilamentPlugin;
 use Escalated\Filament\EscalatedFilamentServiceProvider;
 use Escalated\Laravel\EscalatedServiceProvider;
 use Filament\Actions\ActionsServiceProvider;
+use Filament\Facades\Filament;
 use Filament\FilamentServiceProvider;
 use Filament\Forms\FormsServiceProvider;
 use Filament\Infolists\InfolistsServiceProvider;
@@ -32,6 +33,8 @@ abstract class TestCase extends Orchestra
         Factory::guessFactoryNamesUsing(
             fn (string $modelName) => 'Escalated\\Laravel\\Database\\Factories\\' . class_basename($modelName) . 'Factory'
         );
+
+        Filament::setCurrentPanel(Filament::getPanel('admin'));
     }
 
     protected function getPackageProviders($app): array
@@ -73,6 +76,10 @@ abstract class TestCase extends Orchestra
 
         // Filament panel configuration
         $app['config']->set('app.key', 'base64:' . base64_encode(random_bytes(32)));
+
+        // Define escalated gates — test user is always agent + admin
+        \Illuminate\Support\Facades\Gate::define('escalated-agent', fn ($user) => true);
+        \Illuminate\Support\Facades\Gate::define('escalated-admin', fn ($user) => true);
     }
 
     protected function defineDatabaseMigrations(): void
@@ -80,10 +87,13 @@ abstract class TestCase extends Orchestra
         // Create users table for test User model
         $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
 
-        // Load escalated-laravel package migrations
-        $this->loadMigrationsFrom(
-            dirname(__DIR__) . '/../escalated-laravel/database/migrations'
-        );
+        // Load escalated-laravel package migrations from vendor
+        $migrationPath = dirname(__DIR__) . '/vendor/escalated-dev/escalated-laravel/database/migrations';
+        if (! is_dir($migrationPath)) {
+            // Fallback for local development with sibling checkout
+            $migrationPath = dirname(__DIR__) . '/../escalated-laravel/database/migrations';
+        }
+        $this->loadMigrationsFrom($migrationPath);
     }
 
     /**
@@ -98,11 +108,10 @@ abstract class TestCase extends Orchestra
     {
         parent::resolveApplicationConfiguration($app);
 
-        // Register a default Filament panel with the Escalated plugin
-        $app->booted(function () use ($app) {
-            /** @var \Filament\FilamentManager $filament */
-            $filament = $app->make(\Filament\FilamentManager::class);
-
+        // Register a default Filament panel with the Escalated plugin.
+        // Must happen during boot (not in a booted callback) so routes are
+        // available when Livewire tests mount components.
+        $app->afterResolving(\Filament\FilamentManager::class, function (\Filament\FilamentManager $filament) {
             $panel = \Filament\Panel::make()
                 ->default()
                 ->id('admin')

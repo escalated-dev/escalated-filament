@@ -114,7 +114,7 @@ class ViewTicket extends ViewRecord
                             Infolists\Components\TextEntry::make('first_response_at')
                                 ->label('First Response At')
                                 ->dateTime()
-                                ->default('Not yet responded'),
+                                ->placeholder('Not yet responded'),
 
                             Infolists\Components\TextEntry::make('resolution_due_at')
                                 ->label('Resolution Due')
@@ -174,12 +174,12 @@ class ViewTicket extends ViewRecord
                             Infolists\Components\TextEntry::make('resolved_at')
                                 ->label('Resolved At')
                                 ->dateTime()
-                                ->default('Not resolved'),
+                                ->placeholder('Not resolved'),
 
                             Infolists\Components\TextEntry::make('closed_at')
                                 ->label('Closed At')
                                 ->dateTime()
-                                ->default('Not closed'),
+                                ->placeholder('Not closed'),
                         ])
                         ->collapsible(),
                 ])->columnSpan(1),
