@@ -18,11 +18,18 @@ class Reports extends Page implements HasForms
 {
     use InteractsWithForms;
 
-    protected static ?string $navigationIcon = 'heroicon-o-chart-bar';
-
     protected static ?int $navigationSort = 20;
 
     protected static ?string $title = null;
+
+    protected static ?string $slug = 'support-reports';
+
+    protected static string $view = 'escalated-filament::pages.reports';
+
+    public static function getNavigationIcon(): ?string
+    {
+        return 'heroicon-o-chart-bar';
+    }
 
     public function getTitle(): string
     {
@@ -33,10 +40,6 @@ class Reports extends Page implements HasForms
     {
         return __('escalated-filament::filament.pages.reports.title');
     }
-
-    protected static ?string $slug = 'support-reports';
-
-    protected static string $view = 'escalated-filament::pages.reports';
 
     public ?string $date_from = null;
 

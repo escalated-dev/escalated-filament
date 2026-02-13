@@ -13,11 +13,18 @@ use Filament\Pages\Page;
 
 class Dashboard extends Page
 {
-    protected static ?string $navigationIcon = 'heroicon-o-home';
-
     protected static ?int $navigationSort = 0;
 
     protected static ?string $title = null;
+
+    protected static ?string $slug = 'support-dashboard';
+
+    protected static string $view = 'escalated-filament::pages.dashboard';
+
+    public static function getNavigationIcon(): ?string
+    {
+        return 'heroicon-o-home';
+    }
 
     public function getTitle(): string
     {
@@ -28,10 +35,6 @@ class Dashboard extends Page
     {
         return __('escalated-filament::filament.pages.dashboard.title');
     }
-
-    protected static ?string $slug = 'support-dashboard';
-
-    protected static string $view = 'escalated-filament::pages.dashboard';
 
     public static function getNavigationGroup(): ?string
     {

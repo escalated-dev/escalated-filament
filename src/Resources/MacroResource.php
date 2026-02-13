@@ -20,9 +20,12 @@ class MacroResource extends Resource
 {
     protected static ?string $model = Macro::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-bolt';
-
     protected static ?int $navigationSort = 15;
+
+    public static function getNavigationIcon(): ?string
+    {
+        return 'heroicon-o-bolt';
+    }
 
     public static function getNavigationGroup(): ?string
     {

@@ -13,7 +13,10 @@ class RepliesRelationManager extends RelationManager
 {
     protected static string $relationship = 'replies';
 
-    protected static ?string $icon = 'heroicon-o-chat-bubble-left-right';
+    public static function getIcon(): ?string
+    {
+        return 'heroicon-o-chat-bubble-left-right';
+    }
 
     public static function getTitle($ownerRecord, string $pageClass): string
     {

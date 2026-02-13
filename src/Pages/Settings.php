@@ -15,11 +15,18 @@ class Settings extends Page implements HasForms
 {
     use InteractsWithForms;
 
-    protected static ?string $navigationIcon = 'heroicon-o-cog-6-tooth';
-
     protected static ?int $navigationSort = 99;
 
     protected static ?string $title = null;
+
+    protected static ?string $slug = 'support-settings';
+
+    protected static string $view = 'escalated-filament::pages.settings';
+
+    public static function getNavigationIcon(): ?string
+    {
+        return 'heroicon-o-cog-6-tooth';
+    }
 
     public function getTitle(): string
     {
@@ -30,10 +37,6 @@ class Settings extends Page implements HasForms
     {
         return __('escalated-filament::filament.pages.settings.title');
     }
-
-    protected static ?string $slug = 'support-settings';
-
-    protected static string $view = 'escalated-filament::pages.settings';
 
     public ?array $data = [];
 

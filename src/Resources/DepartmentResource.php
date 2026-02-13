@@ -16,9 +16,12 @@ class DepartmentResource extends Resource
 {
     protected static ?string $model = Department::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-building-office';
-
     protected static ?int $navigationSort = 10;
+
+    public static function getNavigationIcon(): ?string
+    {
+        return 'heroicon-o-building-office';
+    }
 
     public static function getNavigationGroup(): ?string
     {

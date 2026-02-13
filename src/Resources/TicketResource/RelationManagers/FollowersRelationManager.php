@@ -13,7 +13,10 @@ class FollowersRelationManager extends RelationManager
 {
     protected static string $relationship = 'followers';
 
-    protected static ?string $icon = 'heroicon-o-bell';
+    public static function getIcon(): ?string
+    {
+        return 'heroicon-o-bell';
+    }
 
     public static function getTitle($ownerRecord, string $pageClass): string
     {
