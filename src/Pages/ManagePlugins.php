@@ -22,11 +22,18 @@ class ManagePlugins extends Page implements HasForms, HasTable
     use InteractsWithForms;
     use InteractsWithTable;
 
-    protected static ?string $navigationIcon = 'heroicon-o-puzzle-piece';
-
     protected static ?int $navigationSort = 98;
 
     protected static ?string $title = null;
+
+    protected static ?string $slug = 'support-plugins';
+
+    protected static string $view = 'escalated-filament::pages.manage-plugins';
+
+    public static function getNavigationIcon(): ?string
+    {
+        return 'heroicon-o-puzzle-piece';
+    }
 
     public function getTitle(): string
     {
@@ -37,10 +44,6 @@ class ManagePlugins extends Page implements HasForms, HasTable
     {
         return __('escalated-filament::filament.pages.manage_plugins.title');
     }
-
-    protected static ?string $slug = 'support-plugins';
-
-    protected static string $view = 'escalated-filament::pages.manage-plugins';
 
     public static function getNavigationGroup(): ?string
     {

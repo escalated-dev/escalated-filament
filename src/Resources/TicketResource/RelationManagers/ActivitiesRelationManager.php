@@ -16,7 +16,10 @@ class ActivitiesRelationManager extends RelationManager
         return __('escalated-filament::filament.resources.activities.title');
     }
 
-    protected static ?string $icon = 'heroicon-o-clipboard-document-list';
+    public static function getIcon(): ?string
+    {
+        return 'heroicon-o-clipboard-document-list';
+    }
 
     public function isReadOnly(): bool
     {

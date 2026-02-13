@@ -16,9 +16,12 @@ class SlaPolicyResource extends Resource
 {
     protected static ?string $model = SlaPolicy::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-clock';
-
     protected static ?int $navigationSort = 12;
+
+    public static function getNavigationIcon(): ?string
+    {
+        return 'heroicon-o-clock';
+    }
 
     public static function getModelLabel(): string
     {

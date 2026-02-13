@@ -15,9 +15,12 @@ class TagResource extends Resource
 {
     protected static ?string $model = Tag::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-tag';
-
     protected static ?int $navigationSort = 11;
+
+    public static function getNavigationIcon(): ?string
+    {
+        return 'heroicon-o-tag';
+    }
 
     public static function getNavigationGroup(): ?string
     {

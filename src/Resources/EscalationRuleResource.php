@@ -19,9 +19,12 @@ class EscalationRuleResource extends Resource
 {
     protected static ?string $model = EscalationRule::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-arrow-trending-up';
-
     protected static ?int $navigationSort = 13;
+
+    public static function getNavigationIcon(): ?string
+    {
+        return 'heroicon-o-arrow-trending-up';
+    }
 
     public static function getNavigationGroup(): ?string
     {
