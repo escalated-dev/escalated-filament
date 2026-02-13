@@ -25,33 +25,33 @@ class TicketStatsOverview extends StatsOverviewWidget
         })->avg('rating');
 
         return [
-            Stat::make('My Open Tickets', $myOpen)
-                ->description('Assigned to you')
+            Stat::make(__('escalated-filament::filament.widgets.stats.my_open_tickets'), $myOpen)
+                ->description(__('escalated-filament::filament.widgets.stats.assigned_to_you'))
                 ->icon('heroicon-o-user')
                 ->color('primary'),
 
-            Stat::make('Unassigned', $unassigned)
-                ->description('Awaiting assignment')
+            Stat::make(__('escalated-filament::filament.widgets.stats.unassigned'), $unassigned)
+                ->description(__('escalated-filament::filament.widgets.stats.awaiting_assignment'))
                 ->icon('heroicon-o-user-minus')
                 ->color($unassigned > 0 ? 'warning' : 'success'),
 
-            Stat::make('Total Open', $totalOpen)
-                ->description('All open tickets')
+            Stat::make(__('escalated-filament::filament.widgets.stats.total_open'), $totalOpen)
+                ->description(__('escalated-filament::filament.widgets.stats.all_open_tickets'))
                 ->icon('heroicon-o-inbox')
                 ->color('info'),
 
-            Stat::make('SLA Breached', $breachedSla)
-                ->description('Breached response or resolution SLA')
+            Stat::make(__('escalated-filament::filament.widgets.stats.sla_breached'), $breachedSla)
+                ->description(__('escalated-filament::filament.widgets.stats.breached_sla_description'))
                 ->icon('heroicon-o-exclamation-triangle')
                 ->color($breachedSla > 0 ? 'danger' : 'success'),
 
-            Stat::make('Resolved Today', $resolvedToday)
-                ->description('Resolved in the last 24 hours')
+            Stat::make(__('escalated-filament::filament.widgets.stats.resolved_today'), $resolvedToday)
+                ->description(__('escalated-filament::filament.widgets.stats.resolved_today_description'))
                 ->icon('heroicon-o-check-circle')
                 ->color('success'),
 
-            Stat::make('Avg CSAT (30d)', $avgCsat ? number_format($avgCsat, 1).'/5' : 'N/A')
-                ->description('Average customer satisfaction')
+            Stat::make(__('escalated-filament::filament.widgets.stats.avg_csat_30d'), $avgCsat ? number_format($avgCsat, 1).'/5' : 'N/A')
+                ->description(__('escalated-filament::filament.widgets.stats.avg_csat_description'))
                 ->icon('heroicon-o-star')
                 ->color($avgCsat && $avgCsat >= 4 ? 'success' : ($avgCsat && $avgCsat >= 3 ? 'warning' : 'danger')),
         ];

@@ -21,12 +21,12 @@ class ChangeStatusAction extends Action
         parent::setUp();
 
         $this
-            ->label('Change Status')
+            ->label(__('escalated-filament::filament.actions.change_status.label'))
             ->icon('heroicon-o-arrow-path')
             ->color('warning')
             ->form([
                 Forms\Components\Select::make('status')
-                    ->label('New Status')
+                    ->label(__('escalated-filament::filament.actions.change_status.new_status_field'))
                     ->options(collect(TicketStatus::cases())->mapWithKeys(
                         fn (TicketStatus $s) => [$s->value => $s->label()]
                     ))
@@ -40,7 +40,7 @@ class ChangeStatusAction extends Action
                 );
 
                 Notification::make()
-                    ->title('Status updated successfully')
+                    ->title(__('escalated-filament::filament.actions.change_status.success'))
                     ->success()
                     ->send();
             });

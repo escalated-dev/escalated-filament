@@ -24,7 +24,7 @@
         <div class="text-sm text-gray-500 dark:text-gray-400">
             <div class="flex items-center gap-2">
                 <x-heroicon-o-star class="h-4 w-4" />
-                <span>No rating submitted yet</span>
+                <span>{{ __('escalated-filament::filament.livewire.rating.no_rating') }}</span>
             </div>
         </div>
     @endif

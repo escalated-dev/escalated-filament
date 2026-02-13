@@ -26,7 +26,17 @@ class ManagePlugins extends Page implements HasForms, HasTable
 
     protected static ?int $navigationSort = 98;
 
-    protected static ?string $title = 'Plugins';
+    protected static ?string $title = null;
+
+    public function getTitle(): string
+    {
+        return __('escalated-filament::filament.pages.manage_plugins.title');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('escalated-filament::filament.pages.manage_plugins.title');
+    }
 
     protected static ?string $slug = 'support-plugins';
 
@@ -56,16 +66,16 @@ class ManagePlugins extends Page implements HasForms, HasTable
     {
         return [
             Action::make('uploadPlugin')
-                ->label('Upload Plugin')
+                ->label(__('escalated-filament::filament.pages.manage_plugins.upload_plugin'))
                 ->icon('heroicon-o-arrow-up-tray')
                 ->color('primary')
                 ->form([
                     Forms\Components\FileUpload::make('plugin_file')
-                        ->label('Plugin ZIP File')
+                        ->label(__('escalated-filament::filament.pages.manage_plugins.plugin_zip_file'))
                         ->acceptedFileTypes(['application/zip', 'application/x-zip-compressed'])
                         ->maxSize(config('escalated.plugins.max_upload_size_kb', 51200))
                         ->required()
-                        ->helperText('Upload a plugin ZIP archive containing a valid plugin.json manifest.'),
+                        ->helperText(__('escalated-filament::filament.pages.manage_plugins.upload_helper_text')),
                 ])
                 ->action(function (array $data): void {
                     try {
@@ -86,8 +96,8 @@ class ManagePlugins extends Page implements HasForms, HasTable
                         $this->getPluginService()->uploadPlugin($file);
 
                         Notification::make()
-                            ->title('Plugin uploaded successfully')
-                            ->body('The plugin has been extracted and is ready to activate.')
+                            ->title(__('escalated-filament::filament.pages.manage_plugins.upload_success_title'))
+                            ->body(__('escalated-filament::filament.pages.manage_plugins.upload_success_body'))
                             ->success()
                             ->send();
                     } catch (\Exception $e) {
@@ -96,7 +106,7 @@ class ManagePlugins extends Page implements HasForms, HasTable
                         ]);
 
                         Notification::make()
-                            ->title('Plugin upload failed')
+                            ->title(__('escalated-filament::filament.pages.manage_plugins.upload_failed_title'))
                             ->body($e->getMessage())
                             ->danger()
                             ->send();
@@ -111,25 +121,25 @@ class ManagePlugins extends Page implements HasForms, HasTable
             ->query($this->getPluginQuery())
             ->columns([
                 Tables\Columns\TextColumn::make('name')
-                    ->label('Plugin')
+                    ->label(__('escalated-filament::filament.pages.manage_plugins.column_plugin'))
                     ->searchable()
                     ->sortable()
                     ->weight('bold')
                     ->description(fn (array $state, $record): string => $record->description ?? ''),
 
                 Tables\Columns\TextColumn::make('version')
-                    ->label('Version')
+                    ->label(__('escalated-filament::filament.pages.manage_plugins.column_version'))
                     ->badge()
                     ->color('gray')
                     ->sortable(),
 
                 Tables\Columns\TextColumn::make('author')
-                    ->label('Author')
+                    ->label(__('escalated-filament::filament.pages.manage_plugins.column_author'))
                     ->sortable()
                     ->color('gray'),
 
                 Tables\Columns\TextColumn::make('source')
-                    ->label('Source')
+                    ->label(__('escalated-filament::filament.pages.manage_plugins.column_source'))
                     ->badge()
                     ->color(fn (string $state): string => match ($state) {
                         'composer' => 'purple',
@@ -138,7 +148,7 @@ class ManagePlugins extends Page implements HasForms, HasTable
                     ->sortable(),
 
                 Tables\Columns\IconColumn::make('is_active')
-                    ->label('Status')
+                    ->label(__('escalated-filament::filament.pages.manage_plugins.column_status'))
                     ->boolean()
                     ->trueIcon('heroicon-o-check-circle')
                     ->falseIcon('heroicon-o-x-circle')
@@ -147,35 +157,35 @@ class ManagePlugins extends Page implements HasForms, HasTable
                     ->sortable(),
 
                 Tables\Columns\TextColumn::make('activated_at')
-                    ->label('Activated')
+                    ->label(__('escalated-filament::filament.pages.manage_plugins.column_activated'))
                     ->dateTime()
                     ->sortable()
-                    ->placeholder('Never')
+                    ->placeholder(__('escalated-filament::filament.pages.manage_plugins.placeholder_never'))
                     ->toggleable(),
 
                 Tables\Columns\TextColumn::make('deactivated_at')
-                    ->label('Deactivated')
+                    ->label(__('escalated-filament::filament.pages.manage_plugins.column_deactivated'))
                     ->dateTime()
                     ->sortable()
-                    ->placeholder('Never')
+                    ->placeholder(__('escalated-filament::filament.pages.manage_plugins.placeholder_never'))
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->actions([
                 Tables\Actions\Action::make('activate')
-                    ->label('Activate')
+                    ->label(__('escalated-filament::filament.pages.manage_plugins.activate'))
                     ->icon('heroicon-o-play')
                     ->color('success')
                     ->visible(fn ($record): bool => ! $record->is_active)
                     ->requiresConfirmation()
-                    ->modalHeading('Activate Plugin')
-                    ->modalDescription(fn ($record): string => "Are you sure you want to activate \"{$record->name}\"? This will load the plugin and register its hooks.")
+                    ->modalHeading(__('escalated-filament::filament.pages.manage_plugins.activate_heading'))
+                    ->modalDescription(fn ($record): string => __('escalated-filament::filament.pages.manage_plugins.activate_description', ['name' => $record->name]))
                     ->action(function ($record): void {
                         try {
                             $this->getPluginService()->activatePlugin($record->slug);
 
                             Notification::make()
-                                ->title('Plugin activated')
-                                ->body("\"{$record->name}\" has been activated successfully.")
+                                ->title(__('escalated-filament::filament.pages.manage_plugins.activated_title'))
+                                ->body(__('escalated-filament::filament.pages.manage_plugins.activated_body', ['name' => $record->name]))
                                 ->success()
                                 ->send();
                         } catch (\Exception $e) {
@@ -185,7 +195,7 @@ class ManagePlugins extends Page implements HasForms, HasTable
                             ]);
 
                             Notification::make()
-                                ->title('Activation failed')
+                                ->title(__('escalated-filament::filament.pages.manage_plugins.activation_failed_title'))
                                 ->body($e->getMessage())
                                 ->danger()
                                 ->send();
@@ -193,20 +203,20 @@ class ManagePlugins extends Page implements HasForms, HasTable
                     }),
 
                 Tables\Actions\Action::make('deactivate')
-                    ->label('Deactivate')
+                    ->label(__('escalated-filament::filament.pages.manage_plugins.deactivate'))
                     ->icon('heroicon-o-pause')
                     ->color('warning')
                     ->visible(fn ($record): bool => (bool) $record->is_active)
                     ->requiresConfirmation()
-                    ->modalHeading('Deactivate Plugin')
-                    ->modalDescription(fn ($record): string => "Are you sure you want to deactivate \"{$record->name}\"? Its hooks and extensions will be unregistered.")
+                    ->modalHeading(__('escalated-filament::filament.pages.manage_plugins.deactivate_heading'))
+                    ->modalDescription(fn ($record): string => __('escalated-filament::filament.pages.manage_plugins.deactivate_description', ['name' => $record->name]))
                     ->action(function ($record): void {
                         try {
                             $this->getPluginService()->deactivatePlugin($record->slug);
 
                             Notification::make()
-                                ->title('Plugin deactivated')
-                                ->body("\"{$record->name}\" has been deactivated.")
+                                ->title(__('escalated-filament::filament.pages.manage_plugins.deactivated_title'))
+                                ->body(__('escalated-filament::filament.pages.manage_plugins.deactivated_body', ['name' => $record->name]))
                                 ->success()
                                 ->send();
                         } catch (\Exception $e) {
@@ -216,7 +226,7 @@ class ManagePlugins extends Page implements HasForms, HasTable
                             ]);
 
                             Notification::make()
-                                ->title('Deactivation failed')
+                                ->title(__('escalated-filament::filament.pages.manage_plugins.deactivation_failed_title'))
                                 ->body($e->getMessage())
                                 ->danger()
                                 ->send();
@@ -224,21 +234,21 @@ class ManagePlugins extends Page implements HasForms, HasTable
                     }),
 
                 Tables\Actions\Action::make('delete')
-                    ->label('Delete')
+                    ->label(__('escalated-filament::filament.pages.manage_plugins.delete'))
                     ->icon('heroicon-o-trash')
                     ->color('danger')
                     ->visible(fn ($record): bool => ($record->source ?? 'local') !== 'composer')
                     ->requiresConfirmation()
-                    ->modalHeading('Delete Plugin')
-                    ->modalDescription(fn ($record): string => "Are you sure you want to permanently delete \"{$record->name}\"? This will remove all plugin files and cannot be undone.")
-                    ->modalSubmitActionLabel('Yes, delete plugin')
+                    ->modalHeading(__('escalated-filament::filament.pages.manage_plugins.delete_heading'))
+                    ->modalDescription(fn ($record): string => __('escalated-filament::filament.pages.manage_plugins.delete_description', ['name' => $record->name]))
+                    ->modalSubmitActionLabel(__('escalated-filament::filament.pages.manage_plugins.delete_confirm'))
                     ->action(function ($record): void {
                         try {
                             $this->getPluginService()->deletePlugin($record->slug);
 
                             Notification::make()
-                                ->title('Plugin deleted')
-                                ->body("\"{$record->name}\" has been removed.")
+                                ->title(__('escalated-filament::filament.pages.manage_plugins.deleted_title'))
+                                ->body(__('escalated-filament::filament.pages.manage_plugins.deleted_body', ['name' => $record->name]))
                                 ->success()
                                 ->send();
                         } catch (\Exception $e) {
@@ -248,15 +258,15 @@ class ManagePlugins extends Page implements HasForms, HasTable
                             ]);
 
                             Notification::make()
-                                ->title('Deletion failed')
+                                ->title(__('escalated-filament::filament.pages.manage_plugins.deletion_failed_title'))
                                 ->body($e->getMessage())
                                 ->danger()
                                 ->send();
                         }
                     }),
             ])
-            ->emptyStateHeading('No plugins installed')
-            ->emptyStateDescription('Upload a plugin ZIP file or install one via Composer to get started.')
+            ->emptyStateHeading(__('escalated-filament::filament.pages.manage_plugins.empty_heading'))
+            ->emptyStateDescription(__('escalated-filament::filament.pages.manage_plugins.empty_description'))
             ->emptyStateIcon('heroicon-o-puzzle-piece')
             ->poll('30s');
     }

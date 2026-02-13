@@ -17,7 +17,17 @@ class Dashboard extends Page
 
     protected static ?int $navigationSort = 0;
 
-    protected static ?string $title = 'Support Dashboard';
+    protected static ?string $title = null;
+
+    public function getTitle(): string
+    {
+        return __('escalated-filament::filament.pages.dashboard.title');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('escalated-filament::filament.pages.dashboard.title');
+    }
 
     protected static ?string $slug = 'support-dashboard';
 

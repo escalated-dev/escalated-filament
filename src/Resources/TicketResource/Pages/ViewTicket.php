@@ -24,31 +24,31 @@ class ViewTicket extends ViewRecord
         return $infolist
             ->schema([
                 Infolists\Components\Group::make([
-                    Infolists\Components\Section::make('Ticket Information')
+                    Infolists\Components\Section::make(__('escalated-filament::filament.resources.ticket.section_ticket_info'))
                         ->schema([
                             Infolists\Components\TextEntry::make('reference')
-                                ->label('Reference')
+                                ->label(__('escalated-filament::filament.resources.ticket.field_reference'))
                                 ->badge()
                                 ->color('primary')
                                 ->copyable(),
 
                             Infolists\Components\TextEntry::make('subject')
-                                ->label('Subject')
+                                ->label(__('escalated-filament::filament.resources.ticket.field_subject'))
                                 ->columnSpanFull(),
 
                             Infolists\Components\TextEntry::make('description')
-                                ->label('Description')
+                                ->label(__('escalated-filament::filament.resources.ticket.field_description'))
                                 ->html()
                                 ->columnSpanFull(),
 
                             Infolists\Components\TextEntry::make('channel')
-                                ->label('Channel')
+                                ->label(__('escalated-filament::filament.resources.ticket.field_channel'))
                                 ->badge()
                                 ->color('gray'),
                         ])
                         ->columns(2),
 
-                    Infolists\Components\Section::make('Conversation')
+                    Infolists\Components\Section::make(__('escalated-filament::filament.resources.ticket.section_conversation'))
                         ->schema([
                             Infolists\Components\Livewire::make(
                                 \Escalated\Filament\Livewire\TicketConversation::class,
@@ -58,7 +58,7 @@ class ViewTicket extends ViewRecord
                 ])->columnSpan(2),
 
                 Infolists\Components\Group::make([
-                    Infolists\Components\Section::make('Details')
+                    Infolists\Components\Section::make(__('escalated-filament::filament.resources.ticket.section_details'))
                         ->schema([
                             Infolists\Components\TextEntry::make('status')
                                 ->badge()
@@ -85,44 +85,44 @@ class ViewTicket extends ViewRecord
                                 ->formatStateUsing(fn (TicketPriority $state) => $state->label()),
 
                             Infolists\Components\TextEntry::make('department.name')
-                                ->label('Department')
-                                ->default('None'),
+                                ->label(__('escalated-filament::filament.resources.ticket.field_department'))
+                                ->default(__('escalated-filament::filament.resources.ticket.default_none')),
 
                             Infolists\Components\TextEntry::make('assignee.name')
-                                ->label('Assigned To')
-                                ->default('Unassigned')
+                                ->label(__('escalated-filament::filament.resources.ticket.column_assigned_to'))
+                                ->default(__('escalated-filament::filament.resources.ticket.default_unassigned'))
                                 ->color(fn (Ticket $record) => $record->assigned_to ? null : 'warning'),
 
                             Infolists\Components\TextEntry::make('requester_name')
-                                ->label('Requester'),
+                                ->label(__('escalated-filament::filament.resources.ticket.field_requester')),
 
                             Infolists\Components\TextEntry::make('requester_email')
-                                ->label('Requester Email'),
+                                ->label(__('escalated-filament::filament.resources.ticket.field_requester_email')),
                         ]),
 
-                    Infolists\Components\Section::make('SLA')
+                    Infolists\Components\Section::make(__('escalated-filament::filament.resources.ticket.section_sla'))
                         ->schema([
                             Infolists\Components\TextEntry::make('slaPolicy.name')
-                                ->label('SLA Policy')
-                                ->default('No policy'),
+                                ->label(__('escalated-filament::filament.resources.ticket.field_sla_policy'))
+                                ->default(__('escalated-filament::filament.resources.ticket.default_no_policy')),
 
                             Infolists\Components\TextEntry::make('first_response_due_at')
-                                ->label('First Response Due')
+                                ->label(__('escalated-filament::filament.resources.ticket.field_first_response_due'))
                                 ->dateTime()
                                 ->color(fn (Ticket $record) => $record->sla_first_response_breached ? 'danger' : null),
 
                             Infolists\Components\TextEntry::make('first_response_at')
-                                ->label('First Response At')
+                                ->label(__('escalated-filament::filament.resources.ticket.field_first_response_at'))
                                 ->dateTime()
-                                ->placeholder('Not yet responded'),
+                                ->placeholder(__('escalated-filament::filament.resources.ticket.placeholder_not_responded')),
 
                             Infolists\Components\TextEntry::make('resolution_due_at')
-                                ->label('Resolution Due')
+                                ->label(__('escalated-filament::filament.resources.ticket.field_resolution_due'))
                                 ->dateTime()
                                 ->color(fn (Ticket $record) => $record->sla_resolution_breached ? 'danger' : null),
 
                             Infolists\Components\IconEntry::make('sla_first_response_breached')
-                                ->label('Response Breached')
+                                ->label(__('escalated-filament::filament.resources.ticket.field_response_breached'))
                                 ->boolean()
                                 ->trueIcon('heroicon-o-x-circle')
                                 ->falseIcon('heroicon-o-check-circle')
@@ -130,7 +130,7 @@ class ViewTicket extends ViewRecord
                                 ->falseColor('success'),
 
                             Infolists\Components\IconEntry::make('sla_resolution_breached')
-                                ->label('Resolution Breached')
+                                ->label(__('escalated-filament::filament.resources.ticket.field_resolution_breached'))
                                 ->boolean()
                                 ->trueIcon('heroicon-o-x-circle')
                                 ->falseIcon('heroicon-o-check-circle')
@@ -139,7 +139,7 @@ class ViewTicket extends ViewRecord
                         ])
                         ->collapsible(),
 
-                    Infolists\Components\Section::make('Tags')
+                    Infolists\Components\Section::make(__('escalated-filament::filament.resources.ticket.section_tags'))
                         ->schema([
                             Infolists\Components\RepeatableEntry::make('tags')
                                 ->schema([
@@ -152,7 +152,7 @@ class ViewTicket extends ViewRecord
                         ])
                         ->collapsible(),
 
-                    Infolists\Components\Section::make('Satisfaction Rating')
+                    Infolists\Components\Section::make(__('escalated-filament::filament.resources.ticket.section_satisfaction'))
                         ->schema([
                             Infolists\Components\Livewire::make(
                                 \Escalated\Filament\Livewire\SatisfactionRating::class,
@@ -161,25 +161,25 @@ class ViewTicket extends ViewRecord
                         ])
                         ->collapsible(),
 
-                    Infolists\Components\Section::make('Timestamps')
+                    Infolists\Components\Section::make(__('escalated-filament::filament.resources.ticket.section_timestamps'))
                         ->schema([
                             Infolists\Components\TextEntry::make('created_at')
-                                ->label('Created')
+                                ->label(__('escalated-filament::filament.resources.ticket.field_created'))
                                 ->dateTime(),
 
                             Infolists\Components\TextEntry::make('updated_at')
-                                ->label('Updated')
+                                ->label(__('escalated-filament::filament.resources.ticket.field_updated'))
                                 ->dateTime(),
 
                             Infolists\Components\TextEntry::make('resolved_at')
-                                ->label('Resolved At')
+                                ->label(__('escalated-filament::filament.resources.ticket.field_resolved_at'))
                                 ->dateTime()
-                                ->placeholder('Not resolved'),
+                                ->placeholder(__('escalated-filament::filament.resources.ticket.placeholder_not_resolved')),
 
                             Infolists\Components\TextEntry::make('closed_at')
-                                ->label('Closed At')
+                                ->label(__('escalated-filament::filament.resources.ticket.field_closed_at'))
                                 ->dateTime()
-                                ->placeholder('Not closed'),
+                                ->placeholder(__('escalated-filament::filament.resources.ticket.placeholder_not_closed')),
                         ])
                         ->collapsible(),
                 ])->columnSpan(1),
@@ -191,12 +191,12 @@ class ViewTicket extends ViewRecord
     {
         return [
             Actions\Action::make('reply')
-                ->label('Reply')
+                ->label(__('escalated-filament::filament.resources.ticket.action_reply'))
                 ->icon('heroicon-o-chat-bubble-left-right')
                 ->color('primary')
                 ->form([
                     Forms\Components\RichEditor::make('body')
-                        ->label('Reply')
+                        ->label(__('escalated-filament::filament.resources.ticket.action_reply'))
                         ->required(),
                 ])
                 ->action(function (array $data): void {
@@ -204,18 +204,18 @@ class ViewTicket extends ViewRecord
                         ->reply($this->record, auth()->user(), $data['body']);
 
                     Notification::make()
-                        ->title('Reply sent')
+                        ->title(__('escalated-filament::filament.resources.ticket.notification_reply_sent'))
                         ->success()
                         ->send();
                 }),
 
             Actions\Action::make('addNote')
-                ->label('Add Note')
+                ->label(__('escalated-filament::filament.resources.ticket.action_add_note'))
                 ->icon('heroicon-o-pencil-square')
                 ->color('gray')
                 ->form([
                     Forms\Components\RichEditor::make('body')
-                        ->label('Internal Note')
+                        ->label(__('escalated-filament::filament.resources.ticket.field_internal_note'))
                         ->required(),
                 ])
                 ->action(function (array $data): void {
@@ -223,18 +223,18 @@ class ViewTicket extends ViewRecord
                         ->addNote($this->record, auth()->user(), $data['body']);
 
                     Notification::make()
-                        ->title('Internal note added')
+                        ->title(__('escalated-filament::filament.resources.ticket.notification_note_added'))
                         ->success()
                         ->send();
                 }),
 
             Actions\Action::make('assign')
-                ->label('Assign')
+                ->label(__('escalated-filament::filament.actions.assign_ticket.label'))
                 ->icon('heroicon-o-user-plus')
                 ->color('info')
                 ->form([
                     Forms\Components\Select::make('agent_id')
-                        ->label('Agent')
+                        ->label(__('escalated-filament::filament.actions.assign_ticket.agent_field'))
                         ->options(fn () => app(Escalated::userModel())::pluck('name', 'id'))
                         ->searchable()
                         ->required(),
@@ -244,13 +244,13 @@ class ViewTicket extends ViewRecord
                         ->assign($this->record, $data['agent_id'], auth()->user());
 
                     Notification::make()
-                        ->title('Ticket assigned')
+                        ->title(__('escalated-filament::filament.resources.ticket.notification_assigned'))
                         ->success()
                         ->send();
                 }),
 
             Actions\Action::make('changeStatus')
-                ->label('Status')
+                ->label(__('escalated-filament::filament.resources.ticket.action_status'))
                 ->icon('heroicon-o-arrow-path')
                 ->color('warning')
                 ->form([
@@ -265,13 +265,13 @@ class ViewTicket extends ViewRecord
                         ->changeStatus($this->record, TicketStatus::from($data['status']), auth()->user());
 
                     Notification::make()
-                        ->title('Status updated')
+                        ->title(__('escalated-filament::filament.resources.ticket.notification_status_updated'))
                         ->success()
                         ->send();
                 }),
 
             Actions\Action::make('changePriority')
-                ->label('Priority')
+                ->label(__('escalated-filament::filament.resources.ticket.action_priority'))
                 ->icon('heroicon-o-flag')
                 ->color('warning')
                 ->form([
@@ -286,32 +286,32 @@ class ViewTicket extends ViewRecord
                         ->changePriority($this->record, TicketPriority::from($data['priority']), auth()->user());
 
                     Notification::make()
-                        ->title('Priority updated')
+                        ->title(__('escalated-filament::filament.resources.ticket.notification_priority_updated'))
                         ->success()
                         ->send();
                 }),
 
             Actions\Action::make('follow')
-                ->label(fn () => $this->record->isFollowedBy(auth()->id()) ? 'Unfollow' : 'Follow')
+                ->label(fn () => $this->record->isFollowedBy(auth()->id()) ? __('escalated-filament::filament.actions.follow_ticket.unfollow') : __('escalated-filament::filament.actions.follow_ticket.follow'))
                 ->icon(fn () => $this->record->isFollowedBy(auth()->id()) ? 'heroicon-s-bell-slash' : 'heroicon-o-bell')
                 ->color('gray')
                 ->action(function (): void {
                     if ($this->record->isFollowedBy(auth()->id())) {
                         $this->record->unfollow(auth()->id());
-                        Notification::make()->title('Unfollowed ticket')->success()->send();
+                        Notification::make()->title(__('escalated-filament::filament.resources.ticket.notification_unfollowed'))->success()->send();
                     } else {
                         $this->record->follow(auth()->id());
-                        Notification::make()->title('Following ticket')->success()->send();
+                        Notification::make()->title(__('escalated-filament::filament.resources.ticket.notification_following'))->success()->send();
                     }
                 }),
 
             Actions\Action::make('applyMacro')
-                ->label('Apply Macro')
+                ->label(__('escalated-filament::filament.actions.apply_macro.label'))
                 ->icon('heroicon-o-bolt')
                 ->color('purple')
                 ->form([
                     Forms\Components\Select::make('macro_id')
-                        ->label('Macro')
+                        ->label(__('escalated-filament::filament.actions.apply_macro.macro_field'))
                         ->options(
                             Macro::forAgent(auth()->id())->pluck('name', 'id')
                         )
@@ -324,14 +324,14 @@ class ViewTicket extends ViewRecord
                         ->apply($macro, $this->record, auth()->user());
 
                     Notification::make()
-                        ->title("Macro '{$macro->name}' applied")
+                        ->title(__('escalated-filament::filament.resources.ticket.notification_macro_applied', ['name' => $macro->name]))
                         ->success()
                         ->send();
                 })
                 ->visible(fn () => $this->record->isOpen()),
 
             Actions\Action::make('resolve')
-                ->label('Resolve')
+                ->label(__('escalated-filament::filament.resources.ticket.action_resolve'))
                 ->icon('heroicon-o-check-circle')
                 ->color('success')
                 ->requiresConfirmation()
@@ -340,14 +340,14 @@ class ViewTicket extends ViewRecord
                         ->resolve($this->record, auth()->user());
 
                     Notification::make()
-                        ->title('Ticket resolved')
+                        ->title(__('escalated-filament::filament.resources.ticket.notification_resolved'))
                         ->success()
                         ->send();
                 })
                 ->visible(fn () => $this->record->isOpen()),
 
             Actions\Action::make('close')
-                ->label('Close')
+                ->label(__('escalated-filament::filament.resources.ticket.action_close'))
                 ->icon('heroicon-o-x-circle')
                 ->color('danger')
                 ->requiresConfirmation()
@@ -356,14 +356,14 @@ class ViewTicket extends ViewRecord
                         ->close($this->record, auth()->user());
 
                     Notification::make()
-                        ->title('Ticket closed')
+                        ->title(__('escalated-filament::filament.resources.ticket.notification_closed'))
                         ->success()
                         ->send();
                 })
                 ->visible(fn () => $this->record->status !== TicketStatus::Closed),
 
             Actions\Action::make('reopen')
-                ->label('Reopen')
+                ->label(__('escalated-filament::filament.resources.ticket.action_reopen'))
                 ->icon('heroicon-o-arrow-uturn-left')
                 ->color('info')
                 ->requiresConfirmation()
@@ -372,7 +372,7 @@ class ViewTicket extends ViewRecord
                         ->reopen($this->record, auth()->user());
 
                     Notification::make()
-                        ->title('Ticket reopened')
+                        ->title(__('escalated-filament::filament.resources.ticket.notification_reopened'))
                         ->success()
                         ->send();
                 })

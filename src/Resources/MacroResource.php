@@ -33,7 +33,7 @@ class MacroResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Section::make('Macro Details')
+                Forms\Components\Section::make(__('escalated-filament::filament.resources.macro.section_macro_details'))
                     ->schema([
                         Forms\Components\TextInput::make('name')
                             ->required()
@@ -48,32 +48,32 @@ class MacroResource extends Resource
                             ->minValue(0),
 
                         Forms\Components\Toggle::make('is_shared')
-                            ->label('Shared')
-                            ->helperText('Shared macros are visible to all agents.')
+                            ->label(__('escalated-filament::filament.resources.macro.field_shared'))
+                            ->helperText(__('escalated-filament::filament.resources.macro.shared_helper'))
                             ->default(true),
                     ])
                     ->columns(2),
 
-                Forms\Components\Section::make('Actions')
-                    ->description('Define the actions this macro will perform when applied to a ticket.')
+                Forms\Components\Section::make(__('escalated-filament::filament.resources.macro.section_actions'))
+                    ->description(__('escalated-filament::filament.resources.macro.actions_description'))
                     ->schema([
                         Forms\Components\Repeater::make('actions')
                             ->schema([
                                 Forms\Components\Select::make('type')
                                     ->options([
-                                        'status' => 'Change Status',
-                                        'priority' => 'Change Priority',
-                                        'assign' => 'Assign Agent',
-                                        'tags' => 'Add Tags',
-                                        'department' => 'Change Department',
-                                        'reply' => 'Add Reply',
-                                        'note' => 'Add Internal Note',
+                                        'status' => __('escalated-filament::filament.resources.macro.action_change_status'),
+                                        'priority' => __('escalated-filament::filament.resources.macro.action_change_priority'),
+                                        'assign' => __('escalated-filament::filament.resources.macro.action_assign_agent'),
+                                        'tags' => __('escalated-filament::filament.resources.macro.action_add_tags'),
+                                        'department' => __('escalated-filament::filament.resources.macro.action_change_department'),
+                                        'reply' => __('escalated-filament::filament.resources.macro.action_add_reply'),
+                                        'note' => __('escalated-filament::filament.resources.macro.action_add_note'),
                                     ])
                                     ->required()
                                     ->live(),
 
                                 Forms\Components\Select::make('value')
-                                    ->label('Value')
+                                    ->label(__('escalated-filament::filament.resources.macro.field_value'))
                                     ->options(fn (Forms\Get $get) => match ($get('type')) {
                                         'status' => collect(TicketStatus::cases())->mapWithKeys(
                                             fn (TicketStatus $s) => [$s->value => $s->label()]
@@ -89,19 +89,19 @@ class MacroResource extends Resource
                                     ->required(fn (Forms\Get $get) => in_array($get('type'), ['status', 'priority', 'assign', 'department'])),
 
                                 Forms\Components\Select::make('value')
-                                    ->label('Tags')
+                                    ->label(__('escalated-filament::filament.resources.macro.field_tags'))
                                     ->options(Tag::pluck('name', 'id'))
                                     ->multiple()
                                     ->visible(fn (Forms\Get $get) => $get('type') === 'tags')
                                     ->required(fn (Forms\Get $get) => $get('type') === 'tags'),
 
                                 Forms\Components\RichEditor::make('value')
-                                    ->label('Message')
+                                    ->label(__('escalated-filament::filament.resources.macro.field_message'))
                                     ->visible(fn (Forms\Get $get) => in_array($get('type'), ['reply', 'note']))
                                     ->required(fn (Forms\Get $get) => in_array($get('type'), ['reply', 'note'])),
                             ])
                             ->columns(2)
-                            ->addActionLabel('Add Action')
+                            ->addActionLabel(__('escalated-filament::filament.resources.macro.add_action'))
                             ->defaultItems(1)
                             ->columnSpanFull(),
                     ]),
@@ -115,7 +115,7 @@ class MacroResource extends Resource
             ->defaultSort('order')
             ->columns([
                 Tables\Columns\TextColumn::make('order')
-                    ->label('#')
+                    ->label(__('escalated-filament::filament.resources.macro.column_order'))
                     ->sortable(),
 
                 Tables\Columns\TextColumn::make('name')
@@ -127,16 +127,16 @@ class MacroResource extends Resource
                     ->toggleable(),
 
                 Tables\Columns\TextColumn::make('actions')
-                    ->label('Actions')
-                    ->formatStateUsing(fn ($state) => is_array($state) ? count($state).' action(s)' : '0 actions')
+                    ->label(__('escalated-filament::filament.resources.macro.column_actions'))
+                    ->formatStateUsing(fn ($state) => is_array($state) ? __('escalated-filament::filament.resources.macro.action_count', ['count' => count($state)]) : __('escalated-filament::filament.resources.macro.zero_actions'))
                     ->color('gray'),
 
                 Tables\Columns\TextColumn::make('creator.name')
-                    ->label('Created By')
+                    ->label(__('escalated-filament::filament.resources.macro.column_created_by'))
                     ->sortable(),
 
                 Tables\Columns\IconColumn::make('is_shared')
-                    ->label('Shared')
+                    ->label(__('escalated-filament::filament.resources.macro.column_shared'))
                     ->boolean()
                     ->sortable(),
 
@@ -147,7 +147,7 @@ class MacroResource extends Resource
             ])
             ->filters([
                 Tables\Filters\TernaryFilter::make('is_shared')
-                    ->label('Shared'),
+                    ->label(__('escalated-filament::filament.resources.macro.filter_shared')),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

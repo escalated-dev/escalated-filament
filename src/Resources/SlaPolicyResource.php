@@ -20,9 +20,15 @@ class SlaPolicyResource extends Resource
 
     protected static ?int $navigationSort = 12;
 
-    protected static ?string $modelLabel = 'SLA Policy';
+    public static function getModelLabel(): string
+    {
+        return __('escalated-filament::filament.resources.sla_policy.model_label');
+    }
 
-    protected static ?string $pluralModelLabel = 'SLA Policies';
+    public static function getPluralModelLabel(): string
+    {
+        return __('escalated-filament::filament.resources.sla_policy.plural_model_label');
+    }
 
     public static function getNavigationGroup(): ?string
     {
@@ -33,7 +39,7 @@ class SlaPolicyResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Section::make('Policy Details')
+                Forms\Components\Section::make(__('escalated-filament::filament.resources.sla_policy.section_policy_details'))
                     ->schema([
                         Forms\Components\TextInput::make('name')
                             ->required()
@@ -43,21 +49,21 @@ class SlaPolicyResource extends Resource
                             ->rows(2),
 
                         Forms\Components\Toggle::make('is_default')
-                            ->label('Default Policy')
-                            ->helperText('The default policy is applied to new tickets automatically.'),
+                            ->label(__('escalated-filament::filament.resources.sla_policy.field_default_policy'))
+                            ->helperText(__('escalated-filament::filament.resources.sla_policy.default_policy_helper')),
 
                         Forms\Components\Toggle::make('business_hours_only')
-                            ->label('Business Hours Only')
-                            ->helperText('Count only business hours toward SLA deadlines.'),
+                            ->label(__('escalated-filament::filament.resources.sla_policy.field_business_hours'))
+                            ->helperText(__('escalated-filament::filament.resources.sla_policy.business_hours_helper')),
 
                         Forms\Components\Toggle::make('is_active')
-                            ->label('Active')
+                            ->label(__('escalated-filament::filament.resources.sla_policy.field_active'))
                             ->default(true),
                     ])
                     ->columns(2),
 
-                Forms\Components\Section::make('First Response Time (hours)')
-                    ->description('Maximum hours for the first agent response, by priority level.')
+                Forms\Components\Section::make(__('escalated-filament::filament.resources.sla_policy.section_first_response'))
+                    ->description(__('escalated-filament::filament.resources.sla_policy.first_response_description'))
                     ->schema(
                         collect(TicketPriority::cases())->map(fn (TicketPriority $p) => Forms\Components\TextInput::make("first_response_hours.{$p->value}")
                             ->label($p->label())
@@ -69,8 +75,8 @@ class SlaPolicyResource extends Resource
                     )
                     ->columns(5),
 
-                Forms\Components\Section::make('Resolution Time (hours)')
-                    ->description('Maximum hours for full ticket resolution, by priority level.')
+                Forms\Components\Section::make(__('escalated-filament::filament.resources.sla_policy.section_resolution'))
+                    ->description(__('escalated-filament::filament.resources.sla_policy.resolution_description'))
                     ->schema(
                         collect(TicketPriority::cases())->map(fn (TicketPriority $p) => Forms\Components\TextInput::make("resolution_hours.{$p->value}")
                             ->label($p->label())
@@ -97,22 +103,22 @@ class SlaPolicyResource extends Resource
                     ->toggleable(),
 
                 Tables\Columns\IconColumn::make('is_default')
-                    ->label('Default')
+                    ->label(__('escalated-filament::filament.resources.sla_policy.column_default'))
                     ->boolean()
                     ->sortable(),
 
                 Tables\Columns\IconColumn::make('business_hours_only')
-                    ->label('Business Hours')
+                    ->label(__('escalated-filament::filament.resources.sla_policy.column_business_hours'))
                     ->boolean()
                     ->sortable(),
 
                 Tables\Columns\IconColumn::make('is_active')
-                    ->label('Active')
+                    ->label(__('escalated-filament::filament.resources.sla_policy.column_active'))
                     ->boolean()
                     ->sortable(),
 
                 Tables\Columns\TextColumn::make('tickets_count')
-                    ->label('Tickets')
+                    ->label(__('escalated-filament::filament.resources.sla_policy.column_tickets'))
                     ->counts('tickets')
                     ->sortable(),
 
@@ -123,9 +129,9 @@ class SlaPolicyResource extends Resource
             ])
             ->filters([
                 Tables\Filters\TernaryFilter::make('is_active')
-                    ->label('Active'),
+                    ->label(__('escalated-filament::filament.resources.sla_policy.filter_active')),
                 Tables\Filters\TernaryFilter::make('is_default')
-                    ->label('Default'),
+                    ->label(__('escalated-filament::filament.resources.sla_policy.filter_default')),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

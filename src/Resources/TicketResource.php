@@ -48,7 +48,7 @@ class TicketResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Section::make('Ticket Details')
+                Forms\Components\Section::make(__('escalated-filament::filament.resources.ticket.section_details'))
                     ->schema([
                         Forms\Components\TextInput::make('subject')
                             ->required()
@@ -67,14 +67,14 @@ class TicketResource extends Resource
                             ->required(),
 
                         Forms\Components\Select::make('department_id')
-                            ->label('Department')
+                            ->label(__('escalated-filament::filament.resources.ticket.field_department'))
                             ->relationship('department', 'name')
                             ->searchable()
                             ->preload()
                             ->nullable(),
 
                         Forms\Components\Select::make('assigned_to')
-                            ->label('Assigned Agent')
+                            ->label(__('escalated-filament::filament.resources.ticket.field_assigned_agent'))
                             ->options(fn () => app(Escalated::userModel())::pluck('name', 'id'))
                             ->searchable()
                             ->nullable(),
@@ -94,7 +94,7 @@ class TicketResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('reference')
-                    ->label('Reference')
+                    ->label(__('escalated-filament::filament.resources.ticket.column_reference'))
                     ->searchable()
                     ->sortable()
                     ->copyable()
@@ -135,23 +135,23 @@ class TicketResource extends Resource
                     ->sortable(),
 
                 Tables\Columns\TextColumn::make('department.name')
-                    ->label('Department')
+                    ->label(__('escalated-filament::filament.resources.ticket.column_department'))
                     ->sortable()
                     ->toggleable(),
 
                 Tables\Columns\TextColumn::make('assignee.name')
-                    ->label('Assigned To')
+                    ->label(__('escalated-filament::filament.resources.ticket.column_assigned_to'))
                     ->sortable()
-                    ->default('Unassigned')
+                    ->default(__('escalated-filament::filament.resources.ticket.default_unassigned'))
                     ->color(fn (Ticket $record) => $record->assigned_to ? null : 'warning')
                     ->toggleable(),
 
                 Tables\Columns\TextColumn::make('requester_name')
-                    ->label('Requester')
+                    ->label(__('escalated-filament::filament.resources.ticket.column_requester'))
                     ->toggleable(isToggledHiddenByDefault: true),
 
                 Tables\Columns\IconColumn::make('sla_status')
-                    ->label('SLA')
+                    ->label(__('escalated-filament::filament.resources.ticket.column_sla'))
                     ->state(fn (Ticket $record): string => match (true) {
                         $record->sla_first_response_breached || $record->sla_resolution_breached => 'breached',
                         $record->resolution_due_at && $record->resolution_due_at->isPast() => 'breached',
@@ -195,13 +195,13 @@ class TicketResource extends Resource
                     ->multiple(),
 
                 Tables\Filters\SelectFilter::make('department_id')
-                    ->label('Department')
+                    ->label(__('escalated-filament::filament.resources.ticket.filter_department'))
                     ->relationship('department', 'name')
                     ->searchable()
                     ->preload(),
 
                 Tables\Filters\SelectFilter::make('assigned_to')
-                    ->label('Assigned Agent')
+                    ->label(__('escalated-filament::filament.resources.ticket.filter_assigned_agent'))
                     ->options(fn () => app(Escalated::userModel())::pluck('name', 'id'))
                     ->searchable(),
 
@@ -211,7 +211,7 @@ class TicketResource extends Resource
                     ->preload(),
 
                 Tables\Filters\TernaryFilter::make('sla_breached')
-                    ->label('SLA Breached')
+                    ->label(__('escalated-filament::filament.resources.ticket.filter_sla_breached'))
                     ->queries(
                         true: fn ($query) => $query->breachedSla(),
                         false: fn ($query) => $query->where('sla_first_response_breached', false)
@@ -219,7 +219,7 @@ class TicketResource extends Resource
                     ),
 
                 Tables\Filters\TernaryFilter::make('unassigned')
-                    ->label('Unassigned')
+                    ->label(__('escalated-filament::filament.resources.ticket.filter_unassigned'))
                     ->queries(
                         true: fn ($query) => $query->unassigned(),
                         false: fn ($query) => $query->whereNotNull('assigned_to'),
@@ -232,7 +232,7 @@ class TicketResource extends Resource
                     ->color('primary')
                     ->form([
                         Forms\Components\Select::make('agent_id')
-                            ->label('Agent')
+                            ->label(__('escalated-filament::filament.actions.assign_ticket.agent_field'))
                             ->options(fn () => app(Escalated::userModel())::pluck('name', 'id'))
                             ->searchable()
                             ->required(),
@@ -260,11 +260,11 @@ class TicketResource extends Resource
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\BulkAction::make('assignBulk')
-                        ->label('Assign Agent')
+                        ->label(__('escalated-filament::filament.resources.ticket.bulk_assign_agent'))
                         ->icon('heroicon-o-user-plus')
                         ->form([
                             Forms\Components\Select::make('agent_id')
-                                ->label('Agent')
+                                ->label(__('escalated-filament::filament.actions.assign_ticket.agent_field'))
                                 ->options(fn () => app(Escalated::userModel())::pluck('name', 'id'))
                                 ->searchable()
                                 ->required(),
@@ -278,7 +278,7 @@ class TicketResource extends Resource
                         ->deselectRecordsAfterCompletion(),
 
                     Tables\Actions\BulkAction::make('changeStatusBulk')
-                        ->label('Change Status')
+                        ->label(__('escalated-filament::filament.resources.ticket.bulk_change_status'))
                         ->icon('heroicon-o-arrow-path')
                         ->form([
                             Forms\Components\Select::make('status')
@@ -296,7 +296,7 @@ class TicketResource extends Resource
                         ->deselectRecordsAfterCompletion(),
 
                     Tables\Actions\BulkAction::make('changePriorityBulk')
-                        ->label('Change Priority')
+                        ->label(__('escalated-filament::filament.resources.ticket.bulk_change_priority'))
                         ->icon('heroicon-o-flag')
                         ->form([
                             Forms\Components\Select::make('priority')
@@ -314,7 +314,7 @@ class TicketResource extends Resource
                         ->deselectRecordsAfterCompletion(),
 
                     Tables\Actions\BulkAction::make('addTagsBulk')
-                        ->label('Add Tags')
+                        ->label(__('escalated-filament::filament.resources.ticket.bulk_add_tags'))
                         ->icon('heroicon-o-tag')
                         ->form([
                             Forms\Components\Select::make('tags')
@@ -331,7 +331,7 @@ class TicketResource extends Resource
                         ->deselectRecordsAfterCompletion(),
 
                     Tables\Actions\BulkAction::make('closeBulk')
-                        ->label('Close')
+                        ->label(__('escalated-filament::filament.resources.ticket.bulk_close'))
                         ->icon('heroicon-o-x-circle')
                         ->color('danger')
                         ->requiresConfirmation()

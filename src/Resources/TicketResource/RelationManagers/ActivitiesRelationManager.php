@@ -11,7 +11,10 @@ class ActivitiesRelationManager extends RelationManager
 {
     protected static string $relationship = 'activities';
 
-    protected static ?string $title = 'Activity Log';
+    public static function getTitle($ownerRecord, string $pageClass): string
+    {
+        return __('escalated-filament::filament.resources.activities.title');
+    }
 
     protected static ?string $icon = 'heroicon-o-clipboard-document-list';
 
@@ -26,7 +29,7 @@ class ActivitiesRelationManager extends RelationManager
             ->defaultSort('created_at', 'desc')
             ->columns([
                 Tables\Columns\TextColumn::make('type')
-                    ->label('Activity')
+                    ->label(__('escalated-filament::filament.resources.activities.column_activity'))
                     ->badge()
                     ->color(fn (ActivityType $state): string => match ($state) {
                         ActivityType::StatusChanged => 'info',
@@ -46,11 +49,11 @@ class ActivitiesRelationManager extends RelationManager
                     ->formatStateUsing(fn (ActivityType $state) => $state->label()),
 
                 Tables\Columns\TextColumn::make('causer.name')
-                    ->label('By')
-                    ->default('System'),
+                    ->label(__('escalated-filament::filament.resources.activities.column_by'))
+                    ->default(__('escalated-filament::filament.resources.activities.default_system')),
 
                 Tables\Columns\TextColumn::make('properties')
-                    ->label('Details')
+                    ->label(__('escalated-filament::filament.resources.activities.column_details'))
                     ->formatStateUsing(function ($state) {
                         if (! is_array($state)) {
                             return '-';
@@ -70,7 +73,7 @@ class ActivitiesRelationManager extends RelationManager
                     ->limit(100),
 
                 Tables\Columns\TextColumn::make('created_at')
-                    ->label('Date')
+                    ->label(__('escalated-filament::filament.resources.activities.column_date'))
                     ->dateTime()
                     ->sortable(),
             ])

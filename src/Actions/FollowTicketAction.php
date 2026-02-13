@@ -18,7 +18,7 @@ class FollowTicketAction extends Action
         parent::setUp();
 
         $this
-            ->label(fn (Ticket $record) => $record->isFollowedBy(auth()->id()) ? 'Unfollow' : 'Follow')
+            ->label(fn (Ticket $record) => $record->isFollowedBy(auth()->id()) ? __('escalated-filament::filament.actions.follow_ticket.unfollow') : __('escalated-filament::filament.actions.follow_ticket.follow'))
             ->icon(fn (Ticket $record) => $record->isFollowedBy(auth()->id()) ? 'heroicon-s-bell-slash' : 'heroicon-o-bell')
             ->color('gray')
             ->action(function (Ticket $record): void {
@@ -26,14 +26,14 @@ class FollowTicketAction extends Action
                     $record->unfollow(auth()->id());
 
                     Notification::make()
-                        ->title('Unfollowed ticket')
+                        ->title(__('escalated-filament::filament.actions.follow_ticket.unfollowed'))
                         ->success()
                         ->send();
                 } else {
                     $record->follow(auth()->id());
 
                     Notification::make()
-                        ->title('Now following ticket')
+                        ->title(__('escalated-filament::filament.actions.follow_ticket.now_following'))
                         ->success()
                         ->send();
                 }

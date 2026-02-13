@@ -27,7 +27,7 @@ class DepartmentResource extends Resource
 
     public static function getNavigationLabel(): string
     {
-        return 'Departments';
+        return __('escalated-filament::filament.resources.department.navigation_label');
     }
 
     public static function form(Form $form): Form
@@ -52,11 +52,11 @@ class DepartmentResource extends Resource
                             ->columnSpanFull(),
 
                         Forms\Components\Toggle::make('is_active')
-                            ->label('Active')
+                            ->label(__('escalated-filament::filament.resources.department.field_active'))
                             ->default(true),
 
                         Forms\Components\Select::make('agents')
-                            ->label('Agents')
+                            ->label(__('escalated-filament::filament.resources.department.field_agents'))
                             ->relationship('agents', 'name')
                             ->multiple()
                             ->preload()
@@ -84,17 +84,17 @@ class DepartmentResource extends Resource
                     ->toggleable(),
 
                 Tables\Columns\IconColumn::make('is_active')
-                    ->label('Active')
+                    ->label(__('escalated-filament::filament.resources.department.column_active'))
                     ->boolean()
                     ->sortable(),
 
                 Tables\Columns\TextColumn::make('agents_count')
-                    ->label('Agents')
+                    ->label(__('escalated-filament::filament.resources.department.column_agents'))
                     ->counts('agents')
                     ->sortable(),
 
                 Tables\Columns\TextColumn::make('tickets_count')
-                    ->label('Tickets')
+                    ->label(__('escalated-filament::filament.resources.department.column_tickets'))
                     ->counts('tickets')
                     ->sortable(),
 
@@ -105,7 +105,7 @@ class DepartmentResource extends Resource
             ])
             ->filters([
                 Tables\Filters\TernaryFilter::make('is_active')
-                    ->label('Active'),
+                    ->label(__('escalated-filament::filament.resources.department.filter_active')),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

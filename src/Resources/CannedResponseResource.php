@@ -44,13 +44,13 @@ class CannedResponseResource extends Resource
                             ),
 
                         Forms\Components\RichEditor::make('body')
-                            ->label('Response Body')
+                            ->label(__('escalated-filament::filament.resources.canned_response.field_response_body'))
                             ->required()
                             ->columnSpanFull(),
 
                         Forms\Components\Toggle::make('is_shared')
-                            ->label('Shared')
-                            ->helperText('Shared responses are visible to all agents.')
+                            ->label(__('escalated-filament::filament.resources.canned_response.field_shared'))
+                            ->helperText(__('escalated-filament::filament.resources.canned_response.shared_helper'))
                             ->default(true),
                     ])
                     ->columns(2),
@@ -77,11 +77,11 @@ class CannedResponseResource extends Resource
                     ->toggleable(),
 
                 Tables\Columns\TextColumn::make('creator.name')
-                    ->label('Created By')
+                    ->label(__('escalated-filament::filament.resources.canned_response.column_created_by'))
                     ->sortable(),
 
                 Tables\Columns\IconColumn::make('is_shared')
-                    ->label('Shared')
+                    ->label(__('escalated-filament::filament.resources.canned_response.field_shared'))
                     ->boolean()
                     ->sortable(),
 
@@ -92,7 +92,7 @@ class CannedResponseResource extends Resource
             ])
             ->filters([
                 Tables\Filters\TernaryFilter::make('is_shared')
-                    ->label('Shared'),
+                    ->label(__('escalated-filament::filament.resources.canned_response.field_shared')),
                 Tables\Filters\SelectFilter::make('category')
                     ->options(
                         CannedResponse::whereNotNull('category')

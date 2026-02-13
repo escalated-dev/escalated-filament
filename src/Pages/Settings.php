@@ -19,7 +19,17 @@ class Settings extends Page implements HasForms
 
     protected static ?int $navigationSort = 99;
 
-    protected static ?string $title = 'Support Settings';
+    protected static ?string $title = null;
+
+    public function getTitle(): string
+    {
+        return __('escalated-filament::filament.pages.settings.title');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('escalated-filament::filament.pages.settings.title');
+    }
 
     protected static ?string $slug = 'support-settings';
 
@@ -48,54 +58,54 @@ class Settings extends Page implements HasForms
     {
         return $form
             ->schema([
-                Forms\Components\Section::make('General')
-                    ->description('Configure general ticket system behavior.')
+                Forms\Components\Section::make(__('escalated-filament::filament.pages.settings.general'))
+                    ->description(__('escalated-filament::filament.pages.settings.general_description'))
                     ->schema([
                         Forms\Components\TextInput::make('ticket_reference_prefix')
-                            ->label('Ticket Reference Prefix')
-                            ->helperText('Prefix for ticket reference numbers (e.g., ESC-00001).')
+                            ->label(__('escalated-filament::filament.pages.settings.ticket_reference_prefix'))
+                            ->helperText(__('escalated-filament::filament.pages.settings.ticket_reference_prefix_helper'))
                             ->required()
                             ->maxLength(10),
 
                         Forms\Components\Toggle::make('guest_tickets_enabled')
-                            ->label('Allow Guest Tickets')
-                            ->helperText('Allow unauthenticated users to submit tickets.'),
+                            ->label(__('escalated-filament::filament.pages.settings.allow_guest_tickets'))
+                            ->helperText(__('escalated-filament::filament.pages.settings.allow_guest_tickets_helper')),
 
                         Forms\Components\Toggle::make('allow_customer_close')
-                            ->label('Allow Customer Close')
-                            ->helperText('Allow customers to close their own tickets.'),
+                            ->label(__('escalated-filament::filament.pages.settings.allow_customer_close'))
+                            ->helperText(__('escalated-filament::filament.pages.settings.allow_customer_close_helper')),
                     ])
                     ->columns(2),
 
-                Forms\Components\Section::make('Auto-Close')
-                    ->description('Automatically close resolved tickets after a specified period.')
+                Forms\Components\Section::make(__('escalated-filament::filament.pages.settings.auto_close'))
+                    ->description(__('escalated-filament::filament.pages.settings.auto_close_description'))
                     ->schema([
                         Forms\Components\TextInput::make('auto_close_resolved_after_days')
-                            ->label('Auto-Close Resolved After (days)')
-                            ->helperText('Number of days after resolution before a ticket is automatically closed.')
+                            ->label(__('escalated-filament::filament.pages.settings.auto_close_days'))
+                            ->helperText(__('escalated-filament::filament.pages.settings.auto_close_days_helper'))
                             ->numeric()
                             ->minValue(1)
                             ->maxValue(365)
                             ->suffix('days'),
                     ]),
 
-                Forms\Components\Section::make('Attachments')
-                    ->description('Configure attachment limits for tickets and replies.')
+                Forms\Components\Section::make(__('escalated-filament::filament.pages.settings.attachments'))
+                    ->description(__('escalated-filament::filament.pages.settings.attachments_description'))
                     ->schema([
                         Forms\Components\TextInput::make('max_attachments_per_reply')
-                            ->label('Max Attachments per Reply')
+                            ->label(__('escalated-filament::filament.pages.settings.max_attachments'))
                             ->numeric()
                             ->minValue(1)
                             ->maxValue(20)
                             ->suffix('files'),
 
                         Forms\Components\TextInput::make('max_attachment_size_kb')
-                            ->label('Max Attachment Size')
+                            ->label(__('escalated-filament::filament.pages.settings.max_attachment_size'))
                             ->numeric()
                             ->minValue(1024)
                             ->maxValue(102400)
                             ->suffix('KB')
-                            ->helperText('Maximum file size in kilobytes (1024 KB = 1 MB).'),
+                            ->helperText(__('escalated-filament::filament.pages.settings.max_attachment_size_helper')),
                     ])
                     ->columns(2),
             ])
@@ -114,7 +124,7 @@ class Settings extends Page implements HasForms
         EscalatedSettings::set('allow_customer_close', $data['allow_customer_close'] ? '1' : '0');
 
         Notification::make()
-            ->title('Settings saved successfully')
+            ->title(__('escalated-filament::filament.pages.settings.save_success'))
             ->success()
             ->send();
     }

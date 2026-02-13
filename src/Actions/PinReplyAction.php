@@ -18,13 +18,13 @@ class PinReplyAction extends Action
         parent::setUp();
 
         $this
-            ->label(fn (Reply $record) => $record->is_pinned ? 'Unpin' : 'Pin')
+            ->label(fn (Reply $record) => $record->is_pinned ? __('escalated-filament::filament.actions.pin_reply.unpin') : __('escalated-filament::filament.actions.pin_reply.pin'))
             ->icon(fn (Reply $record) => $record->is_pinned ? 'heroicon-s-bookmark' : 'heroicon-o-bookmark')
             ->color(fn (Reply $record) => $record->is_pinned ? 'primary' : 'gray')
             ->action(function (Reply $record): void {
                 $record->update(['is_pinned' => ! $record->is_pinned]);
 
-                $message = $record->is_pinned ? 'Reply pinned' : 'Reply unpinned';
+                $message = $record->is_pinned ? __('escalated-filament::filament.actions.pin_reply.pinned') : __('escalated-filament::filament.actions.pin_reply.unpinned');
 
                 Notification::make()
                     ->title($message)
