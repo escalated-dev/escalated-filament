@@ -16,6 +16,9 @@
         "pestphp/pest-plugin-laravel": "^2.0|^3.0|^4.0"
     },
     "autoload": {
+        "files": [
+            "src/compat.php"
+        ],
         "psr-4": {
             "Escalated\\Filament\\": "src/"
         }
