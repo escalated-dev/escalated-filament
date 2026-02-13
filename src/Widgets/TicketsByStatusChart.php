@@ -15,7 +15,10 @@ class TicketsByStatusChart extends ChartWidget
 
     protected static ?int $sort = 2;
 
-    protected static ?string $maxHeight = '300px';
+    public function getMaxHeight(): ?string
+    {
+        return '300px';
+    }
 
     protected function getType(): string
     {
