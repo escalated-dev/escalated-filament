@@ -1,7 +1,6 @@
 <?php
 
 use Escalated\Filament\EscalatedFilamentPlugin;
-use Filament\Panel;
 
 it('has the correct plugin ID', function () {
     $plugin = EscalatedFilamentPlugin::make();
@@ -93,14 +92,14 @@ it('registers pages with the panel', function () {
         ->and($pages)->toContain(\Escalated\Filament\Pages\Settings::class);
 });
 
-it('registers widgets with the panel', function () {
+it('does not register widgets on the panel (they are page-specific)', function () {
     $panel = \Filament\Facades\Filament::getDefaultPanel();
     $widgets = $panel->getWidgets();
 
-    expect($widgets)->toContain(\Escalated\Filament\Widgets\TicketStatsOverview::class)
-        ->and($widgets)->toContain(\Escalated\Filament\Widgets\TicketsByStatusChart::class)
-        ->and($widgets)->toContain(\Escalated\Filament\Widgets\TicketsByPriorityChart::class)
-        ->and($widgets)->toContain(\Escalated\Filament\Widgets\CsatOverviewWidget::class)
-        ->and($widgets)->toContain(\Escalated\Filament\Widgets\RecentTicketsWidget::class)
-        ->and($widgets)->toContain(\Escalated\Filament\Widgets\SlaBreachWidget::class);
+    expect($widgets)->not->toContain(\Escalated\Filament\Widgets\TicketStatsOverview::class)
+        ->and($widgets)->not->toContain(\Escalated\Filament\Widgets\TicketsByStatusChart::class)
+        ->and($widgets)->not->toContain(\Escalated\Filament\Widgets\TicketsByPriorityChart::class)
+        ->and($widgets)->not->toContain(\Escalated\Filament\Widgets\CsatOverviewWidget::class)
+        ->and($widgets)->not->toContain(\Escalated\Filament\Widgets\RecentTicketsWidget::class)
+        ->and($widgets)->not->toContain(\Escalated\Filament\Widgets\SlaBreachWidget::class);
 });

@@ -15,3 +15,22 @@ if (! class_exists(\Filament\Forms\Form::class) && class_exists(\Filament\Schema
 if (! class_exists(\Filament\Infolists\Infolist::class) && class_exists(\Filament\Schemas\Schema::class)) {
     class_alias(\Filament\Schemas\Schema::class, \Filament\Infolists\Infolist::class);
 }
+
+// Tables\Actions → Actions (Filament 5 unified actions)
+$tableActionAliases = [
+    'Action',
+    'EditAction',
+    'DeleteAction',
+    'ViewAction',
+    'BulkAction',
+    'BulkActionGroup',
+    'DeleteBulkAction',
+];
+
+foreach ($tableActionAliases as $class) {
+    $old = "Filament\\Tables\\Actions\\{$class}";
+    $new = "Filament\\Actions\\{$class}";
+    if (! class_exists($old) && class_exists($new)) {
+        class_alias($new, $old);
+    }
+}

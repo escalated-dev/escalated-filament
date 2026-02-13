@@ -13,12 +13,6 @@ use Escalated\Filament\Resources\MacroResource;
 use Escalated\Filament\Resources\SlaPolicyResource;
 use Escalated\Filament\Resources\TagResource;
 use Escalated\Filament\Resources\TicketResource;
-use Escalated\Filament\Widgets\CsatOverviewWidget;
-use Escalated\Filament\Widgets\RecentTicketsWidget;
-use Escalated\Filament\Widgets\SlaBreachWidget;
-use Escalated\Filament\Widgets\TicketsByPriorityChart;
-use Escalated\Filament\Widgets\TicketsByStatusChart;
-use Escalated\Filament\Widgets\TicketStatsOverview;
 use Filament\Contracts\Plugin;
 use Filament\Panel;
 
@@ -101,14 +95,6 @@ class EscalatedFilamentPlugin implements Plugin
                 Reports::class,
                 Settings::class,
                 ManagePlugins::class,
-            ])
-            ->widgets([
-                TicketStatsOverview::class,
-                TicketsByStatusChart::class,
-                TicketsByPriorityChart::class,
-                CsatOverviewWidget::class,
-                RecentTicketsWidget::class,
-                SlaBreachWidget::class,
             ])
             ->livewireComponents([
                 Livewire\TicketConversation::class,
