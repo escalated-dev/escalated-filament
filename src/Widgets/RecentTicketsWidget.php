@@ -12,7 +12,10 @@ use Filament\Widgets\TableWidget as BaseWidget;
 
 class RecentTicketsWidget extends BaseWidget
 {
-    protected static ?string $heading = 'Recent Tickets';
+    public function getHeading(): ?string
+    {
+        return __('escalated-filament::filament.widgets.recent_tickets.heading');
+    }
 
     protected static ?int $sort = 5;
 
@@ -28,7 +31,7 @@ class RecentTicketsWidget extends BaseWidget
             )
             ->columns([
                 Tables\Columns\TextColumn::make('reference')
-                    ->label('Ref')
+                    ->label(__('escalated-filament::filament.widgets.recent_tickets.column_ref'))
                     ->weight('bold')
                     ->color('primary'),
 
@@ -59,11 +62,11 @@ class RecentTicketsWidget extends BaseWidget
                     ->formatStateUsing(fn (TicketPriority $state) => $state->label()),
 
                 Tables\Columns\TextColumn::make('assignee.name')
-                    ->label('Agent')
-                    ->default('Unassigned'),
+                    ->label(__('escalated-filament::filament.widgets.recent_tickets.column_agent'))
+                    ->default(__('escalated-filament::filament.widgets.recent_tickets.unassigned')),
 
                 Tables\Columns\TextColumn::make('created_at')
-                    ->label('Created')
+                    ->label(__('escalated-filament::filament.widgets.recent_tickets.column_created'))
                     ->since(),
             ])
             ->actions([

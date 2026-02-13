@@ -8,7 +8,10 @@ use Filament\Widgets\ChartWidget;
 
 class TicketsByPriorityChart extends ChartWidget
 {
-    protected static ?string $heading = 'Tickets by Priority';
+    public function getHeading(): ?string
+    {
+        return __('escalated-filament::filament.widgets.tickets_by_priority.heading');
+    }
 
     protected static ?int $sort = 3;
 
@@ -32,7 +35,7 @@ class TicketsByPriorityChart extends ChartWidget
         return [
             'datasets' => [
                 [
-                    'label' => 'Open Tickets',
+                    'label' => __('escalated-filament::filament.widgets.tickets_by_priority.open_tickets'),
                     'data' => $data->pluck('count')->all(),
                     'backgroundColor' => $data->pluck('color')->all(),
                     'borderWidth' => 0,

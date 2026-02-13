@@ -11,7 +11,10 @@ use Filament\Widgets\TableWidget as BaseWidget;
 
 class SlaBreachWidget extends BaseWidget
 {
-    protected static ?string $heading = 'SLA Breach Alerts';
+    public function getHeading(): ?string
+    {
+        return __('escalated-filament::filament.widgets.sla_breach.heading');
+    }
 
     protected static ?int $sort = 6;
 
@@ -29,7 +32,7 @@ class SlaBreachWidget extends BaseWidget
             )
             ->columns([
                 Tables\Columns\TextColumn::make('reference')
-                    ->label('Ref')
+                    ->label(__('escalated-filament::filament.widgets.sla_breach.column_ref'))
                     ->weight('bold')
                     ->color('danger'),
 
@@ -48,11 +51,11 @@ class SlaBreachWidget extends BaseWidget
                     ->formatStateUsing(fn (TicketPriority $state) => $state->label()),
 
                 Tables\Columns\TextColumn::make('assignee.name')
-                    ->label('Agent')
-                    ->default('Unassigned'),
+                    ->label(__('escalated-filament::filament.widgets.sla_breach.column_agent'))
+                    ->default(__('escalated-filament::filament.widgets.sla_breach.unassigned')),
 
                 Tables\Columns\IconColumn::make('sla_first_response_breached')
-                    ->label('Response')
+                    ->label(__('escalated-filament::filament.widgets.sla_breach.column_response'))
                     ->boolean()
                     ->trueIcon('heroicon-o-x-circle')
                     ->falseIcon('heroicon-o-check-circle')
@@ -60,7 +63,7 @@ class SlaBreachWidget extends BaseWidget
                     ->falseColor('success'),
 
                 Tables\Columns\IconColumn::make('sla_resolution_breached')
-                    ->label('Resolution')
+                    ->label(__('escalated-filament::filament.widgets.sla_breach.column_resolution'))
                     ->boolean()
                     ->trueIcon('heroicon-o-x-circle')
                     ->falseIcon('heroicon-o-check-circle')
@@ -68,7 +71,7 @@ class SlaBreachWidget extends BaseWidget
                     ->falseColor('success'),
 
                 Tables\Columns\TextColumn::make('resolution_due_at')
-                    ->label('Resolution Due')
+                    ->label(__('escalated-filament::filament.widgets.sla_breach.column_resolution_due'))
                     ->dateTime()
                     ->color('danger'),
             ])
@@ -78,8 +81,8 @@ class SlaBreachWidget extends BaseWidget
                     ->url(fn (Ticket $record) => TicketResource::getUrl('view', ['record' => $record])),
             ])
             ->paginated(false)
-            ->emptyStateHeading('No SLA Breaches')
-            ->emptyStateDescription('All tickets are within SLA targets.')
+            ->emptyStateHeading(__('escalated-filament::filament.widgets.sla_breach.empty_heading'))
+            ->emptyStateDescription(__('escalated-filament::filament.widgets.sla_breach.empty_description'))
             ->emptyStateIcon('heroicon-o-check-circle');
     }
 }

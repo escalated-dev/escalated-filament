@@ -13,22 +13,25 @@ class RepliesRelationManager extends RelationManager
 {
     protected static string $relationship = 'replies';
 
-    protected static ?string $title = 'Replies & Notes';
-
     protected static ?string $icon = 'heroicon-o-chat-bubble-left-right';
+
+    public static function getTitle($ownerRecord, string $pageClass): string
+    {
+        return __('escalated-filament::filament.resources.replies.title');
+    }
 
     public function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\RichEditor::make('body')
-                    ->label('Message')
+                    ->label(__('escalated-filament::filament.resources.replies.field_message'))
                     ->required()
                     ->columnSpanFull(),
 
                 Forms\Components\Toggle::make('is_internal_note')
-                    ->label('Internal Note')
-                    ->helperText('Internal notes are only visible to agents.')
+                    ->label(__('escalated-filament::filament.resources.replies.field_internal_note'))
+                    ->helperText(__('escalated-filament::filament.resources.replies.internal_note_helper'))
                     ->default(false),
             ]);
     }
@@ -40,17 +43,17 @@ class RepliesRelationManager extends RelationManager
             ->defaultSort('created_at', 'desc')
             ->columns([
                 Tables\Columns\TextColumn::make('author.name')
-                    ->label('Author')
-                    ->default('System'),
+                    ->label(__('escalated-filament::filament.resources.replies.column_author'))
+                    ->default(__('escalated-filament::filament.resources.replies.default_system')),
 
                 Tables\Columns\TextColumn::make('body')
-                    ->label('Message')
+                    ->label(__('escalated-filament::filament.resources.replies.column_message'))
                     ->html()
                     ->limit(100)
                     ->wrap(),
 
                 Tables\Columns\IconColumn::make('is_internal_note')
-                    ->label('Internal')
+                    ->label(__('escalated-filament::filament.resources.replies.column_internal'))
                     ->boolean()
                     ->trueIcon('heroicon-o-lock-closed')
                     ->falseIcon('heroicon-o-lock-open')
@@ -58,7 +61,7 @@ class RepliesRelationManager extends RelationManager
                     ->falseColor('gray'),
 
                 Tables\Columns\IconColumn::make('is_pinned')
-                    ->label('Pinned')
+                    ->label(__('escalated-filament::filament.resources.replies.column_pinned'))
                     ->boolean()
                     ->trueIcon('heroicon-s-bookmark')
                     ->falseIcon('heroicon-o-bookmark')
@@ -66,30 +69,30 @@ class RepliesRelationManager extends RelationManager
                     ->falseColor('gray'),
 
                 Tables\Columns\TextColumn::make('created_at')
-                    ->label('Date')
+                    ->label(__('escalated-filament::filament.resources.replies.column_date'))
                     ->dateTime()
                     ->sortable(),
             ])
             ->filters([
                 Tables\Filters\TernaryFilter::make('is_internal_note')
-                    ->label('Type')
-                    ->placeholder('All')
-                    ->trueLabel('Internal Notes Only')
-                    ->falseLabel('Public Replies Only'),
+                    ->label(__('escalated-filament::filament.resources.replies.filter_type'))
+                    ->placeholder(__('escalated-filament::filament.resources.replies.filter_all'))
+                    ->trueLabel(__('escalated-filament::filament.resources.replies.filter_internal_only'))
+                    ->falseLabel(__('escalated-filament::filament.resources.replies.filter_public_only')),
 
                 Tables\Filters\TernaryFilter::make('is_pinned')
-                    ->label('Pinned')
-                    ->placeholder('All')
-                    ->trueLabel('Pinned Only')
-                    ->falseLabel('Not Pinned'),
+                    ->label(__('escalated-filament::filament.resources.replies.filter_pinned'))
+                    ->placeholder(__('escalated-filament::filament.resources.replies.filter_all'))
+                    ->trueLabel(__('escalated-filament::filament.resources.replies.filter_pinned_only'))
+                    ->falseLabel(__('escalated-filament::filament.resources.replies.filter_not_pinned')),
             ])
             ->headerActions([
                 Tables\Actions\Action::make('reply')
-                    ->label('Add Reply')
+                    ->label(__('escalated-filament::filament.resources.replies.action_add_reply'))
                     ->icon('heroicon-o-chat-bubble-left')
                     ->form([
                         Forms\Components\RichEditor::make('body')
-                            ->label('Reply')
+                            ->label(__('escalated-filament::filament.resources.replies.field_reply'))
                             ->required()
                             ->columnSpanFull(),
                     ])
@@ -99,12 +102,12 @@ class RepliesRelationManager extends RelationManager
                     }),
 
                 Tables\Actions\Action::make('note')
-                    ->label('Add Note')
+                    ->label(__('escalated-filament::filament.resources.replies.action_add_note'))
                     ->icon('heroicon-o-pencil-square')
                     ->color('gray')
                     ->form([
                         Forms\Components\RichEditor::make('body')
-                            ->label('Internal Note')
+                            ->label(__('escalated-filament::filament.resources.replies.field_internal_note'))
                             ->required()
                             ->columnSpanFull(),
                     ])
@@ -115,7 +118,7 @@ class RepliesRelationManager extends RelationManager
             ])
             ->actions([
                 Tables\Actions\Action::make('togglePin')
-                    ->label(fn (Reply $record) => $record->is_pinned ? 'Unpin' : 'Pin')
+                    ->label(fn (Reply $record) => $record->is_pinned ? __('escalated-filament::filament.resources.replies.action_unpin') : __('escalated-filament::filament.resources.replies.action_pin'))
                     ->icon(fn (Reply $record) => $record->is_pinned ? 'heroicon-s-bookmark' : 'heroicon-o-bookmark')
                     ->action(fn (Reply $record) => $record->update(['is_pinned' => ! $record->is_pinned]))
                     ->visible(fn (Reply $record) => $record->is_internal_note),

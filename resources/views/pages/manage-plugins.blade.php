@@ -12,21 +12,21 @@
             <x-filament::section>
                 <div class="text-center">
                     <div class="text-2xl font-bold text-gray-900 dark:text-gray-100">{{ $totalCount }}</div>
-                    <div class="text-sm text-gray-500 dark:text-gray-400">Total Plugins</div>
+                    <div class="text-sm text-gray-500 dark:text-gray-400">{{ __('escalated-filament::filament.pages.manage_plugins.total_plugins') }}</div>
                 </div>
             </x-filament::section>
 
             <x-filament::section>
                 <div class="text-center">
                     <div class="text-2xl font-bold text-success-600 dark:text-success-400">{{ $activeCount }}</div>
-                    <div class="text-sm text-gray-500 dark:text-gray-400">Active</div>
+                    <div class="text-sm text-gray-500 dark:text-gray-400">{{ __('escalated-filament::filament.pages.manage_plugins.active') }}</div>
                 </div>
             </x-filament::section>
 
             <x-filament::section>
                 <div class="text-center">
                     <div class="text-2xl font-bold text-danger-600 dark:text-danger-400">{{ $inactiveCount }}</div>
-                    <div class="text-sm text-gray-500 dark:text-gray-400">Inactive</div>
+                    <div class="text-sm text-gray-500 dark:text-gray-400">{{ __('escalated-filament::filament.pages.manage_plugins.inactive') }}</div>
                 </div>
             </x-filament::section>
         </div>

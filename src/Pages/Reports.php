@@ -22,7 +22,17 @@ class Reports extends Page implements HasForms
 
     protected static ?int $navigationSort = 20;
 
-    protected static ?string $title = 'Reports';
+    protected static ?string $title = null;
+
+    public function getTitle(): string
+    {
+        return __('escalated-filament::filament.pages.reports.title');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('escalated-filament::filament.pages.reports.title');
+    }
 
     protected static ?string $slug = 'support-reports';
 
@@ -48,12 +58,12 @@ class Reports extends Page implements HasForms
         return $form
             ->schema([
                 Forms\Components\DatePicker::make('date_from')
-                    ->label('From')
+                    ->label(__('escalated-filament::filament.pages.reports.date_from'))
                     ->default(now()->subDays(30))
                     ->live(),
 
                 Forms\Components\DatePicker::make('date_to')
-                    ->label('To')
+                    ->label(__('escalated-filament::filament.pages.reports.date_to'))
                     ->default(now())
                     ->live(),
             ])

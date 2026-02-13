@@ -13,9 +13,12 @@ class FollowersRelationManager extends RelationManager
 {
     protected static string $relationship = 'followers';
 
-    protected static ?string $title = 'Followers';
-
     protected static ?string $icon = 'heroicon-o-bell';
+
+    public static function getTitle($ownerRecord, string $pageClass): string
+    {
+        return __('escalated-filament::filament.resources.followers.title');
+    }
 
     public function form(Form $form): Form
     {
@@ -31,24 +34,24 @@ class FollowersRelationManager extends RelationManager
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
-                    ->label('Name')
+                    ->label(__('escalated-filament::filament.resources.followers.column_name'))
                     ->searchable(),
 
                 Tables\Columns\TextColumn::make('email')
-                    ->label('Email')
+                    ->label(__('escalated-filament::filament.resources.followers.column_email'))
                     ->searchable(),
 
                 Tables\Columns\TextColumn::make('pivot.created_at')
-                    ->label('Following Since')
+                    ->label(__('escalated-filament::filament.resources.followers.column_following_since'))
                     ->dateTime(),
             ])
             ->headerActions([
                 Tables\Actions\Action::make('addFollower')
-                    ->label('Add Follower')
+                    ->label(__('escalated-filament::filament.resources.followers.action_add_follower'))
                     ->icon('heroicon-o-user-plus')
                     ->form([
                         Forms\Components\Select::make('user_id')
-                            ->label('User')
+                            ->label(__('escalated-filament::filament.resources.followers.field_user'))
                             ->options(fn () => app(Escalated::userModel())::pluck('name', 'id'))
                             ->searchable()
                             ->required(),
@@ -59,7 +62,7 @@ class FollowersRelationManager extends RelationManager
             ])
             ->actions([
                 Tables\Actions\Action::make('remove')
-                    ->label('Remove')
+                    ->label(__('escalated-filament::filament.resources.followers.action_remove'))
                     ->icon('heroicon-o-x-mark')
                     ->color('danger')
                     ->requiresConfirmation()

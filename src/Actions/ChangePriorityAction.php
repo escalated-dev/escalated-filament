@@ -21,12 +21,12 @@ class ChangePriorityAction extends Action
         parent::setUp();
 
         $this
-            ->label('Change Priority')
+            ->label(__('escalated-filament::filament.actions.change_priority.label'))
             ->icon('heroicon-o-flag')
             ->color('warning')
             ->form([
                 Forms\Components\Select::make('priority')
-                    ->label('New Priority')
+                    ->label(__('escalated-filament::filament.actions.change_priority.new_priority_field'))
                     ->options(collect(TicketPriority::cases())->mapWithKeys(
                         fn (TicketPriority $p) => [$p->value => $p->label()]
                     ))
@@ -40,7 +40,7 @@ class ChangePriorityAction extends Action
                 );
 
                 Notification::make()
-                    ->title('Priority updated successfully')
+                    ->title(__('escalated-filament::filament.actions.change_priority.success'))
                     ->success()
                     ->send();
             });

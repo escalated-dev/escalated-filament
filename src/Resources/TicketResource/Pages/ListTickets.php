@@ -26,21 +26,21 @@ class ListTickets extends ListRecords
     public function getTabs(): array
     {
         return [
-            'all' => Tab::make('All Tickets')
+            'all' => Tab::make(__('escalated-filament::filament.resources.ticket.tab_all'))
                 ->icon('heroicon-o-inbox')
                 ->badge(Ticket::count()),
 
-            'my_tickets' => Tab::make('My Tickets')
+            'my_tickets' => Tab::make(__('escalated-filament::filament.resources.ticket.tab_my_tickets'))
                 ->icon('heroicon-o-user')
                 ->badge(Ticket::where('assigned_to', auth()->id())->open()->count())
                 ->modifyQueryUsing(fn (Builder $query) => $query->where('assigned_to', auth()->id())),
 
-            'unassigned' => Tab::make('Unassigned')
+            'unassigned' => Tab::make(__('escalated-filament::filament.resources.ticket.tab_unassigned'))
                 ->icon('heroicon-o-user-minus')
                 ->badge(Ticket::unassigned()->open()->count())
                 ->modifyQueryUsing(fn (Builder $query) => $query->unassigned()->open()),
 
-            'urgent' => Tab::make('Urgent')
+            'urgent' => Tab::make(__('escalated-filament::filament.resources.ticket.tab_urgent'))
                 ->icon('heroicon-o-exclamation-triangle')
                 ->badge(
                     Ticket::open()
@@ -50,7 +50,7 @@ class ListTickets extends ListRecords
                 ->modifyQueryUsing(fn (Builder $query) => $query->open()
                     ->whereIn('priority', [TicketPriority::Urgent->value, TicketPriority::Critical->value])),
 
-            'sla_breaching' => Tab::make('SLA Breaching')
+            'sla_breaching' => Tab::make(__('escalated-filament::filament.resources.ticket.tab_sla_breaching'))
                 ->icon('heroicon-o-clock')
                 ->badge(Ticket::open()->breachedSla()->count())
                 ->modifyQueryUsing(fn (Builder $query) => $query->open()->breachedSla()),

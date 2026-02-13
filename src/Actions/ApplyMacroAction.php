@@ -21,12 +21,12 @@ class ApplyMacroAction extends Action
         parent::setUp();
 
         $this
-            ->label('Apply Macro')
+            ->label(__('escalated-filament::filament.actions.apply_macro.label'))
             ->icon('heroicon-o-bolt')
             ->color('purple')
             ->form([
                 Forms\Components\Select::make('macro_id')
-                    ->label('Macro')
+                    ->label(__('escalated-filament::filament.actions.apply_macro.macro_field'))
                     ->options(
                         Macro::forAgent(auth()->id())->pluck('name', 'id')
                     )
@@ -39,7 +39,7 @@ class ApplyMacroAction extends Action
                 app(MacroService::class)->apply($macro, $record, auth()->user());
 
                 Notification::make()
-                    ->title("Macro '{$macro->name}' applied successfully")
+                    ->title(__('escalated-filament::filament.actions.apply_macro.success', ['name' => $macro->name]))
                     ->success()
                     ->send();
             })

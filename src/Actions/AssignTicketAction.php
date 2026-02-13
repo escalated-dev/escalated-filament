@@ -21,12 +21,12 @@ class AssignTicketAction extends Action
         parent::setUp();
 
         $this
-            ->label('Assign')
+            ->label(__('escalated-filament::filament.actions.assign_ticket.label'))
             ->icon('heroicon-o-user-plus')
             ->color('primary')
             ->form([
                 Forms\Components\Select::make('agent_id')
-                    ->label('Agent')
+                    ->label(__('escalated-filament::filament.actions.assign_ticket.agent_field'))
                     ->options(fn () => app(Escalated::userModel())::pluck('name', 'id'))
                     ->searchable()
                     ->required(),
@@ -35,7 +35,7 @@ class AssignTicketAction extends Action
                 app(AssignmentService::class)->assign($record, $data['agent_id'], auth()->user());
 
                 Notification::make()
-                    ->title('Ticket assigned successfully')
+                    ->title(__('escalated-filament::filament.actions.assign_ticket.success'))
                     ->success()
                     ->send();
             })

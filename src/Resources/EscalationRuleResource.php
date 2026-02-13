@@ -32,7 +32,7 @@ class EscalationRuleResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Section::make('Rule Details')
+                Forms\Components\Section::make(__('escalated-filament::filament.resources.escalation_rule.section_rule_details'))
                     ->schema([
                         Forms\Components\TextInput::make('name')
                             ->required()
@@ -52,25 +52,25 @@ class EscalationRuleResource extends Resource
                             ->minValue(0),
 
                         Forms\Components\Toggle::make('is_active')
-                            ->label('Active')
+                            ->label(__('escalated-filament::filament.resources.escalation_rule.field_active'))
                             ->default(true),
                     ])
                     ->columns(2),
 
-                Forms\Components\Section::make('Conditions')
-                    ->description('Define the conditions that must be met for this rule to trigger.')
+                Forms\Components\Section::make(__('escalated-filament::filament.resources.escalation_rule.section_conditions'))
+                    ->description(__('escalated-filament::filament.resources.escalation_rule.conditions_description'))
                     ->schema([
                         Forms\Components\Repeater::make('conditions')
                             ->schema([
                                 Forms\Components\Select::make('field')
                                     ->options([
-                                        'status' => 'Status',
-                                        'priority' => 'Priority',
-                                        'assigned' => 'Assignment',
-                                        'age_hours' => 'Age (hours)',
-                                        'no_response_hours' => 'No Response (hours)',
-                                        'sla_breached' => 'SLA Breached',
-                                        'department_id' => 'Department',
+                                        'status' => __('escalated-filament::filament.resources.escalation_rule.condition_field_status'),
+                                        'priority' => __('escalated-filament::filament.resources.escalation_rule.condition_field_priority'),
+                                        'assigned' => __('escalated-filament::filament.resources.escalation_rule.condition_field_assignment'),
+                                        'age_hours' => __('escalated-filament::filament.resources.escalation_rule.condition_field_age_hours'),
+                                        'no_response_hours' => __('escalated-filament::filament.resources.escalation_rule.condition_field_no_response_hours'),
+                                        'sla_breached' => __('escalated-filament::filament.resources.escalation_rule.condition_field_sla_breached'),
+                                        'department_id' => __('escalated-filament::filament.resources.escalation_rule.condition_field_department'),
                                     ])
                                     ->required()
                                     ->live(),
@@ -83,8 +83,11 @@ class EscalationRuleResource extends Resource
                                         'priority' => collect(TicketPriority::cases())->mapWithKeys(
                                             fn (TicketPriority $p) => [$p->value => $p->label()]
                                         )->all(),
-                                        'assigned' => ['unassigned' => 'Unassigned', 'assigned' => 'Assigned'],
-                                        'sla_breached' => ['true' => 'Yes'],
+                                        'assigned' => [
+                                            'unassigned' => __('escalated-filament::filament.resources.escalation_rule.condition_value_unassigned'),
+                                            'assigned' => __('escalated-filament::filament.resources.escalation_rule.condition_value_assigned'),
+                                        ],
+                                        'sla_breached' => ['true' => __('escalated-filament::filament.resources.escalation_rule.condition_value_yes')],
                                         'department_id' => Department::pluck('name', 'id')->all(),
                                         default => [],
                                     })
@@ -92,29 +95,29 @@ class EscalationRuleResource extends Resource
                                     ->required(fn (Forms\Get $get) => in_array($get('field'), ['status', 'priority', 'assigned', 'sla_breached', 'department_id'])),
 
                                 Forms\Components\TextInput::make('value')
-                                    ->label('Hours')
+                                    ->label(__('escalated-filament::filament.resources.escalation_rule.field_hours'))
                                     ->numeric()
                                     ->minValue(1)
                                     ->visible(fn (Forms\Get $get) => in_array($get('field'), ['age_hours', 'no_response_hours']))
                                     ->required(fn (Forms\Get $get) => in_array($get('field'), ['age_hours', 'no_response_hours'])),
                             ])
                             ->columns(3)
-                            ->addActionLabel('Add Condition')
+                            ->addActionLabel(__('escalated-filament::filament.resources.escalation_rule.add_condition'))
                             ->defaultItems(1)
                             ->columnSpanFull(),
                     ]),
 
-                Forms\Components\Section::make('Actions')
-                    ->description('Define the actions to execute when conditions are met.')
+                Forms\Components\Section::make(__('escalated-filament::filament.resources.escalation_rule.section_actions'))
+                    ->description(__('escalated-filament::filament.resources.escalation_rule.actions_description'))
                     ->schema([
                         Forms\Components\Repeater::make('actions')
                             ->schema([
                                 Forms\Components\Select::make('type')
                                     ->options([
-                                        'escalate' => 'Escalate Ticket',
-                                        'change_priority' => 'Change Priority',
-                                        'assign_to' => 'Assign To Agent',
-                                        'change_department' => 'Change Department',
+                                        'escalate' => __('escalated-filament::filament.resources.escalation_rule.action_escalate'),
+                                        'change_priority' => __('escalated-filament::filament.resources.escalation_rule.action_change_priority'),
+                                        'assign_to' => __('escalated-filament::filament.resources.escalation_rule.action_assign_to'),
+                                        'change_department' => __('escalated-filament::filament.resources.escalation_rule.action_change_department'),
                                     ])
                                     ->required()
                                     ->live(),
@@ -132,7 +135,7 @@ class EscalationRuleResource extends Resource
                                     ->required(fn (Forms\Get $get) => $get('type') !== 'escalate' && $get('type') !== null),
                             ])
                             ->columns(2)
-                            ->addActionLabel('Add Action')
+                            ->addActionLabel(__('escalated-filament::filament.resources.escalation_rule.add_action'))
                             ->defaultItems(1)
                             ->columnSpanFull(),
                     ]),
@@ -146,7 +149,7 @@ class EscalationRuleResource extends Resource
             ->defaultSort('order')
             ->columns([
                 Tables\Columns\TextColumn::make('order')
-                    ->label('#')
+                    ->label(__('escalated-filament::filament.resources.escalation_rule.column_order'))
                     ->sortable(),
 
                 Tables\Columns\TextColumn::make('name')
@@ -158,22 +161,22 @@ class EscalationRuleResource extends Resource
                     ->toggleable(),
 
                 Tables\Columns\TextColumn::make('trigger_type')
-                    ->label('Trigger')
+                    ->label(__('escalated-filament::filament.resources.escalation_rule.column_trigger'))
                     ->badge()
                     ->color('gray'),
 
                 Tables\Columns\TextColumn::make('conditions')
-                    ->label('Conditions')
-                    ->formatStateUsing(fn ($state) => is_array($state) ? count($state).' condition(s)' : '0 conditions')
+                    ->label(__('escalated-filament::filament.resources.escalation_rule.column_conditions'))
+                    ->formatStateUsing(fn ($state) => is_array($state) ? __('escalated-filament::filament.resources.escalation_rule.condition_count', ['count' => count($state)]) : __('escalated-filament::filament.resources.escalation_rule.zero_conditions'))
                     ->color('gray'),
 
                 Tables\Columns\TextColumn::make('actions')
-                    ->label('Actions')
-                    ->formatStateUsing(fn ($state) => is_array($state) ? count($state).' action(s)' : '0 actions')
+                    ->label(__('escalated-filament::filament.resources.escalation_rule.column_actions'))
+                    ->formatStateUsing(fn ($state) => is_array($state) ? __('escalated-filament::filament.resources.escalation_rule.action_count', ['count' => count($state)]) : __('escalated-filament::filament.resources.escalation_rule.zero_actions'))
                     ->color('gray'),
 
                 Tables\Columns\IconColumn::make('is_active')
-                    ->label('Active')
+                    ->label(__('escalated-filament::filament.resources.escalation_rule.column_active'))
                     ->boolean()
                     ->sortable(),
 
@@ -184,12 +187,12 @@ class EscalationRuleResource extends Resource
             ])
             ->filters([
                 Tables\Filters\TernaryFilter::make('is_active')
-                    ->label('Active'),
+                    ->label(__('escalated-filament::filament.resources.escalation_rule.filter_active')),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\Action::make('toggleActive')
-                    ->label(fn (EscalationRule $record) => $record->is_active ? 'Deactivate' : 'Activate')
+                    ->label(fn (EscalationRule $record) => $record->is_active ? __('escalated-filament::filament.resources.escalation_rule.toggle_deactivate') : __('escalated-filament::filament.resources.escalation_rule.toggle_activate'))
                     ->icon(fn (EscalationRule $record) => $record->is_active ? 'heroicon-o-pause' : 'heroicon-o-play')
                     ->color(fn (EscalationRule $record) => $record->is_active ? 'warning' : 'success')
                     ->action(fn (EscalationRule $record) => $record->update(['is_active' => ! $record->is_active])),

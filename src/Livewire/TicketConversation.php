@@ -58,12 +58,12 @@ class TicketConversation extends Component implements HasForms
         return $form
             ->schema([
                 Forms\Components\Select::make('cannedResponseId')
-                    ->label('Insert Canned Response')
+                    ->label(__('escalated-filament::filament.livewire.conversation.insert_canned_response'))
                     ->options(
                         CannedResponse::forAgent(auth()->id())->pluck('title', 'id')
                     )
                     ->searchable()
-                    ->placeholder('Select a canned response...')
+                    ->placeholder(__('escalated-filament::filament.livewire.conversation.select_canned_response'))
                     ->live()
                     ->afterStateUpdated(function ($state) {
                         if ($state) {
@@ -77,12 +77,12 @@ class TicketConversation extends Component implements HasForms
 
                 Forms\Components\RichEditor::make('replyBody')
                     ->label('')
-                    ->placeholder('Type your reply...')
+                    ->placeholder(__('escalated-filament::filament.livewire.conversation.type_reply'))
                     ->required(),
 
                 Forms\Components\Toggle::make('isInternalNote')
-                    ->label('Internal Note')
-                    ->helperText('Internal notes are only visible to agents.'),
+                    ->label(__('escalated-filament::filament.livewire.conversation.internal_note_label'))
+                    ->helperText(__('escalated-filament::filament.livewire.conversation.internal_note_helper')),
             ]);
     }
 
@@ -105,7 +105,7 @@ class TicketConversation extends Component implements HasForms
         $this->isInternalNote = false;
 
         Notification::make()
-            ->title($this->isInternalNote ? 'Internal note added' : 'Reply sent')
+            ->title($this->isInternalNote ? __('escalated-filament::filament.livewire.conversation.notification_note_added') : __('escalated-filament::filament.livewire.conversation.notification_reply_sent'))
             ->success()
             ->send();
     }
@@ -121,7 +121,7 @@ class TicketConversation extends Component implements HasForms
         $reply->update(['is_pinned' => ! $reply->is_pinned]);
 
         Notification::make()
-            ->title($reply->is_pinned ? 'Note pinned' : 'Note unpinned')
+            ->title($reply->is_pinned ? __('escalated-filament::filament.livewire.conversation.note_pinned') : __('escalated-filament::filament.livewire.conversation.note_unpinned'))
             ->success()
             ->send();
     }

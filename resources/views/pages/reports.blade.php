@@ -15,42 +15,42 @@
         <x-filament::section>
             <div class="text-center">
                 <div class="text-2xl font-bold text-gray-900 dark:text-gray-100">{{ $stats['total_tickets'] }}</div>
-                <div class="text-sm text-gray-500 dark:text-gray-400">Total Tickets</div>
+                <div class="text-sm text-gray-500 dark:text-gray-400">{{ __('escalated-filament::filament.pages.reports.total_tickets') }}</div>
             </div>
         </x-filament::section>
 
         <x-filament::section>
             <div class="text-center">
                 <div class="text-2xl font-bold text-gray-900 dark:text-gray-100">{{ $stats['resolved_tickets'] }}</div>
-                <div class="text-sm text-gray-500 dark:text-gray-400">Resolved</div>
+                <div class="text-sm text-gray-500 dark:text-gray-400">{{ __('escalated-filament::filament.pages.reports.resolved') }}</div>
             </div>
         </x-filament::section>
 
         <x-filament::section>
             <div class="text-center">
                 <div class="text-2xl font-bold text-gray-900 dark:text-gray-100">{{ $stats['resolution_rate'] }}%</div>
-                <div class="text-sm text-gray-500 dark:text-gray-400">Resolution Rate</div>
+                <div class="text-sm text-gray-500 dark:text-gray-400">{{ __('escalated-filament::filament.pages.reports.resolution_rate') }}</div>
             </div>
         </x-filament::section>
 
         <x-filament::section>
             <div class="text-center">
                 <div class="text-2xl font-bold text-gray-900 dark:text-gray-100">{{ $stats['avg_response_time'] }}</div>
-                <div class="text-sm text-gray-500 dark:text-gray-400">Avg Response</div>
+                <div class="text-sm text-gray-500 dark:text-gray-400">{{ __('escalated-filament::filament.pages.reports.avg_response') }}</div>
             </div>
         </x-filament::section>
 
         <x-filament::section>
             <div class="text-center">
                 <div class="text-2xl font-bold text-gray-900 dark:text-gray-100">{{ $stats['avg_resolution_time'] }}</div>
-                <div class="text-sm text-gray-500 dark:text-gray-400">Avg Resolution</div>
+                <div class="text-sm text-gray-500 dark:text-gray-400">{{ __('escalated-filament::filament.pages.reports.avg_resolution') }}</div>
             </div>
         </x-filament::section>
 
         <x-filament::section>
             <div class="text-center">
                 <div class="text-2xl font-bold text-gray-900 dark:text-gray-100">{{ $stats['csat_average'] }}</div>
-                <div class="text-sm text-gray-500 dark:text-gray-400">CSAT Average</div>
+                <div class="text-sm text-gray-500 dark:text-gray-400">{{ __('escalated-filament::filament.pages.reports.csat_average') }}</div>
             </div>
         </x-filament::section>
     </div>
@@ -58,7 +58,7 @@
     {{-- Tickets by Department --}}
     <div class="grid grid-cols-1 gap-6 lg:grid-cols-2 mb-6">
         <x-filament::section>
-            <x-slot name="heading">Tickets by Department</x-slot>
+            <x-slot name="heading">{{ __('escalated-filament::filament.pages.reports.tickets_by_department') }}</x-slot>
             @if(count($ticketsByDepartment) > 0)
                 <div class="space-y-3">
                     @foreach($ticketsByDepartment as $dept)
@@ -78,12 +78,12 @@
                     @endforeach
                 </div>
             @else
-                <p class="text-sm text-gray-500 dark:text-gray-400">No data for selected period.</p>
+                <p class="text-sm text-gray-500 dark:text-gray-400">{{ __('escalated-filament::filament.pages.reports.no_data') }}</p>
             @endif
         </x-filament::section>
 
         <x-filament::section>
-            <x-slot name="heading">Tickets Over Time</x-slot>
+            <x-slot name="heading">{{ __('escalated-filament::filament.pages.reports.tickets_over_time') }}</x-slot>
             @if(count($ticketsOverTime) > 0)
                 <div class="space-y-2">
                     @foreach($ticketsOverTime as $entry)
@@ -103,7 +103,7 @@
                     @endforeach
                 </div>
             @else
-                <p class="text-sm text-gray-500 dark:text-gray-400">No data for selected period.</p>
+                <p class="text-sm text-gray-500 dark:text-gray-400">{{ __('escalated-filament::filament.pages.reports.no_data') }}</p>
             @endif
         </x-filament::section>
     </div>

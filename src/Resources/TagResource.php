@@ -65,10 +65,10 @@ class TagResource extends Resource
                     ->color('gray'),
 
                 Tables\Columns\ColorColumn::make('color')
-                    ->label('Color'),
+                    ->label(__('escalated-filament::filament.resources.tag.column_color')),
 
                 Tables\Columns\TextColumn::make('tickets_count')
-                    ->label('Tickets')
+                    ->label(__('escalated-filament::filament.resources.tag.column_tickets'))
                     ->counts('tickets')
                     ->sortable(),
 

@@ -8,7 +8,10 @@ use Filament\Widgets\ChartWidget;
 
 class TicketsByStatusChart extends ChartWidget
 {
-    protected static ?string $heading = 'Tickets by Status';
+    public function getHeading(): ?string
+    {
+        return __('escalated-filament::filament.widgets.tickets_by_status.heading');
+    }
 
     protected static ?int $sort = 2;
 
