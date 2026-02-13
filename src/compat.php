@@ -16,6 +16,11 @@ if (! class_exists(\Filament\Infolists\Infolist::class) && class_exists(\Filamen
     class_alias(\Filament\Schemas\Schema::class, \Filament\Infolists\Infolist::class);
 }
 
+// Forms\Components\Section → Schemas\Components\Section (Filament 5)
+if (! class_exists(\Filament\Forms\Components\Section::class) && class_exists(\Filament\Schemas\Components\Section::class)) {
+    class_alias(\Filament\Schemas\Components\Section::class, \Filament\Forms\Components\Section::class);
+}
+
 // Resources\Components\Tab → Schemas\Components\Tabs\Tab (Filament 5)
 if (! class_exists(\Filament\Resources\Components\Tab::class) && class_exists(\Filament\Schemas\Components\Tabs\Tab::class)) {
     class_alias(\Filament\Schemas\Components\Tabs\Tab::class, \Filament\Resources\Components\Tab::class);
