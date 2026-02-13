@@ -2,7 +2,6 @@
     "name": "escalated-dev/escalated-filament",
     "description": "Filament admin panel integration for the Escalated support ticket system",
     "keywords": ["laravel", "filament", "support", "tickets", "helpdesk", "admin-panel"],
-    "version": "0.5.1",
     "license": "MIT",
     "type": "library",
     "require": {
