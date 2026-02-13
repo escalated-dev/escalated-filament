@@ -14,13 +14,14 @@ jobs:
       matrix:
         php: [8.3, 8.2]
         laravel: [^12.0, ^11.0]
+        filament: ['^3.0', '^4.0', '^5.0']
         include:
           - laravel: ^12.0
             testbench: 10.*
           - laravel: ^11.0
             testbench: 9.*
 
-    name: P${{ matrix.php }} - L${{ matrix.laravel }}
+    name: P${{ matrix.php }} - L${{ matrix.laravel }} - F${{ matrix.filament }}
 
     steps:
       - name: Checkout code
@@ -35,7 +36,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" "filament/filament:^3.0" --no-interaction --no-update
+          composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" "filament/filament:${{ matrix.filament }}" --no-interaction --no-update
           composer update --prefer-stable --prefer-dist --no-interaction
 
       - name: Execute tests
