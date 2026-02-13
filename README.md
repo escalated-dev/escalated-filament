@@ -1,6 +1,6 @@
 # Escalated for Filament
 
-A [Filament v3](https://filamentphp.com) admin panel plugin for the [Escalated](https://github.com/escalated-dev/escalated-laravel) support ticket system. Manage tickets, departments, SLA policies, escalation rules, macros, and more — all from within your existing Filament admin panel.
+A [Filament](https://filamentphp.com) admin panel plugin for the [Escalated](https://github.com/escalated-dev/escalated-laravel) support ticket system. Manage tickets, departments, SLA policies, escalation rules, macros, and more — all from within your existing Filament admin panel.
 
 ## How It Works
 
@@ -17,8 +17,14 @@ Escalated for Filament is a **Filament plugin wrapper** around [`escalated-larav
 
 - PHP 8.2+
 - Laravel 11 or 12
-- Filament 3.x
-- escalated-dev/escalated-laravel ^0.4
+- Filament 3.x, 4.x, or 5.x
+- escalated-dev/escalated-laravel ^0.5
+
+### Version Compatibility
+
+| escalated-filament | Filament | Laravel | PHP  |
+|--------------------|----------|---------|------|
+| 0.5.x              | 3.x, 4.x, 5.x | 11, 12  | 8.2+ |
 
 ## Installation
 
@@ -153,7 +159,7 @@ _Coming soon._
 - **[Escalated for Rails](https://github.com/escalated-dev/escalated-rails)** — Ruby on Rails engine
 - **[Escalated for Django](https://github.com/escalated-dev/escalated-django)** — Django reusable app
 - **[Escalated for AdonisJS](https://github.com/escalated-dev/escalated-adonis)** — AdonisJS v6 package
-- **[Escalated for Filament](https://github.com/escalated-dev/escalated-filament)** — Filament v3 admin panel plugin (you are here)
+- **[Escalated for Filament](https://github.com/escalated-dev/escalated-filament)** — Filament admin panel plugin (you are here)
 - **[Shared Frontend](https://github.com/escalated-dev/escalated)** — Vue 3 + Inertia.js UI components
 
 Same architecture, same ticket system — native Filament experience for Laravel admin panels.

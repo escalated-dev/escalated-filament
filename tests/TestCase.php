@@ -20,7 +20,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\LivewireServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
-use RyanChandler\BladeCaptureDirective\BladeCaptureDirectiveServiceProvider;
 
 abstract class TestCase extends Orchestra
 {
@@ -39,11 +38,10 @@ abstract class TestCase extends Orchestra
 
     protected function getPackageProviders($app): array
     {
-        return [
+        $providers = [
             LivewireServiceProvider::class,
             BladeIconsServiceProvider::class,
             BladeHeroiconsServiceProvider::class,
-            BladeCaptureDirectiveServiceProvider::class,
             SupportServiceProvider::class,
             FilamentServiceProvider::class,
             FormsServiceProvider::class,
@@ -55,6 +53,18 @@ abstract class TestCase extends Orchestra
             EscalatedServiceProvider::class,
             EscalatedFilamentServiceProvider::class,
         ];
+
+        // Filament v3 dependency — removed in v4/v5
+        if (class_exists(\RyanChandler\BladeCaptureDirective\BladeCaptureDirectiveServiceProvider::class)) {
+            $providers[] = \RyanChandler\BladeCaptureDirective\BladeCaptureDirectiveServiceProvider::class;
+        }
+
+        // Filament v4+ dependency
+        if (class_exists(\Filament\Schemas\SchemasServiceProvider::class)) {
+            $providers[] = \Filament\Schemas\SchemasServiceProvider::class;
+        }
+
+        return $providers;
     }
 
     protected function defineEnvironment($app): void
