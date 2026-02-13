@@ -21,11 +21,14 @@ class Settings extends Page implements HasForms
 
     protected static ?string $slug = 'support-settings';
 
-    protected static string $view = 'escalated-filament::pages.settings';
-
     public static function getNavigationIcon(): ?string
     {
         return 'heroicon-o-cog-6-tooth';
+    }
+
+    public function getView(): string
+    {
+        return 'escalated-filament::pages.settings';
     }
 
     public function getTitle(): string

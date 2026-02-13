@@ -24,11 +24,14 @@ class Reports extends Page implements HasForms
 
     protected static ?string $slug = 'support-reports';
 
-    protected static string $view = 'escalated-filament::pages.reports';
-
     public static function getNavigationIcon(): ?string
     {
         return 'heroicon-o-chart-bar';
+    }
+
+    public function getView(): string
+    {
+        return 'escalated-filament::pages.reports';
     }
 
     public function getTitle(): string

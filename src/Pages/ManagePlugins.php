@@ -28,11 +28,14 @@ class ManagePlugins extends Page implements HasForms, HasTable
 
     protected static ?string $slug = 'support-plugins';
 
-    protected static string $view = 'escalated-filament::pages.manage-plugins';
-
     public static function getNavigationIcon(): ?string
     {
         return 'heroicon-o-puzzle-piece';
+    }
+
+    public function getView(): string
+    {
+        return 'escalated-filament::pages.manage-plugins';
     }
 
     public function getTitle(): string

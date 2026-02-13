@@ -19,11 +19,14 @@ class Dashboard extends Page
 
     protected static ?string $slug = 'support-dashboard';
 
-    protected static string $view = 'escalated-filament::pages.dashboard';
-
     public static function getNavigationIcon(): ?string
     {
         return 'heroicon-o-home';
+    }
+
+    public function getView(): string
+    {
+        return 'escalated-filament::pages.dashboard';
     }
 
     public function getTitle(): string
