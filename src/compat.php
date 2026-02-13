@@ -16,6 +16,11 @@ if (! class_exists(\Filament\Infolists\Infolist::class) && class_exists(\Filamen
     class_alias(\Filament\Schemas\Schema::class, \Filament\Infolists\Infolist::class);
 }
 
+// Resources\Components\Tab → Schemas\Components\Tabs\Tab (Filament 5)
+if (! class_exists(\Filament\Resources\Components\Tab::class) && class_exists(\Filament\Schemas\Components\Tabs\Tab::class)) {
+    class_alias(\Filament\Schemas\Components\Tabs\Tab::class, \Filament\Resources\Components\Tab::class);
+}
+
 // Tables\Actions → Actions (Filament 5 unified actions)
 $tableActionAliases = [
     'Action',
