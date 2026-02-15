@@ -6,6 +6,7 @@ use Escalated\Filament\Pages\Dashboard;
 use Escalated\Filament\Pages\ManagePlugins;
 use Escalated\Filament\Pages\Reports;
 use Escalated\Filament\Pages\Settings;
+use Escalated\Filament\Resources\ApiTokenResource;
 use Escalated\Filament\Resources\CannedResponseResource;
 use Escalated\Filament\Resources\DepartmentResource;
 use Escalated\Filament\Resources\EscalationRuleResource;
@@ -89,6 +90,7 @@ class EscalatedFilamentPlugin implements Plugin
                 EscalationRuleResource::class,
                 CannedResponseResource::class,
                 MacroResource::class,
+                ApiTokenResource::class,
             ])
             ->pages([
                 Dashboard::class,
