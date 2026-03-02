@@ -12,6 +12,8 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Filament\Schemas\Schema;
+use Filament\Forms\Set;
+
 
 class DepartmentResource extends Resource
 {
@@ -44,7 +46,7 @@ class DepartmentResource extends Resource
                             ->required()
                             ->maxLength(255)
                             ->live(onBlur: true)
-                            ->afterStateUpdated(fn (Forms\Set $set, ?string $state) => $set('slug', \Illuminate\Support\Str::slug($state ?? ''))),
+                            ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', \Illuminate\Support\Str::slug($state ?? ''))),
 
                         Forms\Components\TextInput::make('slug')
                             ->required()
