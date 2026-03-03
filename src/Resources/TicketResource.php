@@ -12,8 +12,8 @@ use Escalated\Laravel\Models\Department;
 use Escalated\Laravel\Models\Tag;
 use Escalated\Laravel\Models\Ticket;
 use Filament\Forms;
-use Filament\Forms\Form;
 use Filament\Resources\Resource;
+use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
 
@@ -47,9 +47,9 @@ class TicketResource extends Resource
         return $count > 10 ? 'danger' : ($count > 0 ? 'warning' : 'success');
     }
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
+        return $schema
             ->schema([
                 Forms\Components\Section::make(__('escalated-filament::filament.resources.ticket.section_details'))
                     ->schema([
