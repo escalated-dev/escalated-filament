@@ -10,6 +10,7 @@ use Escalated\Laravel\Enums\TicketStatus;
 use Escalated\Laravel\Escalated;
 use Escalated\Laravel\Models\Macro;
 use Escalated\Laravel\Models\Ticket;
+use Escalated\Laravel\Services\MacroService;
 use Escalated\Laravel\Services\TicketService;
 use Filament\Actions;
 use Filament\Forms;
@@ -281,7 +282,7 @@ class ViewTicket extends ViewRecord
                 ->label(__('escalated-filament::filament.resources.ticket.action_priority'))
                 ->icon('heroicon-o-flag')
                 ->color('warning')
-                ->form([
+                ->schema([
                     Forms\Components\Select::make('priority')
                         ->options(collect(TicketPriority::cases())->mapWithKeys(
                             fn (TicketPriority $p) => [$p->value => $p->label()]
@@ -316,7 +317,7 @@ class ViewTicket extends ViewRecord
                 ->label(__('escalated-filament::filament.actions.apply_macro.label'))
                 ->icon('heroicon-o-bolt')
                 ->color('purple')
-                ->form([
+                ->schema([
                     Forms\Components\Select::make('macro_id')
                         ->label(__('escalated-filament::filament.actions.apply_macro.macro_field'))
                         ->options(
@@ -327,7 +328,7 @@ class ViewTicket extends ViewRecord
                 ])
                 ->action(function (array $data): void {
                     $macro = Macro::findOrFail($data['macro_id']);
-                    app(\Escalated\Laravel\Services\MacroService::class)
+                    app(MacroService::class)
                         ->apply($macro, $this->record, auth()->user());
 
                     Notification::make()
