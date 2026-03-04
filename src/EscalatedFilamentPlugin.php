@@ -24,6 +24,16 @@ class EscalatedFilamentPlugin implements Plugin
 
     protected string $adminGate = 'escalated-admin';
 
+    protected array $resources = [
+        TicketResource::class,
+        DepartmentResource::class,
+        TagResource::class,
+        SlaPolicyResource::class,
+        EscalationRuleResource::class,
+        CannedResponseResource::class,
+        MacroResource::class,
+    ];
+
     public static function make(): static
     {
         return app(static::class);
@@ -81,15 +91,7 @@ class EscalatedFilamentPlugin implements Plugin
     public function register(Panel $panel): void
     {
         $panel
-            ->resources([
-                TicketResource::class,
-                DepartmentResource::class,
-                TagResource::class,
-                SlaPolicyResource::class,
-                EscalationRuleResource::class,
-                CannedResponseResource::class,
-                MacroResource::class,
-            ])
+            ->resources($this->getResources())
             ->pages([
                 Dashboard::class,
                 Reports::class,
@@ -100,6 +102,17 @@ class EscalatedFilamentPlugin implements Plugin
                 Livewire\TicketConversation::class,
                 Livewire\SatisfactionRating::class,
             ]);
+    }
+
+    public function resources(array $resources): static
+    {
+        $this->resources = $resources;
+        return $this;
+    }
+
+    public function getResources(): array
+    {
+        return $this->resources;
     }
 
     public function boot(Panel $panel): void

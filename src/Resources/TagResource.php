@@ -6,10 +6,12 @@ use Escalated\Filament\EscalatedFilamentPlugin;
 use Escalated\Filament\Resources\TagResource\Pages;
 use Escalated\Laravel\Models\Tag;
 use Filament\Forms;
-use Filament\Forms\Form;
 use Filament\Resources\Resource;
+use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Filament\Schemas\Components\Utilities\Set;
+
 
 class TagResource extends Resource
 {
@@ -27,9 +29,9 @@ class TagResource extends Resource
         return app(EscalatedFilamentPlugin::class)->getNavigationGroup();
     }
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
+        return $schema
             ->schema([
                 Forms\Components\Section::make()
                     ->schema([
@@ -37,7 +39,7 @@ class TagResource extends Resource
                             ->required()
                             ->maxLength(255)
                             ->live(onBlur: true)
-                            ->afterStateUpdated(fn (Forms\Set $set, ?string $state) => $set('slug', \Illuminate\Support\Str::slug($state ?? ''))),
+                            ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', \Illuminate\Support\Str::slug($state ?? ''))),
 
                         Forms\Components\TextInput::make('slug')
                             ->required()

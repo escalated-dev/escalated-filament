@@ -12,8 +12,10 @@ use Escalated\Laravel\Models\EscalationRule;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
+use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Filament\Schemas\Components\Utilities\Get;
 
 class EscalationRuleResource extends Resource
 {
@@ -31,9 +33,9 @@ class EscalationRuleResource extends Resource
         return app(EscalatedFilamentPlugin::class)->getNavigationGroup();
     }
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
+        return $schema
             ->schema([
                 Forms\Components\Section::make(__('escalated-filament::filament.resources.escalation_rule.section_rule_details'))
                     ->schema([
@@ -79,7 +81,7 @@ class EscalationRuleResource extends Resource
                                     ->live(),
 
                                 Forms\Components\Select::make('value')
-                                    ->options(fn (Forms\Get $get) => match ($get('field')) {
+                                    ->options(fn (Get $get) => match ($get('field')) {
                                         'status' => collect(TicketStatus::cases())->mapWithKeys(
                                             fn (TicketStatus $s) => [$s->value => $s->label()]
                                         )->all(),
@@ -94,15 +96,15 @@ class EscalationRuleResource extends Resource
                                         'department_id' => Department::pluck('name', 'id')->all(),
                                         default => [],
                                     })
-                                    ->visible(fn (Forms\Get $get) => in_array($get('field'), ['status', 'priority', 'assigned', 'sla_breached', 'department_id']))
-                                    ->required(fn (Forms\Get $get) => in_array($get('field'), ['status', 'priority', 'assigned', 'sla_breached', 'department_id'])),
+                                    ->visible(fn (Get $get) => in_array($get('field'), ['status', 'priority', 'assigned', 'sla_breached', 'department_id']))
+                                    ->required(fn (Get $get) => in_array($get('field'), ['status', 'priority', 'assigned', 'sla_breached', 'department_id'])),
 
                                 Forms\Components\TextInput::make('value')
                                     ->label(__('escalated-filament::filament.resources.escalation_rule.field_hours'))
                                     ->numeric()
                                     ->minValue(1)
-                                    ->visible(fn (Forms\Get $get) => in_array($get('field'), ['age_hours', 'no_response_hours']))
-                                    ->required(fn (Forms\Get $get) => in_array($get('field'), ['age_hours', 'no_response_hours'])),
+                                    ->visible(fn (Get $get) => in_array($get('field'), ['age_hours', 'no_response_hours']))
+                                    ->required(fn (Get $get) => in_array($get('field'), ['age_hours', 'no_response_hours'])),
                             ])
                             ->columns(3)
                             ->addActionLabel(__('escalated-filament::filament.resources.escalation_rule.add_condition'))
@@ -126,7 +128,7 @@ class EscalationRuleResource extends Resource
                                     ->live(),
 
                                 Forms\Components\Select::make('value')
-                                    ->options(fn (Forms\Get $get) => match ($get('type')) {
+                                    ->options(fn (Get $get) => match ($get('type')) {
                                         'change_priority' => collect(TicketPriority::cases())->mapWithKeys(
                                             fn (TicketPriority $p) => [$p->value => $p->label()]
                                         )->all(),
@@ -134,8 +136,8 @@ class EscalationRuleResource extends Resource
                                         'change_department' => Department::pluck('name', 'id')->all(),
                                         default => [],
                                     })
-                                    ->visible(fn (Forms\Get $get) => $get('type') !== 'escalate' && $get('type') !== null)
-                                    ->required(fn (Forms\Get $get) => $get('type') !== 'escalate' && $get('type') !== null),
+                                    ->visible(fn (Get $get) => $get('type') !== 'escalate' && $get('type') !== null)
+                                    ->required(fn (Get $get) => $get('type') !== 'escalate' && $get('type') !== null),
                             ])
                             ->columns(2)
                             ->addActionLabel(__('escalated-filament::filament.resources.escalation_rule.add_action'))

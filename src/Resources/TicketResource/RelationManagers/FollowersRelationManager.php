@@ -8,12 +8,13 @@ use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
 
 class FollowersRelationManager extends RelationManager
 {
     protected static string $relationship = 'followers';
 
-    public static function getIcon(): ?string
+    public static function getIcon(Model $ownerRecord, string $pageClass): ?string
     {
         return 'heroicon-o-bell';
     }
