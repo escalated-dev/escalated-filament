@@ -19,7 +19,7 @@ class TicketConversation extends Component implements HasForms
 
     public int $ticketId;
 
-    public string $replyBody = '';
+    public string|array $replyBody = '';
 
     public bool $isInternalNote = false;
 
@@ -89,16 +89,18 @@ class TicketConversation extends Component implements HasForms
     public function sendReply(): void
     {
         $this->validate([
-            'replyBody' => 'required|string|min:1',
+            'replyBody' => 'required|min:1',
         ]);
+
+        $bodyContent = is_array($this->replyBody) ? json_encode($this->replyBody) : $this->replyBody;
 
         $ticket = $this->ticket;
         $service = app(TicketService::class);
 
         if ($this->isInternalNote) {
-            $service->addNote($ticket, auth()->user(), $this->replyBody);
+            $service->addNote($ticket, auth()->user(), $bodyContent);
         } else {
-            $service->reply($ticket, auth()->user(), $this->replyBody);
+            $service->reply($ticket, auth()->user(), $bodyContent);
         }
 
         $this->replyBody = '';
