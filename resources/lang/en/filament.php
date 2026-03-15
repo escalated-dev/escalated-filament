@@ -129,6 +129,10 @@ return [
             'max_attachment_size_helper' => 'Maximum file size in kilobytes (1024 KB = 1 MB).',
             'save_success' => 'Settings saved successfully',
             'save_button' => 'Save Settings',
+            'branding' => 'Branding',
+            'branding_description' => 'Configure attribution and branding options.',
+            'show_powered_by' => 'Show "Powered by Escalated"',
+            'show_powered_by_helper' => 'Display attribution badge in the support portal footer.',
         ],
     ],
 

@@ -57,6 +57,7 @@ class Settings extends Page implements HasForms
             'max_attachment_size_kb' => EscalatedSettings::getInt('max_attachment_size_kb', 10240),
             'ticket_reference_prefix' => EscalatedSettings::get('ticket_reference_prefix', 'ESC'),
             'allow_customer_close' => EscalatedSettings::getBool('allow_customer_close', true),
+            'show_powered_by' => EscalatedSettings::getBool('show_powered_by', true),
         ]);
     }
 
@@ -114,6 +115,14 @@ class Settings extends Page implements HasForms
                             ->helperText(__('escalated-filament::filament.pages.settings.max_attachment_size_helper')),
                     ])
                     ->columns(2),
+
+                Forms\Components\Section::make(__('escalated-filament::filament.pages.settings.branding'))
+                    ->description(__('escalated-filament::filament.pages.settings.branding_description'))
+                    ->schema([
+                        Forms\Components\Toggle::make('show_powered_by')
+                            ->label(__('escalated-filament::filament.pages.settings.show_powered_by'))
+                            ->helperText(__('escalated-filament::filament.pages.settings.show_powered_by_helper')),
+                    ]),
             ])
             ->statePath('data');
     }
@@ -128,6 +137,7 @@ class Settings extends Page implements HasForms
         EscalatedSettings::set('max_attachment_size_kb', (string) $data['max_attachment_size_kb']);
         EscalatedSettings::set('ticket_reference_prefix', $data['ticket_reference_prefix']);
         EscalatedSettings::set('allow_customer_close', $data['allow_customer_close'] ? '1' : '0');
+        EscalatedSettings::set('show_powered_by', $data['show_powered_by'] ? '1' : '0');
 
         Notification::make()
             ->title(__('escalated-filament::filament.pages.settings.save_success'))
