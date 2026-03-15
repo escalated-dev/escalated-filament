@@ -15,6 +15,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Filament\Schemas\Components\Utilities\Get;
 
 class MacroResource extends Resource
 {
@@ -77,7 +78,7 @@ class MacroResource extends Resource
 
                                 Forms\Components\Select::make('value')
                                     ->label(__('escalated-filament::filament.resources.macro.field_value'))
-                                    ->options(fn (Forms\Get $get) => match ($get('type')) {
+                                    ->options(fn (Get $get) => match ($get('type')) {
                                         'status' => collect(TicketStatus::cases())->mapWithKeys(
                                             fn (TicketStatus $s) => [$s->value => $s->label()]
                                         )->all(),
@@ -88,20 +89,20 @@ class MacroResource extends Resource
                                         'department' => Department::pluck('name', 'id')->all(),
                                         default => [],
                                     })
-                                    ->visible(fn (Forms\Get $get) => in_array($get('type'), ['status', 'priority', 'assign', 'department']))
-                                    ->required(fn (Forms\Get $get) => in_array($get('type'), ['status', 'priority', 'assign', 'department'])),
+                                    ->visible(fn (Get $get) => in_array($get('type'), ['status', 'priority', 'assign', 'department']))
+                                    ->required(fn (Get $get) => in_array($get('type'), ['status', 'priority', 'assign', 'department'])),
 
                                 Forms\Components\Select::make('value')
                                     ->label(__('escalated-filament::filament.resources.macro.field_tags'))
                                     ->options(Tag::pluck('name', 'id'))
                                     ->multiple()
-                                    ->visible(fn (Forms\Get $get) => $get('type') === 'tags')
-                                    ->required(fn (Forms\Get $get) => $get('type') === 'tags'),
+                                    ->visible(fn (Get $get) => $get('type') === 'tags')
+                                    ->required(fn (Get $get) => $get('type') === 'tags'),
 
                                 Forms\Components\RichEditor::make('value')
                                     ->label(__('escalated-filament::filament.resources.macro.field_message'))
-                                    ->visible(fn (Forms\Get $get) => in_array($get('type'), ['reply', 'note']))
-                                    ->required(fn (Forms\Get $get) => in_array($get('type'), ['reply', 'note'])),
+                                    ->visible(fn (Get $get) => in_array($get('type'), ['reply', 'note']))
+                                    ->required(fn (Get $get) => in_array($get('type'), ['reply', 'note'])),
                             ])
                             ->columns(2)
                             ->addActionLabel(__('escalated-filament::filament.resources.macro.add_action'))

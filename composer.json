@@ -6,8 +6,8 @@
     "type": "library",
     "require": {
         "php": "^8.2",
-        "escalated-dev/escalated-laravel": "^0.5",
-        "filament/filament": "^3.0 || ^4.0 || ^5.0"
+        "escalated-dev/escalated-laravel": "0.6",
+        "filament/filament": "^4.0 || ^5.0"
     },
     "require-dev": {
         "orchestra/testbench": "^9.0|^10.0",

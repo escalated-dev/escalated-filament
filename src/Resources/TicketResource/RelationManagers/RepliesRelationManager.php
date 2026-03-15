@@ -8,12 +8,13 @@ use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
 
 class RepliesRelationManager extends RelationManager
 {
     protected static string $relationship = 'replies';
 
-    public static function getIcon(): ?string
+    public static function getIcon(Model $ownerRecord, string $pageClass): ?string
     {
         return 'heroicon-o-chat-bubble-left-right';
     }

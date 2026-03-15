@@ -6,6 +6,7 @@ use Escalated\Laravel\Enums\ActivityType;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
 
 class ActivitiesRelationManager extends RelationManager
 {
@@ -16,7 +17,7 @@ class ActivitiesRelationManager extends RelationManager
         return __('escalated-filament::filament.resources.activities.title');
     }
 
-    public static function getIcon(): ?string
+    public static function getIcon(Model $ownerRecord, string $pageClass): ?string
     {
         return 'heroicon-o-clipboard-document-list';
     }
