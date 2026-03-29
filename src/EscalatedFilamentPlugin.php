@@ -3,17 +3,29 @@
 namespace Escalated\Filament;
 
 use Escalated\Filament\Pages\Dashboard;
+use Escalated\Filament\Pages\EmailSettings;
 use Escalated\Filament\Pages\ManagePlugins;
 use Escalated\Filament\Pages\Reports;
 use Escalated\Filament\Pages\Settings;
+use Escalated\Filament\Pages\SsoSettings;
 use Escalated\Filament\Resources\ApiTokenResource;
+use Escalated\Filament\Resources\ArticleCategoryResource;
+use Escalated\Filament\Resources\ArticleResource;
+use Escalated\Filament\Resources\AuditLogResource;
+use Escalated\Filament\Resources\AutomationResource;
+use Escalated\Filament\Resources\BusinessScheduleResource;
 use Escalated\Filament\Resources\CannedResponseResource;
+use Escalated\Filament\Resources\CustomFieldResource;
 use Escalated\Filament\Resources\DepartmentResource;
 use Escalated\Filament\Resources\EscalationRuleResource;
 use Escalated\Filament\Resources\MacroResource;
+use Escalated\Filament\Resources\RoleResource;
+use Escalated\Filament\Resources\SkillResource;
 use Escalated\Filament\Resources\SlaPolicyResource;
 use Escalated\Filament\Resources\TagResource;
 use Escalated\Filament\Resources\TicketResource;
+use Escalated\Filament\Resources\TicketStatusResource;
+use Escalated\Filament\Resources\WebhookResource;
 use Filament\Contracts\Plugin;
 use Filament\Panel;
 
@@ -33,6 +45,17 @@ class EscalatedFilamentPlugin implements Plugin
         EscalationRuleResource::class,
         CannedResponseResource::class,
         MacroResource::class,
+        ApiTokenResource::class,
+        AutomationResource::class,
+        WebhookResource::class,
+        RoleResource::class,
+        TicketStatusResource::class,
+        SkillResource::class,
+        CustomFieldResource::class,
+        BusinessScheduleResource::class,
+        ArticleResource::class,
+        ArticleCategoryResource::class,
+        AuditLogResource::class,
     ];
 
     public static function make(): static
@@ -101,11 +124,23 @@ class EscalatedFilamentPlugin implements Plugin
                 CannedResponseResource::class,
                 MacroResource::class,
                 ApiTokenResource::class,
+                AutomationResource::class,
+                WebhookResource::class,
+                RoleResource::class,
+                TicketStatusResource::class,
+                SkillResource::class,
+                CustomFieldResource::class,
+                BusinessScheduleResource::class,
+                ArticleResource::class,
+                ArticleCategoryResource::class,
+                AuditLogResource::class,
             ])
             ->pages([
                 Dashboard::class,
                 Reports::class,
                 Settings::class,
+                SsoSettings::class,
+                EmailSettings::class,
                 ManagePlugins::class,
             ])
             ->livewireComponents([
