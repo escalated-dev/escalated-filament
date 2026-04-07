@@ -7,11 +7,11 @@ use Escalated\Filament\Resources\CustomFieldResource\Pages;
 use Escalated\Laravel\Models\CustomField;
 use Filament\Forms;
 use Filament\Resources\Resource;
+use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Filament\Schemas\Components\Utilities\Set;
-
+use Illuminate\Support\Str;
 
 class CustomFieldResource extends Resource
 {
@@ -39,7 +39,7 @@ class CustomFieldResource extends Resource
                             ->required()
                             ->maxLength(255)
                             ->live(onBlur: true)
-                            ->afterStateUpdated(fn (Set $set, ?string $state) => $set('key', \Illuminate\Support\Str::slug($state ?? '', '_'))),
+                            ->afterStateUpdated(fn (Set $set, ?string $state) => $set('key', Str::slug($state ?? '', '_'))),
 
                         Forms\Components\TextInput::make('key')
                             ->required()

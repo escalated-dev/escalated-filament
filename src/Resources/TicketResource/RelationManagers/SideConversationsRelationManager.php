@@ -62,7 +62,7 @@ class SideConversationsRelationManager extends RelationManager
                     ->limit(50)
                     ->tooltip(fn (SideConversation $record) => $record->subject),
 
-                Tables\Columns\TextColumn::make('creator.' . Escalated::userDisplayColumn())
+                Tables\Columns\TextColumn::make('creator.'.Escalated::userDisplayColumn())
                     ->label('Created By')
                     ->sortable()
                     ->default('System'),

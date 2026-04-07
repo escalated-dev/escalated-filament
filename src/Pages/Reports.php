@@ -3,7 +3,7 @@
 namespace Escalated\Filament\Pages;
 
 use Escalated\Filament\EscalatedFilamentPlugin;
-use Escalated\Laravel\Enums\TicketStatus;
+use Escalated\Laravel\Escalated;
 use Escalated\Laravel\Models\Department;
 use Escalated\Laravel\Models\SatisfactionRating;
 use Escalated\Laravel\Models\Ticket;
@@ -129,7 +129,7 @@ class Reports extends Page implements HasForms
         $from = Carbon::parse($this->date_from)->startOfDay();
         $to = Carbon::parse($this->date_to)->endOfDay();
 
-        $userModel = app(\Escalated\Laravel\Escalated::userModel());
+        $userModel = app(Escalated::userModel());
 
         return $userModel::withCount(['tickets' => function ($q) use ($from, $to) {
             $q->whereBetween('created_at', [$from, $to]);

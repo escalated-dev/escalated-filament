@@ -122,7 +122,7 @@ class TicketConversation extends Component implements HasForms
      */
     protected function extractTextFromTiptap(array $data): string
     {
-        if (!isset($data['content']) || !is_array($data['content'])) {
+        if (! isset($data['content']) || ! is_array($data['content'])) {
             return '';
         }
 
@@ -156,12 +156,12 @@ class TicketConversation extends Component implements HasForms
      */
     protected function processChildNodes(array $node): string
     {
-        if (!isset($node['content']) || !is_array($node['content'])) {
+        if (! isset($node['content']) || ! is_array($node['content'])) {
             return '';
         }
 
         return collect($node['content'])
-            ->map(fn($child) => $this->processTiptapNode($child))
+            ->map(fn ($child) => $this->processTiptapNode($child))
             ->join('');
     }
 
@@ -172,12 +172,12 @@ class TicketConversation extends Component implements HasForms
     {
         $text = $node['text'] ?? '';
 
-        if (!isset($node['marks']) || !is_array($node['marks'])) {
+        if (! isset($node['marks']) || ! is_array($node['marks'])) {
             return htmlspecialchars($text, ENT_QUOTES, 'UTF-8');
         }
 
         return collect($node['marks'])
-            ->reduce(fn($text, $mark) => $this->applyTextMark($text, $mark), htmlspecialchars($text, ENT_QUOTES, 'UTF-8'));
+            ->reduce(fn ($text, $mark) => $this->applyTextMark($text, $mark), htmlspecialchars($text, ENT_QUOTES, 'UTF-8'));
     }
 
     /**
@@ -202,7 +202,7 @@ class TicketConversation extends Component implements HasForms
     protected function wrapTextInLink(string $text, array $mark): string
     {
         $href = htmlspecialchars($mark['attrs']['href'] ?? '#', ENT_QUOTES, 'UTF-8');
-        $target = isset($mark['attrs']['target']) ? ' target="' . htmlspecialchars($mark['attrs']['target'], ENT_QUOTES, 'UTF-8') . '"' : '';
+        $target = isset($mark['attrs']['target']) ? ' target="'.htmlspecialchars($mark['attrs']['target'], ENT_QUOTES, 'UTF-8').'"' : '';
 
         return "<a href=\"{$href}\"{$target}>{$text}</a>";
     }
@@ -231,7 +231,8 @@ class TicketConversation extends Component implements HasForms
      */
     protected function wrapInHeading(string $content, array $node): string
     {
-        $level = min(max((int)($node['attrs']['level'] ?? 1), 1), 6);
+        $level = min(max((int) ($node['attrs']['level'] ?? 1), 1), 6);
+
         return "<h{$level}>{$content}</h{$level}>";
     }
 

@@ -4,12 +4,13 @@ use Escalated\Filament\Resources\TicketResource;
 use Escalated\Filament\Resources\TicketResource\Pages\CreateTicket;
 use Escalated\Filament\Resources\TicketResource\Pages\ListTickets;
 use Escalated\Filament\Resources\TicketResource\Pages\ViewTicket;
+use Escalated\Filament\Resources\TicketResource\RelationManagers\ActivitiesRelationManager;
+use Escalated\Filament\Resources\TicketResource\RelationManagers\FollowersRelationManager;
+use Escalated\Filament\Resources\TicketResource\RelationManagers\RepliesRelationManager;
 use Escalated\Laravel\Enums\TicketPriority;
 use Escalated\Laravel\Enums\TicketStatus;
 use Escalated\Laravel\Models\Department;
-use Escalated\Laravel\Models\Tag;
 use Escalated\Laravel\Models\Ticket;
-use Filament\Tables;
 
 use function Pest\Livewire\livewire;
 
@@ -108,7 +109,7 @@ it('has the list page tabs', function () {
         ->assertSuccessful();
 
     // Verify the tabs are defined by checking the page class
-    $page = new ListTickets();
+    $page = new ListTickets;
     $tabs = $page->getTabs();
 
     expect($tabs)->toHaveKeys(['all', 'my_tickets', 'unassigned', 'urgent', 'sla_breaching']);
@@ -263,7 +264,7 @@ it('has navigation group from plugin', function () {
 });
 
 it('has correct record title attribute', function () {
-    $reflection = new \ReflectionClass(TicketResource::class);
+    $reflection = new ReflectionClass(TicketResource::class);
     $property = $reflection->getProperty('recordTitleAttribute');
 
     expect($property->getDefaultValue())->toBe('subject');
@@ -272,9 +273,9 @@ it('has correct record title attribute', function () {
 it('registers relation managers', function () {
     $relations = TicketResource::getRelations();
 
-    expect($relations)->toContain(\Escalated\Filament\Resources\TicketResource\RelationManagers\RepliesRelationManager::class)
-        ->and($relations)->toContain(\Escalated\Filament\Resources\TicketResource\RelationManagers\ActivitiesRelationManager::class)
-        ->and($relations)->toContain(\Escalated\Filament\Resources\TicketResource\RelationManagers\FollowersRelationManager::class);
+    expect($relations)->toContain(RepliesRelationManager::class)
+        ->and($relations)->toContain(ActivitiesRelationManager::class)
+        ->and($relations)->toContain(FollowersRelationManager::class);
 });
 
 it('has index, create, and view pages', function () {

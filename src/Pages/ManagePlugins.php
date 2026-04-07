@@ -3,6 +3,7 @@
 namespace Escalated\Filament\Pages;
 
 use Escalated\Filament\EscalatedFilamentPlugin;
+use Escalated\Laravel\Models\Plugin;
 use Escalated\Laravel\Services\PluginService;
 use Filament\Actions\Action;
 use Filament\Forms;
@@ -15,6 +16,7 @@ use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Log;
 
 class ManagePlugins extends Page implements HasForms, HasTable
@@ -85,13 +87,13 @@ class ManagePlugins extends Page implements HasForms, HasTable
                 ])
                 ->action(function (array $data): void {
                     try {
-                        $filePath = storage_path('app/public/' . $data['plugin_file']);
+                        $filePath = storage_path('app/public/'.$data['plugin_file']);
 
                         if (! file_exists($filePath)) {
-                            $filePath = storage_path('app/' . $data['plugin_file']);
+                            $filePath = storage_path('app/'.$data['plugin_file']);
                         }
 
-                        $file = new \Illuminate\Http\UploadedFile(
+                        $file = new UploadedFile(
                             $filePath,
                             basename($data['plugin_file']),
                             'application/zip',
@@ -290,7 +292,7 @@ class ManagePlugins extends Page implements HasForms, HasTable
         // We use the Plugin model as the table's base query. The PluginService
         // syncs filesystem plugins into the database, so this gives us a proper
         // Eloquent query that Filament's table can paginate and sort.
-        return \Escalated\Laravel\Models\Plugin::query();
+        return Plugin::query();
     }
 
     /**

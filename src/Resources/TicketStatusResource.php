@@ -8,6 +8,7 @@ use Escalated\Laravel\Models\TicketStatus;
 use Filament\Forms;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
+use Filament\Support\Colors\Color;
 use Filament\Tables;
 use Filament\Tables\Table;
 
@@ -73,7 +74,7 @@ class TicketStatusResource extends Resource
                     ->searchable()
                     ->sortable()
                     ->badge()
-                    ->color(fn (TicketStatus $record) => \Filament\Support\Colors\Color::hex($record->color)),
+                    ->color(fn (TicketStatus $record) => Color::hex($record->color)),
 
                 Tables\Columns\TextColumn::make('category')
                     ->sortable(),

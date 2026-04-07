@@ -59,8 +59,8 @@ it('TicketsByStatusChart returns chart data', function () {
     Ticket::factory()->closed()->count(2)->create();
     Ticket::factory()->resolved()->count(3)->create();
 
-    $widget = new TicketsByStatusChart();
-    $data = (new \ReflectionMethod($widget, 'getData'))->invoke($widget);
+    $widget = new TicketsByStatusChart;
+    $data = (new ReflectionMethod($widget, 'getData'))->invoke($widget);
 
     expect($data)->toHaveKey('datasets')
         ->and($data)->toHaveKey('labels')
@@ -73,8 +73,8 @@ it('TicketsByStatusChart filters out zero-count statuses', function () {
     // Only create open tickets
     Ticket::factory()->open()->count(3)->create();
 
-    $widget = new TicketsByStatusChart();
-    $data = (new \ReflectionMethod($widget, 'getData'))->invoke($widget);
+    $widget = new TicketsByStatusChart;
+    $data = (new ReflectionMethod($widget, 'getData'))->invoke($widget);
 
     // The data should only include statuses with count > 0
     $counts = $data['datasets'][0]['data'] ?? [];
@@ -84,15 +84,15 @@ it('TicketsByStatusChart filters out zero-count statuses', function () {
 });
 
 it('TicketsByStatusChart is a doughnut chart', function () {
-    $widget = new TicketsByStatusChart();
-    $reflection = new \ReflectionMethod($widget, 'getType');
+    $widget = new TicketsByStatusChart;
+    $reflection = new ReflectionMethod($widget, 'getType');
 
     expect($reflection->invoke($widget))->toBe('doughnut');
 });
 
 it('TicketsByStatusChart handles empty data', function () {
-    $widget = new TicketsByStatusChart();
-    $data = (new \ReflectionMethod($widget, 'getData'))->invoke($widget);
+    $widget = new TicketsByStatusChart;
+    $data = (new ReflectionMethod($widget, 'getData'))->invoke($widget);
 
     expect($data['datasets'][0]['data'])->toBeEmpty()
         ->and($data['labels'])->toBeEmpty();
@@ -110,8 +110,8 @@ it('TicketsByPriorityChart returns chart data', function () {
     Ticket::factory()->open()->withPriority(TicketPriority::High)->count(4)->create();
     Ticket::factory()->open()->withPriority(TicketPriority::Critical)->create();
 
-    $widget = new TicketsByPriorityChart();
-    $data = (new \ReflectionMethod($widget, 'getData'))->invoke($widget);
+    $widget = new TicketsByPriorityChart;
+    $data = (new ReflectionMethod($widget, 'getData'))->invoke($widget);
 
     expect($data)->toHaveKey('datasets')
         ->and($data)->toHaveKey('labels')
@@ -121,8 +121,8 @@ it('TicketsByPriorityChart returns chart data', function () {
 });
 
 it('TicketsByPriorityChart includes all priority levels', function () {
-    $widget = new TicketsByPriorityChart();
-    $data = (new \ReflectionMethod($widget, 'getData'))->invoke($widget);
+    $widget = new TicketsByPriorityChart;
+    $data = (new ReflectionMethod($widget, 'getData'))->invoke($widget);
 
     // Should have labels for all 5 priority levels
     expect(count($data['labels']))->toBe(5)
@@ -134,8 +134,8 @@ it('TicketsByPriorityChart includes all priority levels', function () {
 });
 
 it('TicketsByPriorityChart is a bar chart', function () {
-    $widget = new TicketsByPriorityChart();
-    $reflection = new \ReflectionMethod($widget, 'getType');
+    $widget = new TicketsByPriorityChart;
+    $reflection = new ReflectionMethod($widget, 'getType');
 
     expect($reflection->invoke($widget))->toBe('bar');
 });
@@ -144,8 +144,8 @@ it('TicketsByPriorityChart only counts open tickets', function () {
     Ticket::factory()->open()->withPriority(TicketPriority::High)->count(3)->create();
     Ticket::factory()->closed()->withPriority(TicketPriority::High)->count(5)->create();
 
-    $widget = new TicketsByPriorityChart();
-    $data = (new \ReflectionMethod($widget, 'getData'))->invoke($widget);
+    $widget = new TicketsByPriorityChart;
+    $data = (new ReflectionMethod($widget, 'getData'))->invoke($widget);
 
     // Find the High priority index
     $index = array_search('High', $data['labels']);

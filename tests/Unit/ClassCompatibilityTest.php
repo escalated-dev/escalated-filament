@@ -1,7 +1,7 @@
 <?php
 
 it('can load all source classes without fatal errors', function () {
-    $srcDir = dirname(__DIR__, 2) . '/src';
+    $srcDir = dirname(__DIR__, 2).'/src';
     $files = new RecursiveIteratorIterator(
         new RecursiveDirectoryIterator($srcDir)
     );
@@ -16,7 +16,7 @@ it('can load all source classes without fatal errors', function () {
 
         if (preg_match('/namespace\s+(.+?);/', $content, $ns) &&
             preg_match('/class\s+(\w+)/', $content, $cl)) {
-            $classes[] = $ns[1] . '\\' . $cl[1];
+            $classes[] = $ns[1].'\\'.$cl[1];
         }
     }
 

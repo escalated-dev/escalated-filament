@@ -10,18 +10,19 @@ use Escalated\Laravel\Enums\TicketStatus;
 use Escalated\Laravel\Escalated;
 use Escalated\Laravel\Models\Macro;
 use Escalated\Laravel\Models\Ticket;
+use Escalated\Laravel\Services\AssignmentService;
 use Escalated\Laravel\Services\MacroService;
 use Escalated\Laravel\Services\TicketService;
 use Filament\Actions;
 use Filament\Forms;
 use Filament\Forms\Components\Section;
 use Filament\Infolists;
-use Filament\Infolists\Infolist;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\ViewRecord;
 use Filament\Schemas\Components\Group;
 use Filament\Schemas\Components\Livewire;
 use Filament\Schemas\Schema;
+use Filament\Support\Colors\Color;
 
 class ViewTicket extends ViewRecord
 {
@@ -66,7 +67,7 @@ class ViewTicket extends ViewRecord
                 ])->columnSpan(2),
 
                 Group::make([
-                   Section::make(__('escalated-filament::filament.resources.ticket.section_details'))
+                    Section::make(__('escalated-filament::filament.resources.ticket.section_details'))
                         ->schema([
                             Infolists\Components\TextEntry::make('status')
                                 ->badge()
@@ -153,7 +154,7 @@ class ViewTicket extends ViewRecord
                                 ->schema([
                                     Infolists\Components\TextEntry::make('name')
                                         ->badge()
-                                        ->color(fn ($record) => \Filament\Support\Colors\Color::hex($record->color ?? '#6B7280')),
+                                        ->color(fn ($record) => Color::hex($record->color ?? '#6B7280')),
                                 ])
                                 ->grid(3)
                                 ->columnSpanFull(),
@@ -162,7 +163,7 @@ class ViewTicket extends ViewRecord
 
                     Section::make(__('escalated-filament::filament.resources.ticket.section_satisfaction'))
                         ->schema([
-                           Livewire::make(
+                            Livewire::make(
                                 SatisfactionRating::class,
                                 fn (Ticket $record) => ['ticketId' => $record->id]
                             )->columnSpanFull(),
@@ -172,22 +173,22 @@ class ViewTicket extends ViewRecord
                     Section::make(__('escalated-filament::filament.resources.ticket.section_timestamps'))
                         ->schema([
                             Infolists\Components\TextEntry::make('created_at')
-                                ->label(__('escalated-filament::filament.resources.ticket.field_created'))
-                                ->dateTime(),
+                               ->label(__('escalated-filament::filament.resources.ticket.field_created'))
+                               ->dateTime(),
 
                             Infolists\Components\TextEntry::make('updated_at')
-                                ->label(__('escalated-filament::filament.resources.ticket.field_updated'))
-                                ->dateTime(),
+                               ->label(__('escalated-filament::filament.resources.ticket.field_updated'))
+                               ->dateTime(),
 
                             Infolists\Components\TextEntry::make('resolved_at')
-                                ->label(__('escalated-filament::filament.resources.ticket.field_resolved_at'))
-                                ->dateTime()
-                                ->placeholder(__('escalated-filament::filament.resources.ticket.placeholder_not_resolved')),
+                               ->label(__('escalated-filament::filament.resources.ticket.field_resolved_at'))
+                               ->dateTime()
+                               ->placeholder(__('escalated-filament::filament.resources.ticket.placeholder_not_resolved')),
 
                             Infolists\Components\TextEntry::make('closed_at')
-                                ->label(__('escalated-filament::filament.resources.ticket.field_closed_at'))
-                                ->dateTime()
-                                ->placeholder(__('escalated-filament::filament.resources.ticket.placeholder_not_closed')),
+                               ->label(__('escalated-filament::filament.resources.ticket.field_closed_at'))
+                               ->dateTime()
+                               ->placeholder(__('escalated-filament::filament.resources.ticket.placeholder_not_closed')),
                         ])
                         ->collapsible(),
                 ])->columnSpan(1),
@@ -248,7 +249,7 @@ class ViewTicket extends ViewRecord
                         ->required(),
                 ])
                 ->action(function (array $data): void {
-                    app(\Escalated\Laravel\Services\AssignmentService::class)
+                    app(AssignmentService::class)
                         ->assign($this->record, $data['agent_id'], auth()->user());
 
                     Notification::make()
