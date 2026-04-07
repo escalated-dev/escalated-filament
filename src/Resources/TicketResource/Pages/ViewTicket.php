@@ -173,22 +173,22 @@ class ViewTicket extends ViewRecord
                     Section::make(__('escalated-filament::filament.resources.ticket.section_timestamps'))
                         ->schema([
                             Infolists\Components\TextEntry::make('created_at')
-                               ->label(__('escalated-filament::filament.resources.ticket.field_created'))
-                               ->dateTime(),
+                                ->label(__('escalated-filament::filament.resources.ticket.field_created'))
+                                ->dateTime(),
 
                             Infolists\Components\TextEntry::make('updated_at')
-                               ->label(__('escalated-filament::filament.resources.ticket.field_updated'))
-                               ->dateTime(),
+                                ->label(__('escalated-filament::filament.resources.ticket.field_updated'))
+                                ->dateTime(),
 
                             Infolists\Components\TextEntry::make('resolved_at')
-                               ->label(__('escalated-filament::filament.resources.ticket.field_resolved_at'))
-                               ->dateTime()
-                               ->placeholder(__('escalated-filament::filament.resources.ticket.placeholder_not_resolved')),
+                                ->label(__('escalated-filament::filament.resources.ticket.field_resolved_at'))
+                                ->dateTime()
+                                ->placeholder(__('escalated-filament::filament.resources.ticket.placeholder_not_resolved')),
 
                             Infolists\Components\TextEntry::make('closed_at')
-                               ->label(__('escalated-filament::filament.resources.ticket.field_closed_at'))
-                               ->dateTime()
-                               ->placeholder(__('escalated-filament::filament.resources.ticket.placeholder_not_closed')),
+                                ->label(__('escalated-filament::filament.resources.ticket.field_closed_at'))
+                                ->dateTime()
+                                ->placeholder(__('escalated-filament::filament.resources.ticket.placeholder_not_closed')),
                         ])
                         ->collapsible(),
                 ])->columnSpan(1),
