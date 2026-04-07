@@ -11,7 +11,6 @@ use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
 
-
 class BusinessScheduleResource extends Resource
 {
     protected static ?string $model = BusinessSchedule::class;

@@ -2,8 +2,6 @@
 
 namespace Escalated\Filament\Widgets;
 
-use Escalated\Laravel\Enums\TicketPriority;
-use Escalated\Laravel\Enums\TicketStatus;
 use Escalated\Laravel\Models\SatisfactionRating;
 use Escalated\Laravel\Models\Ticket;
 use Filament\Widgets\StatsOverviewWidget;

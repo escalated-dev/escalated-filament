@@ -156,6 +156,7 @@ class EscalatedFilamentPlugin implements Plugin
     public function resources(array $resources): static
     {
         $this->resources = $resources;
+
         return $this;
     }
 

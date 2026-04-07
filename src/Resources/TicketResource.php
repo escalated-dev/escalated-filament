@@ -8,14 +8,16 @@ use Escalated\Filament\Resources\TicketResource\RelationManagers;
 use Escalated\Laravel\Enums\TicketPriority;
 use Escalated\Laravel\Enums\TicketStatus;
 use Escalated\Laravel\Escalated;
-use Escalated\Laravel\Models\Department;
 use Escalated\Laravel\Models\Tag;
 use Escalated\Laravel\Models\Ticket;
+use Escalated\Laravel\Services\AssignmentService;
+use Escalated\Laravel\Services\TicketService;
 use Filament\Forms;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Collection;
 
 class TicketResource extends Resource
 {
@@ -145,7 +147,7 @@ class TicketResource extends Resource
                     ->sortable()
                     ->toggleable(),
 
-                Tables\Columns\TextColumn::make('assignee.' . Escalated::userDisplayColumn())
+                Tables\Columns\TextColumn::make('assignee.'.Escalated::userDisplayColumn())
                     ->label(__('escalated-filament::filament.resources.ticket.column_assigned_to'))
                     ->sortable()
                     ->default(__('escalated-filament::filament.resources.ticket.default_unassigned'))
@@ -244,7 +246,7 @@ class TicketResource extends Resource
                             ->required(),
                     ])
                     ->action(function (Ticket $record, array $data): void {
-                        app(\Escalated\Laravel\Services\AssignmentService::class)
+                        app(AssignmentService::class)
                             ->assign($record, $data['agent_id'], auth()->user());
                     })
                     ->visible(fn (Ticket $record) => $record->isOpen()),
@@ -259,7 +261,7 @@ class TicketResource extends Resource
                             ->required(),
                     ])
                     ->action(function (Ticket $record, array $data): void {
-                        app(\Escalated\Laravel\Services\TicketService::class)
+                        app(TicketService::class)
                             ->changeStatus($record, TicketStatus::from($data['status']), auth()->user());
                     }),
             ])
@@ -275,8 +277,8 @@ class TicketResource extends Resource
                                 ->searchable()
                                 ->required(),
                         ])
-                        ->action(function (\Illuminate\Database\Eloquent\Collection $records, array $data): void {
-                            $service = app(\Escalated\Laravel\Services\AssignmentService::class);
+                        ->action(function (Collection $records, array $data): void {
+                            $service = app(AssignmentService::class);
                             foreach ($records as $ticket) {
                                 $service->assign($ticket, $data['agent_id'], auth()->user());
                             }
@@ -293,8 +295,8 @@ class TicketResource extends Resource
                                 ))
                                 ->required(),
                         ])
-                        ->action(function (\Illuminate\Database\Eloquent\Collection $records, array $data): void {
-                            $service = app(\Escalated\Laravel\Services\TicketService::class);
+                        ->action(function (Collection $records, array $data): void {
+                            $service = app(TicketService::class);
                             foreach ($records as $ticket) {
                                 $service->changeStatus($ticket, TicketStatus::from($data['status']), auth()->user());
                             }
@@ -311,8 +313,8 @@ class TicketResource extends Resource
                                 ))
                                 ->required(),
                         ])
-                        ->action(function (\Illuminate\Database\Eloquent\Collection $records, array $data): void {
-                            $service = app(\Escalated\Laravel\Services\TicketService::class);
+                        ->action(function (Collection $records, array $data): void {
+                            $service = app(TicketService::class);
                             foreach ($records as $ticket) {
                                 $service->changePriority($ticket, TicketPriority::from($data['priority']), auth()->user());
                             }
@@ -328,8 +330,8 @@ class TicketResource extends Resource
                                 ->multiple()
                                 ->required(),
                         ])
-                        ->action(function (\Illuminate\Database\Eloquent\Collection $records, array $data): void {
-                            $service = app(\Escalated\Laravel\Services\TicketService::class);
+                        ->action(function (Collection $records, array $data): void {
+                            $service = app(TicketService::class);
                             foreach ($records as $ticket) {
                                 $service->addTags($ticket, $data['tags'], auth()->user());
                             }
@@ -341,8 +343,8 @@ class TicketResource extends Resource
                         ->icon('heroicon-o-x-circle')
                         ->color('danger')
                         ->requiresConfirmation()
-                        ->action(function (\Illuminate\Database\Eloquent\Collection $records): void {
-                            $service = app(\Escalated\Laravel\Services\TicketService::class);
+                        ->action(function (Collection $records): void {
+                            $service = app(TicketService::class);
                             foreach ($records as $ticket) {
                                 $service->close($ticket, auth()->user());
                             }

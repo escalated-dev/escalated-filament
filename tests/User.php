@@ -2,9 +2,11 @@
 
 namespace Escalated\Filament\Tests;
 
+use Escalated\Laravel\Models\Ticket;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable implements FilamentUser
@@ -30,8 +32,8 @@ class User extends Authenticatable implements FilamentUser
     /**
      * Relationship used by escalated-laravel Reports page (getTicketsByAgent).
      */
-    public function tickets(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function tickets(): HasMany
     {
-        return $this->hasMany(\Escalated\Laravel\Models\Ticket::class, 'assigned_to');
+        return $this->hasMany(Ticket::class, 'assigned_to');
     }
 }

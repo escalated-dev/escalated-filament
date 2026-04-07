@@ -7,11 +7,12 @@ use Escalated\Filament\Resources\TagResource\Pages;
 use Escalated\Laravel\Models\Tag;
 use Filament\Forms;
 use Filament\Resources\Resource;
+use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
+use Filament\Support\Colors\Color;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Filament\Schemas\Components\Utilities\Set;
-
+use Illuminate\Support\Str;
 
 class TagResource extends Resource
 {
@@ -39,7 +40,7 @@ class TagResource extends Resource
                             ->required()
                             ->maxLength(255)
                             ->live(onBlur: true)
-                            ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', \Illuminate\Support\Str::slug($state ?? ''))),
+                            ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state ?? ''))),
 
                         Forms\Components\TextInput::make('slug')
                             ->required()
@@ -62,7 +63,7 @@ class TagResource extends Resource
                     ->searchable()
                     ->sortable()
                     ->badge()
-                    ->color(fn (Tag $record) => \Filament\Support\Colors\Color::hex($record->color)),
+                    ->color(fn (Tag $record) => Color::hex($record->color)),
 
                 Tables\Columns\TextColumn::make('slug')
                     ->searchable()

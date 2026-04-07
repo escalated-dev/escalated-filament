@@ -13,9 +13,9 @@ use Escalated\Laravel\Models\Tag;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
+use Filament\Schemas\Components\Utilities\Get;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Filament\Schemas\Components\Utilities\Get;
 
 class MacroResource extends Resource
 {

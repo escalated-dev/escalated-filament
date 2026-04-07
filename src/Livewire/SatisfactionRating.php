@@ -3,7 +3,6 @@
 namespace Escalated\Filament\Livewire;
 
 use Escalated\Laravel\Models\SatisfactionRating as SatisfactionRatingModel;
-use Escalated\Laravel\Models\Ticket;
 use Livewire\Component;
 
 class SatisfactionRating extends Component

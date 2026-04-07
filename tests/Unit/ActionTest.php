@@ -6,6 +6,7 @@ use Escalated\Filament\Actions\ChangePriorityAction;
 use Escalated\Filament\Actions\ChangeStatusAction;
 use Escalated\Filament\Actions\FollowTicketAction;
 use Escalated\Filament\Actions\PinReplyAction;
+use Filament\Tables\Actions\Action;
 
 it('AssignTicketAction has correct default name', function () {
     expect(AssignTicketAction::getDefaultName())->toBe('assignTicket');
@@ -33,30 +34,30 @@ it('PinReplyAction has correct default name', function () {
 
 it('AssignTicketAction extends Filament Table Action', function () {
     expect(AssignTicketAction::class)
-        ->toExtend(\Filament\Tables\Actions\Action::class);
+        ->toExtend(Action::class);
 });
 
 it('ChangeStatusAction extends Filament Table Action', function () {
     expect(ChangeStatusAction::class)
-        ->toExtend(\Filament\Tables\Actions\Action::class);
+        ->toExtend(Action::class);
 });
 
 it('ChangePriorityAction extends Filament Table Action', function () {
     expect(ChangePriorityAction::class)
-        ->toExtend(\Filament\Tables\Actions\Action::class);
+        ->toExtend(Action::class);
 });
 
 it('ApplyMacroAction extends Filament Table Action', function () {
     expect(ApplyMacroAction::class)
-        ->toExtend(\Filament\Tables\Actions\Action::class);
+        ->toExtend(Action::class);
 });
 
 it('FollowTicketAction extends Filament Table Action', function () {
     expect(FollowTicketAction::class)
-        ->toExtend(\Filament\Tables\Actions\Action::class);
+        ->toExtend(Action::class);
 });
 
 it('PinReplyAction extends Filament Table Action', function () {
     expect(PinReplyAction::class)
-        ->toExtend(\Filament\Tables\Actions\Action::class);
+        ->toExtend(Action::class);
 });

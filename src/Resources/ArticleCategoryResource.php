@@ -7,11 +7,11 @@ use Escalated\Filament\Resources\ArticleCategoryResource\Pages;
 use Escalated\Laravel\Models\ArticleCategory;
 use Filament\Forms;
 use Filament\Resources\Resource;
+use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Filament\Schemas\Components\Utilities\Set;
-
+use Illuminate\Support\Str;
 
 class ArticleCategoryResource extends Resource
 {
@@ -39,7 +39,7 @@ class ArticleCategoryResource extends Resource
                             ->required()
                             ->maxLength(255)
                             ->live(onBlur: true)
-                            ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', \Illuminate\Support\Str::slug($state ?? ''))),
+                            ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state ?? ''))),
 
                         Forms\Components\TextInput::make('slug')
                             ->required()

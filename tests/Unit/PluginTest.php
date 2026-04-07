@@ -1,6 +1,24 @@
 <?php
 
 use Escalated\Filament\EscalatedFilamentPlugin;
+use Escalated\Filament\Pages\Dashboard;
+use Escalated\Filament\Pages\Reports;
+use Escalated\Filament\Pages\Settings;
+use Escalated\Filament\Resources\CannedResponseResource;
+use Escalated\Filament\Resources\DepartmentResource;
+use Escalated\Filament\Resources\EscalationRuleResource;
+use Escalated\Filament\Resources\MacroResource;
+use Escalated\Filament\Resources\SlaPolicyResource;
+use Escalated\Filament\Resources\TagResource;
+use Escalated\Filament\Resources\TicketResource;
+use Escalated\Filament\Widgets\CsatOverviewWidget;
+use Escalated\Filament\Widgets\RecentTicketsWidget;
+use Escalated\Filament\Widgets\SlaBreachWidget;
+use Escalated\Filament\Widgets\TicketsByPriorityChart;
+use Escalated\Filament\Widgets\TicketsByStatusChart;
+use Escalated\Filament\Widgets\TicketStatsOverview;
+use Filament\Contracts\Plugin;
+use Filament\Facades\Filament;
 
 it('has the correct plugin ID', function () {
     $plugin = EscalatedFilamentPlugin::make();
@@ -17,7 +35,7 @@ it('creates an instance via make()', function () {
 it('implements the Filament Plugin contract', function () {
     $plugin = EscalatedFilamentPlugin::make();
 
-    expect($plugin)->toBeInstanceOf(\Filament\Contracts\Plugin::class);
+    expect($plugin)->toBeInstanceOf(Plugin::class);
 });
 
 it('has default navigation group of Support', function () {
@@ -71,35 +89,35 @@ it('supports fluent configuration chaining', function () {
 });
 
 it('registers resources with the panel', function () {
-    $panel = \Filament\Facades\Filament::getDefaultPanel();
+    $panel = Filament::getDefaultPanel();
     $resources = $panel->getResources();
 
-    expect($resources)->toContain(\Escalated\Filament\Resources\TicketResource::class)
-        ->and($resources)->toContain(\Escalated\Filament\Resources\DepartmentResource::class)
-        ->and($resources)->toContain(\Escalated\Filament\Resources\TagResource::class)
-        ->and($resources)->toContain(\Escalated\Filament\Resources\SlaPolicyResource::class)
-        ->and($resources)->toContain(\Escalated\Filament\Resources\EscalationRuleResource::class)
-        ->and($resources)->toContain(\Escalated\Filament\Resources\CannedResponseResource::class)
-        ->and($resources)->toContain(\Escalated\Filament\Resources\MacroResource::class);
+    expect($resources)->toContain(TicketResource::class)
+        ->and($resources)->toContain(DepartmentResource::class)
+        ->and($resources)->toContain(TagResource::class)
+        ->and($resources)->toContain(SlaPolicyResource::class)
+        ->and($resources)->toContain(EscalationRuleResource::class)
+        ->and($resources)->toContain(CannedResponseResource::class)
+        ->and($resources)->toContain(MacroResource::class);
 });
 
 it('registers pages with the panel', function () {
-    $panel = \Filament\Facades\Filament::getDefaultPanel();
+    $panel = Filament::getDefaultPanel();
     $pages = $panel->getPages();
 
-    expect($pages)->toContain(\Escalated\Filament\Pages\Dashboard::class)
-        ->and($pages)->toContain(\Escalated\Filament\Pages\Reports::class)
-        ->and($pages)->toContain(\Escalated\Filament\Pages\Settings::class);
+    expect($pages)->toContain(Dashboard::class)
+        ->and($pages)->toContain(Reports::class)
+        ->and($pages)->toContain(Settings::class);
 });
 
 it('does not register widgets on the panel (they are page-specific)', function () {
-    $panel = \Filament\Facades\Filament::getDefaultPanel();
+    $panel = Filament::getDefaultPanel();
     $widgets = $panel->getWidgets();
 
-    expect($widgets)->not->toContain(\Escalated\Filament\Widgets\TicketStatsOverview::class)
-        ->and($widgets)->not->toContain(\Escalated\Filament\Widgets\TicketsByStatusChart::class)
-        ->and($widgets)->not->toContain(\Escalated\Filament\Widgets\TicketsByPriorityChart::class)
-        ->and($widgets)->not->toContain(\Escalated\Filament\Widgets\CsatOverviewWidget::class)
-        ->and($widgets)->not->toContain(\Escalated\Filament\Widgets\RecentTicketsWidget::class)
-        ->and($widgets)->not->toContain(\Escalated\Filament\Widgets\SlaBreachWidget::class);
+    expect($widgets)->not->toContain(TicketStatsOverview::class)
+        ->and($widgets)->not->toContain(TicketsByStatusChart::class)
+        ->and($widgets)->not->toContain(TicketsByPriorityChart::class)
+        ->and($widgets)->not->toContain(CsatOverviewWidget::class)
+        ->and($widgets)->not->toContain(RecentTicketsWidget::class)
+        ->and($widgets)->not->toContain(SlaBreachWidget::class);
 });

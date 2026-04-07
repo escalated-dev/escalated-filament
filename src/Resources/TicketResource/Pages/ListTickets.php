@@ -4,7 +4,6 @@ namespace Escalated\Filament\Resources\TicketResource\Pages;
 
 use Escalated\Filament\Resources\TicketResource;
 use Escalated\Laravel\Enums\TicketPriority;
-use Escalated\Laravel\Enums\TicketStatus;
 use Escalated\Laravel\Models\Ticket;
 use Filament\Actions;
 use Filament\Resources\Components\Tab;

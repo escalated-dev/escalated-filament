@@ -3,6 +3,7 @@
 namespace Escalated\Filament\Resources\TicketResource\RelationManagers;
 
 use Escalated\Laravel\Models\Reply;
+use Escalated\Laravel\Services\TicketService;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -101,7 +102,7 @@ class RepliesRelationManager extends RelationManager
                             ->columnSpanFull(),
                     ])
                     ->action(function (array $data): void {
-                        app(\Escalated\Laravel\Services\TicketService::class)
+                        app(TicketService::class)
                             ->reply($this->getOwnerRecord(), auth()->user(), $data['body']);
                     }),
 
@@ -116,7 +117,7 @@ class RepliesRelationManager extends RelationManager
                             ->columnSpanFull(),
                     ])
                     ->action(function (array $data): void {
-                        app(\Escalated\Laravel\Services\TicketService::class)
+                        app(TicketService::class)
                             ->addNote($this->getOwnerRecord(), auth()->user(), $data['body']);
                     }),
             ])

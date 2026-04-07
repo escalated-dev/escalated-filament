@@ -5,8 +5,10 @@ namespace Escalated\Filament\Resources\ApiTokenResource\Pages;
 use Escalated\Filament\Resources\ApiTokenResource;
 use Escalated\Laravel\Escalated;
 use Escalated\Laravel\Models\ApiToken;
+use Filament\Notifications\Actions\Action;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\CreateRecord;
+use Illuminate\Database\Eloquent\Model;
 
 class CreateApiToken extends CreateRecord
 {
@@ -25,7 +27,7 @@ class CreateApiToken extends CreateRecord
     /**
      * Override the default create to use ApiToken::createToken which handles hashing.
      */
-    protected function handleRecordCreation(array $data): \Illuminate\Database\Eloquent\Model
+    protected function handleRecordCreation(array $data): Model
     {
         $userModel = Escalated::newUserModel();
         $user = $userModel->newQuery()->findOrFail($data['tokenable_id']);
@@ -54,7 +56,7 @@ class CreateApiToken extends CreateRecord
             ->success()
             ->persistent()
             ->actions([
-                \Filament\Notifications\Actions\Action::make('copy')
+                Action::make('copy')
                     ->label('Copy Token')
                     ->icon('heroicon-o-clipboard-document')
                     ->color('gray')

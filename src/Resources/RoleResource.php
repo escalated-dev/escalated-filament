@@ -7,10 +7,11 @@ use Escalated\Filament\Resources\RoleResource\Pages;
 use Escalated\Laravel\Models\Role;
 use Filament\Forms;
 use Filament\Resources\Resource;
+use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Filament\Schemas\Components\Utilities\Set;
+use Illuminate\Support\Str;
 
 class RoleResource extends Resource
 {
@@ -38,7 +39,7 @@ class RoleResource extends Resource
                             ->required()
                             ->maxLength(255)
                             ->live(onBlur: true)
-                            ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', \Illuminate\Support\Str::slug($state ?? ''))),
+                            ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state ?? ''))),
 
                         Forms\Components\TextInput::make('slug')
                             ->required()

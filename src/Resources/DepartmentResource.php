@@ -7,13 +7,12 @@ use Escalated\Filament\Resources\DepartmentResource\Pages;
 use Escalated\Laravel\Escalated;
 use Escalated\Laravel\Models\Department;
 use Filament\Forms;
-use Filament\Forms\Form;
 use Filament\Resources\Resource;
+use Filament\Schemas\Components\Utilities\Set;
+use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Filament\Schemas\Schema;
-use Filament\Schemas\Components\Utilities\Set;
-
+use Illuminate\Support\Str;
 
 class DepartmentResource extends Resource
 {
@@ -46,7 +45,7 @@ class DepartmentResource extends Resource
                             ->required()
                             ->maxLength(255)
                             ->live(onBlur: true)
-                            ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', \Illuminate\Support\Str::slug($state ?? ''))),
+                            ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state ?? ''))),
 
                         Forms\Components\TextInput::make('slug')
                             ->required()
