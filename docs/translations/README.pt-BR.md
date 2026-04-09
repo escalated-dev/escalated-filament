@@ -1,18 +1,18 @@
 <p align="center">
-  <a href="docs/translations/README.ar.md">العربية</a> •
-  <a href="docs/translations/README.de.md">Deutsch</a> •
-  <b>English</b> •
-  <a href="docs/translations/README.es.md">Español</a> •
-  <a href="docs/translations/README.fr.md">Français</a> •
-  <a href="docs/translations/README.it.md">Italiano</a> •
-  <a href="docs/translations/README.ja.md">日本語</a> •
-  <a href="docs/translations/README.ko.md">한국어</a> •
-  <a href="docs/translations/README.nl.md">Nederlands</a> •
-  <a href="docs/translations/README.pl.md">Polski</a> •
-  <a href="docs/translations/README.pt-BR.md">Português (BR)</a> •
-  <a href="docs/translations/README.ru.md">Русский</a> •
-  <a href="docs/translations/README.tr.md">Türkçe</a> •
-  <a href="docs/translations/README.zh-CN.md">简体中文</a>
+  <a href="README.ar.md">العربية</a> •
+  <a href="README.de.md">Deutsch</a> •
+  <a href="../../README.md">English</a> •
+  <a href="README.es.md">Español</a> •
+  <a href="README.fr.md">Français</a> •
+  <a href="README.it.md">Italiano</a> •
+  <a href="README.ja.md">日本語</a> •
+  <a href="README.ko.md">한국어</a> •
+  <a href="README.nl.md">Nederlands</a> •
+  <a href="README.pl.md">Polski</a> •
+  <b>Português (BR)</b> •
+  <a href="README.ru.md">Русский</a> •
+  <a href="README.tr.md">Türkçe</a> •
+  <a href="README.zh-CN.md">简体中文</a>
 </p>
 
 # Escalated for Filament
@@ -37,7 +37,7 @@ Escalated for Filament is a **Filament plugin wrapper** around [`escalated-larav
 
 > **Note:** This package uses Filament's native Livewire + Blade components (tables, forms, info lists, actions, widgets) rather than the custom Vue 3 + Inertia.js UI from the [`@escalated-dev/escalated`](https://github.com/escalated-dev/escalated) frontend package. The core functionality is the same — same models, services, database, and business logic — but the UI look-and-feel follows Filament's design system. Some interactions may differ slightly (e.g., Filament modals vs. inline forms, Filament table filters vs. custom filter components). If you need pixel-perfect parity with the Inertia frontend, use `escalated-laravel` directly with the shared Vue components instead.
 
-## Requirements
+## Requisitos
 
 - PHP 8.2+
 - Laravel 11 or 12
@@ -50,7 +50,7 @@ Escalated for Filament is a **Filament plugin wrapper** around [`escalated-larav
 |--------------------|----------|---------|------|
 | 0.5.x              | 3.x, 4.x, 5.x | 11, 12  | 8.2+ |
 
-## Installation
+## Instalação
 
 ### 1. Install the packages
 
@@ -102,7 +102,7 @@ public function panel(Panel $panel): Panel
 
 You're live. Visit your Filament panel — a **Support** navigation group will appear with all ticket management resources.
 
-## Features
+## Recursos
 
 ### Resources
 
@@ -154,7 +154,7 @@ You're live. Visit your Filament panel — a **Support** navigation group will a
 - **TicketConversation** — Full conversation thread with reply composer, canned response insertion, and note pinning
 - **SatisfactionRating** — Display customer satisfaction rating with star visualization
 
-## Configuration
+## Configuração
 
 The plugin is configured through method chaining on the plugin instance:
 
@@ -177,7 +177,7 @@ php artisan vendor:publish --tag=escalated-filament-views
 
 _Coming soon._
 
-## Also Available For
+## Também Disponível Para
 
 - **[Escalated for Laravel](https://github.com/escalated-dev/escalated-laravel)** — Laravel Composer package
 - **[Escalated for Rails](https://github.com/escalated-dev/escalated-rails)** — Ruby on Rails engine
@@ -188,6 +188,6 @@ _Coming soon._
 
 Same architecture, same ticket system — native Filament experience for Laravel admin panels.
 
-## License
+## Licença
 
 MIT
