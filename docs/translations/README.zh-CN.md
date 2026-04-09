@@ -15,36 +15,36 @@
   <b>简体中文</b>
 </p>
 
-# Escalated for Filament
+# Escalated Filament 版
 
 [![Tests](https://github.com/escalated-dev/escalated-filament/actions/workflows/run-tests.yml/badge.svg)](https://github.com/escalated-dev/escalated-filament/actions/workflows/run-tests.yml)
 [![Laravel](https://img.shields.io/badge/laravel-11.x-FF2D20?logo=laravel&logoColor=white)](https://laravel.com/)
 [![Filament](https://img.shields.io/badge/filament-v3-FDAE4B?logo=data:image/svg+xml;base64,&logoColor=white)](https://filamentphp.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-A [Filament](https://filamentphp.com) admin panel plugin for the [Escalated](https://github.com/escalated-dev/escalated-laravel) support ticket system. Manage tickets, departments, SLA policies, escalation rules, macros, and more — all from within your existing Filament admin panel.
+为 [Escalated](https://github.com/escalated-dev/escalated-laravel) 支持工单系统打造的 [Filament](https://filamentphp.com) 管理面板插件。在现有的 Filament 管理面板中管理工单、部门、SLA 策略、升级规则、宏等。
 
-> **[escalated.dev](https://escalated.dev)** — Learn more, view demos, and compare Cloud vs Self-Hosted options.
+> **[escalated.dev](https://escalated.dev)** — 了解更多、查看演示、比较云端与自托管方案。
 
-## How It Works
+## 工作原理
 
-Escalated for Filament is a **Filament plugin wrapper** around [`escalated-laravel`](https://github.com/escalated-dev/escalated-laravel). It does not duplicate any business logic. Instead, it provides Filament Resources, Pages, Widgets, and Actions that call the same services, models, and events from the core Laravel package. This means:
+Escalated Filament 版是围绕 [`escalated-laravel`](https://github.com/escalated-dev/escalated-laravel) 的 **Filament 插件包装器**。它不复制任何业务逻辑。相反，它提供 Filament 的 Resources、Pages、Widgets 和 Actions，调用核心 Laravel 包中的相同服务、模型和事件。这意味着：
 
-- All ticket lifecycle logic, SLA calculations, and escalation rules come from `escalated-laravel`
-- Database tables, migrations, and configuration are managed by the core package
-- Events, notifications, and webhooks fire exactly as they would from the Inertia UI
-- You get a native Filament experience without maintaining a separate codebase
+- 所有工单生命周期逻辑、SLA 计算和升级规则均来自 `escalated-laravel`
+- 数据库表、迁移和配置由核心包管理
+- 事件、通知和 Webhook 的触发方式与 Inertia UI 完全相同
+- 无需维护单独的代码库即可获得原生 Filament 体验
 
-> **Note:** This package uses Filament's native Livewire + Blade components (tables, forms, info lists, actions, widgets) rather than the custom Vue 3 + Inertia.js UI from the [`@escalated-dev/escalated`](https://github.com/escalated-dev/escalated) frontend package. The core functionality is the same — same models, services, database, and business logic — but the UI look-and-feel follows Filament's design system. Some interactions may differ slightly (e.g., Filament modals vs. inline forms, Filament table filters vs. custom filter components). If you need pixel-perfect parity with the Inertia frontend, use `escalated-laravel` directly with the shared Vue components instead.
+> **注意：** 此包使用 Filament 原生的 Livewire + Blade 组件（表格、表单、信息列表、操作、小部件），而非 [`@escalated-dev/escalated`](https://github.com/escalated-dev/escalated) 前端包中的自定义 Vue 3 + Inertia.js UI。核心功能相同——相同的模型、服务、数据库和业务逻辑——但界面外观遵循 Filament 的设计系统。某些交互可能略有不同（例如 Filament 模态框 vs. 内联表单，Filament 表格筛选器 vs. 自定义筛选组件）。如需与 Inertia 前端完全一致，请直接使用 `escalated-laravel` 配合共享的 Vue 组件。
 
 ## 系统要求
 
 - PHP 8.2+
-- Laravel 11 or 12
-- Filament 3.x, 4.x, or 5.x
+- Laravel 11 或 12
+- Filament 3.x、4.x 或 5.x
 - escalated-dev/escalated-laravel ^0.5
 
-### Version Compatibility
+### 版本兼容性
 
 | escalated-filament | Filament | Laravel | PHP  |
 |--------------------|----------|---------|------|
@@ -52,28 +52,28 @@ Escalated for Filament is a **Filament plugin wrapper** around [`escalated-larav
 
 ## 安装
 
-### 1. Install the packages
+### 1. 安装包
 
 ```bash
 composer require escalated-dev/escalated-laravel escalated-dev/escalated-filament
 ```
 
-If you already have `escalated-laravel` installed, just add the Filament plugin:
+如果已安装 `escalated-laravel`，只需添加 Filament 插件：
 
 ```bash
 composer require escalated-dev/escalated-filament
 ```
 
-### 2. Run the Escalated installer (if not already done)
+### 2. 运行 Escalated 安装程序（如尚未执行）
 
 ```bash
 php artisan escalated:install
 php artisan migrate
 ```
 
-### 3. Define authorization gates
+### 3. 定义授权门
 
-In a service provider (e.g., `AppServiceProvider`):
+在服务提供者（如 `AppServiceProvider`）中：
 
 ```php
 use Illuminate\Support\Facades\Gate;
@@ -82,7 +82,7 @@ Gate::define('escalated-admin', fn ($user) => $user->is_admin);
 Gate::define('escalated-agent', fn ($user) => $user->is_agent || $user->is_admin);
 ```
 
-### 4. Register the plugin in your Filament panel
+### 4. 在 Filament 面板中注册插件
 
 ```php
 use Escalated\Filament\EscalatedFilamentPlugin;
@@ -100,93 +100,93 @@ public function panel(Panel $panel): Panel
 }
 ```
 
-You're live. Visit your Filament panel — a **Support** navigation group will appear with all ticket management resources.
+设置完成。访问您的 Filament 面板——将出现包含所有工单管理资源的 **支持** 导航组。
 
 ## 功能特性
 
-### Resources
+### 资源
 
-- **TicketResource** — Full ticket management with list, view, and create pages
-  - Filterable by status, priority, department, agent, tags, SLA
-  - Quick filter tabs: All, My Tickets, Unassigned, Urgent, SLA Breaching
-  - Bulk actions: Assign, Change Status, Change Priority, Add Tags, Close, Delete
-  - View page with conversation thread, sidebar details, SLA info, satisfaction rating
-  - Header actions: Reply, Note, Assign, Status, Priority, Follow, Macro, Resolve, Close, Reopen
-- **DepartmentResource** — CRUD for support departments with agent assignment
-- **TagResource** — CRUD for ticket tags with color picker
-- **SlaPolicyResource** — SLA policy management with per-priority response/resolution times
-- **EscalationRuleResource** — Condition/action builder for automatic escalation rules
-- **CannedResponseResource** — Pre-written response templates with categories
-- **MacroResource** — Multi-action automation macros with reorderable steps
+- **TicketResource** — 完整的工单管理，包含列表、查看和创建页面
+  - 可按状态、优先级、部门、客服、标签、SLA 筛选
+  - 快速筛选标签页：全部、我的工单、未分配、紧急、SLA 违规
+  - 批量操作：分配、更改状态、更改优先级、添加标签、关闭、删除
+  - 查看页面包含对话线程、侧边栏详情、SLA 信息、满意度评分
+  - 头部操作：回复、备注、分配、状态、优先级、关注、宏、解决、关闭、重新打开
+- **DepartmentResource** — 支持部门的 CRUD，带客服分配
+- **TagResource** — 工单标签的 CRUD，带颜色选择器
+- **SlaPolicyResource** — SLA 策略管理，按优先级设置响应/解决时间
+- **EscalationRuleResource** — 自动升级规则的条件/操作构建器
+- **CannedResponseResource** — 带分类的预设回复模板
+- **MacroResource** — 可重排步骤的多操作自动化宏
 
-### Dashboard Widgets
+### 仪表板小部件
 
-- **TicketStatsOverview** — Key metrics: My Open, Unassigned, Total Open, SLA Breached, Resolved Today, CSAT
-- **TicketsByStatusChart** — Doughnut chart of ticket distribution by status
-- **TicketsByPriorityChart** — Bar chart of open tickets by priority
-- **CsatOverviewWidget** — Customer satisfaction metrics: Average Rating, Total Ratings, Satisfaction Rate
-- **RecentTicketsWidget** — Table of the 5 most recent tickets
-- **SlaBreachWidget** — Table of tickets with breached SLA targets
+- **TicketStatsOverview** — 关键指标：我的待处理、未分配、总待处理、SLA 违规、今日已解决、CSAT
+- **TicketsByStatusChart** — 按状态分布的工单环形图
+- **TicketsByPriorityChart** — 按优先级的待处理工单柱状图
+- **CsatOverviewWidget** — 客户满意度指标：平均评分、总评分数、满意率
+- **RecentTicketsWidget** — 最近 5 张工单表格
+- **SlaBreachWidget** — SLA 目标违规工单表格
 
-### Pages
+### 页面
 
-- **Dashboard** — Support dashboard with all widgets
-- **Reports** — Date-range analytics with stats, department breakdown, and timeline
-- **Settings** — Admin settings for reference prefix, guest tickets, auto-close, attachment limits
+- **Dashboard** — 包含所有小部件的支持仪表板
+- **Reports** — 带统计、部门分析和时间线的日期范围分析
+- **Settings** — 参考前缀、访客工单、自动关闭、附件限制的管理设置
 
-### Relation Managers
+### 关系管理器
 
-- **RepliesRelationManager** — Reply thread with internal notes, pinning, and canned response insertion
-- **ActivitiesRelationManager** — Read-only audit log of all ticket activities
-- **FollowersRelationManager** — Manage ticket followers
+- **RepliesRelationManager** — 带内部备注、置顶和预设回复插入的回复线程
+- **ActivitiesRelationManager** — 所有工单活动的只读审计日志
+- **FollowersRelationManager** — 管理工单关注者
 
-### Reusable Actions
+### 可复用操作
 
-- `AssignTicketAction` — Assign a ticket to an agent
-- `ChangeStatusAction` — Change ticket status
-- `ChangePriorityAction` — Change ticket priority
-- `ApplyMacroAction` — Apply a macro to a ticket
-- `FollowTicketAction` — Toggle following a ticket
-- `PinReplyAction` — Pin/unpin internal notes
+- `AssignTicketAction` — 将工单分配给客服
+- `ChangeStatusAction` — 更改工单状态
+- `ChangePriorityAction` — 更改工单优先级
+- `ApplyMacroAction` — 对工单应用宏
+- `FollowTicketAction` — 切换工单关注
+- `PinReplyAction` — 置顶/取消置顶内部备注
 
-### Custom Livewire Components
+### 自定义 Livewire 组件
 
-- **TicketConversation** — Full conversation thread with reply composer, canned response insertion, and note pinning
-- **SatisfactionRating** — Display customer satisfaction rating with star visualization
+- **TicketConversation** — 完整的对话线程，带回复编辑器、预设回复插入和备注置顶
+- **SatisfactionRating** — 带星级可视化的客户满意度评分展示
 
 ## 配置
 
-The plugin is configured through method chaining on the plugin instance:
+插件通过插件实例的方法链进行配置：
 
 ```php
 EscalatedFilamentPlugin::make()
-    ->navigationGroup('Support')    // Navigation group label (default: 'Support')
-    ->agentGate('escalated-agent')  // Gate for agent access (default: 'escalated-agent')
-    ->adminGate('escalated-admin')  // Gate for admin access (default: 'escalated-admin')
+    ->navigationGroup('Support')    // 导航组标签（默认：'Support'）
+    ->agentGate('escalated-agent')  // 客服访问门（默认：'escalated-agent'）
+    ->adminGate('escalated-admin')  // 管理员访问门（默认：'escalated-admin'）
 ```
 
-All other configuration (SLA, hosting modes, notifications, etc.) is managed by the core `escalated-laravel` package in `config/escalated.php`. See the [escalated-laravel README](https://github.com/escalated-dev/escalated-laravel) for full configuration reference.
+其他所有配置（SLA、托管模式、通知等）由核心 `escalated-laravel` 包在 `config/escalated.php` 中管理。完整配置参考请查看 [escalated-laravel README](https://github.com/escalated-dev/escalated-laravel)。
 
-## Publishing Views
+## 发布视图
 
 ```bash
 php artisan vendor:publish --tag=escalated-filament-views
 ```
 
-## Screenshots
+## 截图
 
-_Coming soon._
+_即将推出。_
 
 ## 其他框架版本
 
-- **[Escalated for Laravel](https://github.com/escalated-dev/escalated-laravel)** — Laravel Composer package
-- **[Escalated for Rails](https://github.com/escalated-dev/escalated-rails)** — Ruby on Rails engine
-- **[Escalated for Django](https://github.com/escalated-dev/escalated-django)** — Django reusable app
-- **[Escalated for AdonisJS](https://github.com/escalated-dev/escalated-adonis)** — AdonisJS v6 package
-- **[Escalated for Filament](https://github.com/escalated-dev/escalated-filament)** — Filament admin panel plugin (you are here)
-- **[Shared Frontend](https://github.com/escalated-dev/escalated)** — Vue 3 + Inertia.js UI components
+- **[Escalated Laravel 版](https://github.com/escalated-dev/escalated-laravel)** — Laravel Composer 包
+- **[Escalated Rails 版](https://github.com/escalated-dev/escalated-rails)** — Ruby on Rails 引擎
+- **[Escalated Django 版](https://github.com/escalated-dev/escalated-django)** — Django 可复用应用
+- **[Escalated AdonisJS 版](https://github.com/escalated-dev/escalated-adonis)** — AdonisJS v6 包
+- **[Escalated Filament 版](https://github.com/escalated-dev/escalated-filament)** — Filament 管理面板插件（当前页面）
+- **[共享前端](https://github.com/escalated-dev/escalated)** — Vue 3 + Inertia.js UI 组件
 
-Same architecture, same ticket system — native Filament experience for Laravel admin panels.
+相同的架构，相同的工单系统——为 Laravel 管理面板打造的原生 Filament 体验。
 
 ## 许可证
 

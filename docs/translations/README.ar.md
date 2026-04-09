@@ -15,36 +15,36 @@
   <a href="README.zh-CN.md">简体中文</a>
 </p>
 
-# Escalated for Filament
+# Escalated لـ Filament
 
 [![Tests](https://github.com/escalated-dev/escalated-filament/actions/workflows/run-tests.yml/badge.svg)](https://github.com/escalated-dev/escalated-filament/actions/workflows/run-tests.yml)
 [![Laravel](https://img.shields.io/badge/laravel-11.x-FF2D20?logo=laravel&logoColor=white)](https://laravel.com/)
 [![Filament](https://img.shields.io/badge/filament-v3-FDAE4B?logo=data:image/svg+xml;base64,&logoColor=white)](https://filamentphp.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-A [Filament](https://filamentphp.com) admin panel plugin for the [Escalated](https://github.com/escalated-dev/escalated-laravel) support ticket system. Manage tickets, departments, SLA policies, escalation rules, macros, and more — all from within your existing Filament admin panel.
+إضافة للوحة تحكم [Filament](https://filamentphp.com) لنظام تذاكر الدعم [Escalated](https://github.com/escalated-dev/escalated-laravel). إدارة التذاكر والأقسام وسياسات SLA وقواعد التصعيد والماكرو والمزيد — كل ذلك من داخل لوحة تحكم Filament الحالية.
 
-> **[escalated.dev](https://escalated.dev)** — Learn more, view demos, and compare Cloud vs Self-Hosted options.
+> **[escalated.dev](https://escalated.dev)** — تعرف على المزيد، شاهد العروض التوضيحية، وقارن بين خيارات السحابة والاستضافة الذاتية.
 
-## How It Works
+## كيف يعمل
 
-Escalated for Filament is a **Filament plugin wrapper** around [`escalated-laravel`](https://github.com/escalated-dev/escalated-laravel). It does not duplicate any business logic. Instead, it provides Filament Resources, Pages, Widgets, and Actions that call the same services, models, and events from the core Laravel package. This means:
+Escalated لـ Filament هو **غلاف إضافة Filament** حول [`escalated-laravel`](https://github.com/escalated-dev/escalated-laravel). لا يكرر أي منطق أعمال. بدلاً من ذلك، يوفر موارد وصفحات وعناصر واجهة وإجراءات Filament التي تستدعي نفس الخدمات والنماذج والأحداث من حزمة Laravel الأساسية. هذا يعني:
 
-- All ticket lifecycle logic, SLA calculations, and escalation rules come from `escalated-laravel`
-- Database tables, migrations, and configuration are managed by the core package
-- Events, notifications, and webhooks fire exactly as they would from the Inertia UI
-- You get a native Filament experience without maintaining a separate codebase
+- جميع منطق دورة حياة التذاكر وحسابات SLA وقواعد التصعيد تأتي من `escalated-laravel`
+- جداول قاعدة البيانات والهجرات والإعدادات تُدار بواسطة الحزمة الأساسية
+- الأحداث والإشعارات وخطافات الويب تعمل تماماً كما في واجهة Inertia
+- تحصل على تجربة Filament أصلية دون الحاجة لصيانة قاعدة كود منفصلة
 
-> **Note:** This package uses Filament's native Livewire + Blade components (tables, forms, info lists, actions, widgets) rather than the custom Vue 3 + Inertia.js UI from the [`@escalated-dev/escalated`](https://github.com/escalated-dev/escalated) frontend package. The core functionality is the same — same models, services, database, and business logic — but the UI look-and-feel follows Filament's design system. Some interactions may differ slightly (e.g., Filament modals vs. inline forms, Filament table filters vs. custom filter components). If you need pixel-perfect parity with the Inertia frontend, use `escalated-laravel` directly with the shared Vue components instead.
+> **ملاحظة:** تستخدم هذه الحزمة مكونات Livewire + Blade الأصلية من Filament (الجداول، النماذج، قوائم المعلومات، الإجراءات، عناصر الواجهة) بدلاً من واجهة Vue 3 + Inertia.js المخصصة من حزمة [`@escalated-dev/escalated`](https://github.com/escalated-dev/escalated) الأمامية. الوظائف الأساسية هي نفسها — نفس النماذج والخدمات وقاعدة البيانات ومنطق الأعمال — لكن شكل وأسلوب الواجهة يتبع نظام تصميم Filament. قد تختلف بعض التفاعلات قليلاً (مثل نوافذ Filament المنبثقة مقابل النماذج المضمنة، مرشحات جداول Filament مقابل مكونات المرشح المخصصة). إذا كنت بحاجة إلى تطابق دقيق مع واجهة Inertia الأمامية، استخدم `escalated-laravel` مباشرة مع مكونات Vue المشتركة بدلاً من ذلك.
 
 ## المتطلبات
 
 - PHP 8.2+
-- Laravel 11 or 12
-- Filament 3.x, 4.x, or 5.x
+- Laravel 11 أو 12
+- Filament 3.x أو 4.x أو 5.x
 - escalated-dev/escalated-laravel ^0.5
 
-### Version Compatibility
+### توافق الإصدارات
 
 | escalated-filament | Filament | Laravel | PHP  |
 |--------------------|----------|---------|------|
@@ -52,28 +52,28 @@ Escalated for Filament is a **Filament plugin wrapper** around [`escalated-larav
 
 ## التثبيت
 
-### 1. Install the packages
+### 1. تثبيت الحزم
 
 ```bash
 composer require escalated-dev/escalated-laravel escalated-dev/escalated-filament
 ```
 
-If you already have `escalated-laravel` installed, just add the Filament plugin:
+إذا كان `escalated-laravel` مثبتاً لديك بالفعل، أضف إضافة Filament فقط:
 
 ```bash
 composer require escalated-dev/escalated-filament
 ```
 
-### 2. Run the Escalated installer (if not already done)
+### 2. تشغيل مُثبّت Escalated (إذا لم يتم ذلك بالفعل)
 
 ```bash
 php artisan escalated:install
 php artisan migrate
 ```
 
-### 3. Define authorization gates
+### 3. تعريف بوابات التفويض
 
-In a service provider (e.g., `AppServiceProvider`):
+في مزود خدمة (مثل `AppServiceProvider`):
 
 ```php
 use Illuminate\Support\Facades\Gate;
@@ -82,7 +82,7 @@ Gate::define('escalated-admin', fn ($user) => $user->is_admin);
 Gate::define('escalated-agent', fn ($user) => $user->is_agent || $user->is_admin);
 ```
 
-### 4. Register the plugin in your Filament panel
+### 4. تسجيل الإضافة في لوحة Filament
 
 ```php
 use Escalated\Filament\EscalatedFilamentPlugin;
@@ -100,93 +100,93 @@ public function panel(Panel $panel): Panel
 }
 ```
 
-You're live. Visit your Filament panel — a **Support** navigation group will appear with all ticket management resources.
+أنت جاهز الآن. قم بزيارة لوحة Filament — ستظهر مجموعة تنقل **الدعم** مع جميع موارد إدارة التذاكر.
 
 ## الميزات
 
-### Resources
+### الموارد
 
-- **TicketResource** — Full ticket management with list, view, and create pages
-  - Filterable by status, priority, department, agent, tags, SLA
-  - Quick filter tabs: All, My Tickets, Unassigned, Urgent, SLA Breaching
-  - Bulk actions: Assign, Change Status, Change Priority, Add Tags, Close, Delete
-  - View page with conversation thread, sidebar details, SLA info, satisfaction rating
-  - Header actions: Reply, Note, Assign, Status, Priority, Follow, Macro, Resolve, Close, Reopen
-- **DepartmentResource** — CRUD for support departments with agent assignment
-- **TagResource** — CRUD for ticket tags with color picker
-- **SlaPolicyResource** — SLA policy management with per-priority response/resolution times
-- **EscalationRuleResource** — Condition/action builder for automatic escalation rules
-- **CannedResponseResource** — Pre-written response templates with categories
-- **MacroResource** — Multi-action automation macros with reorderable steps
+- **TicketResource** — إدارة كاملة للتذاكر مع صفحات القائمة والعرض والإنشاء
+  - قابلة للتصفية حسب الحالة والأولوية والقسم والوكيل والعلامات وSLA
+  - علامات تبويب تصفية سريعة: الكل، تذاكري، غير مُعيّنة، عاجلة، انتهاك SLA
+  - إجراءات جماعية: تعيين، تغيير الحالة، تغيير الأولوية، إضافة علامات، إغلاق، حذف
+  - صفحة عرض مع سلسلة المحادثة وتفاصيل الشريط الجانبي ومعلومات SLA وتقييم الرضا
+  - إجراءات الرأس: رد، ملاحظة، تعيين، حالة، أولوية، متابعة، ماكرو، حل، إغلاق، إعادة فتح
+- **DepartmentResource** — عمليات CRUD لأقسام الدعم مع تعيين الوكلاء
+- **TagResource** — عمليات CRUD لعلامات التذاكر مع منتقي الألوان
+- **SlaPolicyResource** — إدارة سياسات SLA مع أوقات الاستجابة/الحل لكل أولوية
+- **EscalationRuleResource** — منشئ الشروط/الإجراءات لقواعد التصعيد التلقائي
+- **CannedResponseResource** — قوالب ردود مكتوبة مسبقاً مع تصنيفات
+- **MacroResource** — ماكرو أتمتة متعدد الإجراءات مع خطوات قابلة لإعادة الترتيب
 
-### Dashboard Widgets
+### عناصر واجهة لوحة المعلومات
 
-- **TicketStatsOverview** — Key metrics: My Open, Unassigned, Total Open, SLA Breached, Resolved Today, CSAT
-- **TicketsByStatusChart** — Doughnut chart of ticket distribution by status
-- **TicketsByPriorityChart** — Bar chart of open tickets by priority
-- **CsatOverviewWidget** — Customer satisfaction metrics: Average Rating, Total Ratings, Satisfaction Rate
-- **RecentTicketsWidget** — Table of the 5 most recent tickets
-- **SlaBreachWidget** — Table of tickets with breached SLA targets
+- **TicketStatsOverview** — مقاييس رئيسية: المفتوحة لدي، غير مُعيّنة، إجمالي المفتوحة، انتهاك SLA، المحلولة اليوم، CSAT
+- **TicketsByStatusChart** — مخطط دائري لتوزيع التذاكر حسب الحالة
+- **TicketsByPriorityChart** — مخطط شريطي للتذاكر المفتوحة حسب الأولوية
+- **CsatOverviewWidget** — مقاييس رضا العملاء: متوسط التقييم، إجمالي التقييمات، معدل الرضا
+- **RecentTicketsWidget** — جدول لأحدث 5 تذاكر
+- **SlaBreachWidget** — جدول التذاكر التي انتهكت أهداف SLA
 
-### Pages
+### الصفحات
 
-- **Dashboard** — Support dashboard with all widgets
-- **Reports** — Date-range analytics with stats, department breakdown, and timeline
-- **Settings** — Admin settings for reference prefix, guest tickets, auto-close, attachment limits
+- **Dashboard** — لوحة معلومات الدعم مع جميع العناصر
+- **Reports** — تحليلات بنطاق زمني مع إحصائيات وتفصيل الأقسام والجدول الزمني
+- **Settings** — إعدادات المسؤول لبادئة المرجع وتذاكر الضيوف والإغلاق التلقائي وحدود المرفقات
 
-### Relation Managers
+### مديرو العلاقات
 
-- **RepliesRelationManager** — Reply thread with internal notes, pinning, and canned response insertion
-- **ActivitiesRelationManager** — Read-only audit log of all ticket activities
-- **FollowersRelationManager** — Manage ticket followers
+- **RepliesRelationManager** — سلسلة الردود مع الملاحظات الداخلية والتثبيت وإدراج الردود الجاهزة
+- **ActivitiesRelationManager** — سجل تدقيق للقراءة فقط لجميع أنشطة التذاكر
+- **FollowersRelationManager** — إدارة متابعي التذاكر
 
-### Reusable Actions
+### إجراءات قابلة لإعادة الاستخدام
 
-- `AssignTicketAction` — Assign a ticket to an agent
-- `ChangeStatusAction` — Change ticket status
-- `ChangePriorityAction` — Change ticket priority
-- `ApplyMacroAction` — Apply a macro to a ticket
-- `FollowTicketAction` — Toggle following a ticket
-- `PinReplyAction` — Pin/unpin internal notes
+- `AssignTicketAction` — تعيين تذكرة لوكيل
+- `ChangeStatusAction` — تغيير حالة التذكرة
+- `ChangePriorityAction` — تغيير أولوية التذكرة
+- `ApplyMacroAction` — تطبيق ماكرو على تذكرة
+- `FollowTicketAction` — تبديل متابعة تذكرة
+- `PinReplyAction` — تثبيت/إلغاء تثبيت الملاحظات الداخلية
 
-### Custom Livewire Components
+### مكونات Livewire المخصصة
 
-- **TicketConversation** — Full conversation thread with reply composer, canned response insertion, and note pinning
-- **SatisfactionRating** — Display customer satisfaction rating with star visualization
+- **TicketConversation** — سلسلة محادثة كاملة مع مؤلف الردود وإدراج الردود الجاهزة وتثبيت الملاحظات
+- **SatisfactionRating** — عرض تقييم رضا العملاء مع تصور النجوم
 
 ## الإعدادات
 
-The plugin is configured through method chaining on the plugin instance:
+يتم تكوين الإضافة من خلال تسلسل الطرق على نسخة الإضافة:
 
 ```php
 EscalatedFilamentPlugin::make()
-    ->navigationGroup('Support')    // Navigation group label (default: 'Support')
-    ->agentGate('escalated-agent')  // Gate for agent access (default: 'escalated-agent')
-    ->adminGate('escalated-admin')  // Gate for admin access (default: 'escalated-admin')
+    ->navigationGroup('Support')    // تسمية مجموعة التنقل (الافتراضي: 'Support')
+    ->agentGate('escalated-agent')  // بوابة وصول الوكيل (الافتراضي: 'escalated-agent')
+    ->adminGate('escalated-admin')  // بوابة وصول المسؤول (الافتراضي: 'escalated-admin')
 ```
 
-All other configuration (SLA, hosting modes, notifications, etc.) is managed by the core `escalated-laravel` package in `config/escalated.php`. See the [escalated-laravel README](https://github.com/escalated-dev/escalated-laravel) for full configuration reference.
+جميع الإعدادات الأخرى (SLA، أوضاع الاستضافة، الإشعارات، إلخ) تُدار بواسطة حزمة `escalated-laravel` الأساسية في `config/escalated.php`. راجع [ملف README الخاص بـ escalated-laravel](https://github.com/escalated-dev/escalated-laravel) للاطلاع على مرجع الإعدادات الكامل.
 
-## Publishing Views
+## نشر العروض
 
 ```bash
 php artisan vendor:publish --tag=escalated-filament-views
 ```
 
-## Screenshots
+## لقطات الشاشة
 
-_Coming soon._
+_قريباً._
 
 ## متوفر أيضاً لـ
 
-- **[Escalated for Laravel](https://github.com/escalated-dev/escalated-laravel)** — Laravel Composer package
-- **[Escalated for Rails](https://github.com/escalated-dev/escalated-rails)** — Ruby on Rails engine
-- **[Escalated for Django](https://github.com/escalated-dev/escalated-django)** — Django reusable app
-- **[Escalated for AdonisJS](https://github.com/escalated-dev/escalated-adonis)** — AdonisJS v6 package
-- **[Escalated for Filament](https://github.com/escalated-dev/escalated-filament)** — Filament admin panel plugin (you are here)
-- **[Shared Frontend](https://github.com/escalated-dev/escalated)** — Vue 3 + Inertia.js UI components
+- **[Escalated لـ Laravel](https://github.com/escalated-dev/escalated-laravel)** — حزمة Laravel عبر Composer
+- **[Escalated لـ Rails](https://github.com/escalated-dev/escalated-rails)** — محرك Ruby on Rails
+- **[Escalated لـ Django](https://github.com/escalated-dev/escalated-django)** — تطبيق Django قابل لإعادة الاستخدام
+- **[Escalated لـ AdonisJS](https://github.com/escalated-dev/escalated-adonis)** — حزمة AdonisJS v6
+- **[Escalated لـ Filament](https://github.com/escalated-dev/escalated-filament)** — إضافة لوحة تحكم Filament (أنت هنا)
+- **[الواجهة الأمامية المشتركة](https://github.com/escalated-dev/escalated)** — مكونات واجهة Vue 3 + Inertia.js
 
-Same architecture, same ticket system — native Filament experience for Laravel admin panels.
+نفس البنية، نفس نظام التذاكر — تجربة Filament أصلية للوحات تحكم Laravel الإدارية.
 
 ## الرخصة
 

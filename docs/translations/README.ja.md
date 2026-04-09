@@ -22,29 +22,29 @@
 [![Filament](https://img.shields.io/badge/filament-v3-FDAE4B?logo=data:image/svg+xml;base64,&logoColor=white)](https://filamentphp.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-A [Filament](https://filamentphp.com) admin panel plugin for the [Escalated](https://github.com/escalated-dev/escalated-laravel) support ticket system. Manage tickets, departments, SLA policies, escalation rules, macros, and more — all from within your existing Filament admin panel.
+[Escalated](https://github.com/escalated-dev/escalated-laravel) サポートチケットシステム用の [Filament](https://filamentphp.com) 管理パネルプラグインです。チケット、部門、SLAポリシー、エスカレーションルール、マクロなどを、既存のFilament管理パネルから管理できます。
 
-> **[escalated.dev](https://escalated.dev)** — Learn more, view demos, and compare Cloud vs Self-Hosted options.
+> **[escalated.dev](https://escalated.dev)** — 詳細の確認、デモの閲覧、クラウドとセルフホストの比較ができます。
 
-## How It Works
+## 仕組み
 
-Escalated for Filament is a **Filament plugin wrapper** around [`escalated-laravel`](https://github.com/escalated-dev/escalated-laravel). It does not duplicate any business logic. Instead, it provides Filament Resources, Pages, Widgets, and Actions that call the same services, models, and events from the core Laravel package. This means:
+Escalated for Filament は [`escalated-laravel`](https://github.com/escalated-dev/escalated-laravel) の **Filament プラグインラッパー** です。ビジネスロジックの重複はありません。代わりに、コアLaravelパッケージの同じサービス、モデル、イベントを呼び出すFilament Resources、Pages、Widgets、Actionsを提供します。つまり：
 
-- All ticket lifecycle logic, SLA calculations, and escalation rules come from `escalated-laravel`
-- Database tables, migrations, and configuration are managed by the core package
-- Events, notifications, and webhooks fire exactly as they would from the Inertia UI
-- You get a native Filament experience without maintaining a separate codebase
+- チケットのライフサイクルロジック、SLA計算、エスカレーションルールはすべて `escalated-laravel` から提供されます
+- データベーステーブル、マイグレーション、設定はコアパッケージが管理します
+- イベント、通知、WebhookはInertia UIと全く同じように動作します
+- 別のコードベースを保守することなく、ネイティブなFilament体験が得られます
 
-> **Note:** This package uses Filament's native Livewire + Blade components (tables, forms, info lists, actions, widgets) rather than the custom Vue 3 + Inertia.js UI from the [`@escalated-dev/escalated`](https://github.com/escalated-dev/escalated) frontend package. The core functionality is the same — same models, services, database, and business logic — but the UI look-and-feel follows Filament's design system. Some interactions may differ slightly (e.g., Filament modals vs. inline forms, Filament table filters vs. custom filter components). If you need pixel-perfect parity with the Inertia frontend, use `escalated-laravel` directly with the shared Vue components instead.
+> **注意:** このパッケージは、[`@escalated-dev/escalated`](https://github.com/escalated-dev/escalated) フロントエンドパッケージのカスタム Vue 3 + Inertia.js UI ではなく、Filament ネイティブの Livewire + Blade コンポーネント（テーブル、フォーム、情報リスト、アクション、ウィジェット）を使用します。コア機能は同じです — 同じモデル、サービス、データベース、ビジネスロジック — しかしUIの外観はFilamentのデザインシステムに従います。一部のインタラクションは若干異なる場合があります（例：Filamentのモーダル vs. インラインフォーム、Filamentのテーブルフィルター vs. カスタムフィルターコンポーネント）。Inertiaフロントエンドとの完全な一致が必要な場合は、`escalated-laravel` を共有Vueコンポーネントと直接使用してください。
 
 ## 要件
 
 - PHP 8.2+
-- Laravel 11 or 12
-- Filament 3.x, 4.x, or 5.x
+- Laravel 11 または 12
+- Filament 3.x、4.x、または 5.x
 - escalated-dev/escalated-laravel ^0.5
 
-### Version Compatibility
+### バージョン互換性
 
 | escalated-filament | Filament | Laravel | PHP  |
 |--------------------|----------|---------|------|
@@ -52,28 +52,28 @@ Escalated for Filament is a **Filament plugin wrapper** around [`escalated-larav
 
 ## インストール
 
-### 1. Install the packages
+### 1. パッケージのインストール
 
 ```bash
 composer require escalated-dev/escalated-laravel escalated-dev/escalated-filament
 ```
 
-If you already have `escalated-laravel` installed, just add the Filament plugin:
+`escalated-laravel` が既にインストール済みの場合、Filament プラグインのみ追加してください：
 
 ```bash
 composer require escalated-dev/escalated-filament
 ```
 
-### 2. Run the Escalated installer (if not already done)
+### 2. Escalated インストーラーの実行（未実行の場合）
 
 ```bash
 php artisan escalated:install
 php artisan migrate
 ```
 
-### 3. Define authorization gates
+### 3. 認可ゲートの定義
 
-In a service provider (e.g., `AppServiceProvider`):
+サービスプロバイダー（例：`AppServiceProvider`）内で：
 
 ```php
 use Illuminate\Support\Facades\Gate;
@@ -82,7 +82,7 @@ Gate::define('escalated-admin', fn ($user) => $user->is_admin);
 Gate::define('escalated-agent', fn ($user) => $user->is_agent || $user->is_admin);
 ```
 
-### 4. Register the plugin in your Filament panel
+### 4. Filament パネルにプラグインを登録
 
 ```php
 use Escalated\Filament\EscalatedFilamentPlugin;
@@ -100,93 +100,93 @@ public function panel(Panel $panel): Panel
 }
 ```
 
-You're live. Visit your Filament panel — a **Support** navigation group will appear with all ticket management resources.
+準備完了です。Filament パネルにアクセスすると、すべてのチケット管理リソースを含む **Support** ナビゲーショングループが表示されます。
 
 ## 機能
 
-### Resources
+### リソース
 
-- **TicketResource** — Full ticket management with list, view, and create pages
-  - Filterable by status, priority, department, agent, tags, SLA
-  - Quick filter tabs: All, My Tickets, Unassigned, Urgent, SLA Breaching
-  - Bulk actions: Assign, Change Status, Change Priority, Add Tags, Close, Delete
-  - View page with conversation thread, sidebar details, SLA info, satisfaction rating
-  - Header actions: Reply, Note, Assign, Status, Priority, Follow, Macro, Resolve, Close, Reopen
-- **DepartmentResource** — CRUD for support departments with agent assignment
-- **TagResource** — CRUD for ticket tags with color picker
-- **SlaPolicyResource** — SLA policy management with per-priority response/resolution times
-- **EscalationRuleResource** — Condition/action builder for automatic escalation rules
-- **CannedResponseResource** — Pre-written response templates with categories
-- **MacroResource** — Multi-action automation macros with reorderable steps
+- **TicketResource** — リスト、表示、作成ページを備えた完全なチケット管理
+  - ステータス、優先度、部門、エージェント、タグ、SLAでフィルタリング可能
+  - クイックフィルタータブ：すべて、マイチケット、未割り当て、緊急、SLA違反
+  - 一括操作：割り当て、ステータス変更、優先度変更、タグ追加、クローズ、削除
+  - 会話スレッド、サイドバー詳細、SLA情報、満足度評価付きの表示ページ
+  - ヘッダーアクション：返信、ノート、割り当て、ステータス、優先度、フォロー、マクロ、解決、クローズ、再開
+- **DepartmentResource** — エージェント割り当て付きのサポート部門CRUD
+- **TagResource** — カラーピッカー付きのチケットタグCRUD
+- **SlaPolicyResource** — 優先度別の応答/解決時間を含むSLAポリシー管理
+- **EscalationRuleResource** — 自動エスカレーションルールの条件/アクションビルダー
+- **CannedResponseResource** — カテゴリー付きの定型応答テンプレート
+- **MacroResource** — 並べ替え可能なステップを含むマルチアクション自動化マクロ
 
-### Dashboard Widgets
+### ダッシュボードウィジェット
 
-- **TicketStatsOverview** — Key metrics: My Open, Unassigned, Total Open, SLA Breached, Resolved Today, CSAT
-- **TicketsByStatusChart** — Doughnut chart of ticket distribution by status
-- **TicketsByPriorityChart** — Bar chart of open tickets by priority
-- **CsatOverviewWidget** — Customer satisfaction metrics: Average Rating, Total Ratings, Satisfaction Rate
-- **RecentTicketsWidget** — Table of the 5 most recent tickets
-- **SlaBreachWidget** — Table of tickets with breached SLA targets
+- **TicketStatsOverview** — 主要メトリクス：自分のオープン、未割り当て、合計オープン、SLA違反、本日解決、CSAT
+- **TicketsByStatusChart** — ステータス別チケット分布のドーナツチャート
+- **TicketsByPriorityChart** — 優先度別オープンチケットの棒グラフ
+- **CsatOverviewWidget** — 顧客満足度メトリクス：平均評価、総評価数、満足率
+- **RecentTicketsWidget** — 最新5件のチケットテーブル
+- **SlaBreachWidget** — SLA目標違反チケットのテーブル
 
-### Pages
+### ページ
 
-- **Dashboard** — Support dashboard with all widgets
-- **Reports** — Date-range analytics with stats, department breakdown, and timeline
-- **Settings** — Admin settings for reference prefix, guest tickets, auto-close, attachment limits
+- **Dashboard** — すべてのウィジェット付きサポートダッシュボード
+- **Reports** — 統計、部門別内訳、タイムラインを含む日付範囲分析
+- **Settings** — 参照プレフィックス、ゲストチケット、自動クローズ、添付ファイル制限の管理設定
 
-### Relation Managers
+### リレーションマネージャー
 
-- **RepliesRelationManager** — Reply thread with internal notes, pinning, and canned response insertion
-- **ActivitiesRelationManager** — Read-only audit log of all ticket activities
-- **FollowersRelationManager** — Manage ticket followers
+- **RepliesRelationManager** — 内部ノート、ピン留め、定型応答挿入付きの返信スレッド
+- **ActivitiesRelationManager** — すべてのチケットアクティビティの読み取り専用監査ログ
+- **FollowersRelationManager** — チケットのフォロワー管理
 
-### Reusable Actions
+### 再利用可能なアクション
 
-- `AssignTicketAction` — Assign a ticket to an agent
-- `ChangeStatusAction` — Change ticket status
-- `ChangePriorityAction` — Change ticket priority
-- `ApplyMacroAction` — Apply a macro to a ticket
-- `FollowTicketAction` — Toggle following a ticket
-- `PinReplyAction` — Pin/unpin internal notes
+- `AssignTicketAction` — チケットをエージェントに割り当て
+- `ChangeStatusAction` — チケットステータスの変更
+- `ChangePriorityAction` — チケット優先度の変更
+- `ApplyMacroAction` — チケットにマクロを適用
+- `FollowTicketAction` — チケットフォローの切り替え
+- `PinReplyAction` — 内部ノートのピン留め/解除
 
-### Custom Livewire Components
+### カスタムLivewireコンポーネント
 
-- **TicketConversation** — Full conversation thread with reply composer, canned response insertion, and note pinning
-- **SatisfactionRating** — Display customer satisfaction rating with star visualization
+- **TicketConversation** — 返信エディター、定型応答挿入、ノートピン留め付きの完全な会話スレッド
+- **SatisfactionRating** — 星の視覚化による顧客満足度評価の表示
 
 ## 設定
 
-The plugin is configured through method chaining on the plugin instance:
+プラグインはプラグインインスタンスのメソッドチェーンで設定します：
 
 ```php
 EscalatedFilamentPlugin::make()
-    ->navigationGroup('Support')    // Navigation group label (default: 'Support')
-    ->agentGate('escalated-agent')  // Gate for agent access (default: 'escalated-agent')
-    ->adminGate('escalated-admin')  // Gate for admin access (default: 'escalated-admin')
+    ->navigationGroup('Support')    // ナビゲーショングループラベル（デフォルト: 'Support'）
+    ->agentGate('escalated-agent')  // エージェントアクセスのゲート（デフォルト: 'escalated-agent'）
+    ->adminGate('escalated-admin')  // 管理者アクセスのゲート（デフォルト: 'escalated-admin'）
 ```
 
-All other configuration (SLA, hosting modes, notifications, etc.) is managed by the core `escalated-laravel` package in `config/escalated.php`. See the [escalated-laravel README](https://github.com/escalated-dev/escalated-laravel) for full configuration reference.
+その他の設定（SLA、ホスティングモード、通知など）はすべてコアの `escalated-laravel` パッケージの `config/escalated.php` で管理されます。完全な設定リファレンスは [escalated-laravel README](https://github.com/escalated-dev/escalated-laravel) を参照してください。
 
-## Publishing Views
+## ビューの公開
 
 ```bash
 php artisan vendor:publish --tag=escalated-filament-views
 ```
 
-## Screenshots
+## スクリーンショット
 
-_Coming soon._
+_近日公開。_
 
 ## 他のフレームワーク向け
 
-- **[Escalated for Laravel](https://github.com/escalated-dev/escalated-laravel)** — Laravel Composer package
-- **[Escalated for Rails](https://github.com/escalated-dev/escalated-rails)** — Ruby on Rails engine
-- **[Escalated for Django](https://github.com/escalated-dev/escalated-django)** — Django reusable app
-- **[Escalated for AdonisJS](https://github.com/escalated-dev/escalated-adonis)** — AdonisJS v6 package
-- **[Escalated for Filament](https://github.com/escalated-dev/escalated-filament)** — Filament admin panel plugin (you are here)
-- **[Shared Frontend](https://github.com/escalated-dev/escalated)** — Vue 3 + Inertia.js UI components
+- **[Escalated for Laravel](https://github.com/escalated-dev/escalated-laravel)** — Laravel Composerパッケージ
+- **[Escalated for Rails](https://github.com/escalated-dev/escalated-rails)** — Ruby on Railsエンジン
+- **[Escalated for Django](https://github.com/escalated-dev/escalated-django)** — Django再利用可能アプリ
+- **[Escalated for AdonisJS](https://github.com/escalated-dev/escalated-adonis)** — AdonisJS v6パッケージ
+- **[Escalated for Filament](https://github.com/escalated-dev/escalated-filament)** — Filament管理パネルプラグイン（現在表示中）
+- **[共有フロントエンド](https://github.com/escalated-dev/escalated)** — Vue 3 + Inertia.js UIコンポーネント
 
-Same architecture, same ticket system — native Filament experience for Laravel admin panels.
+同じアーキテクチャ、同じチケットシステム — Laravel管理パネルのためのネイティブFilament体験。
 
 ## ライセンス
 
