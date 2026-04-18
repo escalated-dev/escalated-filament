@@ -327,22 +327,24 @@ class DemoSeeder extends Seeder
             $priority = $priorities[array_rand($priorities)];
             $createdAt = now()->subMinutes(rand(5, 60 * 24 * 30));
 
-            $ticket = Ticket::factory()
-                ->forRequester(User::class, $customer->id)
-                ->state([
-                    'subject' => $subjects[$i % count($subjects)],
-                    'description' => fake()->paragraphs(rand(1, 3), true),
-                    'status' => $status,
-                    'priority' => $priority,
-                    'assigned_to' => $agent?->id,
-                    'department_id' => array_values($departments)[$i % 3]->id,
-                    'sla_policy_id' => $i % 7 === 0 ? $slas['priority']->id : $slas['standard']->id,
-                    'created_at' => $createdAt, 'updated_at' => $createdAt,
-                    'resolved_at' => in_array($status, [TicketStatusEnum::Resolved, TicketStatusEnum::Closed]) ? $createdAt->copy()->addHours(rand(2, 48)) : null,
-                    'closed_at' => $status === TicketStatusEnum::Closed ? $createdAt->copy()->addHours(rand(48, 96)) : null,
-                    'sla_first_response_breached' => $i % 11 === 0,
-                ])
-                ->create();
+            $ticket = Ticket::create([
+                'reference' => sprintf('ESC-%05d', $i + 1),
+                'requester_type' => User::class,
+                'requester_id' => $customer->id,
+                'subject' => $subjects[$i % count($subjects)],
+                'description' => fake()->paragraphs(rand(1, 3), true),
+                'status' => $status,
+                'priority' => $priority,
+                'channel' => 'web',
+                'assigned_to' => $agent?->id,
+                'department_id' => array_values($departments)[$i % 3]->id,
+                'sla_policy_id' => $i % 7 === 0 ? $slas['priority']->id : $slas['standard']->id,
+                'created_at' => $createdAt,
+                'updated_at' => $createdAt,
+                'resolved_at' => in_array($status, [TicketStatusEnum::Resolved, TicketStatusEnum::Closed]) ? $createdAt->copy()->addHours(rand(2, 48)) : null,
+                'closed_at' => $status === TicketStatusEnum::Closed ? $createdAt->copy()->addHours(rand(48, 96)) : null,
+                'sla_first_response_breached' => $i % 11 === 0,
+            ]);
 
             $ticketTags = collect($tags)->random(rand(0, 3))->pluck('id')->all();
             if ($ticketTags) {
@@ -353,15 +355,16 @@ class DemoSeeder extends Seeder
             for ($r = 0; $r < $replyCount; $r++) {
                 $author = $r === 0 ? $customer : ($agent ?? $agents->first());
                 $isInternal = $agent && $r > 0 && fake()->boolean(25);
-                Reply::factory()->state([
+                Reply::create([
                     'ticket_id' => $ticket->id,
-                    'author_type' => User::class, 'author_id' => $author->id,
+                    'author_type' => User::class,
+                    'author_id' => $author->id,
                     'body' => fake()->paragraph(),
                     'is_internal_note' => $isInternal,
                     'type' => $isInternal ? 'note' : 'reply',
                     'created_at' => $createdAt->copy()->addMinutes(15 * ($r + 1)),
                     'updated_at' => $createdAt->copy()->addMinutes(15 * ($r + 1)),
-                ])->create();
+                ]);
             }
 
             $createdTickets[] = $ticket;
