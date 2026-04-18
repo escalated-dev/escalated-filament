@@ -1,0 +1,50 @@
+name: escalated-filament-demo
+
+services:
+  app:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    ports:
+      - "${APP_PORT:-8000}:8000"
+    environment:
+      APP_ENV: demo
+      APP_KEY: base64:Zmh1YXNkaHVpaGFzZGl1aGZhc2Rpb2hmYXNkdWlzZDE=
+      APP_URL: http://localhost:${APP_PORT:-8000}
+      APP_DEBUG: "true"
+      DB_CONNECTION: pgsql
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_DATABASE: escalated
+      DB_USERNAME: escalated
+      DB_PASSWORD: escalated
+      MAIL_MAILER: smtp
+      MAIL_HOST: mailpit
+      MAIL_PORT: 1025
+      MAIL_FROM_ADDRESS: demo@escalated.test
+      MAIL_FROM_NAME: Escalated Demo
+      QUEUE_CONNECTION: sync
+      CACHE_STORE: file
+      SESSION_DRIVER: file
+    depends_on:
+      db:
+        condition: service_healthy
+      mailpit:
+        condition: service_started
+
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: escalated
+      POSTGRES_USER: escalated
+      POSTGRES_PASSWORD: escalated
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U escalated -d escalated"]
+      interval: 2s
+      timeout: 2s
+      retries: 15
+
+  mailpit:
+    image: axllent/mailpit:latest
+    ports:
+      - "${MAILPIT_PORT:-8025}:8025"
