@@ -7,8 +7,8 @@ use Escalated\Filament\Resources\ApiTokenResource\Pages;
 use Escalated\Laravel\Escalated;
 use Escalated\Laravel\Models\ApiToken;
 use Filament\Forms;
-use Filament\Forms\Form;
 use Filament\Resources\Resource;
+use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Support\Facades\Gate;
@@ -17,13 +17,22 @@ class ApiTokenResource extends Resource
 {
     protected static ?string $model = ApiToken::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-key';
-
     protected static ?int $navigationSort = 16;
 
-    protected static ?string $modelLabel = 'API Token';
+    public static function getNavigationIcon(): ?string
+    {
+        return 'heroicon-o-key';
+    }
 
-    protected static ?string $pluralModelLabel = 'API Tokens';
+    public static function getModelLabel(): string
+    {
+        return 'API Token';
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return 'API Tokens';
+    }
 
     public static function getNavigationGroup(): ?string
     {
@@ -35,12 +44,12 @@ class ApiTokenResource extends Resource
         return config('escalated.api.enabled', false);
     }
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
         $agentGate = config('escalated.authorization.agent_gate', 'escalated-agent');
 
-        return $form
-            ->schema([
+        return $schema
+            ->components([
                 Forms\Components\Section::make('Token Details')
                     ->schema([
                         Forms\Components\TextInput::make('name')
