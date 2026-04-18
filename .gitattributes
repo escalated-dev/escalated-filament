@@ -1,0 +1,17 @@
+* text=auto eol=lf
+
+*.sh text eol=lf
+Dockerfile* text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.php text eol=lf
+*.js text eol=lf
+*.json text eol=lf
+*.blade.php text eol=lf
+*.css text eol=lf
+
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
