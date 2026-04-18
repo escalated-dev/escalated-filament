@@ -13,6 +13,7 @@ use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Form;
 use Filament\Pages\Page;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class Reports extends Page implements HasForms
 {
@@ -86,14 +87,16 @@ class Reports extends Page implements HasForms
         $totalTickets = (clone $tickets)->count();
         $resolvedTickets = (clone $tickets)->whereNotNull('resolved_at')->count();
 
+        $minutesDiff = self::minutesDiffExpression('created_at', 'first_response_at');
         $avgResponseMinutes = (clone $tickets)
             ->whereNotNull('first_response_at')
-            ->selectRaw('AVG(TIMESTAMPDIFF(MINUTE, created_at, first_response_at)) as avg_response')
+            ->selectRaw("AVG({$minutesDiff}) as avg_response")
             ->value('avg_response');
 
+        $minutesDiff = self::minutesDiffExpression('created_at', 'resolved_at');
         $avgResolutionMinutes = (clone $tickets)
             ->whereNotNull('resolved_at')
-            ->selectRaw('AVG(TIMESTAMPDIFF(MINUTE, created_at, resolved_at)) as avg_resolution')
+            ->selectRaw("AVG({$minutesDiff}) as avg_resolution")
             ->value('avg_resolution');
 
         $csatAvg = SatisfactionRating::whereHas('ticket', function ($q) use ($from, $to) {
@@ -173,5 +176,14 @@ class Reports extends Page implements HasForms
         $hours = $hours % 24;
 
         return "{$days}d {$hours}h";
+    }
+
+    public static function minutesDiffExpression(string $from, string $to): string
+    {
+        return match (DB::connection()->getDriverName()) {
+            'sqlite' => "(julianday({$to}) - julianday({$from})) * 1440",
+            'pgsql' => "EXTRACT(EPOCH FROM ({$to} - {$from})) / 60",
+            default => "TIMESTAMPDIFF(MINUTE, {$from}, {$to})",
+        };
     }
 }
