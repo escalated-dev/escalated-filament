@@ -7,18 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-04-18
+
 ### Added
 - SideConversation relation manager for TicketResource
 - Respect `escalated.ui.enabled` config gate
 - 10 Filament resources + SSO/Email settings pages
 - `show_powered_by` setting on Filament settings page
 - Configurable Filament user fields and resources
+- Docker dev/demo environment under `docker/` (excluded from the Composer dist). `docker compose up --build` boots a Postgres-backed Laravel + Filament 4 host with the plugin registered and a `/demo` click-to-login picker. (#21)
 
 ### Changed
 - Widened version constraints for Laravel 13 and Testbench 11
 - Updated escalated-laravel dependency to `^1.0`
 
 ### Fixed
+- Migrate `ApiTokenResource` from Filament 3 to 4/5 API. The rest of the resource code already targeted v4/5 (`Filament\Schemas\Schema`), but `ApiTokenResource` still used v3-style `protected static ?string $navigationIcon`, blocking `php artisan package:discover`. (#23, fixes #22)
+- Emit Postgres-compatible minute-diff SQL from `Reports.php`. Previous `selectRaw('AVG(TIMESTAMPDIFF(MINUTE, …))')` (MySQL-only) 500'd on Postgres. (#20)
 - Blue-500 default for tag color picker (better dark mode contrast)
 - Tiptap response handling
 - Reply functionality
