@@ -134,6 +134,23 @@ return [
             'show_powered_by' => 'Show "Powered by Escalated"',
             'show_powered_by_helper' => 'Display attribution badge in the support portal footer.',
         ],
+        'public_tickets_settings' => [
+            'title' => 'Public Tickets',
+            'mode_section' => 'Guest policy',
+            'mode_description' => 'Controls the identity assigned to tickets submitted via the public widget or inbound email. Applies at request time, so changes take effect on the next submission.',
+            'mode_label' => 'Mode',
+            'mode_unassigned' => 'Unassigned (Contact carries the email; ticket has no owner)',
+            'mode_guest_user' => 'Single shared guest user',
+            'mode_prompt_signup' => 'Prompt signup (confirmation email embeds invite link)',
+            'guest_user_section' => 'Shared guest user',
+            'user_id_label' => 'Guest user ID',
+            'user_id_helper' => 'Primary key of the host-app user that will own every public ticket.',
+            'signup_section' => 'Signup invite',
+            'signup_url_label' => 'Signup URL template',
+            'signup_url_helper' => 'Use {{email}} as a placeholder for the guest email. Leave blank to let the outbound-email listener pick a default.',
+            'save_button' => 'Save',
+            'save_success' => 'Guest policy updated',
+        ],
     ],
 
     /*
