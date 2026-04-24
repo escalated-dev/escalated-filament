@@ -5,6 +5,7 @@ namespace Escalated\Filament;
 use Escalated\Filament\Pages\Dashboard;
 use Escalated\Filament\Pages\EmailSettings;
 use Escalated\Filament\Pages\ManagePlugins;
+use Escalated\Filament\Pages\PublicTicketsSettings;
 use Escalated\Filament\Pages\Reports;
 use Escalated\Filament\Pages\Settings;
 use Escalated\Filament\Pages\SsoSettings;
@@ -143,6 +144,7 @@ class EscalatedFilamentPlugin implements Plugin
                 Dashboard::class,
                 Reports::class,
                 Settings::class,
+                PublicTicketsSettings::class,
                 SsoSettings::class,
                 EmailSettings::class,
                 ManagePlugins::class,
