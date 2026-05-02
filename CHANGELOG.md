@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Direct dependency on `escalated-dev/locale ^0.1` (central translations package). Already pulled in transitively via `escalated-laravel`, but pinned explicitly for clarity since Filament is a parallel admin surface.
+
+### Changed
+- README: documented the translation resolution chain (app overrides → central `escalated-dev/locale` package → bundled `escalated-filament` fallbacks).
+
 ## [1.1.0] - 2026-04-18
 
 ### Added

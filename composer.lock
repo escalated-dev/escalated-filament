@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7d12eaa63ca8b9d055850c29f434a2aa",
+    "content-hash": "29c8097c58fdd3b9d179222e4e31ae64",
     "packages": [
         {
             "name": "blade-ui-kit/blade-heroicons",
@@ -982,6 +982,47 @@
                 "source": "https://github.com/escalated-dev/escalated-laravel/tree/v1.1.0"
             },
             "time": "2026-04-06T17:17:29+00:00"
+        },
+        {
+            "name": "escalated-dev/locale",
+            "version": "v0.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/escalated-dev/escalated-locale.git",
+                "reference": "803ddf003005f872fb15a4653cc2be8630b8cc60"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/escalated-dev/escalated-locale/zipball/803ddf003005f872fb15a4653cc2be8630b8cc60",
+                "reference": "803ddf003005f872fb15a4653cc2be8630b8cc60",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.1"
+            },
+            "type": "library",
+            "extra": {
+                "escalated-locale": {
+                    "json-locales-dir": "packages/composer/locales",
+                    "symfony-translations-dir": "packages/composer/translations",
+                    "wordpress-languages-dir": "packages/composer/languages"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Escalated\\Locale\\": "packages/composer/src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Canonical Escalated locale bundle for PHP consumers (Laravel, Symfony, WordPress, Filament).",
+            "homepage": "https://github.com/escalated-dev/escalated-locale",
+            "support": {
+                "issues": "https://github.com/escalated-dev/escalated-locale/issues",
+                "source": "https://github.com/escalated-dev/escalated-locale"
+            },
+            "time": "2026-05-02T18:59:37+00:00"
         },
         {
             "name": "filament/actions",

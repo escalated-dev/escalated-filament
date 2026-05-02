@@ -173,6 +173,22 @@ All other configuration (SLA, hosting modes, notifications, etc.) is managed by 
 php artisan vendor:publish --tag=escalated-filament-views
 ```
 
+## Internationalization
+
+UI strings shown in this plugin's Filament resources, pages, and widgets resolve through the standard Escalated translation chain. The chain is configured in the underlying [`escalated-laravel`](https://github.com/escalated-dev/escalated-laravel) package and reads, in order:
+
+1. App-level overrides (`lang/vendor/escalated/{locale}/{group}.php`)
+2. The central [`escalated-dev/locale`](https://github.com/escalated-dev/escalated-locale) Composer package — single source of truth across all framework plugins
+3. This plugin's bundled fallback strings under `resources/lang/` (namespaced as `escalated-filament::*`)
+
+The central package is pulled in as an explicit dependency so that even if you only install `escalated-filament` without the rest of the stack the shared keys resolve correctly. To override a Filament-specific string in your application, publish:
+
+```bash
+php artisan vendor:publish --tag=escalated-filament-lang
+```
+
+then edit the files under `lang/vendor/escalated-filament/{locale}/`.
+
 ## Screenshots
 
 _Coming soon._
