@@ -4,6 +4,9 @@
     "keywords": ["laravel", "filament", "support", "tickets", "helpdesk", "admin-panel"],
     "license": "MIT",
     "type": "library",
+    "repositories": [
+        {"type": "vcs", "url": "https://github.com/escalated-dev/escalated-locale"}
+    ],
     "require": {
         "php": "^8.2",
         "escalated-dev/escalated-laravel": "^1.0",
