@@ -5,7 +5,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.3",
-        "escalated-dev/escalated-laravel": "^1.2",
+        "escalated-dev/escalated-laravel": "^1.3.0",
         "escalated-dev/escalated-filament": "@dev",
         "fakerphp/faker": "^1.23",
         "filament/filament": "^4.0",
