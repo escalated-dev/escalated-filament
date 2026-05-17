@@ -3,7 +3,6 @@
 namespace Escalated\Filament\Resources\TicketResource\Pages;
 
 use Escalated\Filament\Resources\TicketResource;
-use Escalated\Laravel\Models\Ticket;
 use Filament\Resources\Pages\CreateRecord;
 
 class CreateTicket extends CreateRecord
@@ -12,11 +11,11 @@ class CreateTicket extends CreateRecord
 
     protected function mutateFormDataBeforeCreate(array $data): array
     {
-        $data['reference'] = Ticket::generateReference();
+        unset($data['reference']);
         $data['requester_type'] = get_class(auth()->user());
         $data['requester_id'] = auth()->id();
         $data['status'] = 'open';
-        $data['channel'] = 'admin';
+        $data['channel'] = 'web';
 
         return $data;
     }

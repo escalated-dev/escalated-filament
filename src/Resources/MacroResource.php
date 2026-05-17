@@ -99,14 +99,14 @@ class MacroResource extends Resource
                                     ->visible(fn (Get $get) => $get('type') === 'tags')
                                     ->required(fn (Get $get) => $get('type') === 'tags'),
 
-                                Forms\Components\RichEditor::make('value')
+                                Forms\Components\RichEditor::make('message')
                                     ->label(__('escalated-filament::filament.resources.macro.field_message'))
                                     ->visible(fn (Get $get) => in_array($get('type'), ['reply', 'note']))
                                     ->required(fn (Get $get) => in_array($get('type'), ['reply', 'note'])),
                             ])
                             ->columns(2)
                             ->addActionLabel(__('escalated-filament::filament.resources.macro.add_action'))
-                            ->defaultItems(1)
+                            ->defaultItems(0)
                             ->columnSpanFull(),
                     ]),
             ]);

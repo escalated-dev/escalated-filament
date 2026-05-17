@@ -129,12 +129,11 @@ it('can create an SLA policy', function () {
 });
 
 it('requires a name when creating SLA policy', function () {
-    livewire(CreateSlaPolicy::class)
+    $lw = livewire(CreateSlaPolicy::class)
         ->fillForm([
             'name' => '',
-        ])
-        ->call('create')
-        ->assertHasFormErrors(['name' => 'required']);
+        ]);
+    assertFilamentFormValidates($lw, ['name']);
 });
 
 // --- Edit Page ---

@@ -109,6 +109,11 @@ abstract class TestCase extends Orchestra
             $migrationPath = dirname(__DIR__).'/../escalated-laravel/database/migrations';
         }
         $this->loadMigrationsFrom($migrationPath);
+
+        $postMigrationPath = __DIR__.'/database/migrations-post';
+        if (is_dir($postMigrationPath)) {
+            $this->loadMigrationsFrom($postMigrationPath);
+        }
     }
 
     /**

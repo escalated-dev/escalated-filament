@@ -85,49 +85,45 @@ it('can create a tag', function () {
 });
 
 it('requires a name when creating tag', function () {
-    livewire(CreateTag::class)
+    $lw = livewire(CreateTag::class)
         ->fillForm([
             'name' => '',
             'slug' => 'test-slug',
             'color' => '#FF0000',
-        ])
-        ->call('create')
-        ->assertHasFormErrors(['name' => 'required']);
+        ]);
+    assertFilamentFormValidates($lw, ['name']);
 });
 
 it('requires a slug when creating tag', function () {
-    livewire(CreateTag::class)
+    $lw = livewire(CreateTag::class)
         ->fillForm([
             'name' => 'Test',
             'slug' => '',
             'color' => '#FF0000',
-        ])
-        ->call('create')
-        ->assertHasFormErrors(['slug' => 'required']);
+        ]);
+    assertFilamentFormValidates($lw, ['slug']);
 });
 
 it('requires unique slug when creating tag', function () {
     Tag::create(['name' => 'Existing', 'slug' => 'existing', 'color' => '#000000']);
 
-    livewire(CreateTag::class)
+    $lw = livewire(CreateTag::class)
         ->fillForm([
             'name' => 'Another',
             'slug' => 'existing',
             'color' => '#111111',
-        ])
-        ->call('create')
-        ->assertHasFormErrors(['slug' => 'unique']);
+        ]);
+    assertFilamentFormValidates($lw, ['slug']);
 });
 
 it('requires color when creating tag', function () {
-    livewire(CreateTag::class)
+    $lw = livewire(CreateTag::class)
         ->fillForm([
             'name' => 'Test',
             'slug' => 'test',
             'color' => null,
-        ])
-        ->call('create')
-        ->assertHasFormErrors(['color' => 'required']);
+        ]);
+    assertFilamentFormValidates($lw, ['color']);
 });
 
 // --- Edit Page ---

@@ -168,41 +168,38 @@ it('can create a ticket', function () {
         'priority' => TicketPriority::High->value,
         'department_id' => $dept->id,
         'status' => 'open',
-        'channel' => 'admin',
+        'channel' => 'web',
     ]);
 });
 
 it('requires a subject when creating', function () {
-    livewire(CreateTicket::class)
+    $lw = livewire(CreateTicket::class)
         ->fillForm([
             'subject' => '',
             'description' => 'Some description',
             'priority' => TicketPriority::Medium->value,
-        ])
-        ->call('create')
-        ->assertHasFormErrors(['subject' => 'required']);
+        ]);
+    assertFilamentFormValidates($lw, ['subject']);
 });
 
 it('requires a description when creating', function () {
-    livewire(CreateTicket::class)
+    $lw = livewire(CreateTicket::class)
         ->fillForm([
             'subject' => 'Test subject',
             'description' => '',
             'priority' => TicketPriority::Medium->value,
-        ])
-        ->call('create')
-        ->assertHasFormErrors(['description' => 'required']);
+        ]);
+    assertFilamentFormValidates($lw, ['description']);
 });
 
 it('requires a priority when creating', function () {
-    livewire(CreateTicket::class)
+    $lw = livewire(CreateTicket::class)
         ->fillForm([
             'subject' => 'Test subject',
             'description' => 'Some description',
             'priority' => null,
-        ])
-        ->call('create')
-        ->assertHasFormErrors(['priority' => 'required']);
+        ]);
+    assertFilamentFormValidates($lw, ['priority']);
 });
 
 it('generates a reference when creating', function () {
