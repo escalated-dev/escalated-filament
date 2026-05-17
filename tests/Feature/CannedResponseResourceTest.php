@@ -102,23 +102,21 @@ it('can create a canned response', function () {
 });
 
 it('requires a title when creating canned response', function () {
-    livewire(CreateCannedResponse::class)
+    $lw = livewire(CreateCannedResponse::class)
         ->fillForm([
             'title' => '',
             'body' => '<p>Some body</p>',
-        ])
-        ->call('create')
-        ->assertHasFormErrors(['title' => 'required']);
+        ]);
+    assertFilamentFormValidates($lw, ['title']);
 });
 
 it('requires body when creating canned response', function () {
-    livewire(CreateCannedResponse::class)
+    $lw = livewire(CreateCannedResponse::class)
         ->fillForm([
             'title' => 'Test',
             'body' => '',
-        ])
-        ->call('create')
-        ->assertHasFormErrors(['body' => 'required']);
+        ]);
+    assertFilamentFormValidates($lw, ['body']);
 });
 
 // --- Edit Page ---

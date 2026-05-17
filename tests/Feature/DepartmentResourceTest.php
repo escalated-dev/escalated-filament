@@ -103,23 +103,21 @@ it('can create a department', function () {
 });
 
 it('requires name when creating department', function () {
-    livewire(CreateDepartment::class)
+    $lw = livewire(CreateDepartment::class)
         ->fillForm([
             'name' => '',
             'slug' => 'test-slug',
-        ])
-        ->call('create')
-        ->assertHasFormErrors(['name' => 'required']);
+        ]);
+    assertFilamentFormValidates($lw, ['name']);
 });
 
 it('requires slug when creating department', function () {
-    livewire(CreateDepartment::class)
+    $lw = livewire(CreateDepartment::class)
         ->fillForm([
             'name' => 'Test Name',
             'slug' => '',
-        ])
-        ->call('create')
-        ->assertHasFormErrors(['slug' => 'required']);
+        ]);
+    assertFilamentFormValidates($lw, ['slug']);
 });
 
 it('requires unique slug when creating department', function () {
@@ -129,13 +127,12 @@ it('requires unique slug when creating department', function () {
         'is_active' => true,
     ]);
 
-    livewire(CreateDepartment::class)
+    $lw = livewire(CreateDepartment::class)
         ->fillForm([
             'name' => 'Another',
             'slug' => 'existing-slug',
-        ])
-        ->call('create')
-        ->assertHasFormErrors(['slug' => 'unique']);
+        ]);
+    assertFilamentFormValidates($lw, ['slug']);
 });
 
 // --- Edit Page ---

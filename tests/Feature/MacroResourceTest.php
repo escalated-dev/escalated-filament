@@ -133,12 +133,11 @@ it('can create a macro', function () {
 });
 
 it('requires a name when creating macro', function () {
-    livewire(CreateMacro::class)
+    $lw = livewire(CreateMacro::class)
         ->fillForm([
             'name' => '',
-        ])
-        ->call('create')
-        ->assertHasFormErrors(['name' => 'required']);
+        ]);
+    assertFilamentFormValidates($lw, ['name']);
 });
 
 // --- Edit Page ---

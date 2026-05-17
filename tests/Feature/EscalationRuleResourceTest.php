@@ -100,13 +100,12 @@ it('can create an escalation rule', function () {
 });
 
 it('requires a name when creating', function () {
-    livewire(CreateEscalationRule::class)
+    $lw = livewire(CreateEscalationRule::class)
         ->fillForm([
             'name' => '',
             'trigger_type' => 'automatic',
-        ])
-        ->call('create')
-        ->assertHasFormErrors(['name' => 'required']);
+        ]);
+    assertFilamentFormValidates($lw, ['name']);
 });
 
 // --- Edit Page ---
@@ -119,12 +118,22 @@ it('can render the edit page', function () {
 });
 
 it('can update an escalation rule', function () {
-    $rule = EscalationRule::factory()->create(['name' => 'Old Rule']);
+    $rule = EscalationRule::factory()->create([
+        'name' => 'Old Rule',
+        'trigger_type' => 'automatic',
+        'conditions' => [],
+        'actions' => [],
+    ]);
 
     livewire(EditEscalationRule::class, ['record' => $rule->id])
         ->fillForm([
             'name' => 'Updated Rule',
+            'description' => $rule->description,
+            'trigger_type' => 'automatic',
+            'order' => $rule->order,
             'is_active' => false,
+            'conditions' => [],
+            'actions' => [],
         ])
         ->call('save')
         ->assertHasNoFormErrors();
