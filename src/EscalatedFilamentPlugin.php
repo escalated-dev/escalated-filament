@@ -19,6 +19,9 @@ use Escalated\Filament\Resources\CustomFieldResource;
 use Escalated\Filament\Resources\DepartmentResource;
 use Escalated\Filament\Resources\EscalationRuleResource;
 use Escalated\Filament\Resources\MacroResource;
+use Escalated\Filament\Resources\NewsletterListResource;
+use Escalated\Filament\Resources\NewsletterResource;
+use Escalated\Filament\Resources\NewsletterTemplateResource;
 use Escalated\Filament\Resources\RoleResource;
 use Escalated\Filament\Resources\SkillResource;
 use Escalated\Filament\Resources\SlaPolicyResource;
@@ -56,6 +59,9 @@ class EscalatedFilamentPlugin implements Plugin
         ArticleResource::class,
         ArticleCategoryResource::class,
         AuditLogResource::class,
+        NewsletterResource::class,
+        NewsletterListResource::class,
+        NewsletterTemplateResource::class,
     ];
 
     public static function make(): static
@@ -118,27 +124,37 @@ class EscalatedFilamentPlugin implements Plugin
             return;
         }
 
+        $resources = [
+            TicketResource::class,
+            DepartmentResource::class,
+            TagResource::class,
+            SlaPolicyResource::class,
+            EscalationRuleResource::class,
+            CannedResponseResource::class,
+            MacroResource::class,
+            ApiTokenResource::class,
+            AutomationResource::class,
+            WebhookResource::class,
+            RoleResource::class,
+            TicketStatusResource::class,
+            SkillResource::class,
+            CustomFieldResource::class,
+            BusinessScheduleResource::class,
+            ArticleResource::class,
+            ArticleCategoryResource::class,
+            AuditLogResource::class,
+        ];
+
+        // Newsletter resources are registered unconditionally so navigation
+        // gating (shouldRegisterNavigation) can reflect runtime config flips.
+        // The Resources themselves hide their nav entries when the feature
+        // flag is off.
+        $resources[] = NewsletterResource::class;
+        $resources[] = NewsletterListResource::class;
+        $resources[] = NewsletterTemplateResource::class;
+
         $panel
-            ->resources([
-                TicketResource::class,
-                DepartmentResource::class,
-                TagResource::class,
-                SlaPolicyResource::class,
-                EscalationRuleResource::class,
-                CannedResponseResource::class,
-                MacroResource::class,
-                ApiTokenResource::class,
-                AutomationResource::class,
-                WebhookResource::class,
-                RoleResource::class,
-                TicketStatusResource::class,
-                SkillResource::class,
-                CustomFieldResource::class,
-                BusinessScheduleResource::class,
-                ArticleResource::class,
-                ArticleCategoryResource::class,
-                AuditLogResource::class,
-            ])
+            ->resources($resources)
             ->pages([
                 Dashboard::class,
                 Reports::class,
