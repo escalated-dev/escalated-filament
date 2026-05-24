@@ -63,6 +63,7 @@ class NewsletterListResource extends Resource
                             return ['rules' => []];
                         }
                     }
+
                     return $state;
                 }),
         ]);
