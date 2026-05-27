@@ -72,6 +72,7 @@ class Settings extends Page implements HasForms
                             ->label(__('escalated-filament::filament.pages.settings.ticket_reference_prefix'))
                             ->helperText(__('escalated-filament::filament.pages.settings.ticket_reference_prefix_helper'))
                             ->required()
+                            ->regex('/^[^-]*$/')
                             ->maxLength(10),
 
                         Forms\Components\Toggle::make('guest_tickets_enabled')
