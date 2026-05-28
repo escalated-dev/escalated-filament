@@ -250,6 +250,24 @@ it('displays ticket information on view page', function () {
         ->assertSuccessful();
 });
 
+it('can render the view page when ticket actions config is empty', function () {
+    config(['escalated.ticket_actions' => []]);
+
+    $ticket = Ticket::factory()->create();
+
+    livewire(ViewTicket::class, ['record' => $ticket->getRouteKey()])
+        ->assertSuccessful();
+});
+
+it('can render the view page when ticket actions config is not present', function () {
+    config()->offsetUnset('escalated.ticket_actions');
+
+    $ticket = Ticket::factory()->create();
+
+    livewire(ViewTicket::class, ['record' => $ticket->getRouteKey()])
+        ->assertSuccessful();
+});
+
 // --- Resource Configuration ---
 
 it('uses Ticket as the model', function () {

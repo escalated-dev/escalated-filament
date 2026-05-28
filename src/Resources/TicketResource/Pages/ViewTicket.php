@@ -8,12 +8,14 @@ use Escalated\Filament\Resources\TicketResource;
 use Escalated\Laravel\Enums\TicketPriority;
 use Escalated\Laravel\Enums\TicketStatus;
 use Escalated\Laravel\Escalated;
+use Escalated\Laravel\Events\TicketCustomActionTriggered;
 use Escalated\Laravel\Models\Macro;
 use Escalated\Laravel\Models\Ticket;
 use Escalated\Laravel\Services\AssignmentService;
 use Escalated\Laravel\Services\MacroService;
 use Escalated\Laravel\Services\TicketService;
 use Filament\Actions;
+use Filament\Actions\ActionGroup;
 use Filament\Forms;
 use Filament\Forms\Components\Section;
 use Filament\Infolists;
@@ -386,6 +388,31 @@ class ViewTicket extends ViewRecord
                         ->send();
                 })
                 ->visible(fn () => in_array($this->record->status, [TicketStatus::Resolved, TicketStatus::Closed])),
+
+            $this->generateCustomActionsGroup(),
+
         ];
+    }
+
+    protected function generateCustomActionsGroup(): ActionGroup
+    {
+
+        $actions = [];
+
+        foreach (config('escalated.ticket_actions.actions') ?? [] as $key => $action) {
+            $actions[] = Actions\Action::make('triggerCustomAction' . $key)
+                ->label($action['label'] ?? "Custom Action {$key}")
+                ->action(fn () => TicketCustomActionTriggered::dispatch(
+                    $this->record,
+                    $action['key'],
+                    auth()->user(),
+                    $action['metadata'] ?? []
+                ));
+        }
+
+        return ActionGroup::make($actions)
+            ->visible(fn () => ! empty(config('escalated.ticket_actions.actions')))
+            ->label('Custom Actions');
+
     }
 }
