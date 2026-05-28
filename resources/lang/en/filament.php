@@ -9,6 +9,9 @@ return [
     */
 
     'actions' => [
+        'custom_action' => [
+            'dispatched' => 'Custom action dispatched.',
+        ],
         'apply_macro' => [
             'label' => 'Apply Macro',
             'macro_field' => 'Macro',
