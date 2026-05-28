@@ -112,6 +112,7 @@ You're live. Visit your Filament panel — a **Support** navigation group will a
   - Bulk actions: Assign, Change Status, Change Priority, Add Tags, Close, Delete
   - View page with conversation thread, sidebar details, SLA info, satisfaction rating
   - Header actions: Reply, Note, Assign, Status, Priority, Follow, Macro, Resolve, Close, Reopen
+  - Custom ticket actions: host-defined buttons registered via the core package's `ticket_actions` config appear automatically as header actions (dispatching `TicketCustomActionTriggered`)
 - **DepartmentResource** — CRUD for support departments with agent assignment
 - **TagResource** — CRUD for ticket tags with color picker
 - **SlaPolicyResource** — SLA policy management with per-priority response/resolution times

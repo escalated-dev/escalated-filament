@@ -8,10 +8,12 @@ use Escalated\Filament\Resources\TicketResource;
 use Escalated\Laravel\Enums\TicketPriority;
 use Escalated\Laravel\Enums\TicketStatus;
 use Escalated\Laravel\Escalated;
+use Escalated\Laravel\Events\TicketCustomActionTriggered;
 use Escalated\Laravel\Models\Macro;
 use Escalated\Laravel\Models\Ticket;
 use Escalated\Laravel\Services\AssignmentService;
 use Escalated\Laravel\Services\MacroService;
+use Escalated\Laravel\Services\TicketActionRegistry;
 use Escalated\Laravel\Services\TicketService;
 use Filament\Actions;
 use Filament\Forms;
@@ -386,6 +388,56 @@ class ViewTicket extends ViewRecord
                         ->send();
                 })
                 ->visible(fn () => in_array($this->record->status, [TicketStatus::Resolved, TicketStatus::Closed])),
+
+            ...$this->customTicketActions(),
         ];
+    }
+
+    /**
+     * Host-defined custom ticket actions, surfaced from the Escalated
+     * TicketActionRegistry. Each visible action becomes a header button that
+     * dispatches the TicketCustomActionTriggered event. Guarded with
+     * class_exists so it no-ops on Escalated versions without the feature.
+     *
+     * @return array<int, Actions\Action>
+     */
+    protected function customTicketActions(): array
+    {
+        if (! class_exists(TicketActionRegistry::class)) {
+            return [];
+        }
+
+        return collect(app(TicketActionRegistry::class)->forTicket($this->record, auth()->user()))
+            ->map(function (array $action): Actions\Action {
+                $item = Actions\Action::make('custom_'.$action['key'])
+                    ->label($action['label'])
+                    ->color(match ($action['variant'] ?? 'secondary') {
+                        'primary' => 'primary',
+                        'danger' => 'danger',
+                        default => 'gray',
+                    })
+                    ->disabled((bool) ($action['disabled'] ?? false))
+                    ->action(function () use ($action): void {
+                        TicketCustomActionTriggered::dispatch(
+                            $this->record,
+                            $action['key'],
+                            auth()->user(),
+                            [],
+                            $action['metadata'] ?? [],
+                        );
+
+                        Notification::make()
+                            ->title(__('escalated-filament::filament.actions.custom_action.dispatched'))
+                            ->success()
+                            ->send();
+                    });
+
+                if (! empty($action['confirmation'])) {
+                    $item->requiresConfirmation()->modalDescription($action['confirmation']);
+                }
+
+                return $item;
+            })
+            ->all();
     }
 }
