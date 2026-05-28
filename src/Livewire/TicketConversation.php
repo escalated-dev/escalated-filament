@@ -9,8 +9,8 @@ use Escalated\Laravel\Services\TicketService;
 use Filament\Forms;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
-use Filament\Forms\Form;
 use Filament\Notifications\Notification;
+use Filament\Schemas\Schema;
 use Livewire\Component;
 
 class TicketConversation extends Component implements HasForms
@@ -53,7 +53,7 @@ class TicketConversation extends Component implements HasForms
             ->get();
     }
 
-    public function form(Form $form): Form
+    public function form(Schema $form): Schema
     {
         return $form
             ->schema([

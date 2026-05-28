@@ -12,6 +12,7 @@ use Escalated\Laravel\Models\Tag;
 use Escalated\Laravel\Models\Ticket;
 use Escalated\Laravel\Services\AssignmentService;
 use Escalated\Laravel\Services\TicketService;
+use Filament\Actions;
 use Filament\Forms;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
@@ -233,12 +234,12 @@ class TicketResource extends Resource
                         false: fn ($query) => $query->whereNotNull('assigned_to'),
                     ),
             ])
-            ->actions([
-                Tables\Actions\ViewAction::make(),
-                Tables\Actions\Action::make('assign')
+            ->recordActions([
+                Actions\ViewAction::make(),
+                Actions\Action::make('assign')
                     ->icon('heroicon-o-user-plus')
                     ->color('primary')
-                    ->form([
+                    ->schema([
                         Forms\Components\Select::make('agent_id')
                             ->label(__('escalated-filament::filament.actions.assign_ticket.agent_field'))
                             ->relationship('assignee', Escalated::userDisplayColumn())
@@ -250,10 +251,10 @@ class TicketResource extends Resource
                             ->assign($record, $data['agent_id'], auth()->user());
                     })
                     ->visible(fn (Ticket $record) => $record->isOpen()),
-                Tables\Actions\Action::make('changeStatus')
+                Actions\Action::make('changeStatus')
                     ->icon('heroicon-o-arrow-path')
                     ->color('warning')
-                    ->form([
+                    ->schema([
                         Forms\Components\Select::make('status')
                             ->options(collect(TicketStatus::cases())->mapWithKeys(
                                 fn (TicketStatus $s) => [$s->value => $s->label()]
@@ -265,12 +266,12 @@ class TicketResource extends Resource
                             ->changeStatus($record, TicketStatus::from($data['status']), auth()->user());
                     }),
             ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\BulkAction::make('assignBulk')
+            ->toolbarActions([
+                Actions\BulkActionGroup::make([
+                    Actions\BulkAction::make('assignBulk')
                         ->label(__('escalated-filament::filament.resources.ticket.bulk_assign_agent'))
                         ->icon('heroicon-o-user-plus')
-                        ->form([
+                        ->schema([
                             Forms\Components\Select::make('agent_id')
                                 ->label(__('escalated-filament::filament.actions.assign_ticket.agent_field'))
                                 ->options(fn () => Escalated::userOptions())
@@ -285,10 +286,10 @@ class TicketResource extends Resource
                         })
                         ->deselectRecordsAfterCompletion(),
 
-                    Tables\Actions\BulkAction::make('changeStatusBulk')
+                    Actions\BulkAction::make('changeStatusBulk')
                         ->label(__('escalated-filament::filament.resources.ticket.bulk_change_status'))
                         ->icon('heroicon-o-arrow-path')
-                        ->form([
+                        ->schema([
                             Forms\Components\Select::make('status')
                                 ->options(collect(TicketStatus::cases())->mapWithKeys(
                                     fn (TicketStatus $s) => [$s->value => $s->label()]
@@ -303,10 +304,10 @@ class TicketResource extends Resource
                         })
                         ->deselectRecordsAfterCompletion(),
 
-                    Tables\Actions\BulkAction::make('changePriorityBulk')
+                    Actions\BulkAction::make('changePriorityBulk')
                         ->label(__('escalated-filament::filament.resources.ticket.bulk_change_priority'))
                         ->icon('heroicon-o-flag')
-                        ->form([
+                        ->schema([
                             Forms\Components\Select::make('priority')
                                 ->options(collect(TicketPriority::cases())->mapWithKeys(
                                     fn (TicketPriority $p) => [$p->value => $p->label()]
@@ -321,10 +322,10 @@ class TicketResource extends Resource
                         })
                         ->deselectRecordsAfterCompletion(),
 
-                    Tables\Actions\BulkAction::make('addTagsBulk')
+                    Actions\BulkAction::make('addTagsBulk')
                         ->label(__('escalated-filament::filament.resources.ticket.bulk_add_tags'))
                         ->icon('heroicon-o-tag')
-                        ->form([
+                        ->schema([
                             Forms\Components\Select::make('tags')
                                 ->options(Tag::pluck('name', 'id'))
                                 ->multiple()
@@ -338,7 +339,7 @@ class TicketResource extends Resource
                         })
                         ->deselectRecordsAfterCompletion(),
 
-                    Tables\Actions\BulkAction::make('closeBulk')
+                    Actions\BulkAction::make('closeBulk')
                         ->label(__('escalated-filament::filament.resources.ticket.bulk_close'))
                         ->icon('heroicon-o-x-circle')
                         ->color('danger')
@@ -351,7 +352,7 @@ class TicketResource extends Resource
                         })
                         ->deselectRecordsAfterCompletion(),
 
-                    Tables\Actions\DeleteBulkAction::make(),
+                    Actions\DeleteBulkAction::make(),
                 ]),
             ]);
     }

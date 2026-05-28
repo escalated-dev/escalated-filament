@@ -10,8 +10,8 @@ use Escalated\Laravel\Models\Ticket;
 use Filament\Forms;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
-use Filament\Forms\Form;
 use Filament\Pages\Page;
+use Filament\Schemas\Schema;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 
@@ -60,7 +60,7 @@ class Reports extends Page implements HasForms
         $this->date_to = now()->toDateString();
     }
 
-    public function form(Form $form): Form
+    public function form(Schema $form): Schema
     {
         return $form
             ->schema([

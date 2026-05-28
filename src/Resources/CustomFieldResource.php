@@ -5,8 +5,10 @@ namespace Escalated\Filament\Resources;
 use Escalated\Filament\EscalatedFilamentPlugin;
 use Escalated\Filament\Resources\CustomFieldResource\Pages;
 use Escalated\Laravel\Models\CustomField;
+use Filament\Actions;
 use Filament\Forms;
 use Filament\Resources\Resource;
+use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
 use Filament\Tables;
@@ -60,7 +62,7 @@ class CustomFieldResource extends Resource
 
                         Forms\Components\TextInput::make('options')
                             ->label('Options (JSON)')
-                            ->visible(fn (Forms\Get $get): bool => $get('type') === 'select')
+                            ->visible(fn (Get $get): bool => $get('type') === 'select')
                             ->helperText('Enter options as JSON array, e.g. ["option1","option2"]'),
 
                         Forms\Components\Toggle::make('required')
@@ -104,13 +106,13 @@ class CustomFieldResource extends Resource
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+            ->recordActions([
+                Actions\EditAction::make(),
+                Actions\DeleteAction::make(),
             ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+            ->toolbarActions([
+                Actions\BulkActionGroup::make([
+                    Actions\DeleteBulkAction::make(),
                 ]),
             ]);
     }

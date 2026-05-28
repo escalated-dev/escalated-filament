@@ -5,9 +5,9 @@ namespace Escalated\Filament\Actions;
 use Escalated\Laravel\Enums\TicketStatus;
 use Escalated\Laravel\Models\Ticket;
 use Escalated\Laravel\Services\TicketService;
+use Filament\Actions\Action;
 use Filament\Forms;
 use Filament\Notifications\Notification;
-use Filament\Tables\Actions\Action;
 
 class ChangeStatusAction extends Action
 {
@@ -24,7 +24,7 @@ class ChangeStatusAction extends Action
             ->label(__('escalated-filament::filament.actions.change_status.label'))
             ->icon('heroicon-o-arrow-path')
             ->color('warning')
-            ->form([
+            ->schema([
                 Forms\Components\Select::make('status')
                     ->label(__('escalated-filament::filament.actions.change_status.new_status_field'))
                     ->options(collect(TicketStatus::cases())->mapWithKeys(

@@ -6,7 +6,7 @@ use Escalated\Filament\Actions\ChangePriorityAction;
 use Escalated\Filament\Actions\ChangeStatusAction;
 use Escalated\Filament\Actions\FollowTicketAction;
 use Escalated\Filament\Actions\PinReplyAction;
-use Filament\Tables\Actions\Action;
+use Filament\Actions\Action;
 
 it('AssignTicketAction has correct default name', function () {
     expect(AssignTicketAction::getDefaultName())->toBe('assignTicket');
