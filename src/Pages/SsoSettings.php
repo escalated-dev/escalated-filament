@@ -7,9 +7,9 @@ use Escalated\Laravel\Models\EscalatedSettings;
 use Filament\Forms;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
-use Filament\Schemas\Components\Utilities\Get;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
+use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Schema;
 
 class SsoSettings extends Page implements HasForms

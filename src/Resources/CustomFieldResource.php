@@ -15,7 +15,6 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Support\Str;
 
-
 class CustomFieldResource extends Resource
 {
     protected static ?string $model = CustomField::class;
