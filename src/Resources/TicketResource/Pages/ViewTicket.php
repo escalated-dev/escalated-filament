@@ -400,7 +400,7 @@ class ViewTicket extends ViewRecord
         $actions = [];
 
         foreach (config('escalated.ticket_actions.actions') ?? [] as $key => $action) {
-            $actions[] = Actions\Action::make('triggerCustomAction' . $key)
+            $actions[] = Actions\Action::make('triggerCustomAction'.$key)
                 ->label($action['label'] ?? "Custom Action {$key}")
                 ->action(fn () => TicketCustomActionTriggered::dispatch(
                     $this->record,
