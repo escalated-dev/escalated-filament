@@ -10,10 +10,11 @@ use Escalated\Laravel\Escalated;
 use Escalated\Laravel\Models\Department;
 use Escalated\Laravel\Models\Macro;
 use Escalated\Laravel\Models\Tag;
+use Filament\Actions;
 use Filament\Forms;
-use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Schemas\Components\Utilities\Get;
+use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
 
@@ -33,7 +34,7 @@ class MacroResource extends Resource
         return app(EscalatedFilamentPlugin::class)->getNavigationGroup();
     }
 
-    public static function form(Form $form): Form
+    public static function form(Schema $form): Schema
     {
         return $form
             ->schema([
@@ -153,13 +154,13 @@ class MacroResource extends Resource
                 Tables\Filters\TernaryFilter::make('is_shared')
                     ->label(__('escalated-filament::filament.resources.macro.filter_shared')),
             ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+            ->recordActions([
+                Actions\EditAction::make(),
+                Actions\DeleteAction::make(),
             ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+            ->toolbarActions([
+                Actions\BulkActionGroup::make([
+                    Actions\DeleteBulkAction::make(),
                 ]),
             ]);
     }

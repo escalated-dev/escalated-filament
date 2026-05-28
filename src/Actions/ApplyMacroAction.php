@@ -5,9 +5,9 @@ namespace Escalated\Filament\Actions;
 use Escalated\Laravel\Models\Macro;
 use Escalated\Laravel\Models\Ticket;
 use Escalated\Laravel\Services\MacroService;
+use Filament\Actions\Action;
 use Filament\Forms;
 use Filament\Notifications\Notification;
-use Filament\Tables\Actions\Action;
 
 class ApplyMacroAction extends Action
 {
@@ -24,7 +24,7 @@ class ApplyMacroAction extends Action
             ->label(__('escalated-filament::filament.actions.apply_macro.label'))
             ->icon('heroicon-o-bolt')
             ->color('purple')
-            ->form([
+            ->schema([
                 Forms\Components\Select::make('macro_id')
                     ->label(__('escalated-filament::filament.actions.apply_macro.macro_field'))
                     ->options(

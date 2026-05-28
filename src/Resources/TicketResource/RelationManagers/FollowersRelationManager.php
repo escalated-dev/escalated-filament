@@ -3,9 +3,10 @@
 namespace Escalated\Filament\Resources\TicketResource\RelationManagers;
 
 use Escalated\Laravel\Escalated;
+use Filament\Actions;
 use Filament\Forms;
-use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
+use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
@@ -24,7 +25,7 @@ class FollowersRelationManager extends RelationManager
         return __('escalated-filament::filament.resources.followers.title');
     }
 
-    public function form(Form $form): Form
+    public function form(Schema $form): Schema
     {
         return $form
             ->schema([
@@ -50,10 +51,10 @@ class FollowersRelationManager extends RelationManager
                     ->dateTime(),
             ])
             ->headerActions([
-                Tables\Actions\Action::make('addFollower')
+                Actions\Action::make('addFollower')
                     ->label(__('escalated-filament::filament.resources.followers.action_add_follower'))
                     ->icon('heroicon-o-user-plus')
-                    ->form([
+                    ->schema([
                         Forms\Components\Select::make('user_id')
                             ->label(__('escalated-filament::filament.resources.followers.field_user'))
                             ->options(fn () => app(Escalated::userModel())::pluck('name', 'id'))
@@ -64,8 +65,8 @@ class FollowersRelationManager extends RelationManager
                         $this->getOwnerRecord()->follow($data['user_id']);
                     }),
             ])
-            ->actions([
-                Tables\Actions\Action::make('remove')
+            ->recordActions([
+                Actions\Action::make('remove')
                     ->label(__('escalated-filament::filament.resources.followers.action_remove'))
                     ->icon('heroicon-o-x-mark')
                     ->color('danger')

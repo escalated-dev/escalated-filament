@@ -5,9 +5,9 @@ namespace Escalated\Filament\Actions;
 use Escalated\Laravel\Escalated;
 use Escalated\Laravel\Models\Ticket;
 use Escalated\Laravel\Services\AssignmentService;
+use Filament\Actions\Action;
 use Filament\Forms;
 use Filament\Notifications\Notification;
-use Filament\Tables\Actions\Action;
 
 class AssignTicketAction extends Action
 {
@@ -24,7 +24,7 @@ class AssignTicketAction extends Action
             ->label(__('escalated-filament::filament.actions.assign_ticket.label'))
             ->icon('heroicon-o-user-plus')
             ->color('primary')
-            ->form([
+            ->schema([
                 Forms\Components\Select::make('agent_id')
                     ->label(__('escalated-filament::filament.actions.assign_ticket.agent_field'))
                     ->options(fn () => app(Escalated::userModel())::pluck('name', 'id'))

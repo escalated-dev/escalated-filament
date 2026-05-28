@@ -6,6 +6,7 @@ use Escalated\Filament\Resources\TicketResource;
 use Escalated\Laravel\Enums\TicketPriority;
 use Escalated\Laravel\Enums\TicketStatus;
 use Escalated\Laravel\Models\Ticket;
+use Filament\Actions;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Filament\Widgets\TableWidget as BaseWidget;
@@ -69,8 +70,8 @@ class RecentTicketsWidget extends BaseWidget
                     ->label(__('escalated-filament::filament.widgets.recent_tickets.column_created'))
                     ->since(),
             ])
-            ->actions([
-                Tables\Actions\Action::make('view')
+            ->recordActions([
+                Actions\Action::make('view')
                     ->icon('heroicon-o-eye')
                     ->url(fn (Ticket $record) => TicketResource::getUrl('view', ['record' => $record])),
             ])

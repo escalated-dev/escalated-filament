@@ -6,6 +6,7 @@ use Escalated\Filament\EscalatedFilamentPlugin;
 use Escalated\Filament\Resources\DepartmentResource\Pages;
 use Escalated\Laravel\Escalated;
 use Escalated\Laravel\Models\Department;
+use Filament\Actions;
 use Filament\Forms;
 use Filament\Resources\Resource;
 use Filament\Schemas\Components\Utilities\Set;
@@ -112,13 +113,13 @@ class DepartmentResource extends Resource
                 Tables\Filters\TernaryFilter::make('is_active')
                     ->label(__('escalated-filament::filament.resources.department.filter_active')),
             ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+            ->recordActions([
+                Actions\EditAction::make(),
+                Actions\DeleteAction::make(),
             ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+            ->toolbarActions([
+                Actions\BulkActionGroup::make([
+                    Actions\DeleteBulkAction::make(),
                 ]),
             ]);
     }

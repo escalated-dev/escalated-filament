@@ -5,7 +5,7 @@ namespace Escalated\Filament\Resources\ApiTokenResource\Pages;
 use Escalated\Filament\Resources\ApiTokenResource;
 use Escalated\Laravel\Escalated;
 use Escalated\Laravel\Models\ApiToken;
-use Filament\Notifications\Actions\Action;
+use Filament\Actions\Action;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\CreateRecord;
 use Illuminate\Database\Eloquent\Model;

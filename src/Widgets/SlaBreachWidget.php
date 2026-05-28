@@ -5,6 +5,7 @@ namespace Escalated\Filament\Widgets;
 use Escalated\Filament\Resources\TicketResource;
 use Escalated\Laravel\Enums\TicketPriority;
 use Escalated\Laravel\Models\Ticket;
+use Filament\Actions;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Filament\Widgets\TableWidget as BaseWidget;
@@ -75,8 +76,8 @@ class SlaBreachWidget extends BaseWidget
                     ->dateTime()
                     ->color('danger'),
             ])
-            ->actions([
-                Tables\Actions\Action::make('view')
+            ->recordActions([
+                Actions\Action::make('view')
                     ->icon('heroicon-o-eye')
                     ->url(fn (Ticket $record) => TicketResource::getUrl('view', ['record' => $record])),
             ])
