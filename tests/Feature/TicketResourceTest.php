@@ -7,6 +7,9 @@ use Escalated\Filament\Resources\TicketResource\Pages\ViewTicket;
 use Escalated\Filament\Resources\TicketResource\RelationManagers\ActivitiesRelationManager;
 use Escalated\Filament\Resources\TicketResource\RelationManagers\FollowersRelationManager;
 use Escalated\Filament\Resources\TicketResource\RelationManagers\RepliesRelationManager;
+use Escalated\Filament\Resources\TicketResource\RelationManagers\SubjectsRelationManager;
+use Escalated\Filament\Support\TicketSubjectTypeResolver;
+use Escalated\Filament\Tests\Models\FakeProject;
 use Escalated\Laravel\Enums\TicketPriority;
 use Escalated\Laravel\Enums\TicketStatus;
 use Escalated\Laravel\Models\Department;
@@ -268,11 +271,24 @@ it('has correct record title attribute', function () {
 });
 
 it('registers relation managers', function () {
+    config(['escalated.ticket_subjects.types' => []]);
+
     $relations = TicketResource::getRelations();
 
     expect($relations)->toContain(RepliesRelationManager::class)
         ->and($relations)->toContain(ActivitiesRelationManager::class)
-        ->and($relations)->toContain(FollowersRelationManager::class);
+        ->and($relations)->toContain(FollowersRelationManager::class)
+        ->and($relations)->not->toContain(SubjectsRelationManager::class);
+});
+
+it('registers subjects relation manager when ticket subjects are configured', function () {
+    if (! TicketSubjectTypeResolver::isAvailable()) {
+        $this->markTestSkipped('Requires escalated-laravel#122.');
+    }
+
+    config(['escalated.ticket_subjects.types' => [FakeProject::class]]);
+
+    expect(TicketResource::getRelations())->toContain(SubjectsRelationManager::class);
 });
 
 it('has index, create, and view pages', function () {
