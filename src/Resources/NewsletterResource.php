@@ -5,9 +5,12 @@ namespace Escalated\Filament\Resources;
 use Escalated\Filament\EscalatedFilamentPlugin;
 use Escalated\Filament\Resources\NewsletterResource\Pages;
 use Escalated\Laravel\Models\Newsletter\Newsletter;
+use Escalated\Laravel\Services\Newsletter\NewsletterDispatcherService;
+use Escalated\Laravel\Services\Newsletter\NewsletterPlannerService;
 use Filament\Forms;
-use Filament\Forms\Form;
+use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
+use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
 
@@ -32,9 +35,9 @@ class NewsletterResource extends Resource
         return (bool) config('escalated.enable_newsletters', false);
     }
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form->schema([
+        return $schema->schema([
             Forms\Components\Section::make('Newsletter')->schema([
                 Forms\Components\TextInput::make('subject')
                     ->required()
@@ -82,13 +85,15 @@ class NewsletterResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('subject')->searchable()->limit(60),
                 Tables\Columns\TextColumn::make('targetList.name')->label('List'),
-                Tables\Columns\TextColumn::make('status')->badge()->colors([
-                    'gray' => 'draft',
-                    'info' => fn ($state) => in_array($state, ['scheduled', 'sending'], true),
-                    'success' => 'sent',
-                    'warning' => 'paused',
-                    'danger' => 'failed',
-                ]),
+                Tables\Columns\TextColumn::make('status')
+                    ->badge()
+                    ->color(fn ($state): string => match ($state) {
+                        'scheduled', 'sending' => 'info',
+                        'sent' => 'success',
+                        'paused' => 'warning',
+                        'failed' => 'danger',
+                        default => 'gray',
+                    }),
                 Tables\Columns\TextColumn::make('scheduled_at')->dateTime()->sortable(),
                 Tables\Columns\TextColumn::make('sent_at')->dateTime()->sortable(),
                 Tables\Columns\TextColumn::make('summary_total')->label('Recipients'),
@@ -106,6 +111,10 @@ class NewsletterResource extends Resource
                 ]),
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
+                static::sendTableAction(),
+                static::scheduleTableAction(),
+                static::testSendTableAction(),
                 Tables\Actions\EditAction::make()
                     ->visible(fn ($record) => in_array($record->status, ['draft', 'scheduled'], true)),
                 Tables\Actions\DeleteAction::make()
@@ -119,7 +128,84 @@ class NewsletterResource extends Resource
         return [
             'index' => Pages\ListNewsletters::route('/'),
             'create' => Pages\CreateNewsletter::route('/create'),
+            'view' => Pages\ViewNewsletter::route('/{record}'),
             'edit' => Pages\EditNewsletter::route('/{record}/edit'),
         ];
+    }
+
+    public static function sendTableAction(): Tables\Actions\Action
+    {
+        return Tables\Actions\Action::make('send')
+            ->label('Send')
+            ->icon('heroicon-o-paper-airplane')
+            ->color('success')
+            ->requiresConfirmation()
+            ->visible(fn (Newsletter $record): bool => in_array($record->status, ['draft', 'scheduled'], true))
+            ->action(function (Newsletter $record): void {
+                static::sendNewsletterNow($record);
+            });
+    }
+
+    public static function scheduleTableAction(): Tables\Actions\Action
+    {
+        return Tables\Actions\Action::make('schedule')
+            ->label('Schedule')
+            ->icon('heroicon-o-clock')
+            ->color('info')
+            ->visible(fn (Newsletter $record): bool => in_array($record->status, ['draft', 'scheduled'], true))
+            ->schema([
+                Forms\Components\DateTimePicker::make('scheduled_at')
+                    ->label('Send at')
+                    ->required()
+                    ->native(false),
+            ])
+            ->action(function (Newsletter $record, array $data): void {
+                $record->update([
+                    'status' => 'scheduled',
+                    'scheduled_at' => $data['scheduled_at'],
+                ]);
+
+                Notification::make()
+                    ->title('Newsletter scheduled')
+                    ->success()
+                    ->send();
+            });
+    }
+
+    public static function testSendTableAction(): Tables\Actions\Action
+    {
+        return Tables\Actions\Action::make('testSend')
+            ->label('Test send')
+            ->icon('heroicon-o-envelope')
+            ->color('gray')
+            ->schema([
+                Forms\Components\TextInput::make('email')
+                    ->label('Recipient email')
+                    ->email()
+                    ->required()
+                    ->default(fn () => auth()->user()?->email),
+            ])
+            ->action(function (Newsletter $record, array $data): void {
+                app(\Escalated\Filament\Support\NewsletterOperations::class)
+                    ->sendTest($record, $data['email'], auth()->user()?->name);
+
+                Notification::make()
+                    ->title('Test newsletter sent')
+                    ->success()
+                    ->send();
+            });
+    }
+
+    public static function sendNewsletterNow(Newsletter $newsletter): void
+    {
+        $newsletter->update(['sent_by' => auth()->id()]);
+
+        app(NewsletterPlannerService::class)->plan($newsletter);
+        app(NewsletterDispatcherService::class)->dispatchBatch();
+
+        Notification::make()
+            ->title('Newsletter send started')
+            ->success()
+            ->send();
     }
 }

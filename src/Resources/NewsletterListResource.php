@@ -4,10 +4,11 @@ namespace Escalated\Filament\Resources;
 
 use Escalated\Filament\EscalatedFilamentPlugin;
 use Escalated\Filament\Resources\NewsletterListResource\Pages;
+use Escalated\Filament\Resources\NewsletterListResource\RelationManagers;
 use Escalated\Laravel\Models\Newsletter\NewsletterList;
 use Filament\Forms;
-use Filament\Forms\Form;
 use Filament\Resources\Resource;
+use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
 
@@ -36,9 +37,9 @@ class NewsletterListResource extends Resource
         return (bool) config('escalated.enable_newsletters', false);
     }
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form->schema([
+        return $schema->schema([
             Forms\Components\TextInput::make('name')
                 ->required()
                 ->maxLength(255),
@@ -83,6 +84,13 @@ class NewsletterListResource extends Resource
                 Tables\Actions\DeleteAction::make(),
             ])
             ->defaultSort('created_at', 'desc');
+    }
+
+    public static function getRelations(): array
+    {
+        return [
+            RelationManagers\MembersRelationManager::class,
+        ];
     }
 
     public static function getPages(): array
