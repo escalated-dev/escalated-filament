@@ -119,6 +119,9 @@ You're live. Visit your Filament panel — a **Support** navigation group will a
 - **EscalationRuleResource** — Condition/action builder for automatic escalation rules
 - **CannedResponseResource** — Pre-written response templates with categories
 - **MacroResource** — Multi-action automation macros with reorderable steps
+- **NewsletterResource** *(optional)* — Compose admin newsletters with Markdown body, target list, theme, and scheduled send. Hidden from the navigation when `escalated.enable_newsletters` is false.
+- **NewsletterListResource** *(optional)* — Manage static / dynamic recipient lists for newsletters.
+- **NewsletterTemplateResource** *(optional)* — Reusable Markdown templates with a theme and default subject.
 
 ### Dashboard Widgets
 
