@@ -5,6 +5,7 @@ namespace Escalated\Filament\Resources;
 use Escalated\Filament\EscalatedFilamentPlugin;
 use Escalated\Filament\Resources\TicketResource\Pages;
 use Escalated\Filament\Resources\TicketResource\RelationManagers;
+use Escalated\Filament\Support\TicketSubjectTypeResolver;
 use Escalated\Laravel\Enums\TicketPriority;
 use Escalated\Laravel\Enums\TicketStatus;
 use Escalated\Laravel\Escalated;
@@ -358,12 +359,18 @@ class TicketResource extends Resource
 
     public static function getRelations(): array
     {
-        return [
+        $relations = [
             RelationManagers\RepliesRelationManager::class,
             RelationManagers\SideConversationsRelationManager::class,
             RelationManagers\ActivitiesRelationManager::class,
             RelationManagers\FollowersRelationManager::class,
         ];
+
+        if (TicketSubjectTypeResolver::isConfigured()) {
+            $relations[] = RelationManagers\SubjectsRelationManager::class;
+        }
+
+        return $relations;
     }
 
     public static function getPages(): array
