@@ -76,7 +76,7 @@ class SlaPolicyResource extends Resource
                             ->suffix('hours')
                         )->all()
                     )
-                    ->columns(5),
+                    ->columns(3),
 
                 Forms\Components\Section::make(__('escalated-filament::filament.resources.sla_policy.section_resolution'))
                     ->description(__('escalated-filament::filament.resources.sla_policy.resolution_description'))
@@ -89,7 +89,7 @@ class SlaPolicyResource extends Resource
                             ->suffix('hours')
                         )->all()
                     )
-                    ->columns(5),
+                    ->columns(3),
             ]);
     }
 
