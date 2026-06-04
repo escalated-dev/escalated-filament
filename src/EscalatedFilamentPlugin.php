@@ -5,6 +5,7 @@ namespace Escalated\Filament;
 use Escalated\Filament\Pages\Dashboard;
 use Escalated\Filament\Pages\EmailSettings;
 use Escalated\Filament\Pages\ManagePlugins;
+use Escalated\Filament\Pages\NewsletterSettings;
 use Escalated\Filament\Pages\PublicTicketsSettings;
 use Escalated\Filament\Pages\Reports;
 use Escalated\Filament\Pages\Settings;
@@ -163,6 +164,7 @@ class EscalatedFilamentPlugin implements Plugin
                 PublicTicketsSettings::class,
                 SsoSettings::class,
                 EmailSettings::class,
+                NewsletterSettings::class,
                 ManagePlugins::class,
             ])
             ->livewireComponents([
