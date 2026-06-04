@@ -7,11 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.0] - 2026-06-04
+
 ### Added
+- **Newsletter admin panel.** Full Filament surface for the newsletter system, built on top of the base resources added in #30: `NewsletterResource` Send / Schedule / Test-send actions, a `ViewNewsletter` page, a `NewsletterSettings` page, a `MembersRelationManager` for list membership, and a `NewsletterOperations` support helper. Includes panel feature tests. (#39)
 - Direct dependency on `escalated-dev/locale ^0.1` (central translations package). Already pulled in transitively via `escalated-laravel`, but pinned explicitly for clarity since Filament is a parallel admin surface.
 
 ### Changed
+- Bumped `escalated-dev/escalated-laravel` to `^1.5.1` — the first Laravel release carrying the newsletter HTTP/service layer the panel drives. (#39)
 - README: documented the translation resolution chain (app overrides → central `escalated-dev/locale` package → bundled `escalated-filament` fallbacks).
+
+### Fixed
+- Filament v3 `color()` compatibility on the newsletter resource tables/actions. (#39)
+- CI: ignore Laravel 11.x security advisories in the root `config.audit.ignore` so the `L^11` leg of the compatibility matrix resolves under Composer 2.9+ (root / test-matrix only; does not propagate to host apps). (#39)
 
 ## [1.1.0] - 2026-04-18
 
