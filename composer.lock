@@ -927,16 +927,16 @@
         },
         {
             "name": "escalated-dev/escalated-laravel",
-            "version": "v1.5.0",
+            "version": "v1.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/escalated-dev/escalated-laravel.git",
-                "reference": "dfd3637347cf7f14786f577dac8b073da15e23f2"
+                "reference": "66d8a7624a2e5f883eab5ab7d67bb84a7e03f18b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/escalated-dev/escalated-laravel/zipball/dfd3637347cf7f14786f577dac8b073da15e23f2",
-                "reference": "dfd3637347cf7f14786f577dac8b073da15e23f2",
+                "url": "https://api.github.com/repos/escalated-dev/escalated-laravel/zipball/66d8a7624a2e5f883eab5ab7d67bb84a7e03f18b",
+                "reference": "66d8a7624a2e5f883eab5ab7d67bb84a7e03f18b",
                 "shasum": ""
             },
             "require": {
@@ -985,9 +985,9 @@
             ],
             "support": {
                 "issues": "https://github.com/escalated-dev/escalated-laravel/issues",
-                "source": "https://github.com/escalated-dev/escalated-laravel/tree/v1.5.0"
+                "source": "https://github.com/escalated-dev/escalated-laravel/tree/v1.5.1"
             },
-            "time": "2026-06-04T05:10:08+00:00"
+            "time": "2026-06-04T05:28:48+00:00"
         },
         {
             "name": "escalated-dev/locale",

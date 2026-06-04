@@ -52,6 +52,15 @@
         "sort-packages": true,
         "allow-plugins": {
             "pestphp/pest-plugin": true
+        },
+        "audit": {
+            "ignore": {
+                "PKSA-mdq4-51ck-6kdq": "laravel/framework 11.x advisory; affects all released 11.x with no advisory-clean version, which Composer 2.9+ excludes during resolution and breaks the L^11 compatibility matrix. Root config only (CI/test matrix); does not propagate to host apps.",
+                "PKSA-8qx3-n5y5-vvnd": "laravel/framework 11.x advisory; CI compat matrix only (see above).",
+                "PKSA-q46n-4fdk-zjr4": "laravel/framework 11.x advisory; CI compat matrix only (see above).",
+                "PKSA-qzrn-rnz3-85w1": "laravel/framework 11.x advisory; CI compat matrix only (see above).",
+                "PKSA-w7xr-vk7n-rstm": "laravel/framework 11.x advisory; CI compat matrix only (see above)."
+            }
         }
     },
     "conflict": {
