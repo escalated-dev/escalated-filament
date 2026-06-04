@@ -39,7 +39,7 @@ class EmailSettings extends Page implements HasForms
 
     public static function getNavigationLabel(): string
     {
-        return __('escalated-filament::filament.pages.email_settings.title');
+        return __('escalated-filament::filament.pages.email_settings.navigation_label');
     }
 
     public ?array $data = [];

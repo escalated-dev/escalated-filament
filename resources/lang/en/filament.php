@@ -137,6 +137,23 @@ return [
             'show_powered_by' => 'Show "Powered by Escalated"',
             'show_powered_by_helper' => 'Display attribution badge in the support portal footer.',
         ],
+        'sso_settings' => [
+            'navigation_label' => 'SSO Settings',
+        ],
+        'email_settings' => [
+            'title' => 'Email Settings',
+            'navigation_label' => 'Email Settings',
+            'default_reply_address' => 'Default Reply Address',
+            'default_reply_address_label' => 'Default reply address',
+            'email_addresses' => 'Email Addresses',
+            'email_addresses_label' => 'Email addresses',
+            'email' => 'Email',
+            'display_name' => 'Display name',
+            'department' => 'Department',
+            'dkim_status' => 'DKIM Status',
+            'save_success' => 'Email settings saved',
+            'save_button' => 'Save Email Settings',
+        ],
         'public_tickets_settings' => [
             'title' => 'Public Tickets',
             'mode_section' => 'Guest policy',
@@ -154,6 +171,7 @@ return [
             'save_button' => 'Save',
             'save_success' => 'Guest policy updated',
         ],
+        '',
     ],
 
     /*

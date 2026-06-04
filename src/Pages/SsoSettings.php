@@ -39,7 +39,7 @@ class SsoSettings extends Page implements HasForms
 
     public static function getNavigationLabel(): string
     {
-        return __('escalated-filament::filament.pages.sso_settings.title');
+        return __('escalated-filament::filament.pages.sso_settings.navigation_label');
     }
 
     public ?array $data = [];

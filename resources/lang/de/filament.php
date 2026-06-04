@@ -133,6 +133,23 @@ return [
             'save_success' => 'Einstellungen erfolgreich gespeichert',
             'save_button' => 'Einstellungen speichern',
         ],
+        'sso_settings' => [
+            'navigation_label' => 'SSO-Einstellungen',
+        ],
+        'email_settings' => [
+            'title' => 'E-Mail-Einstellungen',
+            'navigation_label' => 'E-Mail-Einstellungen',
+            'default_reply_address' => 'Standard-Antwortadresse',
+            'default_reply_address_label' => 'Standard-Antwortadresse',
+            'email_addresses' => 'E-Mail-Adressen',
+            'email_addresses_label' => 'E-Mail-Adressen',
+            'email' => 'E-Mail',
+            'display_name' => 'Anzeigename',
+            'department' => 'Abteilung',
+            'dkim_status' => 'DKIM-Status',
+            'save_success' => 'E-Mail-Einstellungen gespeichert',
+            'save_button' => 'E-Mail-Einstellungen speichern',
+        ],
     ],
 
     /*
