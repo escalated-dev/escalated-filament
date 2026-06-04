@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9972943e63437c7e39421654e81000de",
+    "content-hash": "ae7daf2e4a7dbebd8ed09d329c8fb10e",
     "packages": [
         {
             "name": "blade-ui-kit/blade-heroicons",
@@ -927,16 +927,16 @@
         },
         {
             "name": "escalated-dev/escalated-laravel",
-            "version": "dev-main",
+            "version": "v1.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/escalated-dev/escalated-laravel.git",
-                "reference": "cb6a62990c47571e867427f56942c8b20a839944"
+                "reference": "dfd3637347cf7f14786f577dac8b073da15e23f2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/escalated-dev/escalated-laravel/zipball/cb6a62990c47571e867427f56942c8b20a839944",
-                "reference": "cb6a62990c47571e867427f56942c8b20a839944",
+                "url": "https://api.github.com/repos/escalated-dev/escalated-laravel/zipball/dfd3637347cf7f14786f577dac8b073da15e23f2",
+                "reference": "dfd3637347cf7f14786f577dac8b073da15e23f2",
                 "shasum": ""
             },
             "require": {
@@ -953,7 +953,6 @@
                 "pestphp/pest": "^2.0|^3.0",
                 "pestphp/pest-plugin-laravel": "^2.0|^3.0|^4.0"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "laravel": {
@@ -986,9 +985,9 @@
             ],
             "support": {
                 "issues": "https://github.com/escalated-dev/escalated-laravel/issues",
-                "source": "https://github.com/escalated-dev/escalated-laravel/tree/main"
+                "source": "https://github.com/escalated-dev/escalated-laravel/tree/v1.5.0"
             },
-            "time": "2026-06-02T15:47:29+00:00"
+            "time": "2026-06-04T05:10:08+00:00"
         },
         {
             "name": "escalated-dev/locale",
@@ -12358,18 +12357,9 @@
             "time": "2026-05-20T13:07:01+00:00"
         }
     ],
-    "aliases": [
-        {
-            "package": "escalated-dev/escalated-laravel",
-            "version": "dev-main",
-            "alias": "1.4.0",
-            "alias_normalized": "1.4.0.0"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "escalated-dev/escalated-laravel": 20
-    },
+    "stability-flags": {},
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

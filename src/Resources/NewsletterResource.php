@@ -4,6 +4,7 @@ namespace Escalated\Filament\Resources;
 
 use Escalated\Filament\EscalatedFilamentPlugin;
 use Escalated\Filament\Resources\NewsletterResource\Pages;
+use Escalated\Filament\Support\NewsletterOperations;
 use Escalated\Laravel\Models\Newsletter\Newsletter;
 use Escalated\Laravel\Services\Newsletter\NewsletterDispatcherService;
 use Escalated\Laravel\Services\Newsletter\NewsletterPlannerService;
@@ -186,7 +187,7 @@ class NewsletterResource extends Resource
                     ->default(fn () => auth()->user()?->email),
             ])
             ->action(function (Newsletter $record, array $data): void {
-                app(\Escalated\Filament\Support\NewsletterOperations::class)
+                app(NewsletterOperations::class)
                     ->sendTest($record, $data['email'], auth()->user()?->name);
 
                 Notification::make()

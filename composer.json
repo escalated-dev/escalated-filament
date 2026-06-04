@@ -9,7 +9,7 @@
     ],
     "require": {
         "php": "^8.2",
-        "escalated-dev/escalated-laravel": "dev-main as 1.4.0",
+        "escalated-dev/escalated-laravel": "^1.5.0",
         "escalated-dev/locale": "^0.1",
         "filament/filament": "^4.0 || ^5.0"
     },
