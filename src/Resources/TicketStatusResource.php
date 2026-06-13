@@ -5,6 +5,7 @@ namespace Escalated\Filament\Resources;
 use Escalated\Filament\EscalatedFilamentPlugin;
 use Escalated\Filament\Resources\TicketStatusResource\Pages;
 use Escalated\Laravel\Models\TicketStatus;
+use Filament\Actions;
 use Filament\Forms;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
@@ -103,13 +104,13 @@ class TicketStatusResource extends Resource
                     ->label(__('escalated-filament::filament.resources.ticket_statuses.column_order'))
                     ->sortable(),
             ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+            ->recordActions([
+                Actions\EditAction::make(),
+                Actions\DeleteAction::make(),
             ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+            ->toolbarActions([
+                Actions\BulkActionGroup::make([
+                    Actions\DeleteBulkAction::make(),
                 ]),
             ]);
     }

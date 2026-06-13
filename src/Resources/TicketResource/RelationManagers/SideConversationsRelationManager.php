@@ -5,9 +5,10 @@ namespace Escalated\Filament\Resources\TicketResource\RelationManagers;
 use Escalated\Laravel\Escalated;
 use Escalated\Laravel\Models\SideConversation;
 use Escalated\Laravel\Models\SideConversationReply;
+use Filament\Actions;
 use Filament\Forms;
-use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
+use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
@@ -26,7 +27,7 @@ class SideConversationsRelationManager extends RelationManager
         return 'Side Conversations';
     }
 
-    public function form(Form $form): Form
+    public function form(Schema $form): Schema
     {
         return $form
             ->schema([
@@ -107,10 +108,10 @@ class SideConversationsRelationManager extends RelationManager
                     ]),
             ])
             ->headerActions([
-                Tables\Actions\Action::make('create')
+                Actions\Action::make('create')
                     ->label('New Side Conversation')
                     ->icon('heroicon-o-plus')
-                    ->form([
+                    ->schema([
                         Forms\Components\TextInput::make('subject')
                             ->required()
                             ->maxLength(255)
@@ -144,8 +145,8 @@ class SideConversationsRelationManager extends RelationManager
                         ]);
                     }),
             ])
-            ->actions([
-                Tables\Actions\Action::make('view')
+            ->recordActions([
+                Actions\Action::make('view')
                     ->label('View')
                     ->icon('heroicon-o-eye')
                     ->color('gray')
@@ -160,11 +161,11 @@ class SideConversationsRelationManager extends RelationManager
                     ->modalSubmitAction(false)
                     ->modalCancelActionLabel('Close'),
 
-                Tables\Actions\Action::make('reply')
+                Actions\Action::make('reply')
                     ->label('Reply')
                     ->icon('heroicon-o-chat-bubble-left')
                     ->color('primary')
-                    ->form([
+                    ->schema([
                         Forms\Components\RichEditor::make('body')
                             ->label('Reply')
                             ->required()
@@ -179,7 +180,7 @@ class SideConversationsRelationManager extends RelationManager
                     })
                     ->visible(fn (SideConversation $record) => $record->status === 'open'),
 
-                Tables\Actions\Action::make('close')
+                Actions\Action::make('close')
                     ->label('Close')
                     ->icon('heroicon-o-x-circle')
                     ->color('danger')
@@ -187,9 +188,9 @@ class SideConversationsRelationManager extends RelationManager
                     ->action(fn (SideConversation $record) => $record->update(['status' => 'closed']))
                     ->visible(fn (SideConversation $record) => $record->status === 'open'),
             ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+            ->toolbarActions([
+                Actions\BulkActionGroup::make([
+                    Actions\DeleteBulkAction::make(),
                 ]),
             ]);
     }

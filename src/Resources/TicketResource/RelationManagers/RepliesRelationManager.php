@@ -4,9 +4,10 @@ namespace Escalated\Filament\Resources\TicketResource\RelationManagers;
 
 use Escalated\Laravel\Models\Reply;
 use Escalated\Laravel\Services\TicketService;
+use Filament\Actions;
 use Filament\Forms;
-use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
+use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
@@ -25,7 +26,7 @@ class RepliesRelationManager extends RelationManager
         return __('escalated-filament::filament.resources.replies.title');
     }
 
-    public function form(Form $form): Form
+    public function form(Schema $form): Schema
     {
         return $form
             ->schema([
@@ -92,10 +93,10 @@ class RepliesRelationManager extends RelationManager
                     ->falseLabel(__('escalated-filament::filament.resources.replies.filter_not_pinned')),
             ])
             ->headerActions([
-                Tables\Actions\Action::make('reply')
+                Actions\Action::make('reply')
                     ->label(__('escalated-filament::filament.resources.replies.action_add_reply'))
                     ->icon('heroicon-o-chat-bubble-left')
-                    ->form([
+                    ->schema([
                         Forms\Components\RichEditor::make('body')
                             ->label(__('escalated-filament::filament.resources.replies.field_reply'))
                             ->required()
@@ -106,11 +107,11 @@ class RepliesRelationManager extends RelationManager
                             ->reply($this->getOwnerRecord(), auth()->user(), $data['body']);
                     }),
 
-                Tables\Actions\Action::make('note')
+                Actions\Action::make('note')
                     ->label(__('escalated-filament::filament.resources.replies.action_add_note'))
                     ->icon('heroicon-o-pencil-square')
                     ->color('gray')
-                    ->form([
+                    ->schema([
                         Forms\Components\RichEditor::make('body')
                             ->label(__('escalated-filament::filament.resources.replies.field_internal_note'))
                             ->required()
@@ -121,17 +122,17 @@ class RepliesRelationManager extends RelationManager
                             ->addNote($this->getOwnerRecord(), auth()->user(), $data['body']);
                     }),
             ])
-            ->actions([
-                Tables\Actions\Action::make('togglePin')
+            ->recordActions([
+                Actions\Action::make('togglePin')
                     ->label(fn (Reply $record) => $record->is_pinned ? __('escalated-filament::filament.resources.replies.action_unpin') : __('escalated-filament::filament.resources.replies.action_pin'))
                     ->icon(fn (Reply $record) => $record->is_pinned ? 'heroicon-s-bookmark' : 'heroicon-o-bookmark')
                     ->action(fn (Reply $record) => $record->update(['is_pinned' => ! $record->is_pinned]))
                     ->visible(fn (Reply $record) => $record->is_internal_note),
-                Tables\Actions\DeleteAction::make(),
+                Actions\DeleteAction::make(),
             ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+            ->toolbarActions([
+                Actions\BulkActionGroup::make([
+                    Actions\DeleteBulkAction::make(),
                 ]),
             ]);
     }

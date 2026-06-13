@@ -6,9 +6,10 @@ use Escalated\Filament\EscalatedFilamentPlugin;
 use Escalated\Filament\Resources\SlaPolicyResource\Pages;
 use Escalated\Laravel\Enums\TicketPriority;
 use Escalated\Laravel\Models\SlaPolicy;
+use Filament\Actions;
 use Filament\Forms;
-use Filament\Forms\Form;
 use Filament\Resources\Resource;
+use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
 
@@ -38,7 +39,7 @@ class SlaPolicyResource extends Resource
         return app(EscalatedFilamentPlugin::class)->getNavigationGroup();
     }
 
-    public static function form(Form $form): Form
+    public static function form(Schema $form): Schema
     {
         return $form
             ->schema([
@@ -136,13 +137,13 @@ class SlaPolicyResource extends Resource
                 Tables\Filters\TernaryFilter::make('is_default')
                     ->label(__('escalated-filament::filament.resources.sla_policy.filter_default')),
             ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+            ->recordActions([
+                Actions\EditAction::make(),
+                Actions\DeleteAction::make(),
             ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+            ->toolbarActions([
+                Actions\BulkActionGroup::make([
+                    Actions\DeleteBulkAction::make(),
                 ]),
             ]);
     }

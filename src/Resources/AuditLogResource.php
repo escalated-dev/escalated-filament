@@ -72,8 +72,8 @@ class AuditLogResource extends Resource
                     ->sortable(),
             ])
             ->defaultSort('created_at', 'desc')
-            ->actions([])
-            ->bulkActions([]);
+            ->recordActions([])
+            ->toolbarActions([]);
     }
 
     public static function getPages(): array

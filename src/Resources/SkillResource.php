@@ -8,6 +8,7 @@ use Escalated\Laravel\Escalated;
 use Escalated\Laravel\Models\Department;
 use Escalated\Laravel\Models\Skill;
 use Escalated\Laravel\Models\Tag;
+use Filament\Actions;
 use Filament\Forms;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
@@ -165,13 +166,13 @@ class SkillResource extends Resource
                     ->sortable()
                     ->toggleable(),
             ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+            ->recordActions([
+                Actions\EditAction::make(),
+                Actions\DeleteAction::make(),
             ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+            ->toolbarActions([
+                Actions\BulkActionGroup::make([
+                    Actions\DeleteBulkAction::make(),
                 ]),
             ]);
     }

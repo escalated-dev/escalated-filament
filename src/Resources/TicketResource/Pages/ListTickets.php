@@ -6,8 +6,8 @@ use Escalated\Filament\Resources\TicketResource;
 use Escalated\Laravel\Enums\TicketPriority;
 use Escalated\Laravel\Models\Ticket;
 use Filament\Actions;
-use Filament\Resources\Components\Tab;
 use Filament\Resources\Pages\ListRecords;
+use Filament\Schemas\Components\Tabs\Tab;
 use Illuminate\Database\Eloquent\Builder;
 
 class ListTickets extends ListRecords

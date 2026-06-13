@@ -3,8 +3,8 @@
 namespace Escalated\Filament\Actions;
 
 use Escalated\Laravel\Models\Reply;
+use Filament\Actions\Action;
 use Filament\Notifications\Notification;
-use Filament\Tables\Actions\Action;
 
 class PinReplyAction extends Action
 {

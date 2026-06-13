@@ -9,6 +9,7 @@ use Escalated\Laravel\Enums\TicketStatus;
 use Escalated\Laravel\Escalated;
 use Escalated\Laravel\Models\Department;
 use Escalated\Laravel\Models\EscalationRule;
+use Filament\Actions;
 use Filament\Forms;
 use Filament\Resources\Resource;
 use Filament\Schemas\Components\Utilities\Get;
@@ -193,18 +194,18 @@ class EscalationRuleResource extends Resource
                 Tables\Filters\TernaryFilter::make('is_active')
                     ->label(__('escalated-filament::filament.resources.escalation_rule.filter_active')),
             ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\Action::make('toggleActive')
+            ->recordActions([
+                Actions\EditAction::make(),
+                Actions\Action::make('toggleActive')
                     ->label(fn (EscalationRule $record) => $record->is_active ? __('escalated-filament::filament.resources.escalation_rule.toggle_deactivate') : __('escalated-filament::filament.resources.escalation_rule.toggle_activate'))
                     ->icon(fn (EscalationRule $record) => $record->is_active ? 'heroicon-o-pause' : 'heroicon-o-play')
                     ->color(fn (EscalationRule $record) => $record->is_active ? 'warning' : 'success')
                     ->action(fn (EscalationRule $record) => $record->update(['is_active' => ! $record->is_active])),
-                Tables\Actions\DeleteAction::make(),
+                Actions\DeleteAction::make(),
             ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+            ->toolbarActions([
+                Actions\BulkActionGroup::make([
+                    Actions\DeleteBulkAction::make(),
                 ]),
             ]);
     }

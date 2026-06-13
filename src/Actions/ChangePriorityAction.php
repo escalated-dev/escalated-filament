@@ -5,9 +5,9 @@ namespace Escalated\Filament\Actions;
 use Escalated\Laravel\Enums\TicketPriority;
 use Escalated\Laravel\Models\Ticket;
 use Escalated\Laravel\Services\TicketService;
+use Filament\Actions\Action;
 use Filament\Forms;
 use Filament\Notifications\Notification;
-use Filament\Tables\Actions\Action;
 
 class ChangePriorityAction extends Action
 {
@@ -24,7 +24,7 @@ class ChangePriorityAction extends Action
             ->label(__('escalated-filament::filament.actions.change_priority.label'))
             ->icon('heroicon-o-flag')
             ->color('warning')
-            ->form([
+            ->schema([
                 Forms\Components\Select::make('priority')
                     ->label(__('escalated-filament::filament.actions.change_priority.new_priority_field'))
                     ->options(collect(TicketPriority::cases())->mapWithKeys(

@@ -243,7 +243,7 @@ class ViewTicket extends ViewRecord
                 ->label(__('escalated-filament::filament.actions.assign_ticket.label'))
                 ->icon('heroicon-o-user-plus')
                 ->color('info')
-                ->form([
+                ->schema([
                     Forms\Components\Select::make('agent_id')
                         ->label(__('escalated-filament::filament.actions.assign_ticket.agent_field'))
                         ->options(fn () => app(Escalated::userModel())::pluck('name', 'id'))
@@ -264,7 +264,7 @@ class ViewTicket extends ViewRecord
                 ->label(__('escalated-filament::filament.resources.ticket.action_status'))
                 ->icon('heroicon-o-arrow-path')
                 ->color('warning')
-                ->form([
+                ->schema([
                     Forms\Components\Select::make('status')
                         ->options(collect(TicketStatus::cases())->mapWithKeys(
                             fn (TicketStatus $s) => [$s->value => $s->label()]

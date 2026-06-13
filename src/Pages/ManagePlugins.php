@@ -77,7 +77,7 @@ class ManagePlugins extends Page implements HasForms, HasTable
                 ->label(__('escalated-filament::filament.pages.manage_plugins.upload_plugin'))
                 ->icon('heroicon-o-arrow-up-tray')
                 ->color('primary')
-                ->form([
+                ->schema([
                     Forms\Components\FileUpload::make('plugin_file')
                         ->label(__('escalated-filament::filament.pages.manage_plugins.plugin_zip_file'))
                         ->acceptedFileTypes(['application/zip', 'application/x-zip-compressed'])
@@ -178,8 +178,8 @@ class ManagePlugins extends Page implements HasForms, HasTable
                     ->placeholder(__('escalated-filament::filament.pages.manage_plugins.placeholder_never'))
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
-            ->actions([
-                Tables\Actions\Action::make('activate')
+            ->recordActions([
+                Action::make('activate')
                     ->label(__('escalated-filament::filament.pages.manage_plugins.activate'))
                     ->icon('heroicon-o-play')
                     ->color('success')
@@ -210,7 +210,7 @@ class ManagePlugins extends Page implements HasForms, HasTable
                         }
                     }),
 
-                Tables\Actions\Action::make('deactivate')
+                Action::make('deactivate')
                     ->label(__('escalated-filament::filament.pages.manage_plugins.deactivate'))
                     ->icon('heroicon-o-pause')
                     ->color('warning')
@@ -241,7 +241,7 @@ class ManagePlugins extends Page implements HasForms, HasTable
                         }
                     }),
 
-                Tables\Actions\Action::make('delete')
+                Action::make('delete')
                     ->label(__('escalated-filament::filament.pages.manage_plugins.delete'))
                     ->icon('heroicon-o-trash')
                     ->color('danger')

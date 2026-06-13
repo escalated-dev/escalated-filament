@@ -5,9 +5,10 @@ namespace Escalated\Filament\Resources;
 use Escalated\Filament\EscalatedFilamentPlugin;
 use Escalated\Filament\Resources\CannedResponseResource\Pages;
 use Escalated\Laravel\Models\CannedResponse;
+use Filament\Actions;
 use Filament\Forms;
-use Filament\Forms\Form;
 use Filament\Resources\Resource;
+use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
 
@@ -27,7 +28,7 @@ class CannedResponseResource extends Resource
         return app(EscalatedFilamentPlugin::class)->getNavigationGroup();
     }
 
-    public static function form(Form $form): Form
+    public static function form(Schema $form): Schema
     {
         return $form
             ->schema([
@@ -104,13 +105,13 @@ class CannedResponseResource extends Resource
                             ->all()
                     ),
             ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+            ->recordActions([
+                Actions\EditAction::make(),
+                Actions\DeleteAction::make(),
             ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+            ->toolbarActions([
+                Actions\BulkActionGroup::make([
+                    Actions\DeleteBulkAction::make(),
                 ]),
             ]);
     }

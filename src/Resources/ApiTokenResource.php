@@ -6,6 +6,7 @@ use Escalated\Filament\EscalatedFilamentPlugin;
 use Escalated\Filament\Resources\ApiTokenResource\Pages;
 use Escalated\Laravel\Escalated;
 use Escalated\Laravel\Models\ApiToken;
+use Filament\Actions;
 use Filament\Forms;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
@@ -174,17 +175,17 @@ class ApiTokenResource extends Resource
                         };
                     }),
             ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make()
+            ->recordActions([
+                Actions\EditAction::make(),
+                Actions\DeleteAction::make()
                     ->label('Revoke')
                     ->modalHeading('Revoke API Token')
                     ->modalDescription('Are you sure you want to revoke this token? Any applications using this token will immediately lose access.')
                     ->modalSubmitActionLabel('Revoke Token'),
             ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make()
+            ->toolbarActions([
+                Actions\BulkActionGroup::make([
+                    Actions\DeleteBulkAction::make()
                         ->label('Revoke Selected')
                         ->modalHeading('Revoke API Tokens')
                         ->modalDescription('Are you sure you want to revoke the selected tokens? Any applications using these tokens will immediately lose access.'),

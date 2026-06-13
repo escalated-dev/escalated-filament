@@ -5,6 +5,7 @@ namespace Escalated\Filament\Resources;
 use Escalated\Filament\EscalatedFilamentPlugin;
 use Escalated\Filament\Resources\ArticleCategoryResource\Pages;
 use Escalated\Laravel\Models\ArticleCategory;
+use Filament\Actions;
 use Filament\Forms;
 use Filament\Resources\Resource;
 use Filament\Schemas\Components\Utilities\Set;
@@ -92,13 +93,13 @@ class ArticleCategoryResource extends Resource
                     ->sortable(),
             ])
             ->defaultSort('order')
-            ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+            ->recordActions([
+                Actions\EditAction::make(),
+                Actions\DeleteAction::make(),
             ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+            ->toolbarActions([
+                Actions\BulkActionGroup::make([
+                    Actions\DeleteBulkAction::make(),
                 ]),
             ]);
     }
