@@ -23,6 +23,16 @@ class TicketStatusResource extends Resource
         return 'heroicon-o-queue-list';
     }
 
+    public static function getModelLabel(): string
+    {
+        return __('escalated-filament::filament.resources.ticket_statuses.model_label');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('escalated-filament::filament.resources.ticket_statuses.plural_model_label');
+    }
+
     public static function getNavigationGroup(): ?string
     {
         return app(EscalatedFilamentPlugin::class)->getNavigationGroup();
@@ -34,31 +44,33 @@ class TicketStatusResource extends Resource
             ->schema([
                 Forms\Components\Section::make()
                     ->schema([
-                        Forms\Components\TextInput::make('name')
+                        Forms\Components\TextInput::make('label')
+                            ->label(__('escalated-filament::filament.resources.ticket_statuses.field_label'))
                             ->required()
                             ->maxLength(255),
 
                         Forms\Components\TextInput::make('slug')
+                            ->label(__('escalated-filament::filament.resources.ticket_statuses.field_slug'))
                             ->required()
                             ->maxLength(255)
                             ->unique(ignoreRecord: true),
 
                         Forms\Components\ColorPicker::make('color')
+                            ->label(__('escalated-filament::filament.resources.ticket_statuses.field_color'))
                             ->required()
                             ->default('#3B82F6'),
 
                         Forms\Components\Select::make('category')
+                            ->label(__('escalated-filament::filament.resources.ticket_statuses.field_category'))
                             ->required()
-                            ->options([
-                                'open' => 'Open',
-                                'pending' => 'Pending',
-                                'closed' => 'Closed',
-                            ]),
+                            ->options(self::categoryOptions()),
 
                         Forms\Components\Toggle::make('is_default')
+                            ->label(__('escalated-filament::filament.resources.ticket_statuses.field_default'))
                             ->default(false),
 
                         Forms\Components\TextInput::make('order')
+                            ->label(__('escalated-filament::filament.resources.ticket_statuses.field_order'))
                             ->numeric()
                             ->default(0),
                     ])
@@ -70,20 +82,25 @@ class TicketStatusResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')
+                Tables\Columns\TextColumn::make('label')
+                    ->label(__('escalated-filament::filament.resources.ticket_statuses.column_label'))
                     ->searchable()
                     ->sortable()
                     ->badge()
                     ->color(fn (TicketStatus $record) => Color::hex($record->color)),
 
                 Tables\Columns\TextColumn::make('category')
+                    ->label(__('escalated-filament::filament.resources.ticket_statuses.column_category'))
+                    ->formatStateUsing(fn (?string $state) => $state === null ? '' : (self::categoryOptions()[$state] ?? ucfirst($state)))
                     ->sortable(),
 
                 Tables\Columns\IconColumn::make('is_default')
+                    ->label(__('escalated-filament::filament.resources.ticket_statuses.column_default'))
                     ->boolean()
                     ->sortable(),
 
                 Tables\Columns\TextColumn::make('order')
+                    ->label(__('escalated-filament::filament.resources.ticket_statuses.column_order'))
                     ->sortable(),
             ])
             ->actions([
@@ -103,6 +120,15 @@ class TicketStatusResource extends Resource
             'index' => Pages\ListTicketStatuses::route('/'),
             'create' => Pages\CreateTicketStatus::route('/create'),
             'edit' => Pages\EditTicketStatus::route('/{record}/edit'),
+        ];
+    }
+
+    private static function categoryOptions(): array
+    {
+        return [
+            'open' => __('escalated-filament::filament.resources.ticket_statuses.category_open'),
+            'pending' => __('escalated-filament::filament.resources.ticket_statuses.category_pending'),
+            'closed' => __('escalated-filament::filament.resources.ticket_statuses.category_closed'),
         ];
     }
 }
