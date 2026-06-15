@@ -253,6 +253,24 @@ it('displays ticket information on view page', function () {
         ->assertSuccessful();
 });
 
+// Regression for #35: the embedded conversation and satisfaction-rating Livewire
+// islands must each render a stable, unique wire:key. Without one, Livewire tracks
+// both children under the same null key in the parent's `children` memo, so a parent
+// re-render (e.g. switching relation-manager tabs) collapses them into one slot and
+// swaps the satisfaction widget's content for the conversation thread.
+it('renders the conversation and satisfaction livewire islands with distinct keys', function () {
+    $ticket = Ticket::factory()->create();
+
+    $html = livewire(ViewTicket::class, ['record' => $ticket->getRouteKey()])
+        ->assertSuccessful()
+        ->html();
+
+    expect($html)
+        ->toContain('wire:key="')
+        ->toContain('escalated-ticket-conversation-'.$ticket->id)
+        ->toContain('escalated-satisfaction-rating-'.$ticket->id);
+});
+
 // --- Resource Configuration ---
 
 it('uses Ticket as the model', function () {

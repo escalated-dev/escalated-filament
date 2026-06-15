@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.1] - 2026-06-15
+
+### Fixed
+- **Satisfaction widget on the ticket view rendering the conversation thread.** The embedded `TicketConversation` and `SatisfactionRating` Livewire islands were mounted without a `key()`, so Livewire tracked both children under the same `null` slot in the parent page's `children` memo. When the parent re-rendered (e.g. switching relation-manager tabs) both placeholders resolved to the same previously-rendered child, swapping the satisfaction widget's content for the conversation thread. Each island now has a stable, record-scoped `wire:key`. (#35)
+
 ## [1.2.0] - 2026-06-04
 
 ### Added

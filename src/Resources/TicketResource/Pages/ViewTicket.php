@@ -64,7 +64,9 @@ class ViewTicket extends ViewRecord
                             Livewire::make(
                                 TicketConversation::class,
                                 fn (Ticket $record) => ['ticketId' => $record->id]
-                            )->columnSpanFull(),
+                            )
+                                ->key(fn (Ticket $record) => 'escalated-ticket-conversation-'.$record->id)
+                                ->columnSpanFull(),
                         ]),
                 ])->columnSpan(2),
 
@@ -168,7 +170,9 @@ class ViewTicket extends ViewRecord
                             Livewire::make(
                                 SatisfactionRating::class,
                                 fn (Ticket $record) => ['ticketId' => $record->id]
-                            )->columnSpanFull(),
+                            )
+                                ->key(fn (Ticket $record) => 'escalated-satisfaction-rating-'.$record->id)
+                                ->columnSpanFull(),
                         ])
                         ->collapsible(),
 
