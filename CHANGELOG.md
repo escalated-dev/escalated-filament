@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - **Satisfaction widget on the ticket view rendering the conversation thread.** The embedded `TicketConversation` and `SatisfactionRating` Livewire islands were mounted without a `key()`, so Livewire tracked both children under the same `null` slot in the parent page's `children` memo. When the parent re-rendered (e.g. switching relation-manager tabs) both placeholders resolved to the same previously-rendered child, swapping the satisfaction widget's content for the conversation thread. Each island now has a stable, record-scoped `wire:key`. (#35)
+- CI: ignore the `filament/actions` advisory `PKSA-ndkp-2znf-9m7c` in the root `config.audit.ignore`. It flags every released Filament 5.x with no advisory-clean version, so Composer 2.9+ excluded the whole line and the `F^5.0` compatibility matrix could no longer resolve. Composer still caps at `<5.5.0` via the existing `conflict` block (root / test-matrix only; does not propagate to host apps).
 
 ## [1.2.0] - 2026-06-04
 
