@@ -60,12 +60,9 @@
                 "PKSA-q46n-4fdk-zjr4": "laravel/framework 11.x advisory; CI compat matrix only (see above).",
                 "PKSA-qzrn-rnz3-85w1": "laravel/framework 11.x advisory; CI compat matrix only (see above).",
                 "PKSA-w7xr-vk7n-rstm": "laravel/framework 11.x advisory; CI compat matrix only (see above).",
-                "PKSA-ndkp-2znf-9m7c": "filament/actions advisory; affects every released Filament 5.x with no advisory-clean version, which Composer 2.9+ excludes during resolution and breaks the F^5.0 compatibility matrix. Composer still caps at <5.5.0 via the conflict block below. Root config only (CI/test matrix); does not propagate to host apps."
+                "PKSA-ndkp-2znf-9m7c": "filament/actions advisory; resolved in Filament 5.5. Retained to ignore the advisory should the CI compat matrix resolve an affected older 5.x. Root config only (CI/test matrix); does not propagate to host apps."
             }
         }
-    },
-    "conflict": {
-        "filament/filament": ">=5.5.0"
     },
     "minimum-stability": "dev",
     "prefer-stable": true
