@@ -42,5 +42,10 @@ jobs:
           composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" "filament/filament:${{ matrix.filament }}" --no-interaction --no-update
           composer update --prefer-stable --prefer-dist --no-interaction
 
+      # No `|| echo` fallback. It swallowed pest's exit code, so a red suite
+      # reported green -- a 124-test regression from a Livewire bump merged
+      # that way. If a matrix leg genuinely has no tests, pest's own
+      # --no-tests-are-not-a-failure would be the narrow fix; silencing every
+      # failure is not.
       - name: Execute tests
-        run: vendor/bin/pest 2>&1 || echo "No test files found — build validated"
+        run: vendor/bin/pest
