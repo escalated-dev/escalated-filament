@@ -53,9 +53,15 @@ $livewireSupportTesting = $root.'/vendor/livewire/livewire/src/Features/SupportT
 $n = 0;
 
 $n += patchFile($livewireSupportValidation, [
+    // Livewire <= 4.3 built the bag inline.
     [
         "\$errors = (new ViewErrorBag)->put('default', \$this->component->getErrorBag());",
         "\$errors = (new ViewErrorBag)->put('default', \$this->component->getErrorBag() ?? new \\Illuminate\\Support\\MessageBag);",
+    ],
+    // Livewire 4.4 moved it into a viewErrorBag() method that clones the shared bag first.
+    [
+        "return \$errors->put('default', \$this->component->getErrorBag());",
+        "return \$errors->put('default', \$this->component->getErrorBag() ?? new \\Illuminate\\Support\\MessageBag);",
     ],
     [
         '$errors = $this->component->getErrorBag()->toArray();',
