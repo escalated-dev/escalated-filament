@@ -17,7 +17,11 @@ jobs:
       matrix:
         php: [8.3, 8.2]
         laravel: [^12.0, ^11.0]
-        filament: ['^3.0', '^4.0', '^5.0']
+        # composer.json requires filament/filament ^4.0 || ^5.0, so ^3.0 was
+        # testing a version this package declares it does not support. It
+        # fatals on Filament\Schemas\Schema, which only exists from v4. The
+        # swallowed exit code is the only reason that looked green.
+        filament: ['^4.0', '^5.0']
         include:
           - laravel: ^12.0
             testbench: 10.*
