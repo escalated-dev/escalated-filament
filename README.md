@@ -213,4 +213,4 @@ Same architecture, same ticket system — native Filament experience for Laravel
 
 ## License
 
-MIT
+MIT - Copyright (c) Escalated.dev. See [LICENSE](LICENSE).
