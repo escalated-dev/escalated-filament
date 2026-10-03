@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- **The `agentGate()` / `adminGate()` settings are now enforced.** They were documented but never read, so every resource and page without an `escalated-laravel` model policy (webhooks, API tokens, roles, automations, macros, skills, custom fields, KB articles, newsletters, reports, settings, and more) was open to anyone who could sign in to the panel, and the ticket list was too. Tickets, canned responses and the support dashboard now require the agent or admin gate; every other resource and page requires the admin gate. Users without either gate get a 403 and see no Escalated navigation. Existing model policies still apply on top, and in tenant mode a staff seat in the current account is still required. **Upgrade note:** make sure your support staff pass the configured gates before upgrading, or they will lose access to the panel's Escalated pages.
+
 ## [1.2.1] - 2026-06-15
 
 ### Fixed
