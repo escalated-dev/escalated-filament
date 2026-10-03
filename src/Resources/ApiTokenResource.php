@@ -4,6 +4,7 @@ namespace Escalated\Filament\Resources;
 
 use Escalated\Filament\EscalatedFilamentPlugin;
 use Escalated\Filament\Resources\ApiTokenResource\Pages;
+use Escalated\Filament\Support\Concerns\RequiresAdminSeat;
 use Escalated\Filament\Support\StaffSeat;
 use Escalated\Laravel\Escalated;
 use Escalated\Laravel\Models\ApiToken;
@@ -16,6 +17,8 @@ use Filament\Tables\Table;
 
 class ApiTokenResource extends Resource
 {
+    use RequiresAdminSeat;
+
     protected static ?string $model = ApiToken::class;
 
     protected static ?int $navigationSort = 16;

@@ -4,6 +4,7 @@ namespace Escalated\Filament\Resources;
 
 use Escalated\Filament\EscalatedFilamentPlugin;
 use Escalated\Filament\Resources\NewsletterResource\Pages;
+use Escalated\Filament\Support\Concerns\RequiresAdminSeat;
 use Escalated\Filament\Support\NewsletterOperations;
 use Escalated\Laravel\Models\Newsletter\Newsletter;
 use Escalated\Laravel\Services\Newsletter\NewsletterDispatcherService;
@@ -17,6 +18,8 @@ use Filament\Tables\Table;
 
 class NewsletterResource extends Resource
 {
+    use RequiresAdminSeat;
+
     protected static ?string $model = Newsletter::class;
 
     protected static ?int $navigationSort = 25;

@@ -3,6 +3,7 @@
 namespace Escalated\Filament\Pages;
 
 use Escalated\Filament\EscalatedFilamentPlugin;
+use Escalated\Filament\Support\PanelAccess;
 use Escalated\Laravel\Models\EscalatedSettings;
 use Filament\Forms;
 use Filament\Forms\Concerns\InteractsWithForms;
@@ -139,5 +140,10 @@ class NewsletterSettings extends Page implements HasForms
     private function setting(string $key, mixed $default = null): mixed
     {
         return EscalatedSettings::get("newsletter.{$key}", config("escalated.newsletters.{$key}", $default));
+    }
+
+    public static function canAccess(): bool
+    {
+        return PanelAccess::admin();
     }
 }

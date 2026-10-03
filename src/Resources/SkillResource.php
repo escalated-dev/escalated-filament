@@ -4,6 +4,7 @@ namespace Escalated\Filament\Resources;
 
 use Escalated\Filament\EscalatedFilamentPlugin;
 use Escalated\Filament\Resources\SkillResource\Pages;
+use Escalated\Filament\Support\Concerns\RequiresAdminSeat;
 use Escalated\Filament\Support\StaffSeat;
 use Escalated\Laravel\Escalated;
 use Escalated\Laravel\Models\Department;
@@ -20,6 +21,8 @@ use Illuminate\Support\Facades\Schema as SchemaFacade;
 
 class SkillResource extends Resource
 {
+    use RequiresAdminSeat;
+
     protected static ?string $model = Skill::class;
 
     protected static ?int $navigationSort = 24;

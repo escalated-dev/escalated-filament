@@ -4,6 +4,7 @@ namespace Escalated\Filament\Resources;
 
 use Escalated\Filament\EscalatedFilamentPlugin;
 use Escalated\Filament\Resources\AutomationResource\Pages;
+use Escalated\Filament\Support\Concerns\RequiresAdminSeat;
 use Escalated\Laravel\Models\Automation;
 use Filament\Actions;
 use Filament\Forms;
@@ -14,6 +15,8 @@ use Filament\Tables\Table;
 
 class AutomationResource extends Resource
 {
+    use RequiresAdminSeat;
+
     protected static ?string $model = Automation::class;
 
     protected static ?int $navigationSort = 20;

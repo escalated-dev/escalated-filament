@@ -4,6 +4,7 @@ namespace Escalated\Filament\Resources;
 
 use Escalated\Filament\EscalatedFilamentPlugin;
 use Escalated\Filament\Resources\ArticleResource\Pages;
+use Escalated\Filament\Support\Concerns\RequiresAdminSeat;
 use Escalated\Laravel\Models\Article;
 use Escalated\Laravel\Models\ArticleCategory;
 use Filament\Actions;
@@ -17,6 +18,8 @@ use Illuminate\Support\Str;
 
 class ArticleResource extends Resource
 {
+    use RequiresAdminSeat;
+
     protected static ?string $model = Article::class;
 
     protected static ?int $navigationSort = 27;

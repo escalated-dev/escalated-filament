@@ -3,6 +3,7 @@
 namespace Escalated\Filament\Pages;
 
 use Escalated\Filament\EscalatedFilamentPlugin;
+use Escalated\Filament\Support\PanelAccess;
 use Escalated\Laravel\Models\Department;
 use Escalated\Laravel\Models\EscalatedSettings;
 use Filament\Forms;
@@ -110,5 +111,10 @@ class EmailSettings extends Page implements HasForms
             ->title(__('escalated-filament::filament.pages.email_settings.save_success'))
             ->success()
             ->send();
+    }
+
+    public static function canAccess(): bool
+    {
+        return PanelAccess::admin();
     }
 }

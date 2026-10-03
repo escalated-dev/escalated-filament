@@ -2,6 +2,7 @@
 
 namespace Escalated\Filament\Widgets;
 
+use Escalated\Filament\Support\PanelAccess;
 use Escalated\Laravel\Models\SatisfactionRating;
 use Filament\Widgets\StatsOverviewWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
@@ -45,5 +46,10 @@ class CsatOverviewWidget extends StatsOverviewWidget
                 ->icon('heroicon-o-face-smile')
                 ->color($positiveRate >= 80 ? 'success' : ($positiveRate >= 60 ? 'warning' : 'danger')),
         ];
+    }
+
+    public static function canView(): bool
+    {
+        return PanelAccess::agent();
     }
 }

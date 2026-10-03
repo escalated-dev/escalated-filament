@@ -172,6 +172,17 @@ EscalatedFilamentPlugin::make()
     ->adminGate('escalated-admin')  // Gate for admin access (default: 'escalated-admin')
 ```
 
+### Access control
+
+Your panel's `canAccessPanel()` decides who can sign in to the panel. The two gates decide what they can use once inside, mirroring the `escalated-laravel` routes:
+
+| Surface | Required |
+|---|---|
+| Tickets, canned responses, the support dashboard and its widgets | agent gate **or** admin gate |
+| Everything else: departments, tags, SLA policies, escalation rules, macros, automations, webhooks, API tokens, roles, statuses, skills, custom fields, business hours, KB articles and categories, audit log, newsletters, reports, and every settings page | admin gate |
+
+A panel user who passes neither gate gets a 403 on every Escalated page, and the navigation items are hidden. Model policies shipped by `escalated-laravel` (for example, private canned responses stay editable only by their author) still apply on top. In tenant mode the user also needs a staff seat in the current account, whichever gate names you configure.
+
 All other configuration (SLA, hosting modes, notifications, etc.) is managed by the core `escalated-laravel` package in `config/escalated.php`. See the [escalated-laravel README](https://github.com/escalated-dev/escalated-laravel) for full configuration reference.
 
 ## Publishing Views

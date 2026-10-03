@@ -4,6 +4,7 @@ namespace Escalated\Filament\Resources;
 
 use Escalated\Filament\EscalatedFilamentPlugin;
 use Escalated\Filament\Resources\AuditLogResource\Pages;
+use Escalated\Filament\Support\Concerns\RequiresAdminSeat;
 use Escalated\Laravel\Models\AuditLog;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
@@ -12,6 +13,8 @@ use Filament\Tables\Table;
 
 class AuditLogResource extends Resource
 {
+    use RequiresAdminSeat;
+
     protected static ?string $model = AuditLog::class;
 
     protected static ?int $navigationSort = 30;

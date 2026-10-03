@@ -4,6 +4,7 @@ namespace Escalated\Filament\Resources;
 
 use Escalated\Filament\EscalatedFilamentPlugin;
 use Escalated\Filament\Resources\EscalationRuleResource\Pages;
+use Escalated\Filament\Support\Concerns\RequiresAdminSeat;
 use Escalated\Laravel\Enums\TicketPriority;
 use Escalated\Laravel\Enums\TicketStatus;
 use Escalated\Laravel\Escalated;
@@ -19,6 +20,8 @@ use Filament\Tables\Table;
 
 class EscalationRuleResource extends Resource
 {
+    use RequiresAdminSeat;
+
     protected static ?string $model = EscalationRule::class;
 
     protected static ?int $navigationSort = 13;

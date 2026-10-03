@@ -2,6 +2,7 @@
 
 namespace Escalated\Filament\Widgets;
 
+use Escalated\Filament\Support\PanelAccess;
 use Escalated\Laravel\Enums\TicketPriority;
 use Escalated\Laravel\Models\Ticket;
 use Filament\Widgets\ChartWidget;
@@ -46,5 +47,10 @@ class TicketsByPriorityChart extends ChartWidget
             ],
             'labels' => $data->pluck('label')->all(),
         ];
+    }
+
+    public static function canView(): bool
+    {
+        return PanelAccess::agent();
     }
 }

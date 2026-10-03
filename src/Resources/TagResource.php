@@ -4,6 +4,7 @@ namespace Escalated\Filament\Resources;
 
 use Escalated\Filament\EscalatedFilamentPlugin;
 use Escalated\Filament\Resources\TagResource\Pages;
+use Escalated\Filament\Support\Concerns\RequiresAdminSeat;
 use Escalated\Laravel\Models\Tag;
 use Filament\Actions;
 use Filament\Forms;
@@ -17,6 +18,8 @@ use Illuminate\Support\Str;
 
 class TagResource extends Resource
 {
+    use RequiresAdminSeat;
+
     protected static ?string $model = Tag::class;
 
     protected static ?int $navigationSort = 11;

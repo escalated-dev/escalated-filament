@@ -3,6 +3,7 @@
 namespace Escalated\Filament\Pages;
 
 use Escalated\Filament\EscalatedFilamentPlugin;
+use Escalated\Filament\Support\PanelAccess;
 use Escalated\Laravel\Escalated;
 use Escalated\Laravel\Models\Department;
 use Escalated\Laravel\Models\SatisfactionRating;
@@ -185,5 +186,10 @@ class Reports extends Page implements HasForms
             'pgsql' => "EXTRACT(EPOCH FROM ({$to} - {$from})) / 60",
             default => "TIMESTAMPDIFF(MINUTE, {$from}, {$to})",
         };
+    }
+
+    public static function canAccess(): bool
+    {
+        return PanelAccess::admin();
     }
 }

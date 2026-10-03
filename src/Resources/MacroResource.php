@@ -4,6 +4,7 @@ namespace Escalated\Filament\Resources;
 
 use Escalated\Filament\EscalatedFilamentPlugin;
 use Escalated\Filament\Resources\MacroResource\Pages;
+use Escalated\Filament\Support\Concerns\RequiresAdminSeat;
 use Escalated\Laravel\Enums\TicketPriority;
 use Escalated\Laravel\Enums\TicketStatus;
 use Escalated\Laravel\Escalated;
@@ -20,6 +21,8 @@ use Filament\Tables\Table;
 
 class MacroResource extends Resource
 {
+    use RequiresAdminSeat;
+
     protected static ?string $model = Macro::class;
 
     protected static ?int $navigationSort = 15;

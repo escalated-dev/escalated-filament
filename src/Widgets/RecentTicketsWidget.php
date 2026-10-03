@@ -3,6 +3,7 @@
 namespace Escalated\Filament\Widgets;
 
 use Escalated\Filament\Resources\TicketResource;
+use Escalated\Filament\Support\PanelAccess;
 use Escalated\Laravel\Enums\TicketPriority;
 use Escalated\Laravel\Enums\TicketStatus;
 use Escalated\Laravel\Models\Ticket;
@@ -76,5 +77,10 @@ class RecentTicketsWidget extends BaseWidget
                     ->url(fn (Ticket $record) => TicketResource::getUrl('view', ['record' => $record])),
             ])
             ->paginated(false);
+    }
+
+    public static function canView(): bool
+    {
+        return PanelAccess::agent();
     }
 }
