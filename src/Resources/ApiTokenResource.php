@@ -4,6 +4,7 @@ namespace Escalated\Filament\Resources;
 
 use Escalated\Filament\EscalatedFilamentPlugin;
 use Escalated\Filament\Resources\ApiTokenResource\Pages;
+use Escalated\Filament\Support\StaffSeat;
 use Escalated\Laravel\Escalated;
 use Escalated\Laravel\Models\ApiToken;
 use Filament\Actions;
@@ -12,7 +13,6 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Support\Facades\Gate;
 
 class ApiTokenResource extends Resource
 {
@@ -45,10 +45,22 @@ class ApiTokenResource extends Resource
         return config('escalated.api.enabled', false);
     }
 
+    /**
+     * Users a token may be issued for: agents, and in tenant mode only those
+     * holding an agent seat in the current account.
+     *
+     * @return array<int|string, string>
+     */
+    public static function tokenUserOptions(): array
+    {
+        return Escalated::newUserModel()->newQuery()->get()
+            ->filter(fn ($user) => StaffSeat::isAgent($user))
+            ->mapWithKeys(fn ($user) => [$user->getKey() => "{$user->name} ({$user->email})"])
+            ->all();
+    }
+
     public static function form(Schema $schema): Schema
     {
-        $agentGate = config('escalated.authorization.agent_gate', 'escalated-agent');
-
         return $schema
             ->components([
                 Forms\Components\Section::make('Token Details')
@@ -60,14 +72,7 @@ class ApiTokenResource extends Resource
 
                         Forms\Components\Select::make('tokenable_id')
                             ->label('User')
-                            ->options(function () use ($agentGate) {
-                                $userModel = Escalated::newUserModel();
-
-                                return $userModel->newQuery()->get()
-                                    ->filter(fn ($user) => Gate::forUser($user)->allows($agentGate))
-                                    ->mapWithKeys(fn ($user) => [$user->getKey() => "{$user->name} ({$user->email})"])
-                                    ->all();
-                            })
+                            ->options(fn (): array => static::tokenUserOptions())
                             ->required()
                             ->searchable()
                             ->preload()

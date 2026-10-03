@@ -4,6 +4,7 @@ namespace Escalated\Filament\Resources;
 
 use Escalated\Filament\EscalatedFilamentPlugin;
 use Escalated\Filament\Resources\SkillResource\Pages;
+use Escalated\Filament\Support\StaffSeat;
 use Escalated\Laravel\Escalated;
 use Escalated\Laravel\Models\Department;
 use Escalated\Laravel\Models\Skill;
@@ -76,6 +77,15 @@ class SkillResource extends Resource
                     $builder->orWhere('is_admin', true);
                 }
             });
+        }
+
+        // Role columns are host-global; in tenant mode an agent also needs a
+        // seat in the current account.
+        if (StaffSeat::tenancyEnabled()) {
+            return $query->get()
+                ->filter(fn ($user) => StaffSeat::isAgent($user))
+                ->mapWithKeys(fn ($user) => [$user->getKey() => $user->{$displayColumn}])
+                ->all();
         }
 
         return $query->pluck($displayColumn, $userKey)->all();
