@@ -3,6 +3,7 @@
 namespace Escalated\Filament\Widgets;
 
 use Escalated\Filament\Resources\TicketResource;
+use Escalated\Filament\Support\PanelAccess;
 use Escalated\Laravel\Enums\TicketPriority;
 use Escalated\Laravel\Models\Ticket;
 use Filament\Actions;
@@ -85,5 +86,10 @@ class SlaBreachWidget extends BaseWidget
             ->emptyStateHeading(__('escalated-filament::filament.widgets.sla_breach.empty_heading'))
             ->emptyStateDescription(__('escalated-filament::filament.widgets.sla_breach.empty_description'))
             ->emptyStateIcon('heroicon-o-check-circle');
+    }
+
+    public static function canView(): bool
+    {
+        return PanelAccess::agent();
     }
 }

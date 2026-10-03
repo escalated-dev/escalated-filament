@@ -2,6 +2,7 @@
 
 namespace Escalated\Filament\Widgets;
 
+use Escalated\Filament\Support\PanelAccess;
 use Escalated\Laravel\Models\SatisfactionRating;
 use Escalated\Laravel\Models\Ticket;
 use Filament\Widgets\StatsOverviewWidget;
@@ -53,5 +54,10 @@ class TicketStatsOverview extends StatsOverviewWidget
                 ->icon('heroicon-o-star')
                 ->color($avgCsat && $avgCsat >= 4 ? 'success' : ($avgCsat && $avgCsat >= 3 ? 'warning' : 'danger')),
         ];
+    }
+
+    public static function canView(): bool
+    {
+        return PanelAccess::agent();
     }
 }

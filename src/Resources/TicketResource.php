@@ -5,6 +5,7 @@ namespace Escalated\Filament\Resources;
 use Escalated\Filament\EscalatedFilamentPlugin;
 use Escalated\Filament\Resources\TicketResource\Pages;
 use Escalated\Filament\Resources\TicketResource\RelationManagers;
+use Escalated\Filament\Support\Concerns\RequiresAgentSeat;
 use Escalated\Filament\Support\TicketSubjectTypeResolver;
 use Escalated\Laravel\Enums\TicketPriority;
 use Escalated\Laravel\Enums\TicketStatus;
@@ -23,6 +24,8 @@ use Illuminate\Database\Eloquent\Collection;
 
 class TicketResource extends Resource
 {
+    use RequiresAgentSeat;
+
     protected static ?string $model = Ticket::class;
 
     protected static ?int $navigationSort = 1;

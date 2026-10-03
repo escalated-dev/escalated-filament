@@ -4,6 +4,7 @@ namespace Escalated\Filament\Resources;
 
 use Escalated\Filament\EscalatedFilamentPlugin;
 use Escalated\Filament\Resources\CannedResponseResource\Pages;
+use Escalated\Filament\Support\Concerns\RequiresAgentSeat;
 use Escalated\Laravel\Models\CannedResponse;
 use Filament\Actions;
 use Filament\Forms;
@@ -14,6 +15,8 @@ use Filament\Tables\Table;
 
 class CannedResponseResource extends Resource
 {
+    use RequiresAgentSeat;
+
     protected static ?string $model = CannedResponse::class;
 
     protected static ?int $navigationSort = 14;

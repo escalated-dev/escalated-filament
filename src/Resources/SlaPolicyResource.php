@@ -4,6 +4,7 @@ namespace Escalated\Filament\Resources;
 
 use Escalated\Filament\EscalatedFilamentPlugin;
 use Escalated\Filament\Resources\SlaPolicyResource\Pages;
+use Escalated\Filament\Support\Concerns\RequiresAdminSeat;
 use Escalated\Laravel\Enums\TicketPriority;
 use Escalated\Laravel\Models\SlaPolicy;
 use Filament\Actions;
@@ -15,6 +16,8 @@ use Filament\Tables\Table;
 
 class SlaPolicyResource extends Resource
 {
+    use RequiresAdminSeat;
+
     protected static ?string $model = SlaPolicy::class;
 
     protected static ?int $navigationSort = 12;

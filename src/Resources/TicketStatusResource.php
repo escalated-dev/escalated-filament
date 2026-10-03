@@ -4,6 +4,7 @@ namespace Escalated\Filament\Resources;
 
 use Escalated\Filament\EscalatedFilamentPlugin;
 use Escalated\Filament\Resources\TicketStatusResource\Pages;
+use Escalated\Filament\Support\Concerns\RequiresAdminSeat;
 use Escalated\Laravel\Models\TicketStatus;
 use Filament\Actions;
 use Filament\Forms;
@@ -15,6 +16,8 @@ use Filament\Tables\Table;
 
 class TicketStatusResource extends Resource
 {
+    use RequiresAdminSeat;
+
     protected static ?string $model = TicketStatus::class;
 
     protected static ?int $navigationSort = 23;

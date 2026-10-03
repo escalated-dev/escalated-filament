@@ -5,6 +5,7 @@ namespace Escalated\Filament\Resources;
 use Escalated\Filament\EscalatedFilamentPlugin;
 use Escalated\Filament\Resources\NewsletterListResource\Pages;
 use Escalated\Filament\Resources\NewsletterListResource\RelationManagers;
+use Escalated\Filament\Support\Concerns\RequiresAdminSeat;
 use Escalated\Laravel\Models\Newsletter\NewsletterList;
 use Filament\Forms;
 use Filament\Resources\Resource;
@@ -14,6 +15,8 @@ use Filament\Tables\Table;
 
 class NewsletterListResource extends Resource
 {
+    use RequiresAdminSeat;
+
     protected static ?string $model = NewsletterList::class;
 
     protected static ?int $navigationSort = 26;

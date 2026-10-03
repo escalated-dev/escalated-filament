@@ -3,6 +3,7 @@
 namespace Escalated\Filament\Pages;
 
 use Escalated\Filament\EscalatedFilamentPlugin;
+use Escalated\Filament\Support\PanelAccess;
 use Escalated\Laravel\Models\EscalatedSettings;
 use Filament\Forms;
 use Filament\Forms\Concerns\InteractsWithForms;
@@ -144,5 +145,10 @@ class Settings extends Page implements HasForms
             ->title(__('escalated-filament::filament.pages.settings.save_success'))
             ->success()
             ->send();
+    }
+
+    public static function canAccess(): bool
+    {
+        return PanelAccess::admin();
     }
 }

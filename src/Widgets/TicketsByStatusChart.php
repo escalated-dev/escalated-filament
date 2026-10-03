@@ -2,6 +2,7 @@
 
 namespace Escalated\Filament\Widgets;
 
+use Escalated\Filament\Support\PanelAccess;
 use Escalated\Laravel\Enums\TicketStatus;
 use Escalated\Laravel\Models\Ticket;
 use Filament\Widgets\ChartWidget;
@@ -45,5 +46,10 @@ class TicketsByStatusChart extends ChartWidget
             ],
             'labels' => $data->pluck('label')->values()->all(),
         ];
+    }
+
+    public static function canView(): bool
+    {
+        return PanelAccess::agent();
     }
 }

@@ -3,6 +3,7 @@
 namespace Escalated\Filament\Pages;
 
 use Escalated\Filament\EscalatedFilamentPlugin;
+use Escalated\Filament\Support\PanelAccess;
 use Escalated\Filament\Widgets\CsatOverviewWidget;
 use Escalated\Filament\Widgets\RecentTicketsWidget;
 use Escalated\Filament\Widgets\SlaBreachWidget;
@@ -65,5 +66,10 @@ class Dashboard extends Page
     public function getFooterWidgetsColumns(): int|array
     {
         return 2;
+    }
+
+    public static function canAccess(): bool
+    {
+        return PanelAccess::agent();
     }
 }

@@ -4,6 +4,7 @@ namespace Escalated\Filament\Resources;
 
 use Escalated\Filament\EscalatedFilamentPlugin;
 use Escalated\Filament\Resources\DepartmentResource\Pages;
+use Escalated\Filament\Support\Concerns\RequiresAdminSeat;
 use Escalated\Laravel\Escalated;
 use Escalated\Laravel\Models\Department;
 use Filament\Actions;
@@ -17,6 +18,8 @@ use Illuminate\Support\Str;
 
 class DepartmentResource extends Resource
 {
+    use RequiresAdminSeat;
+
     protected static ?string $model = Department::class;
 
     protected static ?int $navigationSort = 10;

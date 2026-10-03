@@ -3,6 +3,7 @@
 namespace Escalated\Filament\Pages;
 
 use Escalated\Filament\EscalatedFilamentPlugin;
+use Escalated\Filament\Support\PanelAccess;
 use Escalated\Laravel\Models\Plugin;
 use Escalated\Laravel\Services\PluginService;
 use Filament\Actions\Action;
@@ -62,7 +63,7 @@ class ManagePlugins extends Page implements HasForms, HasTable
 
     public static function canAccess(): bool
     {
-        return config('escalated.plugins.enabled', false);
+        return config('escalated.plugins.enabled', false) && PanelAccess::admin();
     }
 
     protected function getPluginService(): PluginService
