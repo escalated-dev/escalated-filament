@@ -166,6 +166,17 @@ EscalatedFilamentPlugin::make()
     ->adminGate('escalated-admin')  // Bramka dostępu admina (domyślnie: 'escalated-admin')
 ```
 
+### Kontrola dostępu
+
+Metoda `canAccessPanel()` Twojego panelu decyduje, kto może zalogować się do panelu. Dwie bramki decydują o tym, z czego użytkownicy mogą korzystać po zalogowaniu, odzwierciedlając trasy `escalated-laravel`:
+
+| Obszar | Wymagane |
+|---|---|
+| Zgłoszenia, gotowe odpowiedzi, pulpit wsparcia i jego widżety | bramka agenta **lub** bramka administratora |
+| Wszystko inne: działy, tagi, polityki SLA, reguły eskalacji, makra, automatyzacje, webhooki, tokeny API, role, statusy, umiejętności, pola niestandardowe, godziny pracy, artykuły i kategorie bazy wiedzy, dziennik audytu, newslettery, raporty oraz każda strona ustawień | bramka administratora |
+
+Użytkownik panelu, który nie przechodzi żadnej z bramek, otrzymuje błąd 403 na każdej stronie Escalated, a elementy nawigacji są ukryte. Polityki modeli dostarczane przez `escalated-laravel` (na przykład prywatne gotowe odpowiedzi może edytować tylko ich autor) nadal obowiązują dodatkowo. W trybie wielodzierżawczym użytkownik potrzebuje także miejsca pracownika w bieżącym koncie, niezależnie od skonfigurowanych nazw bramek.
+
 Cała pozostała konfiguracja (SLA, tryby hostingu, powiadomienia itp.) jest zarządzana przez pakiet bazowy `escalated-laravel` w `config/escalated.php`. Zobacz [README escalated-laravel](https://github.com/escalated-dev/escalated-laravel) dla pełnej referencji konfiguracji.
 
 ## Publikowanie widoków

@@ -166,6 +166,17 @@ EscalatedFilamentPlugin::make()
     ->adminGate('escalated-admin')  // 관리자 접근 게이트 (기본값: 'escalated-admin')
 ```
 
+### 접근 제어
+
+패널의 `canAccessPanel()`은 누가 패널에 로그인할 수 있는지 결정합니다. 두 게이트는 로그인한 사용자가 무엇을 사용할 수 있는지 결정하며, `escalated-laravel` 라우트와 동일하게 구성됩니다:
+
+| 영역 | 필요 조건 |
+|---|---|
+| 티켓, 정형 응답, 지원 대시보드 및 위젯 | 에이전트 게이트 **또는** 관리자 게이트 |
+| 그 외 모든 항목: 부서, 태그, SLA 정책, 에스컬레이션 규칙, 매크로, 자동화, 웹훅, API 토큰, 역할, 상태, 스킬, 사용자 정의 필드, 영업 시간, 지식 베이스 문서 및 카테고리, 감사 로그, 뉴스레터, 보고서, 모든 설정 페이지 | 관리자 게이트 |
+
+두 게이트를 모두 통과하지 못한 패널 사용자는 모든 Escalated 페이지에서 403 응답을 받으며, 내비게이션 항목은 숨겨집니다. `escalated-laravel`에 포함된 모델 정책(예: 비공개 정형 응답은 작성자만 편집 가능)은 그 위에 계속 적용됩니다. 테넌트 모드에서는 어떤 게이트 이름을 설정하든 사용자에게 현재 계정의 스태프 좌석도 필요합니다.
+
 기타 모든 설정(SLA, 호스팅 모드, 알림 등)은 코어 `escalated-laravel` 패키지의 `config/escalated.php`에서 관리됩니다. 전체 설정 참조는 [escalated-laravel README](https://github.com/escalated-dev/escalated-laravel)를 확인하세요.
 
 ## 뷰 퍼블리싱

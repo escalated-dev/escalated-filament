@@ -166,6 +166,17 @@ EscalatedFilamentPlugin::make()
     ->adminGate('escalated-admin')  // Porte d'accès admin (par défaut : 'escalated-admin')
 ```
 
+### Contrôle d'accès
+
+La méthode `canAccessPanel()` de votre panneau détermine qui peut se connecter au panneau. Les deux portes déterminent ce que ces utilisateurs peuvent utiliser une fois connectés, à l'image des routes de `escalated-laravel` :
+
+| Périmètre | Requis |
+|---|---|
+| Tickets, réponses prédéfinies, le tableau de bord du support et ses widgets | porte agent **ou** porte admin |
+| Tout le reste : départements, tags, politiques SLA, règles d'escalade, macros, automatisations, webhooks, jetons API, rôles, statuts, compétences, champs personnalisés, heures ouvrées, articles et catégories de la base de connaissances, journal d'audit, newsletters, rapports et toutes les pages de paramètres | porte admin |
+
+Un utilisateur du panneau qui ne passe aucune des deux portes reçoit une erreur 403 sur chaque page Escalated, et les éléments de navigation sont masqués. Les politiques de modèle fournies par `escalated-laravel` (par exemple, les réponses prédéfinies privées ne restent modifiables que par leur auteur) s'appliquent toujours en plus. En mode multi-locataire, l'utilisateur a également besoin d'un siège de personnel dans le compte courant, quels que soient les noms de portes que vous configurez.
+
 Toute autre configuration (SLA, modes d'hébergement, notifications, etc.) est gérée par le package principal `escalated-laravel` dans `config/escalated.php`. Consultez le [README de escalated-laravel](https://github.com/escalated-dev/escalated-laravel) pour la référence complète de configuration.
 
 ## Publication des vues
