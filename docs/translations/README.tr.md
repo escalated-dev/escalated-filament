@@ -166,6 +166,17 @@ EscalatedFilamentPlugin::make()
     ->adminGate('escalated-admin')  // Yönetici erişim kapısı (varsayılan: 'escalated-admin')
 ```
 
+### Erişim kontrolü
+
+Panelinizin `canAccessPanel()` metodu panele kimin giriş yapabileceğine karar verir. İki kapı ise kullanıcıların içeride neleri kullanabileceğine karar verir ve `escalated-laravel` rotalarıyla aynı şekilde çalışır:
+
+| Alan | Gereken |
+|---|---|
+| Biletler, hazır yanıtlar, destek panosu ve widget'ları | temsilci kapısı **veya** yönetici kapısı |
+| Diğer her şey: departmanlar, etiketler, SLA politikaları, eskalasyon kuralları, makrolar, otomasyonlar, webhook'lar, API token'ları, roller, durumlar, beceriler, özel alanlar, çalışma saatleri, bilgi bankası makaleleri ve kategorileri, denetim günlüğü, bültenler, raporlar ve tüm ayar sayfaları | yönetici kapısı |
+
+İki kapıdan hiçbirini geçemeyen bir panel kullanıcısı her Escalated sayfasında 403 alır ve gezinme öğeleri gizlenir. `escalated-laravel` ile gelen model politikaları (örneğin, özel hazır yanıtları yalnızca yazarları düzenleyebilir) bunlara ek olarak geçerliliğini korur. Kiracı modunda, yapılandırdığınız kapı adlarından bağımsız olarak kullanıcının mevcut hesapta bir personel koltuğuna da sahip olması gerekir.
+
 Diğer tüm yapılandırmalar (SLA, barındırma modları, bildirimler vb.) çekirdek `escalated-laravel` paketi tarafından `config/escalated.php` dosyasında yönetilir. Tam yapılandırma referansı için [escalated-laravel README](https://github.com/escalated-dev/escalated-laravel) dosyasına bakın.
 
 ## View'ları Yayınlama

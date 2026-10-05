@@ -166,6 +166,17 @@ EscalatedFilamentPlugin::make()
     ->adminGate('escalated-admin')  // 管理员访问门（默认：'escalated-admin'）
 ```
 
+### 访问控制
+
+面板的 `canAccessPanel()` 决定谁可以登录面板。两个授权门决定用户登录后可以使用哪些功能，与 `escalated-laravel` 的路由保持一致：
+
+| 范围 | 所需权限 |
+|---|---|
+| 工单、预设回复、支持仪表板及其小部件 | 客服门 **或** 管理员门 |
+| 其他所有内容：部门、标签、SLA 策略、升级规则、宏、自动化、Webhook、API 令牌、角色、状态、技能、自定义字段、营业时间、知识库文章和分类、审计日志、新闻通讯、报表以及所有设置页面 | 管理员门 |
+
+两个授权门都未通过的面板用户在每个 Escalated 页面上都会收到 403，并且导航项会被隐藏。`escalated-laravel` 自带的模型策略（例如，私有预设回复仅可由其作者编辑）仍会在此基础上生效。在租户模式下，无论您配置了什么授权门名称，用户还需要在当前账户中拥有一个员工席位。
+
 其他所有配置（SLA、托管模式、通知等）由核心 `escalated-laravel` 包在 `config/escalated.php` 中管理。完整配置参考请查看 [escalated-laravel README](https://github.com/escalated-dev/escalated-laravel)。
 
 ## 发布视图

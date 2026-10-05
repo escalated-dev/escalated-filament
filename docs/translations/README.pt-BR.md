@@ -166,6 +166,17 @@ EscalatedFilamentPlugin::make()
     ->adminGate('escalated-admin')  // Gate de acesso do admin (padrão: 'escalated-admin')
 ```
 
+### Controle de acesso
+
+O método `canAccessPanel()` do seu painel decide quem pode entrar no painel. Os dois gates decidem o que os usuários podem usar depois de entrar, espelhando as rotas do `escalated-laravel`:
+
+| Área | Requisito |
+|---|---|
+| Tickets, respostas prontas, o painel de suporte e seus widgets | gate de agente **ou** gate de administrador |
+| Todo o resto: departamentos, tags, políticas de SLA, regras de escalonamento, macros, automações, webhooks, tokens de API, papéis, status, habilidades, campos personalizados, horário comercial, artigos e categorias da base de conhecimento, log de auditoria, newsletters, relatórios e todas as páginas de configurações | gate de administrador |
+
+Um usuário do painel que não passa em nenhum dos dois gates recebe um 403 em todas as páginas do Escalated, e os itens de navegação ficam ocultos. As policies de modelo incluídas no `escalated-laravel` (por exemplo, respostas prontas privadas continuam editáveis apenas pelo autor) continuam valendo além disso. No modo multi-tenant, o usuário também precisa de uma vaga de equipe na conta atual, independentemente dos nomes de gate configurados.
+
 Todas as demais configurações (SLA, modos de hospedagem, notificações, etc.) são gerenciadas pelo pacote principal `escalated-laravel` em `config/escalated.php`. Consulte o [README do escalated-laravel](https://github.com/escalated-dev/escalated-laravel) para a referência completa de configuração.
 
 ## Publicação de views
