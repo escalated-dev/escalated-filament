@@ -7,6 +7,41 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.4.0] - 2026-10-08
+
+This release enforces the panel's agent and admin gates and requires
+escalated-laravel 1.9. Read **Upgrading** before deploying.
+
+### Upgrading
+- **`agentGate()` / `adminGate()` are now enforced.** Tickets, canned responses
+  and the support dashboard require the agent or admin gate; every other
+  Escalated resource and page requires the admin gate. Panel users who pass
+  neither get a 403 and see no Escalated navigation. Make sure your support
+  staff pass the configured gates (by default `escalated-agent` /
+  `escalated-admin`, or the names passed to the plugin) before upgrading, or
+  they lose access to the panel's Escalated pages.
+- **Requires `escalated-dev/escalated-laravel` ^1.9.0.** Follow that release's
+  upgrading notes first (frontend 0.12, migrations, private attachments,
+  verified guest access, requester-only inbound email replies, tenant staff
+  seats).
+- **Tenant mode needs a staff seat in the current account.** With
+  escalated-laravel tenancy enabled, panel access, the API token owner picker
+  and the skill agent picker go through `StaffAccess` (host gate plus the
+  tenant-local seat from `TenantResolver::isAgent/isAdmin`). A user with the
+  global flag but no seat in the current account is refused and is not offered
+  in the pickers.
+
+### Added
+- `Support\StaffSeat` checks staff access through escalated-laravel's
+  `StaffAccess`, and `Support\PanelAccess` resolves the plugin's gate names.
+  The API token user picker (`ApiTokenResource::tokenUserOptions()`) and the
+  skill agent picker list only seated agents. (#49, #50)
+- README "Access control" section, also in the translated READMEs. (#50, #51)
+
+### Fixed
+- The Livewire `ViewErrorBag` vendor patch script matches Livewire 4.4 as well
+  as 4.3, so the test suite runs again on current Filament 5.7. (#47)
+
 ### Changed
 - **The `agentGate()` / `adminGate()` settings are now enforced.** They were documented but never read, so every resource and page without an `escalated-laravel` model policy (webhooks, API tokens, roles, automations, macros, skills, custom fields, KB articles, newsletters, reports, settings, and more) was open to anyone who could sign in to the panel, and the ticket list was too. Tickets, canned responses and the support dashboard now require the agent or admin gate; every other resource and page requires the admin gate. Users without either gate get a 403 and see no Escalated navigation. Existing model policies still apply on top, and in tenant mode a staff seat in the current account is still required. **Upgrade note:** make sure your support staff pass the configured gates before upgrading, or they will lose access to the panel's Escalated pages.
 
