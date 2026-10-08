@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8a72f1e4bde6902c16be408bf22e9939",
+    "content-hash": "f6b0a8d09fca670d89c77f42268b2019",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -991,21 +991,21 @@
         },
         {
             "name": "escalated-dev/escalated-laravel",
-            "version": "v1.5.1",
+            "version": "v1.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/escalated-dev/escalated-laravel.git",
-                "reference": "66d8a7624a2e5f883eab5ab7d67bb84a7e03f18b"
+                "reference": "3e06f0b2bae9fcb64834b9746b3469e31cbf0400"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/escalated-dev/escalated-laravel/zipball/66d8a7624a2e5f883eab5ab7d67bb84a7e03f18b",
-                "reference": "66d8a7624a2e5f883eab5ab7d67bb84a7e03f18b",
+                "url": "https://api.github.com/repos/escalated-dev/escalated-laravel/zipball/3e06f0b2bae9fcb64834b9746b3469e31cbf0400",
+                "reference": "3e06f0b2bae9fcb64834b9746b3469e31cbf0400",
                 "shasum": ""
             },
             "require": {
                 "escalated-dev/locale": "^0.1.8",
-                "illuminate/contracts": "^11.0|^12.0|^13.0",
+                "illuminate/contracts": "^11.39|^12.0|^13.0",
                 "inertiajs/inertia-laravel": "^2.0|^3.0",
                 "league/commonmark": "^2.0",
                 "php": "^8.2",
@@ -1014,7 +1014,7 @@
             "require-dev": {
                 "laravel/pint": "^1.29",
                 "orchestra/testbench": "^9.0|^10.0|^11.0",
-                "pestphp/pest": "^2.0|^3.0",
+                "pestphp/pest": "^2.0|^3.0|^4.0",
                 "pestphp/pest-plugin-laravel": "^2.0|^3.0|^4.0"
             },
             "type": "library",
@@ -1049,9 +1049,9 @@
             ],
             "support": {
                 "issues": "https://github.com/escalated-dev/escalated-laravel/issues",
-                "source": "https://github.com/escalated-dev/escalated-laravel/tree/v1.5.1"
+                "source": "https://github.com/escalated-dev/escalated-laravel/tree/v1.9.0"
             },
-            "time": "2026-06-04T05:28:48+00:00"
+            "time": "2026-10-08T18:36:05+00:00"
         },
         {
             "name": "escalated-dev/locale",
