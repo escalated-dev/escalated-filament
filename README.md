@@ -234,6 +234,11 @@ only the options your installation needs in the published `config/escalated.php`
 `sla.targeted`. All remain off by default (`visibility` is `all`). Account
 resolution uses the backend `TicketAccountResolver` implemented by the host.
 
+With restrictions enabled, custom panel gates also require the backend's staff
+seat (or admin seat for administration). If your custom gates define those
+roles, set the backend `authorization.agent_gate` and `authorization.admin_gate`
+to the matching names. A panel-only gate cannot bypass backend visibility.
+
 Lists, search, reports, widgets and bulk actions inherit the current agent's
 ticket boundary. Conversation and relation-manager requests recheck the parent
 ticket after membership changes. Assignment choices include only eligible

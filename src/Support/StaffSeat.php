@@ -18,6 +18,8 @@ use Illuminate\Support\Facades\Gate;
  * A panel can name its own gate (EscalatedFilamentPlugin::agentGate() /
  * adminGate()). When that differs from escalated-laravel's configured gate,
  * the named gate is checked instead, still behind the tenant-local seat.
+ * With ticket restrictions enabled, the backend staff seat is also required
+ * so its query scopes and queued delivery recognize the same staff identity.
  */
 final class StaffSeat
 {
@@ -47,6 +49,14 @@ final class StaffSeat
         $configuredGate = config("escalated.authorization.{$seat}_gate", "escalated-{$seat}");
 
         if ($gate !== null && $gate !== $configuredGate) {
+            // Restricted ticket queries and queued delivery use the backend's
+            // staff identity. A panel-only gate must not turn a customer into
+            // an unscoped agent or grant administration of those boundaries.
+            if ((config('escalated.visibility', 'all') === 'department' || config('escalated.accounts.scope_agents', false))
+                && ! ($seat === 'admin' ? StaffAccess::isAdmin($user) : StaffAccess::isStaff($user))) {
+                return false;
+            }
+
             return Gate::forUser($user)->allows($gate) && self::hasTenantSeat($user, $seat);
         }
 

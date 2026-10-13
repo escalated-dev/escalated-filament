@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - Reauthorize conversation children and relation owners on every request, including after department membership changes.
+- Require the backend staff seat for custom panel gates when ticket restrictions are enabled.
 
 ## [1.4.0] - 2026-10-08
 

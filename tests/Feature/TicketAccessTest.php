@@ -1,11 +1,13 @@
 <?php
 
+use Escalated\Filament\EscalatedFilamentPlugin;
 use Escalated\Filament\Livewire\TicketConversation;
 use Escalated\Filament\Pages\Reports;
 use Escalated\Filament\Resources\SlaPolicyResource\Pages\CreateSlaPolicy;
 use Escalated\Filament\Resources\TicketResource\Pages\CreateTicket;
 use Escalated\Filament\Resources\TicketResource\Pages\ListTickets;
 use Escalated\Filament\Resources\TicketResource\RelationManagers\RepliesRelationManager;
+use Escalated\Filament\Support\PanelAccess;
 use Escalated\Filament\Support\TicketAccess;
 use Escalated\Filament\Tests\Models\FakeProject;
 use Escalated\Filament\Tests\User;
@@ -122,4 +124,27 @@ it('persists optional SLA targets from the admin form', function () {
         ->call('create')->assertHasNoFormErrors();
     $policy = SlaPolicy::where('name', 'Incident target')->firstOrFail();
     expect($policy->department_id)->toBe($this->department->id)->and($policy->ticket_type)->toBe('incident');
+});
+
+it('does not let a custom panel gate bypass backend staff restrictions', function () {
+    app(EscalatedFilamentPlugin::class)->agentGate('panel-agent');
+    Gate::define('panel-agent', fn () => true);
+    Gate::define('escalated-agent', fn () => false);
+    livewire(ListTickets::class)->assertForbidden();
+});
+
+it('requires the backend admin seat for custom panel administration when restricted', function () {
+    app(EscalatedFilamentPlugin::class)->adminGate('panel-admin');
+    Gate::define('panel-admin', fn () => true);
+    expect(PanelAccess::admin())->toBeFalse();
+});
+
+it('supports custom staff gates shared with the backend and retains defaults', function () {
+    app(EscalatedFilamentPlugin::class)->agentGate('panel-agent');
+    Gate::define('panel-agent', fn () => true);
+    Gate::define('escalated-agent', fn () => false);
+    config(['escalated.authorization.agent_gate' => 'panel-agent']);
+    livewire(ListTickets::class)->assertCanSeeTableRecords([$this->visible])->assertCanNotSeeTableRecords([$this->hidden]);
+    config(['escalated.visibility' => 'all', 'escalated.authorization.agent_gate' => 'escalated-agent']);
+    expect(PanelAccess::agent())->toBeTrue();
 });
