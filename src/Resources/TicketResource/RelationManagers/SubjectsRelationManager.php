@@ -2,6 +2,7 @@
 
 namespace Escalated\Filament\Resources\TicketResource\RelationManagers;
 
+use Escalated\Filament\Support\Concerns\AuthorizesTicketOwner;
 use Escalated\Filament\Support\TicketSubjectTypeResolver;
 use Escalated\Laravel\Contracts\TicketSubject;
 use Escalated\Laravel\Models\TicketSubjectLink;
@@ -17,6 +18,8 @@ use Illuminate\Validation\ValidationException;
 
 class SubjectsRelationManager extends RelationManager
 {
+    use AuthorizesTicketOwner;
+
     protected static string $relationship = 'subjects';
 
     public static function canViewForRecord(Model $ownerRecord, string $pageClass): bool

@@ -3,6 +3,7 @@
 namespace Escalated\Filament\Resources\TicketResource\Pages;
 
 use Escalated\Filament\Resources\TicketResource;
+use Escalated\Filament\Support\TicketAccess;
 use Filament\Resources\Pages\CreateRecord;
 
 class CreateTicket extends CreateRecord
@@ -16,6 +17,7 @@ class CreateTicket extends CreateRecord
         $data['requester_id'] = auth()->id();
         $data['status'] = 'open';
         $data['channel'] = 'web';
+        TicketAccess::validateAssignee(TicketAccess::prospective($data), $data['assigned_to'] ?? null, 'data.assigned_to');
 
         return $data;
     }

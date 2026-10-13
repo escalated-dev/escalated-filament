@@ -6,6 +6,7 @@ use Escalated\Filament\EscalatedFilamentPlugin;
 use Escalated\Filament\Resources\TicketResource\Pages;
 use Escalated\Filament\Resources\TicketResource\RelationManagers;
 use Escalated\Filament\Support\Concerns\RequiresAgentSeat;
+use Escalated\Filament\Support\TicketAccess;
 use Escalated\Filament\Support\TicketSubjectTypeResolver;
 use Escalated\Laravel\Enums\TicketPriority;
 use Escalated\Laravel\Enums\TicketStatus;
@@ -17,6 +18,7 @@ use Escalated\Laravel\Services\TicketService;
 use Filament\Actions;
 use Filament\Forms;
 use Filament\Resources\Resource;
+use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -76,19 +78,22 @@ class TicketResource extends Resource
                             ->default(TicketPriority::Medium->value)
                             ->required(),
 
+                        Forms\Components\Select::make('ticket_type')
+                            ->options(array_combine(Ticket::TYPES, Ticket::TYPES))
+                            ->default('question')
+                            ->required(),
+
                         Forms\Components\Select::make('department_id')
                             ->label(__('escalated-filament::filament.resources.ticket.field_department'))
                             ->relationship('department', 'name')
+                            ->live()
                             ->searchable()
                             ->preload()
                             ->nullable(),
 
                         Forms\Components\Select::make('assigned_to')
                             ->label(__('escalated-filament::filament.resources.ticket.field_assigned_agent'))
-                            ->relationship(
-                                name: 'assignee',
-                                titleAttribute: Escalated::userDisplayColumn(),
-                            )
+                            ->options(fn (?Ticket $record, Get $get) => TicketAccess::assignmentOptions($record ?? TicketAccess::prospective(['department_id' => $get('department_id')])))
                             ->searchable()
                             ->nullable(),
 
@@ -246,11 +251,13 @@ class TicketResource extends Resource
                     ->schema([
                         Forms\Components\Select::make('agent_id')
                             ->label(__('escalated-filament::filament.actions.assign_ticket.agent_field'))
-                            ->relationship('assignee', Escalated::userDisplayColumn())
+                            ->options(fn (Ticket $record) => TicketAccess::assignmentOptions($record))
                             ->searchable()
                             ->required(),
                     ])
                     ->action(function (Ticket $record, array $data): void {
+                        $record = TicketAccess::find($record->getKey(), 'assign');
+                        TicketAccess::validateAssignee($record, $data['agent_id']);
                         app(AssignmentService::class)
                             ->assign($record, $data['agent_id'], auth()->user());
                     })
@@ -278,11 +285,15 @@ class TicketResource extends Resource
                         ->schema([
                             Forms\Components\Select::make('agent_id')
                                 ->label(__('escalated-filament::filament.actions.assign_ticket.agent_field'))
-                                ->options(fn () => Escalated::userOptions())
+                                ->options(fn ($livewire) => TicketAccess::bulkAssignmentOptions($livewire->getSelectedTableRecords()))
                                 ->searchable()
                                 ->required(),
                         ])
                         ->action(function (Collection $records, array $data): void {
+                            $records = $records->map(fn (Ticket $ticket) => TicketAccess::find($ticket->getKey(), 'assign'));
+                            foreach ($records as $ticket) {
+                                TicketAccess::validateAssignee($ticket, $data['agent_id']);
+                            }
                             $service = app(AssignmentService::class);
                             foreach ($records as $ticket) {
                                 $service->assign($ticket, $data['agent_id'], auth()->user());

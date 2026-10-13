@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Support Laravel 1.9.1 opt-in ticket access and account routing, with eligible assignment controls, ticket types and optional SLA targets.
+
+### Fixed
+- Reauthorize conversation children and relation owners on every request, including after department membership changes.
+
 ## [1.4.0] - 2026-10-08
 
 This release enforces the panel's agent and admin gates and requires

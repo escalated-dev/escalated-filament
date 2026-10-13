@@ -2,8 +2,8 @@
 
 namespace Escalated\Filament\Livewire;
 
+use Escalated\Filament\Support\TicketAccess;
 use Escalated\Laravel\Models\CannedResponse;
-use Escalated\Laravel\Models\Reply;
 use Escalated\Laravel\Models\Ticket;
 use Escalated\Laravel\Services\TicketService;
 use Filament\Forms;
@@ -11,12 +11,14 @@ use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Notifications\Notification;
 use Filament\Schemas\Schema;
+use Livewire\Attributes\Locked;
 use Livewire\Component;
 
 class TicketConversation extends Component implements HasForms
 {
     use InteractsWithForms;
 
+    #[Locked]
     public int $ticketId;
 
     public string|array $replyBody = '';
@@ -32,12 +34,12 @@ class TicketConversation extends Component implements HasForms
 
     public function getTicketProperty(): Ticket
     {
-        return Ticket::findOrFail($this->ticketId);
+        return TicketAccess::find($this->ticketId);
     }
 
     public function getRepliesProperty()
     {
-        return Reply::where('ticket_id', $this->ticketId)
+        return $this->getTicketProperty()->replies()
             ->with('author')
             ->orderBy('created_at', 'asc')
             ->get();
@@ -45,7 +47,7 @@ class TicketConversation extends Component implements HasForms
 
     public function getPinnedNotesProperty()
     {
-        return Reply::where('ticket_id', $this->ticketId)
+        return $this->getTicketProperty()->replies()
             ->where('is_internal_note', true)
             ->where('is_pinned', true)
             ->with('author')
@@ -99,7 +101,7 @@ class TicketConversation extends Component implements HasForms
             $bodyContent = $this->extractTextFromTiptap($bodyContent);
         }
 
-        $ticket = $this->ticket;
+        $ticket = TicketAccess::find($this->ticketId, $this->isInternalNote ? 'addNote' : 'reply');
         $service = app(TicketService::class);
 
         if ($this->isInternalNote) {
@@ -238,11 +240,7 @@ class TicketConversation extends Component implements HasForms
 
     public function togglePin(int $replyId): void
     {
-        $reply = Reply::findOrFail($replyId);
-
-        if ($reply->ticket_id !== $this->ticketId) {
-            return;
-        }
+        $reply = TicketAccess::find($this->ticketId, 'update')->replies()->findOrFail($replyId);
 
         $reply->update(['is_pinned' => ! $reply->is_pinned]);
 

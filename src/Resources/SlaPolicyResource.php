@@ -7,6 +7,7 @@ use Escalated\Filament\Resources\SlaPolicyResource\Pages;
 use Escalated\Filament\Support\Concerns\RequiresAdminSeat;
 use Escalated\Laravel\Enums\TicketPriority;
 use Escalated\Laravel\Models\SlaPolicy;
+use Escalated\Laravel\Models\Ticket;
 use Filament\Actions;
 use Filament\Forms;
 use Filament\Resources\Resource;
@@ -54,6 +55,20 @@ class SlaPolicyResource extends Resource
 
                         Forms\Components\Textarea::make('description')
                             ->rows(2),
+
+                        Forms\Components\Select::make('department_id')
+                            ->label('Department')
+                            ->relationship('department', 'name')
+                            ->searchable()->preload()->nullable()
+                            ->visible(fn () => config('escalated.sla.targeted', false))
+                            ->dehydrated(fn () => config('escalated.sla.targeted', false)),
+
+                        Forms\Components\Select::make('ticket_type')
+                            ->label('Ticket type')
+                            ->options(array_combine(Ticket::TYPES, Ticket::TYPES))
+                            ->nullable()
+                            ->visible(fn () => config('escalated.sla.targeted', false))
+                            ->dehydrated(fn () => config('escalated.sla.targeted', false)),
 
                         Forms\Components\Toggle::make('is_default')
                             ->label(__('escalated-filament::filament.resources.sla_policy.field_default_policy'))

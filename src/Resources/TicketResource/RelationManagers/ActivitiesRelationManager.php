@@ -2,6 +2,7 @@
 
 namespace Escalated\Filament\Resources\TicketResource\RelationManagers;
 
+use Escalated\Filament\Support\Concerns\AuthorizesTicketOwner;
 use Escalated\Laravel\Enums\ActivityType;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
@@ -10,6 +11,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class ActivitiesRelationManager extends RelationManager
 {
+    use AuthorizesTicketOwner;
+
     protected static string $relationship = 'activities';
 
     public static function getTitle($ownerRecord, string $pageClass): string

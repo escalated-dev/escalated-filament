@@ -2,6 +2,7 @@
 
 namespace Escalated\Filament\Resources\TicketResource\RelationManagers;
 
+use Escalated\Filament\Support\Concerns\AuthorizesTicketOwner;
 use Escalated\Laravel\Escalated;
 use Filament\Actions;
 use Filament\Forms;
@@ -13,6 +14,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class FollowersRelationManager extends RelationManager
 {
+    use AuthorizesTicketOwner;
+
     protected static string $relationship = 'followers';
 
     public static function getIcon(Model $ownerRecord, string $pageClass): ?string
