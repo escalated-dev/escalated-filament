@@ -2,6 +2,7 @@
 
 namespace Escalated\Filament\Actions;
 
+use Escalated\Filament\Support\TicketAccess;
 use Escalated\Laravel\Models\Reply;
 use Filament\Actions\Action;
 use Filament\Notifications\Notification;
@@ -22,6 +23,7 @@ class PinReplyAction extends Action
             ->icon(fn (Reply $record) => $record->is_pinned ? 'heroicon-s-bookmark' : 'heroicon-o-bookmark')
             ->color(fn (Reply $record) => $record->is_pinned ? 'primary' : 'gray')
             ->action(function (Reply $record): void {
+                TicketAccess::find($record->ticket_id, 'update');
                 $record->update(['is_pinned' => ! $record->is_pinned]);
 
                 $message = $record->is_pinned ? __('escalated-filament::filament.actions.pin_reply.pinned') : __('escalated-filament::filament.actions.pin_reply.unpinned');

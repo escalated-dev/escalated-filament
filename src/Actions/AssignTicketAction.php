@@ -2,7 +2,7 @@
 
 namespace Escalated\Filament\Actions;
 
-use Escalated\Laravel\Escalated;
+use Escalated\Filament\Support\TicketAccess;
 use Escalated\Laravel\Models\Ticket;
 use Escalated\Laravel\Services\AssignmentService;
 use Filament\Actions\Action;
@@ -27,11 +27,13 @@ class AssignTicketAction extends Action
             ->schema([
                 Forms\Components\Select::make('agent_id')
                     ->label(__('escalated-filament::filament.actions.assign_ticket.agent_field'))
-                    ->options(fn () => app(Escalated::userModel())::pluck('name', 'id'))
+                    ->options(fn (Ticket $record) => TicketAccess::assignmentOptions($record))
                     ->searchable()
                     ->required(),
             ])
             ->action(function (Ticket $record, array $data): void {
+                $record = TicketAccess::find($record->getKey(), 'assign');
+                TicketAccess::validateAssignee($record, $data['agent_id']);
                 app(AssignmentService::class)->assign($record, $data['agent_id'], auth()->user());
 
                 Notification::make()

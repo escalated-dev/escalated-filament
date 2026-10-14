@@ -2,6 +2,7 @@
 
 namespace Escalated\Filament\Resources\TicketResource\RelationManagers;
 
+use Escalated\Filament\Support\Concerns\AuthorizesTicketOwner;
 use Escalated\Laravel\Models\Reply;
 use Escalated\Laravel\Services\TicketService;
 use Filament\Actions;
@@ -14,6 +15,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class RepliesRelationManager extends RelationManager
 {
+    use AuthorizesTicketOwner;
+
     protected static string $relationship = 'replies';
 
     public static function getIcon(Model $ownerRecord, string $pageClass): ?string
