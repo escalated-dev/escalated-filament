@@ -158,3 +158,40 @@ it('has index, create, and edit pages', function () {
 
     expect($pages)->toHaveKeys(['index', 'create', 'edit']);
 });
+
+it('creates rules targeted to a ticket type and complete account identity', function () {
+    $conditions = [
+        ['field' => 'ticket_type', 'value' => 'incident'],
+        ['field' => 'account', 'value' => ['type' => 'company', 'id' => '001']],
+    ];
+    livewire(CreateEscalationRule::class)
+        ->fillForm([
+            'name' => 'Company incident routing',
+            'trigger_type' => 'automatic',
+            'conditions' => $conditions,
+            'actions' => [],
+        ])
+        ->call('create')->assertHasNoFormErrors();
+    $rule = EscalationRule::where('name', 'Company incident routing')->firstOrFail();
+    expect($rule->conditions)->toBe($conditions);
+});
+
+it('changes condition value shapes without carrying over stale values', function () {
+    $page = livewire(CreateEscalationRule::class)
+        ->fillForm([
+            'name' => 'Switched account routing',
+            'trigger_type' => 'automatic',
+            'conditions' => [['field' => 'account', 'value' => ['type' => 'old', 'id' => 'old']]],
+            'actions' => [],
+        ]);
+    $key = array_key_first($page->get('data.conditions'));
+    $path = "data.conditions.{$key}";
+    $page->set("{$path}.field", 'ticket_type');
+    expect($page->get("{$path}.value"))->toBeNull();
+    $page->set("{$path}.value", 'incident')->set("{$path}.field", 'account');
+    expect($page->get("{$path}.value"))->not->toBe('incident');
+    $page->set("{$path}.value.type", 'company')->set("{$path}.value.id", '001 ')
+        ->call('create')->assertHasNoFormErrors();
+    expect(EscalationRule::where('name', 'Switched account routing')->firstOrFail()->conditions)
+        ->toBe([['field' => 'account', 'value' => ['type' => 'company', 'id' => '001 ']]]);
+});

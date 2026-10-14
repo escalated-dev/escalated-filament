@@ -10,10 +10,13 @@ use Escalated\Laravel\Enums\TicketStatus;
 use Escalated\Laravel\Escalated;
 use Escalated\Laravel\Models\Department;
 use Escalated\Laravel\Models\EscalationRule;
+use Escalated\Laravel\Models\Ticket;
 use Filament\Actions;
 use Filament\Forms;
 use Filament\Resources\Resource;
+use Filament\Schemas\Components\Fieldset;
 use Filament\Schemas\Components\Utilities\Get;
+use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -79,9 +82,12 @@ class EscalationRuleResource extends Resource
                                         'no_response_hours' => __('escalated-filament::filament.resources.escalation_rule.condition_field_no_response_hours'),
                                         'sla_breached' => __('escalated-filament::filament.resources.escalation_rule.condition_field_sla_breached'),
                                         'department_id' => __('escalated-filament::filament.resources.escalation_rule.condition_field_department'),
+                                        'ticket_type' => __('escalated-filament::filament.resources.escalation_rule.condition_field_ticket_type'),
+                                        'account' => __('escalated-filament::filament.resources.escalation_rule.condition_field_account'),
                                     ])
                                     ->required()
-                                    ->live(),
+                                    ->live()
+                                    ->afterStateUpdated(fn (Set $set, ?string $state) => $set('value', $state === 'account' ? ['type' => null, 'id' => null] : null)),
 
                                 Forms\Components\Select::make('value')
                                     ->options(fn (Get $get) => match ($get('field')) {
@@ -97,10 +103,11 @@ class EscalationRuleResource extends Resource
                                         ],
                                         'sla_breached' => ['true' => __('escalated-filament::filament.resources.escalation_rule.condition_value_yes')],
                                         'department_id' => Department::pluck('name', 'id')->all(),
+                                        'ticket_type' => array_combine(Ticket::TYPES, Ticket::TYPES),
                                         default => [],
                                     })
-                                    ->visible(fn (Get $get) => in_array($get('field'), ['status', 'priority', 'assigned', 'sla_breached', 'department_id']))
-                                    ->required(fn (Get $get) => in_array($get('field'), ['status', 'priority', 'assigned', 'sla_breached', 'department_id'])),
+                                    ->visible(fn (Get $get) => in_array($get('field'), ['status', 'priority', 'assigned', 'sla_breached', 'department_id', 'ticket_type']))
+                                    ->required(fn (Get $get) => in_array($get('field'), ['status', 'priority', 'assigned', 'sla_breached', 'department_id', 'ticket_type'])),
 
                                 Forms\Components\TextInput::make('value')
                                     ->label(__('escalated-filament::filament.resources.escalation_rule.field_hours'))
@@ -108,6 +115,24 @@ class EscalationRuleResource extends Resource
                                     ->minValue(1)
                                     ->visible(fn (Get $get) => in_array($get('field'), ['age_hours', 'no_response_hours']))
                                     ->required(fn (Get $get) => in_array($get('field'), ['age_hours', 'no_response_hours'])),
+
+                                Fieldset::make(__('escalated-filament::filament.resources.escalation_rule.condition_field_account'))
+                                    ->statePath('value')
+                                    ->schema([
+                                        Forms\Components\TextInput::make('type')
+                                            ->label(__('escalated-filament::filament.resources.escalation_rule.field_account_type'))
+                                            ->trim(false)
+                                            ->maxLength(255)
+                                            ->required(),
+                                        Forms\Components\TextInput::make('id')
+                                            ->label(__('escalated-filament::filament.resources.escalation_rule.field_account_id'))
+                                            ->trim(false)
+                                            ->maxLength(255)
+                                            ->required(),
+                                    ])
+                                    ->visible(fn (Get $get) => $get('field') === 'account')
+                                    ->columns(2)
+                                    ->columnSpan(2),
                             ])
                             ->columns(3)
                             ->addActionLabel(__('escalated-filament::filament.resources.escalation_rule.add_condition'))

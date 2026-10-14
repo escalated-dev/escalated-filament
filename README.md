@@ -245,7 +245,9 @@ ticket after membership changes. Assignment choices include only eligible
 agents, and creation validates the assignee again. Admins retain access within
 their tenant. Department-restricted agents cannot see tickets without a department.
 
-Ticket creation includes a ticket-type field. When targeted SLAs are enabled,
+Ticket creation includes a ticket-type field. The escalation-rule editor supports
+ticket-type conditions and a complete account type/ID pair. Automation conditions
+accept the same fields through their JSON editor. When targeted SLAs are enabled,
 the SLA form offers department and type targets. Requester account resolution
 and SLA selection use Laravel's ticket lifecycle. Moving departments preserves
 the attached SLA and its clock; explicit reselection is a host decision.
