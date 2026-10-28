@@ -7,12 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.4.1] - 2026-10-28
+
+Requires escalated-laravel ^1.9.1. The new ticket access and account routing
+options are off by default; see the README "Optional ticket access and routing"
+section before turning them on.
+
 ### Added
 - Support Laravel 1.9.1 opt-in ticket access and account routing, with eligible assignment controls, ticket types, type/account rule conditions and optional SLA targets.
 
 ### Fixed
 - Reauthorize conversation children and relation owners on every request, including after department membership changes.
 - Require the backend staff seat for custom panel gates when ticket restrictions are enabled.
+
+### Changed
+- Requires `escalated-dev/escalated-laravel` ^1.9.1; composer.lock updated v1.9.1 -> v1.9.11.
 
 ## [1.4.0] - 2026-10-08
 
