@@ -991,16 +991,16 @@
         },
         {
             "name": "escalated-dev/escalated-laravel",
-            "version": "v1.9.1",
+            "version": "v1.9.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/escalated-dev/escalated-laravel.git",
-                "reference": "9508a33592eb7a7231585a7516fd816867ca2c9f"
+                "reference": "8fb5c852093ae5297d5400e7439780ce45d93b61"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/escalated-dev/escalated-laravel/zipball/9508a33592eb7a7231585a7516fd816867ca2c9f",
-                "reference": "9508a33592eb7a7231585a7516fd816867ca2c9f",
+                "url": "https://api.github.com/repos/escalated-dev/escalated-laravel/zipball/8fb5c852093ae5297d5400e7439780ce45d93b61",
+                "reference": "8fb5c852093ae5297d5400e7439780ce45d93b61",
                 "shasum": ""
             },
             "require": {
@@ -1049,9 +1049,9 @@
             ],
             "support": {
                 "issues": "https://github.com/escalated-dev/escalated-laravel/issues",
-                "source": "https://github.com/escalated-dev/escalated-laravel/tree/v1.9.1"
+                "source": "https://github.com/escalated-dev/escalated-laravel/tree/v1.9.11"
             },
-            "time": "2026-10-14T00:33:13+00:00"
+            "time": "2026-10-28T16:57:56+00:00"
         },
         {
             "name": "escalated-dev/locale",
