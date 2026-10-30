@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.4.2] - 2026-10-30
+
+Requires escalated-laravel ^1.9.1. escalated-laravel 1.9.12 adds roles &
+permissions, two-factor authentication and single sign-on, each behind an
+install-level switch that is off by default; read its Upgrading notes (and run
+`php artisan migrate`) before turning any of them on.
+
+### Changed
+- Requires `escalated-dev/escalated-laravel` ^1.9.1 (unchanged); composer.lock updated v1.9.11 -> v1.9.12.
+
 ## [1.4.1] - 2026-10-28
 
 Requires escalated-laravel ^1.9.1. The new ticket access and account routing
