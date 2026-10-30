@@ -25,8 +25,12 @@ jobs:
         include:
           - laravel: ^12.0
             testbench: 10.*
+          # Laravel 11 is past security support and every 11.x release now
+          # carries a Composer advisory, so these legs alone may install
+          # advisory-flagged versions (as escalated-laravel's EOL legs do).
           - laravel: ^11.0
             testbench: 9.*
+            allow-insecure: true
 
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - F${{ matrix.filament }}
 
@@ -43,6 +47,11 @@ jobs:
 
       - name: Install dependencies
         run: |
+          # Only the EOL legs above opt out of Composer's advisory install
+          # block; every other leg still refuses insecure versions.
+          if [ "${{ matrix.allow-insecure }}" = "true" ]; then
+            composer config audit.block-insecure false
+          fi
           composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" "filament/filament:${{ matrix.filament }}" --no-interaction --no-update
           composer update --prefer-stable --prefer-dist --no-interaction
 
