@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.4.4] - 2026-10-30
+
+Requires escalated-laravel ^1.9.1. escalated-laravel 1.9.14 renders the shared
+`Escalated/Error` page for Inertia visits to its routes that end in 403, 404,
+419, 429, 500 or 503, instead of the host's HTML error page; full page loads,
+JSON/API requests and the host's own routes are untouched. Read its Upgrading
+notes if you customise error handling.
+
+### Changed
+- Requires `escalated-dev/escalated-laravel` ^1.9.1 (unchanged); composer.lock updated v1.9.13 -> v1.9.14.
+
 ## [1.4.3] - 2026-10-30
 
 Requires escalated-laravel ^1.9.1. escalated-laravel 1.9.13 sends plugin
