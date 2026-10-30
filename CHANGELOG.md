@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.4.3] - 2026-10-30
+
+Requires escalated-laravel ^1.9.1. escalated-laravel 1.9.13 sends plugin
+`ctx` ticket and reply writes through its ticket service: a status change the
+configured transitions do not allow is now refused with nothing written, and a
+plugin's own write no longer re-delivers the action it is handling; read its
+Upgrading notes if you run SDK plugins.
+
+### Changed
+- Requires `escalated-dev/escalated-laravel` ^1.9.1 (unchanged); composer.lock updated v1.9.12 -> v1.9.13.
+
 ## [1.4.2] - 2026-10-30
 
 Requires escalated-laravel ^1.9.1. escalated-laravel 1.9.12 adds roles &
