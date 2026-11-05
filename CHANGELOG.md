@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.4.5] - 2026-11-04
+
+Requires escalated-laravel ^1.9.1. escalated-laravel 1.9.15 sends the agent
+panel's optional `inbox` and `queue` props on the agent ticket pages (a few
+cached count queries per request, `escalated.agent_inbox.cache_seconds`),
+`agents` and `ticket.requester_tickets` on the agent ticket page, and agent
+snooze and unsnooze routes; a ticket's `latest_reply` is now its latest public
+reply. Read its Upgrading notes.
+
+### Changed
+- Requires `escalated-dev/escalated-laravel` ^1.9.1 (unchanged); composer.lock updated v1.9.14 -> v1.9.15.
+
 ## [1.4.4] - 2026-10-30
 
 Requires escalated-laravel ^1.9.1. escalated-laravel 1.9.14 renders the shared
