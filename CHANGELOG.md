@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.4.6] - 2026-11-05
+
+Requires escalated-laravel ^1.9.1. escalated-laravel 1.9.16 adds the agent
+panel's data (agent status route, knowledge-base search for agents, per-agent
+unread tickets, customer presence and the agent notifications feed) and the
+optional embeddable admin (off by default). It has **new migrations**
+(`last_customer_activity_at`, `escalated_ticket_reads`,
+`escalated_customer_presence`): run `php artisan migrate`. @mention
+notifications now come only from staff-authored replies and notes, and
+assigning a ticket to yourself sends no notification. Read its Upgrading notes.
+
+### Changed
+- Requires `escalated-dev/escalated-laravel` ^1.9.1 (unchanged); composer.lock updated v1.9.15 -> v1.9.16.
+
 ## [1.4.5] - 2026-11-04
 
 Requires escalated-laravel ^1.9.1. escalated-laravel 1.9.15 sends the agent
