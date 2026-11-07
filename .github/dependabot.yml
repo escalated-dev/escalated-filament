@@ -13,6 +13,12 @@ updates:
       interval: "weekly"
     labels:
       - "dependencies"
+    ignore:
+      # Deferred major: Pest 5 needs a planned upgrade.
+      - dependency-name: "pestphp/pest"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "pestphp/pest-plugin-laravel"
+        update-types: ["version-update:semver-major"]
 
   - package-ecosystem: "composer"
     directory: "/docker/host-app"
