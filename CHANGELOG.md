@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.4.7] - 2026-11-07
+
+Requires escalated-laravel ^1.9.1. escalated-laravel 1.9.17 has no host
+changes (its updates are in the Docker demo host app). This release ships the
+dependency sweep: the lock refresh below clears 13 advisories in what this
+package's CI and demo install; update the same packages in your app.
+
+### Security
+- **composer.lock refreshed past 13 advisories**, including the Livewire `#[Authorize]` bypass, and symfony html-sanitizer, http-foundation, http-kernel, mime, routing and yaml: livewire 4.4.8, the Filament panel packages 5.11.1, laravel/framework 13.40 and symfony 8.1.11. `composer audit` reports none (#61). The lock is what this package's CI and Docker demo install; your app resolves its own versions, so run `composer update livewire/livewire "filament/*" "symfony/*"` (or `composer audit`) in the host app to pick up the fixes.
+
+### Changed
+- Requires `escalated-dev/escalated-laravel` ^1.9.1 (unchanged); composer.lock updated v1.9.16 -> v1.9.17.
+- Dependabot holds the deferred `pestphp/pest` / `pest-plugin-laravel` 5 majors and no longer runs for the Docker demo host app, which it cannot resolve outside the Docker image (#61, #62).
+
 ## [1.4.6] - 2026-11-05
 
 Requires escalated-laravel ^1.9.1. escalated-laravel 1.9.16 adds the agent
