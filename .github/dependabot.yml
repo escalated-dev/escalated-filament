@@ -19,10 +19,3 @@ updates:
         update-types: ["version-update:semver-major"]
       - dependency-name: "pestphp/pest-plugin-laravel"
         update-types: ["version-update:semver-major"]
-
-  - package-ecosystem: "composer"
-    directory: "/docker/host-app"
-    schedule:
-      interval: "weekly"
-    labels:
-      - "dependencies"
