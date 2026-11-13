@@ -1,205 +1,147 @@
-<p align="center">
-  <a href="README.ar.md">العربية</a> •
-  <a href="README.de.md">Deutsch</a> •
-  <a href="../../README.md">English</a> •
-  <a href="README.es.md">Español</a> •
-  <a href="README.fr.md">Français</a> •
-  <a href="README.it.md">Italiano</a> •
-  <a href="README.ja.md">日本語</a> •
-  <a href="README.ko.md">한국어</a> •
-  <a href="README.nl.md">Nederlands</a> •
-  <a href="README.pl.md">Polski</a> •
-  <a href="README.pt-BR.md">Português (BR)</a> •
-  <a href="README.ru.md">Русский</a> •
-  <b>Türkçe</b> •
+<p align="center"><sub>
+  <a href="README.ar.md">العربية</a> ·
+  <a href="README.de.md">Deutsch</a> ·
+  <a href="../../README.md">English</a> ·
+  <a href="README.es.md">Español</a> ·
+  <a href="README.fr.md">Français</a> ·
+  <a href="README.it.md">Italiano</a> ·
+  <a href="README.ja.md">日本語</a> ·
+  <a href="README.ko.md">한국어</a> ·
+  <a href="README.nl.md">Nederlands</a> ·
+  <a href="README.pl.md">Polski</a> ·
+  <a href="README.pt-BR.md">Português (BR)</a> ·
+  <a href="README.ru.md">Русский</a> ·
+  <b>Türkçe</b> ·
   <a href="README.zh-CN.md">简体中文</a>
+</sub></p>
+
+<p align="center">
+  <a href="https://escalated.dev"><img src="https://raw.githubusercontent.com/escalated-dev/escalated/main/docs/assets/readme/logo.png" width="72" height="72" alt="Escalated"></a>
 </p>
 
-# Escalated Filament için
+<h1 align="center">Escalated for Filament</h1>
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/escalated-dev/escalated-filament.svg)](https://packagist.org/packages/escalated-dev/escalated-filament)
-[![Tests](https://github.com/escalated-dev/escalated-filament/actions/workflows/run-tests.yml/badge.svg)](https://github.com/escalated-dev/escalated-filament/actions/workflows/run-tests.yml)
-[![Laravel](https://img.shields.io/badge/laravel-11.x-FF2D20?logo=laravel&logoColor=white)](https://laravel.com/)
-[![Filament](https://img.shields.io/badge/filament-v3-FDAE4B?logo=data:image/svg+xml;base64,&logoColor=white)](https://filamentphp.com/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+<p align="center">
+  Escalated yardım masasını mevcut Filament yönetim panelinizin içinde çalıştırın.<br>
+  Talepler, departmanlar, SLA politikaları, eskalasyon kuralları ve makrolar yerel Filament kaynakları olarak gelir ve Escalated for Laravel üzerinde çalışır.
+</p>
 
-[Escalated](https://github.com/escalated-dev/escalated-laravel) destek bilet sistemi için [Filament](https://filamentphp.com) yönetim paneli eklentisi. Biletleri, departmanları, SLA politikalarını, eskalasyon kurallarını, makroları ve daha fazlasını mevcut Filament yönetim panelinizden yönetin.
+<p align="center">
+  <a href="https://escalated.dev"><b>Web sitesi</b></a> ·
+  <a href="https://escalated.dev/docs"><b>Dokümantasyon</b></a> ·
+  <a href="https://escalated.dev/cloud"><b>Cloud</b></a> ·
+  <a href="../../CHANGELOG.md"><b>Değişiklik günlüğü</b></a>
+</p>
 
-> **[escalated.dev](https://escalated.dev)** — Daha fazla bilgi edinin, demoları izleyin ve Bulut ile Kendi Sunucunuz seçeneklerini karşılaştırın.
+## Neler yapar
 
-## Nasıl Çalışır
+<table>
+  <tr>
+    <td width="50%" valign="top">
+      <h3>Zaten kullandığınız panelde yardım masanız</h3>
+      Filtreler, hızlı sekmeler ve toplu işlemlerle talep listeleri; konuşmayı, SLA ayrıntılarını ve tek tıkla yanıtlama, atama ve makro işlemlerini içeren bir talep sayfası.
+    </td>
+    <td width="50%" valign="top">
+      <h3>Escalated for Laravel ile aynı motor</h3>
+      SLA'lar, eskalasyon kuralları, olaylar ve webhook'ların hepsi <a href="https://github.com/escalated-dev/escalated-laravel">escalated-laravel</a> paketinden gelir; böylece hiçbir şey kopyalanmaz ve hiçbir şey ayrışmaz.
+    </td>
+  </tr>
+</table>
 
-Escalated Filament için, [`escalated-laravel`](https://github.com/escalated-dev/escalated-laravel) etrafında bir **Filament eklenti sarmalayıcısıdır**. Hiçbir iş mantığını çoğaltmaz. Bunun yerine, çekirdek Laravel paketindeki aynı servisleri, modelleri ve olayları çağıran Filament Resources, Pages, Widgets ve Actions sağlar. Bu şu anlama gelir:
+## Özellikler
 
-- Tüm bilet yaşam döngüsü mantığı, SLA hesaplamaları ve eskalasyon kuralları `escalated-laravel`dan gelir
-- Veritabanı tabloları, migration'lar ve yapılandırma çekirdek paket tarafından yönetilir
-- Olaylar, bildirimler ve webhook'lar Inertia arayüzündeki gibi tam olarak çalışır
-- Ayrı bir kod tabanı sürdürmeden yerel Filament deneyimi elde edersiniz
+<table>
+<tr>
+<td width="33%" valign="top">
 
-> **Not:** Bu paket, [`@escalated-dev/escalated`](https://github.com/escalated-dev/escalated) frontend paketindeki özel Vue 3 + Inertia.js arayüzü yerine Filament'in yerel Livewire + Blade bileşenlerini (tablolar, formlar, bilgi listeleri, eylemler, widget'lar) kullanır. Çekirdek işlevsellik aynıdır — aynı modeller, servisler, veritabanı ve iş mantığı — ancak arayüz görünümü Filament'in tasarım sistemini takip eder. Bazı etkileşimler hafifçe farklılık gösterebilir (örn. Filament modal'ları vs. satır içi formlar, Filament tablo filtreleri vs. özel filtre bileşenleri). Inertia frontend ile piksel düzeyinde eşleşme gerekiyorsa, paylaşılan Vue bileşenleri ile doğrudan `escalated-laravel` kullanın.
+**Talepler**
+- Liste, görüntüleme ve oluşturma sayfaları
+- Durum, öncelik, temsilci, SLA filtreleri
+- Sekmeler: benim, atanmamış, acil, SLA ihlaline yakın
+- Toplu atama, durum, öncelik, etiket, kapatma
+- Yanıtla, not, ata, takip et, makro uygula
+- Yapılandırmanızdan özel talep işlemleri
 
-## Gereksinimler
+</td>
+<td width="33%" valign="top">
 
-- PHP 8.2+
-- Laravel 11 veya 12
-- Filament 3.x, 4.x veya 5.x
-- escalated-dev/escalated-laravel ^0.5
+**Yönetim kaynakları**
+- Temsilci atamalı departmanlar
+- Renk seçicili etiketler
+- Önceliğe göre SLA politikaları
+- Eskalasyon kuralı koşul/işlem oluşturucusu
+- Kategorili hazır yanıtlar
+- Sırası değiştirilebilir adımlara sahip makrolar
 
-### Sürüm Uyumluluğu
+</td>
+<td width="33%" valign="top">
 
-| escalated-filament | Filament | Laravel | PHP  |
-|--------------------|----------|---------|------|
-| 0.5.x              | 3.x, 4.x, 5.x | 11, 12  | 8.2+ |
+**Panel widget'ları**
+- Açık, atanmamış, SLA ihlalli ve CSAT istatistikleri
+- Duruma ve önceliğe göre talep grafikleri
+- CSAT özeti
+- Son talepler
+- SLA'sı ihlal edilmiş talepler
 
-## Kurulum
+</td>
+</tr>
+<tr>
+<td width="33%" valign="top">
 
-### 1. Paketleri yükleyin
+**Konuşma**
+- İç notlarla yanıt dizisi
+- Sabitlenmiş notlar ve hazır yanıtlar
+- Talep başına etkinlik denetim kaydı
+- Talep takipçileri
+- Yıldızlı memnuniyet puanı
+
+</td>
+<td width="33%" valign="top">
+
+**Sayfalar**
+- Tüm widget'ları içeren destek paneli
+- Departmana göre tarih aralığı raporları
+- Önek, misafirler, otomatik kapatma, ekler için ayarlar
+
+</td>
+<td width="33%" valign="top">
+
+**Bültenler (isteğe bağlı)**
+- Zamanlanmış gönderimli Markdown bültenleri
+- Statik ve dinamik alıcı listeleri
+- Temalı, yeniden kullanılabilir şablonlar
+
+</td>
+</tr>
+</table>
+
+<p align="center"><sub><a href="../features.md">Tüm özelliklerin ayrıntıları</a></sub></p>
+
+<p align="center">
+  <a href="https://laravel.com"><img src="https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white" alt="Laravel"></a>
+  <a href="https://filamentphp.com"><img src="https://img.shields.io/badge/Filament-FDAE4B?style=for-the-badge&logoColor=white" alt="Filament"></a>
+  <a href="https://livewire.laravel.com"><img src="https://img.shields.io/badge/Livewire-4E56A6?style=for-the-badge&logo=livewire&logoColor=white" alt="Livewire"></a>
+  <a href="https://www.php.net"><img src="https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white" alt="PHP"></a>
+</p>
+
+## Hızlı başlangıç
 
 ```bash
 composer require escalated-dev/escalated-laravel escalated-dev/escalated-filament
-```
-
-`escalated-laravel` zaten yüklüyse, sadece Filament eklentisini ekleyin:
-
-```bash
-composer require escalated-dev/escalated-filament
-```
-
-### 2. Escalated yükleyicisini çalıştırın (henüz yapılmadıysa)
-
-```bash
 php artisan escalated:install
 php artisan migrate
 ```
 
-### 3. Yetkilendirme kapılarını tanımlayın
+Ardından `escalated-agent` ve `escalated-admin` gate'lerini tanımlayın ve panelinize `EscalatedFilamentPlugin::make()` ekleyin. PHP 8.2+, Laravel 11 veya 12 ve Filament 3.x, 4.x veya 5.x gerekir. [Kurulum kılavuzu](../installation.md) iki adımı da anlatır.
 
-Bir servis sağlayıcıda (örn. `AppServiceProvider`):
+## Daha fazla bilgi
 
-```php
-use Illuminate\Support\Facades\Gate;
+- [Tüm özellikler](../features.md) · [Nasıl çalışır](../how-it-works.md) · [Kurulum](../installation.md)
+- [Yapılandırma, görünümler ve çeviriler](../configuration.md) · [Talep erişimi ve yönlendirme](../ticket-access-and-routing.md) · [Eklentiler](../plugins.md)
+- Çekirdek yapılandırma başvurusu için [Escalated for Laravel](https://github.com/escalated-dev/escalated-laravel)
 
-Gate::define('escalated-admin', fn ($user) => $user->is_admin);
-Gate::define('escalated-agent', fn ($user) => $user->is_agent || $user->is_admin);
-```
-
-### 4. Eklentiyi Filament panelinize kaydedin
-
-```php
-use Escalated\Filament\EscalatedFilamentPlugin;
-
-public function panel(Panel $panel): Panel
-{
-    return $panel
-        // ...
-        ->plugin(
-            EscalatedFilamentPlugin::make()
-                ->navigationGroup('Support')
-                ->agentGate('escalated-agent')
-                ->adminGate('escalated-admin')
-        );
-}
-```
-
-Hazırsınız. Filament panelinizi ziyaret edin — tüm bilet yönetim kaynaklarını içeren bir **Destek** navigasyon grubu görünecektir.
-
-## Özellikler
-
-### Kaynaklar
-
-- **TicketResource** — Liste, görüntüleme ve oluşturma sayfalarıyla tam bilet yönetimi
-  - Durum, öncelik, departman, temsilci, etiketler, SLA'ya göre filtrelenebilir
-  - Hızlı filtre sekmeleri: Tümü, Biletlerim, Atanmamış, Acil, SLA İhlali
-  - Toplu işlemler: Ata, Durum Değiştir, Öncelik Değiştir, Etiket Ekle, Kapat, Sil
-  - Konuşma dizisi, kenar çubuğu detayları, SLA bilgisi, memnuniyet değerlendirmesi içeren görüntüleme sayfası
-  - Başlık eylemleri: Yanıtla, Not, Ata, Durum, Öncelik, Takip Et, Makro, Çöz, Kapat, Yeniden Aç
-- **DepartmentResource** — Temsilci atamalı destek departmanları için CRUD
-- **TagResource** — Renk seçicili bilet etiketleri için CRUD
-- **SlaPolicyResource** — Önceliğe göre yanıt/çözüm süreleriyle SLA politika yönetimi
-- **EscalationRuleResource** — Otomatik eskalasyon kuralları için koşul/eylem oluşturucu
-- **CannedResponseResource** — Kategorili hazır yanıt şablonları
-- **MacroResource** — Yeniden sıralanabilir adımlı çoklu eylem otomasyon makroları
-
-### Pano Widget'ları
-
-- **TicketStatsOverview** — Temel metrikler: Açıklarım, Atanmamış, Toplam Açık, SLA İhlali, Bugün Çözülen, CSAT
-- **TicketsByStatusChart** — Duruma göre bilet dağılımı halka grafiği
-- **TicketsByPriorityChart** — Önceliğe göre açık biletler çubuk grafiği
-- **CsatOverviewWidget** — Müşteri memnuniyeti metrikleri: Ortalama Puan, Toplam Puanlar, Memnuniyet Oranı
-- **RecentTicketsWidget** — En son 5 bilet tablosu
-- **SlaBreachWidget** — SLA hedefleri ihlal edilen bilet tablosu
-
-### Sayfalar
-
-- **Dashboard** — Tüm widget'lı destek panosu
-- **Reports** — İstatistikler, departman dağılımı ve zaman çizelgesiyle tarih aralığı analizleri
-- **Settings** — Referans ön eki, misafir biletleri, otomatik kapatma, ek dosya sınırları için yönetici ayarları
-
-### İlişki Yöneticileri
-
-- **RepliesRelationManager** — Dahili notlar, sabitleme ve hazır yanıt ekleme içeren yanıt dizisi
-- **ActivitiesRelationManager** — Tüm bilet etkinliklerinin salt okunur denetim günlüğü
-- **FollowersRelationManager** — Bilet takipçilerini yönet
-
-### Yeniden Kullanılabilir Eylemler
-
-- `AssignTicketAction` — Bileti bir temsilciye ata
-- `ChangeStatusAction` — Bilet durumunu değiştir
-- `ChangePriorityAction` — Bilet önceliğini değiştir
-- `ApplyMacroAction` — Bilete makro uygula
-- `FollowTicketAction` — Bilet takibini aç/kapat
-- `PinReplyAction` — Dahili notları sabitle/kaldır
-
-### Özel Livewire Bileşenleri
-
-- **TicketConversation** — Yanıt editörü, hazır yanıt ekleme ve not sabitleme içeren tam konuşma dizisi
-- **SatisfactionRating** — Yıldız görselleştirmeli müşteri memnuniyeti değerlendirmesi gösterimi
-
-## Yapılandırma
-
-Eklenti, eklenti örneği üzerinde metot zincirleme ile yapılandırılır:
-
-```php
-EscalatedFilamentPlugin::make()
-    ->navigationGroup('Support')    // Navigasyon grubu etiketi (varsayılan: 'Support')
-    ->agentGate('escalated-agent')  // Temsilci erişim kapısı (varsayılan: 'escalated-agent')
-    ->adminGate('escalated-admin')  // Yönetici erişim kapısı (varsayılan: 'escalated-admin')
-```
-
-### Erişim kontrolü
-
-Panelinizin `canAccessPanel()` metodu panele kimin giriş yapabileceğine karar verir. İki kapı ise kullanıcıların içeride neleri kullanabileceğine karar verir ve `escalated-laravel` rotalarıyla aynı şekilde çalışır:
-
-| Alan | Gereken |
-|---|---|
-| Biletler, hazır yanıtlar, destek panosu ve widget'ları | temsilci kapısı **veya** yönetici kapısı |
-| Diğer her şey: departmanlar, etiketler, SLA politikaları, eskalasyon kuralları, makrolar, otomasyonlar, webhook'lar, API token'ları, roller, durumlar, beceriler, özel alanlar, çalışma saatleri, bilgi bankası makaleleri ve kategorileri, denetim günlüğü, bültenler, raporlar ve tüm ayar sayfaları | yönetici kapısı |
-
-İki kapıdan hiçbirini geçemeyen bir panel kullanıcısı her Escalated sayfasında 403 alır ve gezinme öğeleri gizlenir. `escalated-laravel` ile gelen model politikaları (örneğin, özel hazır yanıtları yalnızca yazarları düzenleyebilir) bunlara ek olarak geçerliliğini korur. Kiracı modunda, yapılandırdığınız kapı adlarından bağımsız olarak kullanıcının mevcut hesapta bir personel koltuğuna da sahip olması gerekir.
-
-Diğer tüm yapılandırmalar (SLA, barındırma modları, bildirimler vb.) çekirdek `escalated-laravel` paketi tarafından `config/escalated.php` dosyasında yönetilir. Tam yapılandırma referansı için [escalated-laravel README](https://github.com/escalated-dev/escalated-laravel) dosyasına bakın.
-
-## View'ları Yayınlama
-
-```bash
-php artisan vendor:publish --tag=escalated-filament-views
-```
-
-## Ekran Görüntüleri
-
-_Yakında._
-
-## Şunlar için de mevcut
-
-- **[Escalated Laravel için](https://github.com/escalated-dev/escalated-laravel)** — Laravel Composer paketi
-- **[Escalated Rails için](https://github.com/escalated-dev/escalated-rails)** — Ruby on Rails motoru
-- **[Escalated Django için](https://github.com/escalated-dev/escalated-django)** — Yeniden kullanılabilir Django uygulaması
-- **[Escalated AdonisJS için](https://github.com/escalated-dev/escalated-adonis)** — AdonisJS v6 paketi
-- **[Escalated Filament için](https://github.com/escalated-dev/escalated-filament)** — Filament yönetim paneli eklentisi (buradasınız)
-- **[Paylaşılan Frontend](https://github.com/escalated-dev/escalated)** — Vue 3 + Inertia.js arayüz bileşenleri
-
-Aynı mimari, aynı bilet sistemi — Laravel yönetim panelleri için yerel Filament deneyimi.
+Escalated, [Laravel](https://github.com/escalated-dev/escalated-laravel), [Rails](https://github.com/escalated-dev/escalated-rails), [Django](https://github.com/escalated-dev/escalated-django), [NestJS](https://github.com/escalated-dev/escalated-nestjs), [AdonisJS](https://github.com/escalated-dev/escalated-adonis), [Symfony](https://github.com/escalated-dev/escalated-symfony), [Phoenix](https://github.com/escalated-dev/escalated-phoenix), [Go](https://github.com/escalated-dev/escalated-go), [.NET](https://github.com/escalated-dev/escalated-dotnet), [Spring](https://github.com/escalated-dev/escalated-spring) ve [WordPress](https://github.com/escalated-dev/escalated-wordpress) için de kullanılabilir. Paylaşılan Vue arayüzü [escalated](https://github.com/escalated-dev/escalated) deposunda bulunur.
 
 ## Lisans
 
-MIT
+MIT. Copyright (c) 2026 Escalated.dev. Ayrıntılar için [LICENSE](../../LICENSE) dosyasına bakın.

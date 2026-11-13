@@ -1,205 +1,147 @@
-<p align="center">
-  <b>العربية</b> •
-  <a href="README.de.md">Deutsch</a> •
-  <a href="../../README.md">English</a> •
-  <a href="README.es.md">Español</a> •
-  <a href="README.fr.md">Français</a> •
-  <a href="README.it.md">Italiano</a> •
-  <a href="README.ja.md">日本語</a> •
-  <a href="README.ko.md">한국어</a> •
-  <a href="README.nl.md">Nederlands</a> •
-  <a href="README.pl.md">Polski</a> •
-  <a href="README.pt-BR.md">Português (BR)</a> •
-  <a href="README.ru.md">Русский</a> •
-  <a href="README.tr.md">Türkçe</a> •
+<p align="center"><sub>
+  <b>العربية</b> ·
+  <a href="README.de.md">Deutsch</a> ·
+  <a href="../../README.md">English</a> ·
+  <a href="README.es.md">Español</a> ·
+  <a href="README.fr.md">Français</a> ·
+  <a href="README.it.md">Italiano</a> ·
+  <a href="README.ja.md">日本語</a> ·
+  <a href="README.ko.md">한국어</a> ·
+  <a href="README.nl.md">Nederlands</a> ·
+  <a href="README.pl.md">Polski</a> ·
+  <a href="README.pt-BR.md">Português (BR)</a> ·
+  <a href="README.ru.md">Русский</a> ·
+  <a href="README.tr.md">Türkçe</a> ·
   <a href="README.zh-CN.md">简体中文</a>
+</sub></p>
+
+<p align="center">
+  <a href="https://escalated.dev"><img src="https://raw.githubusercontent.com/escalated-dev/escalated/main/docs/assets/readme/logo.png" width="72" height="72" alt="Escalated"></a>
 </p>
 
-# Escalated لـ Filament
+<h1 align="center">Escalated for Filament</h1>
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/escalated-dev/escalated-filament.svg)](https://packagist.org/packages/escalated-dev/escalated-filament)
-[![Tests](https://github.com/escalated-dev/escalated-filament/actions/workflows/run-tests.yml/badge.svg)](https://github.com/escalated-dev/escalated-filament/actions/workflows/run-tests.yml)
-[![Laravel](https://img.shields.io/badge/laravel-11.x-FF2D20?logo=laravel&logoColor=white)](https://laravel.com/)
-[![Filament](https://img.shields.io/badge/filament-v3-FDAE4B?logo=data:image/svg+xml;base64,&logoColor=white)](https://filamentphp.com/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+<p align="center">
+  شغّل مكتب الدعم Escalated داخل لوحة إدارة Filament الحالية لديك.<br>
+  التذاكر والأقسام وسياسات SLA وقواعد التصعيد والماكرو كموارد Filament أصلية، مبنية على Escalated for Laravel.
+</p>
 
-إضافة للوحة تحكم [Filament](https://filamentphp.com) لنظام تذاكر الدعم [Escalated](https://github.com/escalated-dev/escalated-laravel). إدارة التذاكر والأقسام وسياسات SLA وقواعد التصعيد والماكرو والمزيد — كل ذلك من داخل لوحة تحكم Filament الحالية.
+<p align="center">
+  <a href="https://escalated.dev"><b>الموقع</b></a> ·
+  <a href="https://escalated.dev/docs"><b>التوثيق</b></a> ·
+  <a href="https://escalated.dev/cloud"><b>Cloud</b></a> ·
+  <a href="../../CHANGELOG.md"><b>سجل التغييرات</b></a>
+</p>
 
-> **[escalated.dev](https://escalated.dev)** — تعرف على المزيد، شاهد العروض التوضيحية، وقارن بين خيارات السحابة والاستضافة الذاتية.
+## ما الذي يقدمه
 
-## كيف يعمل
+<table>
+  <tr>
+    <td width="50%" valign="top">
+      <h3>مكتب الدعم في اللوحة التي تستخدمها بالفعل</h3>
+      قوائم تذاكر مع عوامل تصفية وعلامات تبويب سريعة وإجراءات جماعية، وصفحة تذكرة تعرض المحادثة وتفاصيل SLA وإجراءات بنقرة واحدة للرد والإسناد وتطبيق الماكرو.
+    </td>
+    <td width="50%" valign="top">
+      <h3>المحرك نفسه الذي يستخدمه Escalated for Laravel</h3>
+      تأتي اتفاقيات SLA وقواعد التصعيد والأحداث وwebhooks كلها من <a href="https://github.com/escalated-dev/escalated-laravel">escalated-laravel</a>، فلا يتكرر شيء ولا يحدث أي اختلاف بينهما.
+    </td>
+  </tr>
+</table>
 
-Escalated لـ Filament هو **غلاف إضافة Filament** حول [`escalated-laravel`](https://github.com/escalated-dev/escalated-laravel). لا يكرر أي منطق أعمال. بدلاً من ذلك، يوفر موارد وصفحات وعناصر واجهة وإجراءات Filament التي تستدعي نفس الخدمات والنماذج والأحداث من حزمة Laravel الأساسية. هذا يعني:
+## الميزات
 
-- جميع منطق دورة حياة التذاكر وحسابات SLA وقواعد التصعيد تأتي من `escalated-laravel`
-- جداول قاعدة البيانات والهجرات والإعدادات تُدار بواسطة الحزمة الأساسية
-- الأحداث والإشعارات وخطافات الويب تعمل تماماً كما في واجهة Inertia
-- تحصل على تجربة Filament أصلية دون الحاجة لصيانة قاعدة كود منفصلة
+<table>
+<tr>
+<td width="33%" valign="top">
 
-> **ملاحظة:** تستخدم هذه الحزمة مكونات Livewire + Blade الأصلية من Filament (الجداول، النماذج، قوائم المعلومات، الإجراءات، عناصر الواجهة) بدلاً من واجهة Vue 3 + Inertia.js المخصصة من حزمة [`@escalated-dev/escalated`](https://github.com/escalated-dev/escalated) الأمامية. الوظائف الأساسية هي نفسها — نفس النماذج والخدمات وقاعدة البيانات ومنطق الأعمال — لكن شكل وأسلوب الواجهة يتبع نظام تصميم Filament. قد تختلف بعض التفاعلات قليلاً (مثل نوافذ Filament المنبثقة مقابل النماذج المضمنة، مرشحات جداول Filament مقابل مكونات المرشح المخصصة). إذا كنت بحاجة إلى تطابق دقيق مع واجهة Inertia الأمامية، استخدم `escalated-laravel` مباشرة مع مكونات Vue المشتركة بدلاً من ذلك.
+**التذاكر**
+- صفحات القائمة والعرض والإنشاء
+- تصفية حسب الحالة والأولوية والوكيل وSLA
+- علامات تبويب: تذاكري، غير المسندة، العاجلة، القريبة من خرق SLA
+- إجراءات جماعية: الإسناد والحالة والأولوية والوسوم والإغلاق
+- الرد، والملاحظة، والإسناد، والمتابعة، وتطبيق ماكرو
+- إجراءات تذاكر مخصصة من إعداداتك
 
-## المتطلبات
+</td>
+<td width="33%" valign="top">
 
-- PHP 8.2+
-- Laravel 11 أو 12
-- Filament 3.x أو 4.x أو 5.x
-- escalated-dev/escalated-laravel ^0.5
+**موارد الإدارة**
+- أقسام مع إسناد الوكلاء
+- وسوم مع منتقي ألوان
+- سياسات SLA لكل أولوية
+- منشئ الشروط والإجراءات لقواعد التصعيد
+- ردود جاهزة مع تصنيفات
+- ماكرو بخطوات قابلة لإعادة الترتيب
 
-### توافق الإصدارات
+</td>
+<td width="33%" valign="top">
 
-| escalated-filament | Filament | Laravel | PHP  |
-|--------------------|----------|---------|------|
-| 0.5.x              | 3.x, 4.x, 5.x | 11, 12  | 8.2+ |
+**أدوات لوحة المعلومات**
+- إحصاءات التذاكر المفتوحة وغير المسندة والمخالفة لـ SLA وCSAT
+- مخططات التذاكر حسب الحالة والأولوية
+- نظرة عامة على CSAT
+- أحدث التذاكر
+- التذاكر التي خُرقت فيها SLA
 
-## التثبيت
+</td>
+</tr>
+<tr>
+<td width="33%" valign="top">
 
-### 1. تثبيت الحزم
+**المحادثة**
+- سلسلة ردود مع ملاحظات داخلية
+- ملاحظات مثبتة وردود جاهزة
+- سجل تدقيق النشاط لكل تذكرة
+- متابعو التذكرة
+- تقييم الرضا بالنجوم
+
+</td>
+<td width="33%" valign="top">
+
+**الصفحات**
+- لوحة دعم تضم كل الأدوات
+- تقارير حسب القسم لفترة زمنية محددة
+- إعدادات البادئة والضيوف والإغلاق التلقائي والمرفقات
+
+</td>
+<td width="33%" valign="top">
+
+**النشرات البريدية (اختيارية)**
+- نشرات بريدية بصيغة Markdown مع إرسال مجدول
+- قوائم مستلمين ثابتة وديناميكية
+- قوالب قابلة لإعادة الاستخدام مع سمات
+
+</td>
+</tr>
+</table>
+
+<p align="center"><sub><a href="../features.md">كل الميزات بالتفصيل</a></sub></p>
+
+<p align="center">
+  <a href="https://laravel.com"><img src="https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white" alt="Laravel"></a>
+  <a href="https://filamentphp.com"><img src="https://img.shields.io/badge/Filament-FDAE4B?style=for-the-badge&logoColor=white" alt="Filament"></a>
+  <a href="https://livewire.laravel.com"><img src="https://img.shields.io/badge/Livewire-4E56A6?style=for-the-badge&logo=livewire&logoColor=white" alt="Livewire"></a>
+  <a href="https://www.php.net"><img src="https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white" alt="PHP"></a>
+</p>
+
+## البدء السريع
 
 ```bash
 composer require escalated-dev/escalated-laravel escalated-dev/escalated-filament
-```
-
-إذا كان `escalated-laravel` مثبتاً لديك بالفعل، أضف إضافة Filament فقط:
-
-```bash
-composer require escalated-dev/escalated-filament
-```
-
-### 2. تشغيل مُثبّت Escalated (إذا لم يتم ذلك بالفعل)
-
-```bash
 php artisan escalated:install
 php artisan migrate
 ```
 
-### 3. تعريف بوابات التفويض
+ثم عرّف بوابتي الوصول (gates) `escalated-agent` و`escalated-admin` وأضف `EscalatedFilamentPlugin::make()` إلى لوحتك. يتطلب PHP 8.2+ وLaravel 11 أو 12 وFilament 3.x أو 4.x أو 5.x. يشرح [دليل التثبيت](../installation.md) الخطوتين.
 
-في مزود خدمة (مثل `AppServiceProvider`):
+## اعرف المزيد
 
-```php
-use Illuminate\Support\Facades\Gate;
+- [كل الميزات](../features.md) · [كيف يعمل](../how-it-works.md) · [التثبيت](../installation.md)
+- [الإعدادات والعروض والترجمات](../configuration.md) · [الوصول إلى التذاكر وتوجيهها](../ticket-access-and-routing.md) · [الإضافات](../plugins.md)
+- [Escalated for Laravel](https://github.com/escalated-dev/escalated-laravel) لمرجع الإعدادات الأساسية
 
-Gate::define('escalated-admin', fn ($user) => $user->is_admin);
-Gate::define('escalated-agent', fn ($user) => $user->is_agent || $user->is_admin);
-```
+يتوفر Escalated أيضًا لـ [Laravel](https://github.com/escalated-dev/escalated-laravel)، [Rails](https://github.com/escalated-dev/escalated-rails)، [Django](https://github.com/escalated-dev/escalated-django)، [NestJS](https://github.com/escalated-dev/escalated-nestjs)، [AdonisJS](https://github.com/escalated-dev/escalated-adonis)، [Symfony](https://github.com/escalated-dev/escalated-symfony)، [Phoenix](https://github.com/escalated-dev/escalated-phoenix)، [Go](https://github.com/escalated-dev/escalated-go)، [.NET](https://github.com/escalated-dev/escalated-dotnet)، [Spring](https://github.com/escalated-dev/escalated-spring) و[WordPress](https://github.com/escalated-dev/escalated-wordpress). توجد واجهة Vue المشتركة في [escalated](https://github.com/escalated-dev/escalated).
 
-### 4. تسجيل الإضافة في لوحة Filament
+## الترخيص
 
-```php
-use Escalated\Filament\EscalatedFilamentPlugin;
-
-public function panel(Panel $panel): Panel
-{
-    return $panel
-        // ...
-        ->plugin(
-            EscalatedFilamentPlugin::make()
-                ->navigationGroup('Support')
-                ->agentGate('escalated-agent')
-                ->adminGate('escalated-admin')
-        );
-}
-```
-
-أنت جاهز الآن. قم بزيارة لوحة Filament — ستظهر مجموعة تنقل **الدعم** مع جميع موارد إدارة التذاكر.
-
-## الميزات
-
-### الموارد
-
-- **TicketResource** — إدارة كاملة للتذاكر مع صفحات القائمة والعرض والإنشاء
-  - قابلة للتصفية حسب الحالة والأولوية والقسم والوكيل والعلامات وSLA
-  - علامات تبويب تصفية سريعة: الكل، تذاكري، غير مُعيّنة، عاجلة، انتهاك SLA
-  - إجراءات جماعية: تعيين، تغيير الحالة، تغيير الأولوية، إضافة علامات، إغلاق، حذف
-  - صفحة عرض مع سلسلة المحادثة وتفاصيل الشريط الجانبي ومعلومات SLA وتقييم الرضا
-  - إجراءات الرأس: رد، ملاحظة، تعيين، حالة، أولوية، متابعة، ماكرو، حل، إغلاق، إعادة فتح
-- **DepartmentResource** — عمليات CRUD لأقسام الدعم مع تعيين الوكلاء
-- **TagResource** — عمليات CRUD لعلامات التذاكر مع منتقي الألوان
-- **SlaPolicyResource** — إدارة سياسات SLA مع أوقات الاستجابة/الحل لكل أولوية
-- **EscalationRuleResource** — منشئ الشروط/الإجراءات لقواعد التصعيد التلقائي
-- **CannedResponseResource** — قوالب ردود مكتوبة مسبقاً مع تصنيفات
-- **MacroResource** — ماكرو أتمتة متعدد الإجراءات مع خطوات قابلة لإعادة الترتيب
-
-### عناصر واجهة لوحة المعلومات
-
-- **TicketStatsOverview** — مقاييس رئيسية: المفتوحة لدي، غير مُعيّنة، إجمالي المفتوحة، انتهاك SLA، المحلولة اليوم، CSAT
-- **TicketsByStatusChart** — مخطط دائري لتوزيع التذاكر حسب الحالة
-- **TicketsByPriorityChart** — مخطط شريطي للتذاكر المفتوحة حسب الأولوية
-- **CsatOverviewWidget** — مقاييس رضا العملاء: متوسط التقييم، إجمالي التقييمات، معدل الرضا
-- **RecentTicketsWidget** — جدول لأحدث 5 تذاكر
-- **SlaBreachWidget** — جدول التذاكر التي انتهكت أهداف SLA
-
-### الصفحات
-
-- **Dashboard** — لوحة معلومات الدعم مع جميع العناصر
-- **Reports** — تحليلات بنطاق زمني مع إحصائيات وتفصيل الأقسام والجدول الزمني
-- **Settings** — إعدادات المسؤول لبادئة المرجع وتذاكر الضيوف والإغلاق التلقائي وحدود المرفقات
-
-### مديرو العلاقات
-
-- **RepliesRelationManager** — سلسلة الردود مع الملاحظات الداخلية والتثبيت وإدراج الردود الجاهزة
-- **ActivitiesRelationManager** — سجل تدقيق للقراءة فقط لجميع أنشطة التذاكر
-- **FollowersRelationManager** — إدارة متابعي التذاكر
-
-### إجراءات قابلة لإعادة الاستخدام
-
-- `AssignTicketAction` — تعيين تذكرة لوكيل
-- `ChangeStatusAction` — تغيير حالة التذكرة
-- `ChangePriorityAction` — تغيير أولوية التذكرة
-- `ApplyMacroAction` — تطبيق ماكرو على تذكرة
-- `FollowTicketAction` — تبديل متابعة تذكرة
-- `PinReplyAction` — تثبيت/إلغاء تثبيت الملاحظات الداخلية
-
-### مكونات Livewire المخصصة
-
-- **TicketConversation** — سلسلة محادثة كاملة مع مؤلف الردود وإدراج الردود الجاهزة وتثبيت الملاحظات
-- **SatisfactionRating** — عرض تقييم رضا العملاء مع تصور النجوم
-
-## الإعدادات
-
-يتم تكوين الإضافة من خلال تسلسل الطرق على نسخة الإضافة:
-
-```php
-EscalatedFilamentPlugin::make()
-    ->navigationGroup('Support')    // تسمية مجموعة التنقل (الافتراضي: 'Support')
-    ->agentGate('escalated-agent')  // بوابة وصول الوكيل (الافتراضي: 'escalated-agent')
-    ->adminGate('escalated-admin')  // بوابة وصول المسؤول (الافتراضي: 'escalated-admin')
-```
-
-### التحكم في الوصول
-
-تحدد الدالة `canAccessPanel()` في لوحتك من يمكنه تسجيل الدخول إلى اللوحة. وتحدد البوابتان ما يمكن للمستخدمين استخدامه بعد الدخول، بما يطابق مسارات `escalated-laravel`:
-
-| النطاق | المطلوب |
-|---|---|
-| التذاكر، والردود الجاهزة، ولوحة معلومات الدعم وعناصرها | بوابة الوكيل **أو** بوابة المدير |
-| كل ما عدا ذلك: الأقسام، والوسوم، وسياسات SLA، وقواعد التصعيد، والماكروز، والأتمتة، وخطافات الويب، ورموز API، والأدوار، والحالات، والمهارات، والحقول المخصصة، وساعات العمل، ومقالات قاعدة المعرفة وتصنيفاتها، وسجل التدقيق، والنشرات الإخبارية، والتقارير، وكل صفحة إعدادات | بوابة المدير |
-
-مستخدم اللوحة الذي لا يجتاز أيًا من البوابتين يحصل على الخطأ 403 في كل صفحة من صفحات Escalated، وتُخفى عناصر التنقل. وتظل سياسات النماذج المضمّنة في `escalated-laravel` (على سبيل المثال، تبقى الردود الجاهزة الخاصة قابلة للتعديل من قِبل كاتبها فقط) مطبقة إضافةً إلى ذلك. وفي وضع المستأجرين يحتاج المستخدم أيضًا إلى مقعد موظف في الحساب الحالي، أيًا كانت أسماء البوابات التي تضبطها.
-
-جميع الإعدادات الأخرى (SLA، أوضاع الاستضافة، الإشعارات، إلخ) تُدار بواسطة حزمة `escalated-laravel` الأساسية في `config/escalated.php`. راجع [ملف README الخاص بـ escalated-laravel](https://github.com/escalated-dev/escalated-laravel) للاطلاع على مرجع الإعدادات الكامل.
-
-## نشر العروض
-
-```bash
-php artisan vendor:publish --tag=escalated-filament-views
-```
-
-## لقطات الشاشة
-
-_قريباً._
-
-## متوفر أيضاً لـ
-
-- **[Escalated لـ Laravel](https://github.com/escalated-dev/escalated-laravel)** — حزمة Laravel عبر Composer
-- **[Escalated لـ Rails](https://github.com/escalated-dev/escalated-rails)** — محرك Ruby on Rails
-- **[Escalated لـ Django](https://github.com/escalated-dev/escalated-django)** — تطبيق Django قابل لإعادة الاستخدام
-- **[Escalated لـ AdonisJS](https://github.com/escalated-dev/escalated-adonis)** — حزمة AdonisJS v6
-- **[Escalated لـ Filament](https://github.com/escalated-dev/escalated-filament)** — إضافة لوحة تحكم Filament (أنت هنا)
-- **[الواجهة الأمامية المشتركة](https://github.com/escalated-dev/escalated)** — مكونات واجهة Vue 3 + Inertia.js
-
-نفس البنية، نفس نظام التذاكر — تجربة Filament أصلية للوحات تحكم Laravel الإدارية.
-
-## الرخصة
-
-MIT
+MIT. Copyright (c) 2026 Escalated.dev. راجع [LICENSE](../../LICENSE).
