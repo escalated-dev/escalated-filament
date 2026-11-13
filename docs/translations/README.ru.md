@@ -1,205 +1,147 @@
-<p align="center">
-  <a href="README.ar.md">العربية</a> •
-  <a href="README.de.md">Deutsch</a> •
-  <a href="../../README.md">English</a> •
-  <a href="README.es.md">Español</a> •
-  <a href="README.fr.md">Français</a> •
-  <a href="README.it.md">Italiano</a> •
-  <a href="README.ja.md">日本語</a> •
-  <a href="README.ko.md">한국어</a> •
-  <a href="README.nl.md">Nederlands</a> •
-  <a href="README.pl.md">Polski</a> •
-  <a href="README.pt-BR.md">Português (BR)</a> •
-  <b>Русский</b> •
-  <a href="README.tr.md">Türkçe</a> •
+<p align="center"><sub>
+  <a href="README.ar.md">العربية</a> ·
+  <a href="README.de.md">Deutsch</a> ·
+  <a href="../../README.md">English</a> ·
+  <a href="README.es.md">Español</a> ·
+  <a href="README.fr.md">Français</a> ·
+  <a href="README.it.md">Italiano</a> ·
+  <a href="README.ja.md">日本語</a> ·
+  <a href="README.ko.md">한국어</a> ·
+  <a href="README.nl.md">Nederlands</a> ·
+  <a href="README.pl.md">Polski</a> ·
+  <a href="README.pt-BR.md">Português (BR)</a> ·
+  <b>Русский</b> ·
+  <a href="README.tr.md">Türkçe</a> ·
   <a href="README.zh-CN.md">简体中文</a>
+</sub></p>
+
+<p align="center">
+  <a href="https://escalated.dev"><img src="https://raw.githubusercontent.com/escalated-dev/escalated/main/docs/assets/readme/logo.png" width="72" height="72" alt="Escalated"></a>
 </p>
 
-# Escalated для Filament
+<h1 align="center">Escalated for Filament</h1>
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/escalated-dev/escalated-filament.svg)](https://packagist.org/packages/escalated-dev/escalated-filament)
-[![Tests](https://github.com/escalated-dev/escalated-filament/actions/workflows/run-tests.yml/badge.svg)](https://github.com/escalated-dev/escalated-filament/actions/workflows/run-tests.yml)
-[![Laravel](https://img.shields.io/badge/laravel-11.x-FF2D20?logo=laravel&logoColor=white)](https://laravel.com/)
-[![Filament](https://img.shields.io/badge/filament-v3-FDAE4B?logo=data:image/svg+xml;base64,&logoColor=white)](https://filamentphp.com/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+<p align="center">
+  Запустите хелпдеск Escalated прямо в вашей админ-панели Filament.<br>
+  Тикеты, отделы, политики SLA, правила эскалации и макросы в виде нативных ресурсов Filament на основе Escalated for Laravel.
+</p>
 
-Плагин панели администрирования [Filament](https://filamentphp.com) для системы тикетов поддержки [Escalated](https://github.com/escalated-dev/escalated-laravel). Управляйте тикетами, отделами, политиками SLA, правилами эскалации, макросами и многим другим — всё из вашей существующей панели администрирования Filament.
+<p align="center">
+  <a href="https://escalated.dev"><b>Сайт</b></a> ·
+  <a href="https://escalated.dev/docs"><b>Документация</b></a> ·
+  <a href="https://escalated.dev/cloud"><b>Cloud</b></a> ·
+  <a href="../../CHANGELOG.md"><b>Список изменений</b></a>
+</p>
 
-> **[escalated.dev](https://escalated.dev)** — Узнайте больше, посмотрите демо и сравните варианты Cloud и Self-Hosted.
+## Что он делает
 
-## Как это работает
+<table>
+  <tr>
+    <td width="50%" valign="top">
+      <h3>Хелпдеск в панели, которой вы уже пользуетесь</h3>
+      Списки тикетов с фильтрами, быстрыми вкладками и массовыми действиями, а также страница тикета с перепиской, деталями SLA и действиями в один клик: ответ, назначение и макрос.
+    </td>
+    <td width="50%" valign="top">
+      <h3>Тот же движок, что и в Escalated for Laravel</h3>
+      SLA, правила эскалации, события и вебхуки берутся из <a href="https://github.com/escalated-dev/escalated-laravel">escalated-laravel</a>, поэтому ничего не дублируется и ничего не расходится.
+    </td>
+  </tr>
+</table>
 
-Escalated для Filament — это **обёртка плагина Filament** вокруг [`escalated-laravel`](https://github.com/escalated-dev/escalated-laravel). Он не дублирует бизнес-логику. Вместо этого предоставляет ресурсы, страницы, виджеты и действия Filament, которые вызывают те же сервисы, модели и события из основного пакета Laravel. Это означает:
+## Возможности
 
-- Вся логика жизненного цикла тикетов, расчёты SLA и правила эскалации поступают из `escalated-laravel`
-- Таблицы базы данных, миграции и конфигурация управляются основным пакетом
-- События, уведомления и вебхуки срабатывают точно так же, как в интерфейсе Inertia
-- Вы получаете нативный опыт Filament без необходимости поддерживать отдельную кодовую базу
+<table>
+<tr>
+<td width="33%" valign="top">
 
-> **Примечание:** Этот пакет использует нативные компоненты Livewire + Blade от Filament (таблицы, формы, информационные списки, действия, виджеты) вместо пользовательского интерфейса Vue 3 + Inertia.js из пакета [`@escalated-dev/escalated`](https://github.com/escalated-dev/escalated). Базовая функциональность одинакова — те же модели, сервисы, база данных и бизнес-логика — но внешний вид интерфейса следует дизайн-системе Filament. Некоторые взаимодействия могут незначительно отличаться (например, модальные окна Filament vs. встроенные формы, фильтры таблиц Filament vs. пользовательские компоненты фильтров). Если вам нужно точное соответствие с фронтендом Inertia, используйте `escalated-laravel` напрямую с общими Vue-компонентами.
+**Тикеты**
+- Страницы списка, просмотра и создания
+- Фильтры по статусу, приоритету, агенту, SLA
+- Вкладки: мои, неназначенные, срочные, близкие к нарушению SLA
+- Массовое назначение, статус, приоритет, теги, закрытие
+- Ответ, заметка, назначение, подписка, применение макроса
+- Собственные действия с тикетами из вашей конфигурации
 
-## Требования
+</td>
+<td width="33%" valign="top">
 
-- PHP 8.2+
-- Laravel 11 или 12
-- Filament 3.x, 4.x или 5.x
-- escalated-dev/escalated-laravel ^0.5
+**Ресурсы администрирования**
+- Отделы с назначением агентов
+- Теги с выбором цвета
+- Политики SLA по приоритетам
+- Конструктор условий и действий для правил эскалации
+- Шаблоны ответов с категориями
+- Макросы с шагами, которые можно переставлять
 
-### Совместимость версий
+</td>
+<td width="33%" valign="top">
 
-| escalated-filament | Filament | Laravel | PHP  |
-|--------------------|----------|---------|------|
-| 0.5.x              | 3.x, 4.x, 5.x | 11, 12  | 8.2+ |
+**Виджеты панели**
+- Статистика открытых, неназначенных, просроченных тикетов и CSAT
+- Диаграммы тикетов по статусу и приоритету
+- Обзор CSAT
+- Последние тикеты
+- Тикеты с нарушенным SLA
 
-## Установка
+</td>
+</tr>
+<tr>
+<td width="33%" valign="top">
 
-### 1. Установка пакетов
+**Переписка**
+- Ветка ответов с внутренними заметками
+- Закреплённые заметки и шаблоны ответов
+- Журнал действий по каждому тикету
+- Подписчики тикета
+- Оценка удовлетворённости звёздами
+
+</td>
+<td width="33%" valign="top">
+
+**Страницы**
+- Панель поддержки со всеми виджетами
+- Отчёты по отделам за выбранный период
+- Настройки префикса, гостей, автозакрытия, вложений
+
+</td>
+<td width="33%" valign="top">
+
+**Рассылки (необязательно)**
+- Рассылки в Markdown с отложенной отправкой
+- Статические и динамические списки получателей
+- Многоразовые шаблоны с темами
+
+</td>
+</tr>
+</table>
+
+<p align="center"><sub><a href="../features.md">Все возможности подробно</a></sub></p>
+
+<p align="center">
+  <a href="https://laravel.com"><img src="https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white" alt="Laravel"></a>
+  <a href="https://filamentphp.com"><img src="https://img.shields.io/badge/Filament-FDAE4B?style=for-the-badge&logoColor=white" alt="Filament"></a>
+  <a href="https://livewire.laravel.com"><img src="https://img.shields.io/badge/Livewire-4E56A6?style=for-the-badge&logo=livewire&logoColor=white" alt="Livewire"></a>
+  <a href="https://www.php.net"><img src="https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white" alt="PHP"></a>
+</p>
+
+## Быстрый старт
 
 ```bash
 composer require escalated-dev/escalated-laravel escalated-dev/escalated-filament
-```
-
-Если `escalated-laravel` уже установлен, просто добавьте плагин Filament:
-
-```bash
-composer require escalated-dev/escalated-filament
-```
-
-### 2. Запуск установщика Escalated (если ещё не сделано)
-
-```bash
 php artisan escalated:install
 php artisan migrate
 ```
 
-### 3. Определение шлюзов авторизации
+Затем определите гейты `escalated-agent` и `escalated-admin` и добавьте `EscalatedFilamentPlugin::make()` в вашу панель. Требуются PHP 8.2+, Laravel 11 или 12 и Filament 3.x, 4.x или 5.x. Оба шага описаны в [руководстве по установке](../installation.md).
 
-В сервис-провайдере (например, `AppServiceProvider`):
+## Подробнее
 
-```php
-use Illuminate\Support\Facades\Gate;
+- [Все возможности](../features.md) · [Как это работает](../how-it-works.md) · [Установка](../installation.md)
+- [Конфигурация, представления и переводы](../configuration.md) · [Доступ к тикетам и маршрутизация](../ticket-access-and-routing.md) · [Плагины](../plugins.md)
+- [Escalated for Laravel](https://github.com/escalated-dev/escalated-laravel): справочник по базовой конфигурации
 
-Gate::define('escalated-admin', fn ($user) => $user->is_admin);
-Gate::define('escalated-agent', fn ($user) => $user->is_agent || $user->is_admin);
-```
-
-### 4. Регистрация плагина в панели Filament
-
-```php
-use Escalated\Filament\EscalatedFilamentPlugin;
-
-public function panel(Panel $panel): Panel
-{
-    return $panel
-        // ...
-        ->plugin(
-            EscalatedFilamentPlugin::make()
-                ->navigationGroup('Support')
-                ->agentGate('escalated-agent')
-                ->adminGate('escalated-admin')
-        );
-}
-```
-
-Готово. Посетите вашу панель Filament — появится навигационная группа **Поддержка** со всеми ресурсами управления тикетами.
-
-## Возможности
-
-### Ресурсы
-
-- **TicketResource** — Полное управление тикетами со страницами списка, просмотра и создания
-  - Фильтрация по статусу, приоритету, отделу, агенту, тегам, SLA
-  - Вкладки быстрого фильтра: Все, Мои тикеты, Неназначенные, Срочные, Нарушение SLA
-  - Массовые действия: Назначить, Изменить статус, Изменить приоритет, Добавить теги, Закрыть, Удалить
-  - Страница просмотра с цепочкой переписки, деталями боковой панели, информацией SLA, оценкой удовлетворённости
-  - Действия заголовка: Ответить, Заметка, Назначить, Статус, Приоритет, Следить, Макрос, Решить, Закрыть, Переоткрыть
-- **DepartmentResource** — CRUD для отделов поддержки с назначением агентов
-- **TagResource** — CRUD для тегов тикетов с выбором цвета
-- **SlaPolicyResource** — Управление политиками SLA с временем ответа/решения по приоритетам
-- **EscalationRuleResource** — Конструктор условий/действий для автоматических правил эскалации
-- **CannedResponseResource** — Готовые шаблоны ответов с категориями
-- **MacroResource** — Многодействийные макросы автоматизации с перетасовываемыми шагами
-
-### Виджеты панели
-
-- **TicketStatsOverview** — Ключевые метрики: Мои открытые, Неназначенные, Всего открытых, Нарушение SLA, Решено сегодня, CSAT
-- **TicketsByStatusChart** — Кольцевая диаграмма распределения тикетов по статусу
-- **TicketsByPriorityChart** — Столбчатая диаграмма открытых тикетов по приоритету
-- **CsatOverviewWidget** — Метрики удовлетворённости клиентов: Средняя оценка, Всего оценок, Коэффициент удовлетворённости
-- **RecentTicketsWidget** — Таблица 5 последних тикетов
-- **SlaBreachWidget** — Таблица тикетов с нарушенными целями SLA
-
-### Страницы
-
-- **Dashboard** — Панель поддержки со всеми виджетами
-- **Reports** — Аналитика по диапазону дат со статистикой, разбивкой по отделам и временной шкалой
-- **Settings** — Настройки администратора для префикса ссылки, гостевых тикетов, автозакрытия, лимитов вложений
-
-### Менеджеры связей
-
-- **RepliesRelationManager** — Цепочка ответов с внутренними заметками, закреплением и вставкой готовых ответов
-- **ActivitiesRelationManager** — Журнал аудита только для чтения всех действий по тикетам
-- **FollowersRelationManager** — Управление подписчиками тикетов
-
-### Повторно используемые действия
-
-- `AssignTicketAction` — Назначить тикет агенту
-- `ChangeStatusAction` — Изменить статус тикета
-- `ChangePriorityAction` — Изменить приоритет тикета
-- `ApplyMacroAction` — Применить макрос к тикету
-- `FollowTicketAction` — Переключить отслеживание тикета
-- `PinReplyAction` — Закрепить/открепить внутренние заметки
-
-### Пользовательские компоненты Livewire
-
-- **TicketConversation** — Полная цепочка переписки с редактором ответов, вставкой готовых ответов и закреплением заметок
-- **SatisfactionRating** — Отображение оценки удовлетворённости клиента со звёздной визуализацией
-
-## Конфигурация
-
-Плагин настраивается через цепочку методов на экземпляре плагина:
-
-```php
-EscalatedFilamentPlugin::make()
-    ->navigationGroup('Support')    // Метка навигационной группы (по умолчанию: 'Support')
-    ->agentGate('escalated-agent')  // Шлюз доступа агента (по умолчанию: 'escalated-agent')
-    ->adminGate('escalated-admin')  // Шлюз доступа администратора (по умолчанию: 'escalated-admin')
-```
-
-### Управление доступом
-
-Метод `canAccessPanel()` вашей панели определяет, кто может войти в панель. Два шлюза определяют, чем пользователи могут пользоваться после входа, повторяя маршруты `escalated-laravel`:
-
-| Раздел | Требуется |
-|---|---|
-| Тикеты, шаблонные ответы, панель поддержки и её виджеты | шлюз агента **или** шлюз администратора |
-| Всё остальное: отделы, теги, политики SLA, правила эскалации, макросы, автоматизации, вебхуки, API-токены, роли, статусы, навыки, пользовательские поля, рабочие часы, статьи и категории базы знаний, журнал аудита, рассылки, отчёты и все страницы настроек | шлюз администратора |
-
-Пользователь панели, не прошедший ни один из шлюзов, получает 403 на каждой странице Escalated, а пункты навигации скрываются. Политики моделей, поставляемые с `escalated-laravel` (например, приватные шаблонные ответы может редактировать только их автор), по-прежнему применяются дополнительно. В мультитенантном режиме пользователю также нужно место сотрудника в текущем аккаунте, независимо от настроенных имён шлюзов.
-
-Вся остальная конфигурация (SLA, режимы хостинга, уведомления и т.д.) управляется основным пакетом `escalated-laravel` в `config/escalated.php`. Смотрите [README escalated-laravel](https://github.com/escalated-dev/escalated-laravel) для полного справочника конфигурации.
-
-## Публикация представлений
-
-```bash
-php artisan vendor:publish --tag=escalated-filament-views
-```
-
-## Скриншоты
-
-_Скоро._
-
-## Также доступно для
-
-- **[Escalated для Laravel](https://github.com/escalated-dev/escalated-laravel)** — Composer-пакет Laravel
-- **[Escalated для Rails](https://github.com/escalated-dev/escalated-rails)** — Движок Ruby on Rails
-- **[Escalated для Django](https://github.com/escalated-dev/escalated-django)** — Повторно используемое приложение Django
-- **[Escalated для AdonisJS](https://github.com/escalated-dev/escalated-adonis)** — Пакет AdonisJS v6
-- **[Escalated для Filament](https://github.com/escalated-dev/escalated-filament)** — Плагин панели администрирования Filament (вы здесь)
-- **[Общий фронтенд](https://github.com/escalated-dev/escalated)** — Компоненты интерфейса Vue 3 + Inertia.js
-
-Та же архитектура, та же система тикетов — нативный опыт Filament для панелей администрирования Laravel.
+Escalated также доступен для [Laravel](https://github.com/escalated-dev/escalated-laravel), [Rails](https://github.com/escalated-dev/escalated-rails), [Django](https://github.com/escalated-dev/escalated-django), [NestJS](https://github.com/escalated-dev/escalated-nestjs), [AdonisJS](https://github.com/escalated-dev/escalated-adonis), [Symfony](https://github.com/escalated-dev/escalated-symfony), [Phoenix](https://github.com/escalated-dev/escalated-phoenix), [Go](https://github.com/escalated-dev/escalated-go), [.NET](https://github.com/escalated-dev/escalated-dotnet), [Spring](https://github.com/escalated-dev/escalated-spring) и [WordPress](https://github.com/escalated-dev/escalated-wordpress). Общий интерфейс на Vue находится в [escalated](https://github.com/escalated-dev/escalated).
 
 ## Лицензия
 
-MIT
+MIT. Copyright (c) 2026 Escalated.dev. См. [LICENSE](../../LICENSE).

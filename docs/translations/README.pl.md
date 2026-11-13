@@ -1,205 +1,147 @@
-<p align="center">
-  <a href="README.ar.md">العربية</a> •
-  <a href="README.de.md">Deutsch</a> •
-  <a href="../../README.md">English</a> •
-  <a href="README.es.md">Español</a> •
-  <a href="README.fr.md">Français</a> •
-  <a href="README.it.md">Italiano</a> •
-  <a href="README.ja.md">日本語</a> •
-  <a href="README.ko.md">한국어</a> •
-  <a href="README.nl.md">Nederlands</a> •
-  <b>Polski</b> •
-  <a href="README.pt-BR.md">Português (BR)</a> •
-  <a href="README.ru.md">Русский</a> •
-  <a href="README.tr.md">Türkçe</a> •
+<p align="center"><sub>
+  <a href="README.ar.md">العربية</a> ·
+  <a href="README.de.md">Deutsch</a> ·
+  <a href="../../README.md">English</a> ·
+  <a href="README.es.md">Español</a> ·
+  <a href="README.fr.md">Français</a> ·
+  <a href="README.it.md">Italiano</a> ·
+  <a href="README.ja.md">日本語</a> ·
+  <a href="README.ko.md">한국어</a> ·
+  <a href="README.nl.md">Nederlands</a> ·
+  <b>Polski</b> ·
+  <a href="README.pt-BR.md">Português (BR)</a> ·
+  <a href="README.ru.md">Русский</a> ·
+  <a href="README.tr.md">Türkçe</a> ·
   <a href="README.zh-CN.md">简体中文</a>
+</sub></p>
+
+<p align="center">
+  <a href="https://escalated.dev"><img src="https://raw.githubusercontent.com/escalated-dev/escalated/main/docs/assets/readme/logo.png" width="72" height="72" alt="Escalated"></a>
 </p>
 
-# Escalated dla Filament
+<h1 align="center">Escalated for Filament</h1>
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/escalated-dev/escalated-filament.svg)](https://packagist.org/packages/escalated-dev/escalated-filament)
-[![Tests](https://github.com/escalated-dev/escalated-filament/actions/workflows/run-tests.yml/badge.svg)](https://github.com/escalated-dev/escalated-filament/actions/workflows/run-tests.yml)
-[![Laravel](https://img.shields.io/badge/laravel-11.x-FF2D20?logo=laravel&logoColor=white)](https://laravel.com/)
-[![Filament](https://img.shields.io/badge/filament-v3-FDAE4B?logo=data:image/svg+xml;base64,&logoColor=white)](https://filamentphp.com/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+<p align="center">
+  Uruchom helpdesk Escalated w swoim obecnym panelu administracyjnym Filament.<br>
+  Zgłoszenia, działy, polityki SLA, reguły eskalacji i makra jako natywne zasoby Filament, oparte na Escalated for Laravel.
+</p>
 
-Wtyczka panelu administracyjnego [Filament](https://filamentphp.com) dla systemu zgłoszeń wsparcia [Escalated](https://github.com/escalated-dev/escalated-laravel). Zarządzaj zgłoszeniami, działami, politykami SLA, regułami eskalacji, makrami i nie tylko — wszystko z poziomu istniejącego panelu administracyjnego Filament.
+<p align="center">
+  <a href="https://escalated.dev"><b>Strona</b></a> ·
+  <a href="https://escalated.dev/docs"><b>Dokumentacja</b></a> ·
+  <a href="https://escalated.dev/cloud"><b>Cloud</b></a> ·
+  <a href="../../CHANGELOG.md"><b>Lista zmian</b></a>
+</p>
 
-> **[escalated.dev](https://escalated.dev)** — Dowiedz się więcej, obejrzyj dema i porównaj opcje Cloud vs Self-Hosted.
+## Co robi
 
-## Jak to działa
+<table>
+  <tr>
+    <td width="50%" valign="top">
+      <h3>Helpdesk w panelu, którego już używasz</h3>
+      Listy zgłoszeń z filtrami, szybkimi zakładkami i akcjami zbiorczymi oraz strona zgłoszenia z rozmową, szczegółami SLA i akcjami jednym kliknięciem: odpowiedź, przypisanie i makro.
+    </td>
+    <td width="50%" valign="top">
+      <h3>Ten sam silnik co Escalated for Laravel</h3>
+      SLA, reguły eskalacji, zdarzenia i webhooki pochodzą z <a href="https://github.com/escalated-dev/escalated-laravel">escalated-laravel</a>, więc nic nie jest powielane i nic się nie rozjeżdża.
+    </td>
+  </tr>
+</table>
 
-Escalated dla Filament to **wrapper wtyczki Filament** wokół [`escalated-laravel`](https://github.com/escalated-dev/escalated-laravel). Nie powiela żadnej logiki biznesowej. Zamiast tego dostarcza zasoby, strony, widżety i akcje Filament, które wywołują te same usługi, modele i zdarzenia z pakietu bazowego Laravel. Oznacza to:
+## Funkcje
 
-- Cała logika cyklu życia zgłoszeń, obliczenia SLA i reguły eskalacji pochodzą z `escalated-laravel`
-- Tabele bazy danych, migracje i konfiguracja są zarządzane przez pakiet bazowy
-- Zdarzenia, powiadomienia i webhooki działają dokładnie tak samo jak w interfejsie Inertia
-- Otrzymujesz natywne doświadczenie Filament bez konieczności utrzymywania osobnej bazy kodu
+<table>
+<tr>
+<td width="33%" valign="top">
 
-> **Uwaga:** Ten pakiet używa natywnych komponentów Livewire + Blade Filament (tabele, formularze, listy informacyjne, akcje, widżety) zamiast niestandardowego interfejsu Vue 3 + Inertia.js z pakietu frontend [`@escalated-dev/escalated`](https://github.com/escalated-dev/escalated). Podstawowa funkcjonalność jest taka sama — te same modele, usługi, baza danych i logika biznesowa — ale wygląd interfejsu podąża za systemem projektowym Filament. Niektóre interakcje mogą się nieznacznie różnić (np. modale Filament vs. formularze inline, filtry tabel Filament vs. niestandardowe komponenty filtrów). Jeśli potrzebujesz dokładnego odwzorowania frontendu Inertia, użyj `escalated-laravel` bezpośrednio ze współdzielonymi komponentami Vue.
+**Zgłoszenia**
+- Strony listy, podglądu i tworzenia
+- Filtry według statusu, priorytetu, agenta, SLA
+- Zakładki: moje, nieprzypisane, pilne, zagrożone SLA
+- Zbiorcze przypisanie, status, priorytet, tagi, zamknięcie
+- Odpowiedź, notatka, przypisanie, obserwowanie, makro
+- Własne akcje zgłoszeń z Twojej konfiguracji
 
-## Wymagania
+</td>
+<td width="33%" valign="top">
 
-- PHP 8.2+
-- Laravel 11 lub 12
-- Filament 3.x, 4.x lub 5.x
-- escalated-dev/escalated-laravel ^0.5
+**Zasoby administracyjne**
+- Działy z przypisaniem agentów
+- Tagi z wyborem koloru
+- Polityki SLA dla każdego priorytetu
+- Kreator warunków i akcji reguł eskalacji
+- Gotowe odpowiedzi z kategoriami
+- Makra z krokami o zmiennej kolejności
 
-### Kompatybilność wersji
+</td>
+<td width="33%" valign="top">
 
-| escalated-filament | Filament | Laravel | PHP  |
-|--------------------|----------|---------|------|
-| 0.5.x              | 3.x, 4.x, 5.x | 11, 12  | 8.2+ |
+**Widżety pulpitu**
+- Statystyki otwartych, nieprzypisanych, z przekroczonym SLA i CSAT
+- Wykresy zgłoszeń według statusu i priorytetu
+- Przegląd CSAT
+- Ostatnie zgłoszenia
+- Zgłoszenia z przekroczonym SLA
 
-## Instalacja
+</td>
+</tr>
+<tr>
+<td width="33%" valign="top">
 
-### 1. Zainstaluj pakiety
+**Rozmowa**
+- Wątek odpowiedzi z notatkami wewnętrznymi
+- Przypięte notatki i gotowe odpowiedzi
+- Dziennik aktywności dla każdego zgłoszenia
+- Obserwujący zgłoszenie
+- Ocena zadowolenia w gwiazdkach
+
+</td>
+<td width="33%" valign="top">
+
+**Strony**
+- Pulpit wsparcia ze wszystkimi widżetami
+- Raporty według działu dla zakresu dat
+- Ustawienia prefiksu, gości, automatycznego zamykania, załączników
+
+</td>
+<td width="33%" valign="top">
+
+**Newslettery (opcjonalnie)**
+- Newslettery w Markdown z planowaną wysyłką
+- Statyczne i dynamiczne listy odbiorców
+- Szablony wielokrotnego użytku z motywami
+
+</td>
+</tr>
+</table>
+
+<p align="center"><sub><a href="../features.md">Wszystkie funkcje w szczegółach</a></sub></p>
+
+<p align="center">
+  <a href="https://laravel.com"><img src="https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white" alt="Laravel"></a>
+  <a href="https://filamentphp.com"><img src="https://img.shields.io/badge/Filament-FDAE4B?style=for-the-badge&logoColor=white" alt="Filament"></a>
+  <a href="https://livewire.laravel.com"><img src="https://img.shields.io/badge/Livewire-4E56A6?style=for-the-badge&logo=livewire&logoColor=white" alt="Livewire"></a>
+  <a href="https://www.php.net"><img src="https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white" alt="PHP"></a>
+</p>
+
+## Szybki start
 
 ```bash
 composer require escalated-dev/escalated-laravel escalated-dev/escalated-filament
-```
-
-Jeśli `escalated-laravel` jest już zainstalowany, dodaj tylko wtyczkę Filament:
-
-```bash
-composer require escalated-dev/escalated-filament
-```
-
-### 2. Uruchom instalator Escalated (jeśli jeszcze tego nie zrobiono)
-
-```bash
 php artisan escalated:install
 php artisan migrate
 ```
 
-### 3. Zdefiniuj bramki autoryzacji
+Następnie zdefiniuj bramki dostępu (gates) `escalated-agent` i `escalated-admin` i dodaj `EscalatedFilamentPlugin::make()` do swojego panelu. Wymaga PHP 8.2+, Laravel 11 lub 12 oraz Filament 3.x, 4.x lub 5.x. [Przewodnik instalacji](../installation.md) opisuje oba kroki.
 
-W dostawcy usług (np. `AppServiceProvider`):
+## Dowiedz się więcej
 
-```php
-use Illuminate\Support\Facades\Gate;
+- [Wszystkie funkcje](../features.md) · [Jak to działa](../how-it-works.md) · [Instalacja](../installation.md)
+- [Konfiguracja, widoki i tłumaczenia](../configuration.md) · [Dostęp do zgłoszeń i routing](../ticket-access-and-routing.md) · [Wtyczki](../plugins.md)
+- [Escalated for Laravel](https://github.com/escalated-dev/escalated-laravel), gdzie znajduje się opis konfiguracji rdzenia
 
-Gate::define('escalated-admin', fn ($user) => $user->is_admin);
-Gate::define('escalated-agent', fn ($user) => $user->is_agent || $user->is_admin);
-```
-
-### 4. Zarejestruj wtyczkę w panelu Filament
-
-```php
-use Escalated\Filament\EscalatedFilamentPlugin;
-
-public function panel(Panel $panel): Panel
-{
-    return $panel
-        // ...
-        ->plugin(
-            EscalatedFilamentPlugin::make()
-                ->navigationGroup('Support')
-                ->agentGate('escalated-agent')
-                ->adminGate('escalated-admin')
-        );
-}
-```
-
-Gotowe. Odwiedź panel Filament — pojawi się grupa nawigacji **Wsparcie** ze wszystkimi zasobami zarządzania zgłoszeniami.
-
-## Funkcje
-
-### Zasoby
-
-- **TicketResource** — Pełne zarządzanie zgłoszeniami ze stronami listy, widoku i tworzenia
-  - Filtrowanie po statusie, priorytecie, dziale, agencie, tagach, SLA
-  - Zakładki szybkiego filtrowania: Wszystkie, Moje zgłoszenia, Nieprzypisane, Pilne, Naruszenie SLA
-  - Akcje masowe: Przypisz, Zmień status, Zmień priorytet, Dodaj tagi, Zamknij, Usuń
-  - Strona widoku z wątkiem konwersacji, szczegółami paska bocznego, informacjami SLA, oceną satysfakcji
-  - Akcje nagłówka: Odpowiedz, Notatka, Przypisz, Status, Priorytet, Obserwuj, Makro, Rozwiąż, Zamknij, Otwórz ponownie
-- **DepartmentResource** — CRUD dla działów wsparcia z przypisaniem agentów
-- **TagResource** — CRUD dla tagów zgłoszeń z selektorem kolorów
-- **SlaPolicyResource** — Zarządzanie politykami SLA z czasami odpowiedzi/rozwiązania na priorytet
-- **EscalationRuleResource** — Kreator warunków/akcji dla automatycznych reguł eskalacji
-- **CannedResponseResource** — Wstępnie napisane szablony odpowiedzi z kategoriami
-- **MacroResource** — Wieloakcyjne makra automatyzacji z krokami do zmiany kolejności
-
-### Widżety pulpitu
-
-- **TicketStatsOverview** — Kluczowe metryki: Moje otwarte, Nieprzypisane, Łącznie otwarte, Naruszenie SLA, Rozwiązane dziś, CSAT
-- **TicketsByStatusChart** — Wykres pierścieniowy dystrybucji zgłoszeń według statusu
-- **TicketsByPriorityChart** — Wykres słupkowy otwartych zgłoszeń według priorytetu
-- **CsatOverviewWidget** — Metryki satysfakcji klienta: Średnia ocena, Łączne oceny, Wskaźnik satysfakcji
-- **RecentTicketsWidget** — Tabela 5 najnowszych zgłoszeń
-- **SlaBreachWidget** — Tabela zgłoszeń z naruszonymi celami SLA
-
-### Strony
-
-- **Dashboard** — Pulpit wsparcia ze wszystkimi widżetami
-- **Reports** — Analityka zakresu dat ze statystykami, podziałem na działy i osią czasu
-- **Settings** — Ustawienia administratora dla prefiksu referencji, zgłoszeń gości, automatycznego zamykania, limitów załączników
-
-### Menedżerowie relacji
-
-- **RepliesRelationManager** — Wątek odpowiedzi z notatkami wewnętrznymi, przypinaniem i wstawianiem gotowych odpowiedzi
-- **ActivitiesRelationManager** — Dziennik audytu tylko do odczytu wszystkich aktywności zgłoszeń
-- **FollowersRelationManager** — Zarządzanie obserwatorami zgłoszeń
-
-### Akcje wielokrotnego użytku
-
-- `AssignTicketAction` — Przypisz zgłoszenie do agenta
-- `ChangeStatusAction` — Zmień status zgłoszenia
-- `ChangePriorityAction` — Zmień priorytet zgłoszenia
-- `ApplyMacroAction` — Zastosuj makro do zgłoszenia
-- `FollowTicketAction` — Przełącz obserwowanie zgłoszenia
-- `PinReplyAction` — Przypnij/odepnij notatki wewnętrzne
-
-### Niestandardowe komponenty Livewire
-
-- **TicketConversation** — Pełny wątek konwersacji z edytorem odpowiedzi, wstawianiem gotowych odpowiedzi i przypinaniem notatek
-- **SatisfactionRating** — Wyświetlanie oceny satysfakcji klienta z wizualizacją gwiazdkową
-
-## Konfiguracja
-
-Wtyczka jest konfigurowana poprzez łańcuchowanie metod na instancji wtyczki:
-
-```php
-EscalatedFilamentPlugin::make()
-    ->navigationGroup('Support')    // Etykieta grupy nawigacji (domyślnie: 'Support')
-    ->agentGate('escalated-agent')  // Bramka dostępu agenta (domyślnie: 'escalated-agent')
-    ->adminGate('escalated-admin')  // Bramka dostępu admina (domyślnie: 'escalated-admin')
-```
-
-### Kontrola dostępu
-
-Metoda `canAccessPanel()` Twojego panelu decyduje, kto może zalogować się do panelu. Dwie bramki decydują o tym, z czego użytkownicy mogą korzystać po zalogowaniu, odzwierciedlając trasy `escalated-laravel`:
-
-| Obszar | Wymagane |
-|---|---|
-| Zgłoszenia, gotowe odpowiedzi, pulpit wsparcia i jego widżety | bramka agenta **lub** bramka administratora |
-| Wszystko inne: działy, tagi, polityki SLA, reguły eskalacji, makra, automatyzacje, webhooki, tokeny API, role, statusy, umiejętności, pola niestandardowe, godziny pracy, artykuły i kategorie bazy wiedzy, dziennik audytu, newslettery, raporty oraz każda strona ustawień | bramka administratora |
-
-Użytkownik panelu, który nie przechodzi żadnej z bramek, otrzymuje błąd 403 na każdej stronie Escalated, a elementy nawigacji są ukryte. Polityki modeli dostarczane przez `escalated-laravel` (na przykład prywatne gotowe odpowiedzi może edytować tylko ich autor) nadal obowiązują dodatkowo. W trybie wielodzierżawczym użytkownik potrzebuje także miejsca pracownika w bieżącym koncie, niezależnie od skonfigurowanych nazw bramek.
-
-Cała pozostała konfiguracja (SLA, tryby hostingu, powiadomienia itp.) jest zarządzana przez pakiet bazowy `escalated-laravel` w `config/escalated.php`. Zobacz [README escalated-laravel](https://github.com/escalated-dev/escalated-laravel) dla pełnej referencji konfiguracji.
-
-## Publikowanie widoków
-
-```bash
-php artisan vendor:publish --tag=escalated-filament-views
-```
-
-## Zrzuty ekranu
-
-_Wkrótce._
-
-## Dostępne również dla
-
-- **[Escalated dla Laravel](https://github.com/escalated-dev/escalated-laravel)** — Pakiet Composer Laravel
-- **[Escalated dla Rails](https://github.com/escalated-dev/escalated-rails)** — Silnik Ruby on Rails
-- **[Escalated dla Django](https://github.com/escalated-dev/escalated-django)** — Wielokrotnego użytku aplikacja Django
-- **[Escalated dla AdonisJS](https://github.com/escalated-dev/escalated-adonis)** — Pakiet AdonisJS v6
-- **[Escalated dla Filament](https://github.com/escalated-dev/escalated-filament)** — Wtyczka panelu administracyjnego Filament (jesteś tutaj)
-- **[Współdzielony frontend](https://github.com/escalated-dev/escalated)** — Komponenty interfejsu Vue 3 + Inertia.js
-
-Ta sama architektura, ten sam system zgłoszeń — natywne doświadczenie Filament dla paneli administracyjnych Laravel.
+Escalated jest dostępny również dla [Laravel](https://github.com/escalated-dev/escalated-laravel), [Rails](https://github.com/escalated-dev/escalated-rails), [Django](https://github.com/escalated-dev/escalated-django), [NestJS](https://github.com/escalated-dev/escalated-nestjs), [AdonisJS](https://github.com/escalated-dev/escalated-adonis), [Symfony](https://github.com/escalated-dev/escalated-symfony), [Phoenix](https://github.com/escalated-dev/escalated-phoenix), [Go](https://github.com/escalated-dev/escalated-go), [.NET](https://github.com/escalated-dev/escalated-dotnet), [Spring](https://github.com/escalated-dev/escalated-spring) i [WordPress](https://github.com/escalated-dev/escalated-wordpress). Wspólny interfejs Vue znajduje się w [escalated](https://github.com/escalated-dev/escalated).
 
 ## Licencja
 
-MIT
+MIT. Copyright (c) 2026 Escalated.dev. Zobacz [LICENSE](../../LICENSE).

@@ -1,205 +1,147 @@
-<p align="center">
-  <a href="README.ar.md">العربية</a> •
-  <a href="README.de.md">Deutsch</a> •
-  <a href="../../README.md">English</a> •
-  <a href="README.es.md">Español</a> •
-  <a href="README.fr.md">Français</a> •
-  <a href="README.it.md">Italiano</a> •
-  <a href="README.ja.md">日本語</a> •
-  <a href="README.ko.md">한국어</a> •
-  <a href="README.nl.md">Nederlands</a> •
-  <a href="README.pl.md">Polski</a> •
-  <a href="README.pt-BR.md">Português (BR)</a> •
-  <a href="README.ru.md">Русский</a> •
-  <a href="README.tr.md">Türkçe</a> •
+<p align="center"><sub>
+  <a href="README.ar.md">العربية</a> ·
+  <a href="README.de.md">Deutsch</a> ·
+  <a href="../../README.md">English</a> ·
+  <a href="README.es.md">Español</a> ·
+  <a href="README.fr.md">Français</a> ·
+  <a href="README.it.md">Italiano</a> ·
+  <a href="README.ja.md">日本語</a> ·
+  <a href="README.ko.md">한국어</a> ·
+  <a href="README.nl.md">Nederlands</a> ·
+  <a href="README.pl.md">Polski</a> ·
+  <a href="README.pt-BR.md">Português (BR)</a> ·
+  <a href="README.ru.md">Русский</a> ·
+  <a href="README.tr.md">Türkçe</a> ·
   <b>简体中文</b>
+</sub></p>
+
+<p align="center">
+  <a href="https://escalated.dev"><img src="https://raw.githubusercontent.com/escalated-dev/escalated/main/docs/assets/readme/logo.png" width="72" height="72" alt="Escalated"></a>
 </p>
 
-# Escalated Filament 版
+<h1 align="center">Escalated for Filament</h1>
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/escalated-dev/escalated-filament.svg)](https://packagist.org/packages/escalated-dev/escalated-filament)
-[![Tests](https://github.com/escalated-dev/escalated-filament/actions/workflows/run-tests.yml/badge.svg)](https://github.com/escalated-dev/escalated-filament/actions/workflows/run-tests.yml)
-[![Laravel](https://img.shields.io/badge/laravel-11.x-FF2D20?logo=laravel&logoColor=white)](https://laravel.com/)
-[![Filament](https://img.shields.io/badge/filament-v3-FDAE4B?logo=data:image/svg+xml;base64,&logoColor=white)](https://filamentphp.com/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+<p align="center">
+  在你现有的 Filament 管理面板中运行 Escalated 帮助台。<br>
+  工单、部门、SLA 策略、升级规则和宏都以原生 Filament 资源的形式提供，底层由 Escalated for Laravel 驱动。
+</p>
 
-为 [Escalated](https://github.com/escalated-dev/escalated-laravel) 支持工单系统打造的 [Filament](https://filamentphp.com) 管理面板插件。在现有的 Filament 管理面板中管理工单、部门、SLA 策略、升级规则、宏等。
+<p align="center">
+  <a href="https://escalated.dev"><b>官网</b></a> ·
+  <a href="https://escalated.dev/docs"><b>文档</b></a> ·
+  <a href="https://escalated.dev/cloud"><b>Cloud</b></a> ·
+  <a href="../../CHANGELOG.md"><b>更新日志</b></a>
+</p>
 
-> **[escalated.dev](https://escalated.dev)** — 了解更多、查看演示、比较云端与自托管方案。
+## 功能
 
-## 工作原理
+<table>
+  <tr>
+    <td width="50%" valign="top">
+      <h3>帮助台就在你已经在用的面板里</h3>
+      带筛选、快捷标签页和批量操作的工单列表，以及包含对话、SLA 详情和一键回复、分配、执行宏的工单页面。
+    </td>
+    <td width="50%" valign="top">
+      <h3>与 Escalated for Laravel 相同的引擎</h3>
+      SLA、升级规则、事件和 webhook 都来自 <a href="https://github.com/escalated-dev/escalated-laravel">escalated-laravel</a>，因此没有重复实现，也不会出现不一致。
+    </td>
+  </tr>
+</table>
 
-Escalated Filament 版是围绕 [`escalated-laravel`](https://github.com/escalated-dev/escalated-laravel) 的 **Filament 插件包装器**。它不复制任何业务逻辑。相反，它提供 Filament 的 Resources、Pages、Widgets 和 Actions，调用核心 Laravel 包中的相同服务、模型和事件。这意味着：
+## 功能列表
 
-- 所有工单生命周期逻辑、SLA 计算和升级规则均来自 `escalated-laravel`
-- 数据库表、迁移和配置由核心包管理
-- 事件、通知和 Webhook 的触发方式与 Inertia UI 完全相同
-- 无需维护单独的代码库即可获得原生 Filament 体验
+<table>
+<tr>
+<td width="33%" valign="top">
 
-> **注意：** 此包使用 Filament 原生的 Livewire + Blade 组件（表格、表单、信息列表、操作、小部件），而非 [`@escalated-dev/escalated`](https://github.com/escalated-dev/escalated) 前端包中的自定义 Vue 3 + Inertia.js UI。核心功能相同——相同的模型、服务、数据库和业务逻辑——但界面外观遵循 Filament 的设计系统。某些交互可能略有不同（例如 Filament 模态框 vs. 内联表单，Filament 表格筛选器 vs. 自定义筛选组件）。如需与 Inertia 前端完全一致，请直接使用 `escalated-laravel` 配合共享的 Vue 组件。
+**工单**
+- 列表、查看和创建页面
+- 按状态、优先级、客服、SLA 筛选
+- 标签页：我的、未分配、紧急、即将违反 SLA
+- 批量分配、状态、优先级、标签、关闭
+- 回复、备注、分配、关注、执行宏
+- 通过配置添加自定义工单操作
 
-## 系统要求
+</td>
+<td width="33%" valign="top">
 
-- PHP 8.2+
-- Laravel 11 或 12
-- Filament 3.x、4.x 或 5.x
-- escalated-dev/escalated-laravel ^0.5
+**管理资源**
+- 支持分配客服的部门
+- 带颜色选择器的标签
+- 按优先级设置的 SLA 策略
+- 升级规则的条件/动作构建器
+- 带分类的预设回复
+- 步骤可重新排序的宏
 
-### 版本兼容性
+</td>
+<td width="33%" valign="top">
 
-| escalated-filament | Filament | Laravel | PHP  |
-|--------------------|----------|---------|------|
-| 0.5.x              | 3.x, 4.x, 5.x | 11, 12  | 8.2+ |
+**仪表盘小部件**
+- 待处理、未分配、已违反 SLA 和 CSAT 统计
+- 按状态和优先级的工单图表
+- CSAT 概览
+- 最近工单
+- 已违反 SLA 的工单
 
-## 安装
+</td>
+</tr>
+<tr>
+<td width="33%" valign="top">
 
-### 1. 安装包
+**对话**
+- 带内部备注的回复线程
+- 置顶备注和预设回复
+- 每个工单的活动审计日志
+- 工单关注者
+- 星级满意度评分
+
+</td>
+<td width="33%" valign="top">
+
+**页面**
+- 包含全部小部件的支持仪表盘
+- 按部门的日期范围报表
+- 前缀、访客、自动关闭、附件设置
+
+</td>
+<td width="33%" valign="top">
+
+**邮件通讯（可选）**
+- 支持定时发送的 Markdown 邮件通讯
+- 静态和动态收件人列表
+- 带主题的可复用模板
+
+</td>
+</tr>
+</table>
+
+<p align="center"><sub><a href="../features.md">查看每项功能的详细说明</a></sub></p>
+
+<p align="center">
+  <a href="https://laravel.com"><img src="https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white" alt="Laravel"></a>
+  <a href="https://filamentphp.com"><img src="https://img.shields.io/badge/Filament-FDAE4B?style=for-the-badge&logoColor=white" alt="Filament"></a>
+  <a href="https://livewire.laravel.com"><img src="https://img.shields.io/badge/Livewire-4E56A6?style=for-the-badge&logo=livewire&logoColor=white" alt="Livewire"></a>
+  <a href="https://www.php.net"><img src="https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white" alt="PHP"></a>
+</p>
+
+## 快速开始
 
 ```bash
 composer require escalated-dev/escalated-laravel escalated-dev/escalated-filament
-```
-
-如果已安装 `escalated-laravel`，只需添加 Filament 插件：
-
-```bash
-composer require escalated-dev/escalated-filament
-```
-
-### 2. 运行 Escalated 安装程序（如尚未执行）
-
-```bash
 php artisan escalated:install
 php artisan migrate
 ```
 
-### 3. 定义授权门
+然后定义 `escalated-agent` 和 `escalated-admin` 两个 gate，并把 `EscalatedFilamentPlugin::make()` 添加到你的面板。需要 PHP 8.2+、Laravel 11 或 12，以及 Filament 3.x、4.x 或 5.x。[安装指南](../installation.md)介绍了这两个步骤。
 
-在服务提供者（如 `AppServiceProvider`）中：
+## 了解更多
 
-```php
-use Illuminate\Support\Facades\Gate;
+- [全部功能](../features.md) · [工作原理](../how-it-works.md) · [安装](../installation.md)
+- [配置、视图和翻译](../configuration.md) · [工单访问与路由](../ticket-access-and-routing.md) · [插件](../plugins.md)
+- 核心配置参考见 [Escalated for Laravel](https://github.com/escalated-dev/escalated-laravel)
 
-Gate::define('escalated-admin', fn ($user) => $user->is_admin);
-Gate::define('escalated-agent', fn ($user) => $user->is_agent || $user->is_admin);
-```
-
-### 4. 在 Filament 面板中注册插件
-
-```php
-use Escalated\Filament\EscalatedFilamentPlugin;
-
-public function panel(Panel $panel): Panel
-{
-    return $panel
-        // ...
-        ->plugin(
-            EscalatedFilamentPlugin::make()
-                ->navigationGroup('Support')
-                ->agentGate('escalated-agent')
-                ->adminGate('escalated-admin')
-        );
-}
-```
-
-设置完成。访问您的 Filament 面板——将出现包含所有工单管理资源的 **支持** 导航组。
-
-## 功能特性
-
-### 资源
-
-- **TicketResource** — 完整的工单管理，包含列表、查看和创建页面
-  - 可按状态、优先级、部门、客服、标签、SLA 筛选
-  - 快速筛选标签页：全部、我的工单、未分配、紧急、SLA 违规
-  - 批量操作：分配、更改状态、更改优先级、添加标签、关闭、删除
-  - 查看页面包含对话线程、侧边栏详情、SLA 信息、满意度评分
-  - 头部操作：回复、备注、分配、状态、优先级、关注、宏、解决、关闭、重新打开
-- **DepartmentResource** — 支持部门的 CRUD，带客服分配
-- **TagResource** — 工单标签的 CRUD，带颜色选择器
-- **SlaPolicyResource** — SLA 策略管理，按优先级设置响应/解决时间
-- **EscalationRuleResource** — 自动升级规则的条件/操作构建器
-- **CannedResponseResource** — 带分类的预设回复模板
-- **MacroResource** — 可重排步骤的多操作自动化宏
-
-### 仪表板小部件
-
-- **TicketStatsOverview** — 关键指标：我的待处理、未分配、总待处理、SLA 违规、今日已解决、CSAT
-- **TicketsByStatusChart** — 按状态分布的工单环形图
-- **TicketsByPriorityChart** — 按优先级的待处理工单柱状图
-- **CsatOverviewWidget** — 客户满意度指标：平均评分、总评分数、满意率
-- **RecentTicketsWidget** — 最近 5 张工单表格
-- **SlaBreachWidget** — SLA 目标违规工单表格
-
-### 页面
-
-- **Dashboard** — 包含所有小部件的支持仪表板
-- **Reports** — 带统计、部门分析和时间线的日期范围分析
-- **Settings** — 参考前缀、访客工单、自动关闭、附件限制的管理设置
-
-### 关系管理器
-
-- **RepliesRelationManager** — 带内部备注、置顶和预设回复插入的回复线程
-- **ActivitiesRelationManager** — 所有工单活动的只读审计日志
-- **FollowersRelationManager** — 管理工单关注者
-
-### 可复用操作
-
-- `AssignTicketAction` — 将工单分配给客服
-- `ChangeStatusAction` — 更改工单状态
-- `ChangePriorityAction` — 更改工单优先级
-- `ApplyMacroAction` — 对工单应用宏
-- `FollowTicketAction` — 切换工单关注
-- `PinReplyAction` — 置顶/取消置顶内部备注
-
-### 自定义 Livewire 组件
-
-- **TicketConversation** — 完整的对话线程，带回复编辑器、预设回复插入和备注置顶
-- **SatisfactionRating** — 带星级可视化的客户满意度评分展示
-
-## 配置
-
-插件通过插件实例的方法链进行配置：
-
-```php
-EscalatedFilamentPlugin::make()
-    ->navigationGroup('Support')    // 导航组标签（默认：'Support'）
-    ->agentGate('escalated-agent')  // 客服访问门（默认：'escalated-agent'）
-    ->adminGate('escalated-admin')  // 管理员访问门（默认：'escalated-admin'）
-```
-
-### 访问控制
-
-面板的 `canAccessPanel()` 决定谁可以登录面板。两个授权门决定用户登录后可以使用哪些功能，与 `escalated-laravel` 的路由保持一致：
-
-| 范围 | 所需权限 |
-|---|---|
-| 工单、预设回复、支持仪表板及其小部件 | 客服门 **或** 管理员门 |
-| 其他所有内容：部门、标签、SLA 策略、升级规则、宏、自动化、Webhook、API 令牌、角色、状态、技能、自定义字段、营业时间、知识库文章和分类、审计日志、新闻通讯、报表以及所有设置页面 | 管理员门 |
-
-两个授权门都未通过的面板用户在每个 Escalated 页面上都会收到 403，并且导航项会被隐藏。`escalated-laravel` 自带的模型策略（例如，私有预设回复仅可由其作者编辑）仍会在此基础上生效。在租户模式下，无论您配置了什么授权门名称，用户还需要在当前账户中拥有一个员工席位。
-
-其他所有配置（SLA、托管模式、通知等）由核心 `escalated-laravel` 包在 `config/escalated.php` 中管理。完整配置参考请查看 [escalated-laravel README](https://github.com/escalated-dev/escalated-laravel)。
-
-## 发布视图
-
-```bash
-php artisan vendor:publish --tag=escalated-filament-views
-```
-
-## 截图
-
-_即将推出。_
-
-## 其他框架版本
-
-- **[Escalated Laravel 版](https://github.com/escalated-dev/escalated-laravel)** — Laravel Composer 包
-- **[Escalated Rails 版](https://github.com/escalated-dev/escalated-rails)** — Ruby on Rails 引擎
-- **[Escalated Django 版](https://github.com/escalated-dev/escalated-django)** — Django 可复用应用
-- **[Escalated AdonisJS 版](https://github.com/escalated-dev/escalated-adonis)** — AdonisJS v6 包
-- **[Escalated Filament 版](https://github.com/escalated-dev/escalated-filament)** — Filament 管理面板插件（当前页面）
-- **[共享前端](https://github.com/escalated-dev/escalated)** — Vue 3 + Inertia.js UI 组件
-
-相同的架构，相同的工单系统——为 Laravel 管理面板打造的原生 Filament 体验。
+Escalated 也提供 [Laravel](https://github.com/escalated-dev/escalated-laravel)、[Rails](https://github.com/escalated-dev/escalated-rails)、[Django](https://github.com/escalated-dev/escalated-django)、[NestJS](https://github.com/escalated-dev/escalated-nestjs)、[AdonisJS](https://github.com/escalated-dev/escalated-adonis)、[Symfony](https://github.com/escalated-dev/escalated-symfony)、[Phoenix](https://github.com/escalated-dev/escalated-phoenix)、[Go](https://github.com/escalated-dev/escalated-go)、[.NET](https://github.com/escalated-dev/escalated-dotnet)、[Spring](https://github.com/escalated-dev/escalated-spring) 和 [WordPress](https://github.com/escalated-dev/escalated-wordpress) 版本。共享的 Vue 界面位于 [escalated](https://github.com/escalated-dev/escalated)。
 
 ## 许可证
 
-MIT
+MIT。Copyright (c) 2026 Escalated.dev。详见 [LICENSE](../../LICENSE)。
